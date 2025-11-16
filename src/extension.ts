@@ -123,11 +123,9 @@ class ModalEditLineIndicator implements vscode.Disposable {
   private async applyDecorations(editor: vscode.TextEditor): Promise<void> {
     try {
       const isNormalMode = await this.isInNormalMode();
-      const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
-      const highlightCurrentLineOnly = config.get<boolean>('highlightCurrentLineOnly', true);
 
       // Get the line(s) to decorate
-      const ranges = this.getDecorateRanges(editor, highlightCurrentLineOnly);
+      const ranges = this.getDecorateRanges(editor);
 
       if (isNormalMode) {
         // Apply normal mode decoration
@@ -149,21 +147,12 @@ class ModalEditLineIndicator implements vscode.Disposable {
 
   /**
    * Calculate which line ranges should be decorated
-   * Can be just the current line or all lines depending on configuration
+   * Always highlights only the current cursor line
    */
-  private getDecorateRanges(editor: vscode.TextEditor, currentLineOnly: boolean): vscode.Range[] {
-    if (currentLineOnly) {
-      // Only highlight the current cursor line
-      const cursorLine = editor.selection.active.line;
-      return [new vscode.Range(cursorLine, 0, cursorLine, 0)];
-    } else {
-      // Highlight all lines (useful for visual feedback during scrolling)
-      const ranges: vscode.Range[] = [];
-      for (let i = 0; i < editor.document.lineCount; i++) {
-        ranges.push(new vscode.Range(i, 0, i, 0));
-      }
-      return ranges;
-    }
+  private getDecorateRanges(editor: vscode.TextEditor): vscode.Range[] {
+    // Only highlight the current cursor line
+    const cursorLine = editor.selection.active.line;
+    return [new vscode.Range(cursorLine, 0, cursorLine, 0)];
   }
 
   /**
