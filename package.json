@@ -1,0 +1,110 @@
+{
+  "name": "modaledit-line-indicator",
+  "displayName": "ModalEdit Line Indicator",
+  "description": "Dynamic line highlight for ModalEdit normal/insert modes. Changes line highlight color based on current mode for instant visual feedback.",
+  "version": "1.0.0",
+  "publisher": "user",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/modaledit-line-indicator"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other",
+    "Themes",
+    "Keymaps"
+  ],
+  "keywords": [
+    "modaledit",
+    "vim",
+    "modal",
+    "indicator",
+    "color",
+    "highlight"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "modaledit-line-indicator.toggleEnabled",
+        "title": "ModalEdit Line Indicator: Toggle Enabled/Disabled"
+      },
+      {
+        "command": "modaledit-line-indicator.updateHighlight",
+        "title": "ModalEdit Line Indicator: Update Highlight (Internal)"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "ModalEdit Line Indicator",
+      "properties": {
+        "modaledit-line-indicator.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the line highlight indicator"
+        },
+        "modaledit-line-indicator.normalModeBackground": {
+          "type": "string",
+          "default": "#00770020",
+          "description": "Background color for normal mode line highlight (hex format)"
+        },
+        "modaledit-line-indicator.normalModeBorder": {
+          "type": "string",
+          "default": "#005500",
+          "description": "Border color for normal mode line highlight (hex format)"
+        },
+        "modaledit-line-indicator.insertModeBackground": {
+          "type": "string",
+          "default": "#77000020",
+          "description": "Background color for insert mode line highlight (hex format)"
+        },
+        "modaledit-line-indicator.insertModeBorder": {
+          "type": "string",
+          "default": "#aa0000",
+          "description": "Border color for insert mode line highlight (hex format)"
+        },
+        "modaledit-line-indicator.highlightCurrentLineOnly": {
+          "type": "boolean",
+          "default": true,
+          "description": "If true, only highlight the current cursor line. If false, highlight all lines."
+        },
+        "modaledit-line-indicator.borderStyle": {
+          "type": "string",
+          "enum": ["solid", "dashed", "dotted"],
+          "default": "solid",
+          "description": "Border style for the line highlight"
+        },
+        "modaledit-line-indicator.borderWidth": {
+          "type": "string",
+          "default": "2px",
+          "description": "Border width for the line highlight"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "lint:fix": "eslint src --ext ts --fix",
+    "package": "vsce package",
+    "clean": "rm -rf out"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0"
+  }
+}

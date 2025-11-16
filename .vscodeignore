@@ -1,0 +1,11 @@
+.git
+.gitignore
+tsconfig.json
+.eslintrc.json
+.prettierrc.json
+src/
+out/**/*.map
+node_modules/
+*.vsix
+.DS_Store
+README.md
