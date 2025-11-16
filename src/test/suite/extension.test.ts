@@ -25,14 +25,27 @@ suite('ModalEdit Line Indicator Extension Test Suite', () => {
     // Ensure enabled is set to true for this test
     const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
     await config.update('enabled', true, vscode.ConfigurationTarget.Global);
-    await new Promise(resolve => setTimeout(resolve, 100));
+    // Allow additional time for configuration to propagate
+    await new Promise(resolve => setTimeout(resolve, 200));
 
     const updatedConfig = vscode.workspace.getConfiguration('modaledit-line-indicator');
     assert.strictEqual(updatedConfig.get('enabled'), true);
-    assert.strictEqual(updatedConfig.get('normalModeBackground'), '#00770020');
-    assert.strictEqual(updatedConfig.get('insertModeBackground'), '#77000020');
-    assert.strictEqual(updatedConfig.get('borderStyle'), 'solid');
-    assert.strictEqual(updatedConfig.get('borderWidth'), '2px');
+    assert.strictEqual(
+      updatedConfig.get('normalModeBackground'),
+      '#00770020',
+      'normalModeBackground should match default'
+    );
+    assert.strictEqual(
+      updatedConfig.get('insertModeBackground'),
+      '#77000020',
+      'insertModeBackground should match default'
+    );
+    assert.strictEqual(
+      updatedConfig.get('borderStyle'),
+      'solid',
+      'borderStyle should match default'
+    );
+    assert.strictEqual(updatedConfig.get('borderWidth'), '2px', 'borderWidth should match default');
   });
 
   test('Toggle command should work', async () => {
