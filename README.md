@@ -47,7 +47,6 @@ Edit your `settings.json` to customize colors and behavior:
   "modaledit-line-indicator.normalModeBorder": "#005500",
   "modaledit-line-indicator.insertModeBackground": "#77000020",
   "modaledit-line-indicator.insertModeBorder": "#aa0000",
-  "modaledit-line-indicator.highlightCurrentLineOnly": true,
   "modaledit-line-indicator.borderStyle": "solid",
   "modaledit-line-indicator.borderWidth": "2px"
 }
@@ -62,7 +61,6 @@ Edit your `settings.json` to customize colors and behavior:
 | `normalModeBorder` | string | `#005500` | Normal mode border color |
 | `insertModeBackground` | string | `#77000020` | Insert mode line background color |
 | `insertModeBorder` | string | `#aa0000` | Insert mode border color |
-| `highlightCurrentLineOnly` | boolean | `true` | Only highlight cursor line (false = all lines) |
 | `borderStyle` | enum | `solid` | Border style: `solid`, `dashed`, or `dotted` |
 | `borderWidth` | string | `2px` | Border width |
 

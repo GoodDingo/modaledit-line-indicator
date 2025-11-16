@@ -35,7 +35,6 @@ Thumbs.db
 
 # Cache
 .eslintcache
-.claude
 
 # Coverage
 coverage/

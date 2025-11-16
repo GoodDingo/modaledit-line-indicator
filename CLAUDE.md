@@ -60,7 +60,7 @@ Always run `make validate` before committing. This runs:
 **Decoration System**:
 - Two `TextEditorDecorationType` instances created on initialization (normal, insert)
 - Decorations applied exclusively (only one active at a time)
-- Applied to current line only by default (configurable via `highlightCurrentLineOnly`)
+- Applied to current line only (use transparent colors to hide highlight when desired)
 - Must be manually cleared when switching modes or disabling extension
 
 **Event-Driven Updates**:
@@ -97,7 +97,7 @@ VS Code renders line highlight
 All settings namespaced with `modaledit-line-indicator.*`:
 - Color customization: `normalModeBackground`, `normalModeBorder`, `insertModeBackground`, `insertModeBorder`
 - Visual style: `borderStyle` (solid/dashed/dotted), `borderWidth`
-- Behavior: `enabled`, `highlightCurrentLineOnly`
+- Behavior: `enabled`
 
 Configuration changes trigger `reloadDecorations()` which:
 1. Disposes old decoration types
@@ -167,7 +167,7 @@ make validate         # Verify everything passes
 
 - Decorations only applied to visible editors (not all open files)
 - Debounced updates prevent excessive redraws during rapid cursor movement
-- Current line only mode minimizes decoration count
+- Only current line is highlighted, minimizing decoration count
 - Mode checks are async but lightweight (context query only)
 
 ## Publishing Checklist

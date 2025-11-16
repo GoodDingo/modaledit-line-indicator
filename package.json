@@ -74,12 +74,6 @@
           "scope": "resource",
           "description": "Border color for insert mode line highlight (hex format)"
         },
-        "modaledit-line-indicator.highlightCurrentLineOnly": {
-          "type": "boolean",
-          "default": true,
-          "scope": "resource",
-          "description": "If true, only highlight the current cursor line. If false, highlight all lines."
-        },
         "modaledit-line-indicator.borderStyle": {
           "type": "string",
           "enum": [

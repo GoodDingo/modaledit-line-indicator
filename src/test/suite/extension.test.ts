@@ -31,7 +31,6 @@ suite('ModalEdit Line Indicator Extension Test Suite', () => {
     assert.strictEqual(updatedConfig.get('enabled'), true);
     assert.strictEqual(updatedConfig.get('normalModeBackground'), '#00770020');
     assert.strictEqual(updatedConfig.get('insertModeBackground'), '#77000020');
-    assert.strictEqual(updatedConfig.get('highlightCurrentLineOnly'), true);
     assert.strictEqual(updatedConfig.get('borderStyle'), 'solid');
     assert.strictEqual(updatedConfig.get('borderWidth'), '2px');
   });
