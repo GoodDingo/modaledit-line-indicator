@@ -10,19 +10,21 @@ interface DecorationType {
   insert: vscode.TextEditorDecorationType;
 }
 
-class ModalEditLineIndicator {
+class ModalEditLineIndicator implements vscode.Disposable {
   private modeState: ModeState = {
     isNormalMode: false,
     lastUpdateTime: 0
   };
 
   private decorations: DecorationType;
-  private enabled: boolean = true;
+  private enabled: boolean;
   private disposables: vscode.Disposable[] = [];
   private updateDebounceTimer: NodeJS.Timeout | null = null;
   private readonly DEBOUNCE_MS = 10; // Debounce rapid updates
 
   constructor() {
+    const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
+    this.enabled = config.get<boolean>('enabled', true);
     this.decorations = this.createDecorations();
   }
 
@@ -191,7 +193,7 @@ class ModalEditLineIndicator {
   private registerListeners(): void {
     // Update on selection/cursor change
     this.disposables.push(
-      vscode.window.onDidChangeTextEditorSelection(async (e) => {
+      vscode.window.onDidChangeTextEditorSelection(async (_e) => {
         await this.updateHighlight();
       })
     );
@@ -220,7 +222,14 @@ class ModalEditLineIndicator {
       vscode.commands.registerCommand(
         'modaledit-line-indicator.toggleEnabled',
         async () => {
-          this.enabled = !this.enabled;
+          const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
+          const newValue = !this.enabled;
+
+          // Persist to configuration
+          await config.update('enabled', newValue, vscode.ConfigurationTarget.Global);
+
+          // Update in-memory state
+          this.enabled = newValue;
 
           if (this.enabled) {
             await this.updateHighlight();
@@ -244,7 +253,13 @@ class ModalEditLineIndicator {
     // Listen for configuration changes
     this.disposables.push(
       vscode.workspace.onDidChangeConfiguration((e) => {
-        if (e.affectsConfiguration('modaledit-line-indicator')) {
+        if (e.affectsConfiguration('modaledit-line-indicator.enabled')) {
+          // Only enabled state changed - no need to recreate decorations
+          const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
+          this.enabled = config.get<boolean>('enabled', true);
+          this.updateHighlight();
+        } else if (e.affectsConfiguration('modaledit-line-indicator')) {
+          // Visual properties changed - need to reload decorations
           this.reloadDecorations();
         }
       })
@@ -268,10 +283,17 @@ class ModalEditLineIndicator {
   }
 
   /**
+   * Dispose method required by vscode.Disposable interface
    * Clean up resources when extension is deactivated
    */
-  public deactivate(): void {
+  public dispose(): void {
     console.log('ModalEdit Line Indicator: Deactivating...');
+
+    // Clear pending debounce timer
+    if (this.updateDebounceTimer) {
+      clearTimeout(this.updateDebounceTimer);
+      this.updateDebounceTimer = null;
+    }
 
     // Clear all decorations
     vscode.window.visibleTextEditors.forEach(editor => {
@@ -298,7 +320,7 @@ let indicator: ModalEditLineIndicator;
  */
 export function activate(context: vscode.ExtensionContext): void {
   indicator = new ModalEditLineIndicator();
-  context.subscriptions.push(indicator as any);
+  context.subscriptions.push(indicator);
 
   indicator.activate().catch(error => {
     console.error('Error activating ModalEdit Line Indicator:', error);
@@ -311,6 +333,6 @@ export function activate(context: vscode.ExtensionContext): void {
  */
 export function deactivate(): void {
   if (indicator) {
-    indicator.deactivate();
+    indicator.dispose();
   }
 }
