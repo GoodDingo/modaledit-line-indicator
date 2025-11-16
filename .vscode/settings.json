@@ -1,0 +1,21 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": [
+    "typescript"
+  ],
+  "files.exclude": {
+    "out": false,
+    "node_modules": true,
+    "coverage": true
+  },
+  "search.exclude": {
+    "out": true,
+    "node_modules": true,
+    "coverage": true
+  },
+  "typescript.tsc.autoDetect": "on"
+}

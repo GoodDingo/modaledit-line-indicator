@@ -63,9 +63,19 @@ lint-fix: ## Run ESLint and auto-fix issues
 	@npm run lint:fix
 	@echo "$(GREEN)✓ Linting with fixes complete$(NC)"
 
+format: ## Format code with Prettier
+	@echo "$(YELLOW)Formatting code...$(NC)"
+	@npm run format
+	@echo "$(GREEN)✓ Formatting complete$(NC)"
+
+format-check: ## Check code formatting
+	@echo "$(YELLOW)Checking code formatting...$(NC)"
+	@npm run format:check
+	@echo "$(GREEN)✓ Format check complete$(NC)"
+
 ##@ Validation
 
-validate: compile lint check-manifest check-structure ## Validate extension is ready for packaging
+validate: compile lint format-check check-manifest check-structure test ## Validate extension is ready for packaging
 	@echo "$(GREEN)✓ Extension validation complete!$(NC)"
 
 check: validate ## Alias for validate
@@ -114,9 +124,16 @@ reinstall: uninstall-ext install-ext ## Uninstall and reinstall extension
 
 ##@ Testing
 
-test: ## Run tests (placeholder - implement when tests are added)
+test: compile ## Run extension tests
 	@echo "$(YELLOW)Running tests...$(NC)"
-	@echo "$(CYAN)ℹ No tests configured yet$(NC)"
+	@npm test
+	@echo "$(GREEN)✓ Tests complete$(NC)"
+
+coverage: compile ## Generate code coverage report
+	@echo "$(YELLOW)Generating coverage report...$(NC)"
+	@npm run coverage
+	@echo "$(GREEN)✓ Coverage report generated$(NC)"
+	@echo "$(CYAN)View HTML report: open coverage/index.html$(NC)"
 
 ##@ Information
 

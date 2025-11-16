@@ -13,7 +13,7 @@ interface DecorationType {
 class ModalEditLineIndicator implements vscode.Disposable {
   private modeState: ModeState = {
     isNormalMode: false,
-    lastUpdateTime: 0
+    lastUpdateTime: 0,
   };
 
   private decorations: DecorationType;
@@ -50,12 +50,12 @@ class ModalEditLineIndicator implements vscode.Disposable {
       overviewRulerLane: vscode.OverviewRulerLane.Full,
       light: {
         backgroundColor: normalBgColor,
-        border: `${borderWidth} ${borderStyle} ${normalBorderColor}`
+        border: `${borderWidth} ${borderStyle} ${normalBorderColor}`,
       },
       dark: {
         backgroundColor: normalBgColor,
-        border: `${borderWidth} ${borderStyle} ${normalBorderColor}`
-      }
+        border: `${borderWidth} ${borderStyle} ${normalBorderColor}`,
+      },
     });
 
     const insertMode = vscode.window.createTextEditorDecorationType({
@@ -66,12 +66,12 @@ class ModalEditLineIndicator implements vscode.Disposable {
       overviewRulerLane: vscode.OverviewRulerLane.Full,
       light: {
         backgroundColor: insertBgColor,
-        border: `${borderWidth} ${borderStyle} ${insertBorderColor}`
+        border: `${borderWidth} ${borderStyle} ${insertBorderColor}`,
       },
       dark: {
         backgroundColor: insertBgColor,
-        border: `${borderWidth} ${borderStyle} ${insertBorderColor}`
-      }
+        border: `${borderWidth} ${borderStyle} ${insertBorderColor}`,
+      },
     });
 
     return { normal: normalMode, insert: insertMode };
@@ -151,10 +151,7 @@ class ModalEditLineIndicator implements vscode.Disposable {
    * Calculate which line ranges should be decorated
    * Can be just the current line or all lines depending on configuration
    */
-  private getDecorateRanges(
-    editor: vscode.TextEditor,
-    currentLineOnly: boolean
-  ): vscode.Range[] {
+  private getDecorateRanges(editor: vscode.TextEditor, currentLineOnly: boolean): vscode.Range[] {
     if (currentLineOnly) {
       // Only highlight the current cursor line
       const cursorLine = editor.selection.active.line;
@@ -193,14 +190,14 @@ class ModalEditLineIndicator implements vscode.Disposable {
   private registerListeners(): void {
     // Update on selection/cursor change
     this.disposables.push(
-      vscode.window.onDidChangeTextEditorSelection(async (_e) => {
+      vscode.window.onDidChangeTextEditorSelection(async _e => {
         await this.updateHighlight();
       })
     );
 
     // Update on active editor change
     this.disposables.push(
-      vscode.window.onDidChangeActiveTextEditor(async (e) => {
+      vscode.window.onDidChangeActiveTextEditor(async e => {
         if (e) {
           await this.updateHighlight();
         }
@@ -211,48 +208,40 @@ class ModalEditLineIndicator implements vscode.Disposable {
     // Note: ModalEdit doesn't directly expose mode change events,
     // so we rely on selection changes as a proxy
     this.disposables.push(
-      vscode.commands.registerCommand(
-        'modaledit-line-indicator.updateHighlight',
-        () => this.updateHighlight()
+      vscode.commands.registerCommand('modaledit-line-indicator.updateHighlight', () =>
+        this.updateHighlight()
       )
     );
 
     // Toggle enabled/disabled
     this.disposables.push(
-      vscode.commands.registerCommand(
-        'modaledit-line-indicator.toggleEnabled',
-        async () => {
-          const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
-          const newValue = !this.enabled;
+      vscode.commands.registerCommand('modaledit-line-indicator.toggleEnabled', async () => {
+        const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
+        const newValue = !this.enabled;
 
-          // Persist to configuration
-          await config.update('enabled', newValue, vscode.ConfigurationTarget.Global);
+        // Persist to configuration
+        await config.update('enabled', newValue, vscode.ConfigurationTarget.Global);
 
-          // Update in-memory state
-          this.enabled = newValue;
+        // Update in-memory state
+        this.enabled = newValue;
 
-          if (this.enabled) {
-            await this.updateHighlight();
-            vscode.window.showInformationMessage(
-              'ModalEdit Line Indicator: Enabled'
-            );
-          } else {
-            // Clear all decorations
-            vscode.window.visibleTextEditors.forEach(editor => {
-              editor.setDecorations(this.decorations.normal, []);
-              editor.setDecorations(this.decorations.insert, []);
-            });
-            vscode.window.showInformationMessage(
-              'ModalEdit Line Indicator: Disabled'
-            );
-          }
+        if (this.enabled) {
+          await this.updateHighlight();
+          vscode.window.showInformationMessage('ModalEdit Line Indicator: Enabled');
+        } else {
+          // Clear all decorations
+          vscode.window.visibleTextEditors.forEach(editor => {
+            editor.setDecorations(this.decorations.normal, []);
+            editor.setDecorations(this.decorations.insert, []);
+          });
+          vscode.window.showInformationMessage('ModalEdit Line Indicator: Disabled');
         }
-      )
+      })
     );
 
     // Listen for configuration changes
     this.disposables.push(
-      vscode.workspace.onDidChangeConfiguration((e) => {
+      vscode.workspace.onDidChangeConfiguration(e => {
         if (e.affectsConfiguration('modaledit-line-indicator.enabled')) {
           // Only enabled state changed - no need to recreate decorations
           const config = vscode.workspace.getConfiguration('modaledit-line-indicator');

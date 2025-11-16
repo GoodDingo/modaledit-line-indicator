@@ -2,7 +2,7 @@
   "name": "modaledit-line-indicator",
   "displayName": "ModalEdit Line Indicator",
   "description": "Dynamic line highlight for ModalEdit normal/insert modes. Changes line highlight color based on current mode for instant visual feedback.",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "publisher": "user",
   "license": "MIT",
   "repository": {
@@ -82,7 +82,11 @@
         },
         "modaledit-line-indicator.borderStyle": {
           "type": "string",
-          "enum": ["solid", "dashed", "dotted"],
+          "enum": [
+            "solid",
+            "dashed",
+            "dotted"
+          ],
           "enumDescriptions": [
             "Solid border line",
             "Dashed border line",
@@ -106,18 +110,36 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
+    "test": "vscode-test",
+    "test:unit": "c8 npm run test",
+    "coverage": "c8 --reporter=html --reporter=text npm run test",
     "lint": "eslint src --ext ts",
     "lint:fix": "eslint src --ext ts --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\"",
     "package": "vsce package",
-    "clean": "rm -rf out"
+    "clean": "rm -rf out coverage .nyc_output",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.10",
     "@types/node": "^22.0.0",
     "@types/vscode": "^1.106.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^2.22.0",
+    "c8": "^10.1.3",
     "eslint": "^8.56.0",
-    "typescript": "^5.3.0",
-    "@vscode/vsce": "^2.22.0"
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
+    "mocha": "^11.7.5",
+    "prettier": "^3.6.2",
+    "typescript": "^5.3.0"
   }
 }

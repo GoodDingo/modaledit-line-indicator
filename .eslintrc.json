@@ -7,11 +7,13 @@
     "project": "./tsconfig.json"
   },
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "prettier"
   ],
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
   ],
   "rules": {
     "@typescript-eslint/naming-convention": [
@@ -40,6 +42,7 @@
     "dist",
     "**/*.d.ts",
     "node_modules",
-    ".vscode-test"
+    ".vscode-test",
+    "coverage"
   ]
 }
