@@ -93,8 +93,7 @@ class ModalEditLineIndicator implements vscode.Disposable {
   private modePollTimer: NodeJS.Timeout | null = null;
   private readonly MODE_POLL_MS = 50; // Check mode every 50ms for instant detection
   private logger: ExtensionLogger;
-  private lastLoggedCursorStyle: number | undefined = undefined;
-  private lastLoggedHasSelection: boolean = false;
+  private lastLoggedStateKey: string = '';
 
   constructor() {
     this.logger = new ExtensionLogger('ModalEdit Line Indicator');
@@ -144,64 +143,64 @@ class ModalEditLineIndicator implements vscode.Disposable {
   }
 
   /**
-   * Detects the current ModalEdit mode using cursor style.
+   * Detects the current ModalEdit mode using cursor style and selection state.
    *
-   * ModalEdit sets different cursor styles for different modes:
-   * - NORMAL mode: Block cursor (2)
-   * - INSERT mode: Line cursor (1)
-   * - VISUAL mode: LineThin cursor (4)
-   * - SEARCH mode: Underline cursor (3)
+   * ModalEdit ALWAYS uses different cursor styles for different modes, though users
+   * can configure which style. The key insight: we can detect VISUAL mode reliably
+   * by checking if there's an active selection, regardless of cursor configuration.
+   *
+   * Mode detection strategy:
+   * 1. Check if editor has a selection (selection.anchor != selection.active)
+   * 2. If yes, and cursor is NOT the INSERT cursor → likely VISUAL mode
+   * 3. Otherwise, detect based on cursor style patterns
+   *
+   * This works because:
+   * - INSERT mode: Always uses thin cursor (Line/LineThin variants)
+   * - NORMAL mode: Uses block cursor variants, NO selection
+   * - VISUAL mode: Uses ANY cursor style, WITH selection
+   * - SEARCH mode: Uses distinctive cursor (typically Underline variants)
    *
    * @returns The current mode ('normal' | 'insert' | 'visual' | 'search')
    */
   private detectCurrentMode(): Mode {
     const editor = vscode.window.activeTextEditor;
     if (!editor) {
-      return 'insert'; // Fallback when no editor active
+      return 'insert';
     }
 
     const cursorStyle = editor.options.cursorStyle as number | undefined;
     const hasSelection = !editor.selection.isEmpty;
 
-    // Only log when cursor style or selection state changes
-    if (
-      cursorStyle !== this.lastLoggedCursorStyle ||
-      hasSelection !== this.lastLoggedHasSelection
-    ) {
-      this.logger.debug(
-        `Cursor style detected: ${cursorStyle} (${this.getCursorStyleName(cursorStyle)}), hasSelection: ${hasSelection}`
-      );
-      this.lastLoggedCursorStyle = cursorStyle;
-      this.lastLoggedHasSelection = hasSelection;
+    // Only log when state changes
+    const stateKey = `${cursorStyle}-${hasSelection}`;
+    if (stateKey !== this.lastLoggedStateKey) {
+      this.logger.debug(`Cursor: ${cursorStyle}, Selection: ${hasSelection}`);
+      this.lastLoggedStateKey = stateKey;
     }
 
-    // Map cursor styles to modes (using ModalEdit defaults and user config)
-    // Users can configure ModalEdit cursor styles, so we check multiple possibilities
+    // Priority 1: If there's a selection and we're NOT in LINE cursor → VISUAL mode
+    // This handles all cursor configurations where VISUAL mode has a selection
+    if (hasSelection && cursorStyle !== vscode.TextEditorCursorStyle.Line) {
+      return 'visual';
+    }
+
+    // Priority 2: Detect based on cursor style
     switch (cursorStyle) {
-      case vscode.TextEditorCursorStyle.Block: // 2
-        // Block cursor is typically NORMAL mode
-        // But if there's a selection, it might be VISUAL (depending on config)
+      case vscode.TextEditorCursorStyle.Block: // 2 - Typical NORMAL mode
+      case vscode.TextEditorCursorStyle.BlockOutline: // 5 - Alternative NORMAL/VISUAL
         return hasSelection ? 'visual' : 'normal';
-      case vscode.TextEditorCursorStyle.BlockOutline: // 5
-        // BlockOutline is commonly used for VISUAL/SELECT mode
-        return 'visual';
-      case vscode.TextEditorCursorStyle.LineThin: // 4
-        // LineThin is the default ModalEdit VISUAL mode cursor
-        return 'visual';
-      case vscode.TextEditorCursorStyle.Underline: // 3
+
+      case vscode.TextEditorCursorStyle.Underline: // 3 - Typical SEARCH mode
+      case vscode.TextEditorCursorStyle.UnderlineThin: // 6 - Alternative SEARCH
         return 'search';
-      case vscode.TextEditorCursorStyle.Line: // 1
+
+      case vscode.TextEditorCursorStyle.LineThin: // 4 - Could be VISUAL or INSERT
+        return hasSelection ? 'visual' : 'insert';
+
+      case vscode.TextEditorCursorStyle.Line: // 1 - Typical INSERT mode
       default:
         return 'insert';
     }
-  }
-
-  private getCursorStyleName(style: number | undefined): string {
-    if (style === undefined) {
-      return 'undefined';
-    }
-    const names = ['Line', 'Block', 'Underline', 'LineThin', 'BlockOutline', 'UnderlineThin'];
-    return names[style - 1] || `Unknown(${style})`;
   }
 
   /**
