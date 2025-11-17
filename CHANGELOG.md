@@ -44,6 +44,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **High Contrast Light Theme Bug**: Fixed white borders on white background in HC light themes
   - Root cause: Single `[highContrast]` key used dark-optimized colors for both HC variants
   - Solution: Separate `[highContrastDark]` and `[highContrastLight]` keys with proper fallback
+- **Decorations Bypass Disabled State**: Fixed decorations reappearing when extension is disabled
+  - Root cause: `reloadDecorations()` didn't check `enabled` state before applying decorations
+  - Impact: Theme changes would reapply decorations even when extension was explicitly disabled
+  - Solution: Added `if (this.enabled)` check before reapplying decorations
+- **Editor Context Mismatch**: Fixed decorations applying to wrong editor in edge cases
+  - Root cause: `updateHighlight()` captured editor reference, used it 10ms later after debounce
+  - Impact: If user switched editors within 10ms window, decoration applied to wrong editor
+  - Solution: Re-check `activeTextEditor` inside debounce timeout callback
 - Improved configuration flexibility with cascading fallback hierarchy
 - Better high contrast theme support with dedicated dark/light configurations
 

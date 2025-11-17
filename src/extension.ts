@@ -436,7 +436,11 @@ class ModalEditLineIndicator implements vscode.Disposable {
     }
 
     this.updateDebounceTimer = setTimeout(async () => {
-      await this.applyDecorations(editor);
+      // Re-check active editor in case it changed during debounce
+      const currentEditor = vscode.window.activeTextEditor;
+      if (currentEditor) {
+        await this.applyDecorations(currentEditor);
+      }
     }, this.DEBOUNCE_MS);
   }
 
@@ -539,9 +543,11 @@ class ModalEditLineIndicator implements vscode.Disposable {
     // Create new decorations with updated config
     this.decorations = this.createDecorations();
 
-    // Reapply to all visible editors
-    for (const editor of vscode.window.visibleTextEditors) {
-      this.applyDecorations(editor);
+    // Reapply to all visible editors only if extension is enabled
+    if (this.enabled) {
+      for (const editor of vscode.window.visibleTextEditors) {
+        this.applyDecorations(editor);
+      }
     }
   }
 
