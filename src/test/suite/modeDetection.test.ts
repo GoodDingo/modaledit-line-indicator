@@ -83,7 +83,7 @@ suite('Mode Detection Tests', () => {
 
     try {
       result = await TestHelpers.queryModalEditContext();
-    } catch (error) {
+    } catch (_error) {
       assert.fail('Context query should not throw, should return undefined');
     }
 

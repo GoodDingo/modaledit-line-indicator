@@ -107,7 +107,7 @@ suite('Extension Test Suite', () => {
     try {
       await vscode.commands.executeCommand('modaledit-line-indicator.queryMode');
       assert.ok(true, 'Query mode command should execute');
-    } catch (error) {
+    } catch (_error) {
       assert.fail('Query mode command should not throw');
     }
   });
@@ -122,7 +122,7 @@ suite('Extension Test Suite', () => {
     try {
       await vscode.commands.executeCommand('modaledit-line-indicator.updateHighlight');
       assert.ok(true, 'Update highlight command should execute');
-    } catch (error) {
+    } catch (_error) {
       assert.fail('Update highlight command should not throw');
     }
   });
@@ -142,8 +142,8 @@ suite('Extension Test Suite', () => {
       try {
         await vscode.commands.executeCommand(cmd);
         console.log(`✓ Command ${cmd} executed successfully`);
-      } catch (error) {
-        assert.fail(`Command ${cmd} should not throw: ${error}`);
+      } catch (_error) {
+        assert.fail(`Command ${cmd} should not throw: ${_error}`);
       }
     }
   });

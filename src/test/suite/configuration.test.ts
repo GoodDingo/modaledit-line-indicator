@@ -58,7 +58,7 @@ suite('Configuration Tests', () => {
   });
 
   test('Can update all configuration values without errors', async () => {
-    const testValues: Record<string, any> = {
+    const testValues: Record<string, unknown> = {
       enabled: false,
       normalModeBackground: '#123456',
       normalModeBorder: '#654321',

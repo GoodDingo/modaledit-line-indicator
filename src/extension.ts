@@ -20,7 +20,7 @@ class ExtensionLogger {
     // Clear old log on startup
     try {
       fs.writeFileSync(this.logFilePath, '');
-    } catch (err) {
+    } catch (_err) {
       // Ignore if can't write - not critical
     }
 
@@ -28,26 +28,26 @@ class ExtensionLogger {
     this.log(`Log file: ${this.logFilePath}`);
   }
 
-  private formatMessage(level: string, message: string, data?: any): string {
+  private formatMessage(level: string, message: string, data?: unknown): string {
     const timestamp = new Date().toISOString();
     const dataStr = data !== undefined ? ` | ${JSON.stringify(data)}` : '';
     return `[${timestamp}] [${level}] ${message}${dataStr}`;
   }
 
-  log(message: string, data?: any): void {
+  log(message: string, data?: unknown): void {
     const formatted = this.formatMessage('INFO', message, data);
     this.outputChannel.appendLine(formatted);
     this.writeToFile(formatted);
   }
 
-  debug(message: string, data?: any): void {
+  debug(message: string, data?: unknown): void {
     const formatted = this.formatMessage('DEBUG', message, data);
     this.outputChannel.appendLine(formatted);
     this.writeToFile(formatted);
   }
 
-  error(message: string, error?: any): void {
-    const errorStr = error ? error.stack || error.toString() : '';
+  error(message: string, error?: unknown): void {
+    const errorStr = error instanceof Error ? error.stack || error.message : String(error || '');
     const formatted = this.formatMessage('ERROR', message, { error: errorStr });
     this.outputChannel.appendLine(formatted);
     this.writeToFile(formatted);
@@ -64,7 +64,7 @@ class ExtensionLogger {
   private writeToFile(message: string): void {
     try {
       fs.appendFileSync(this.logFilePath, message + '\n');
-    } catch (err) {
+    } catch (_err) {
       // Don't crash if file write fails
     }
   }
@@ -435,7 +435,7 @@ class ModalEditLineIndicator implements vscode.Disposable {
           fs.writeFileSync(logPath, '');
           this.logger.log('=== LOG CLEARED BY USER ===');
           vscode.window.showInformationMessage('Log file cleared');
-        } catch (error) {
+        } catch (_error) {
           vscode.window.showErrorMessage('Failed to clear log file');
         }
       })

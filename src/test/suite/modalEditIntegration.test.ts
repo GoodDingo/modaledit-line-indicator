@@ -124,7 +124,7 @@ suite('ModalEdit Integration Tests', () => {
 
     try {
       result = await TestHelpers.queryModalEditContext();
-    } catch (error) {
+    } catch (_error) {
       assert.fail('Context query should not throw when ModalEdit is missing');
     }
 
@@ -163,7 +163,7 @@ suite('ModalEdit Integration Tests', () => {
       const context = await vscode.commands.executeCommand('getContext', 'modaledit.normal');
       // Should return something or undefined
       assert.ok(context === undefined || typeof context === 'boolean');
-    } catch (error) {
+    } catch (_error) {
       // It's acceptable for getContext to not exist or throw
       // We just verify that our code handles it gracefully
       console.log('getContext command not available or threw - this is acceptable');

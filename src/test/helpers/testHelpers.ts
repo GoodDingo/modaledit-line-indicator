@@ -103,7 +103,7 @@ export class TestHelpers {
    *     return;
    *   }
    */
-  static getModalEditExtension(): vscode.Extension<any> | undefined {
+  static getModalEditExtension(): vscode.Extension<unknown> | undefined {
     return vscode.extensions.getExtension('johtela.vscode-modaledit');
   }
 
@@ -150,7 +150,7 @@ export class TestHelpers {
     try {
       const result = await vscode.commands.executeCommand('getContext', 'modaledit.normal');
       return result as boolean | undefined;
-    } catch (error) {
+    } catch (_error) {
       return undefined;
     }
   }
@@ -177,7 +177,7 @@ export class TestHelpers {
    * Example:
    *   await TestHelpers.setConfig('enabled', false);
    */
-  static async setConfig(key: string, value: any): Promise<void> {
+  static async setConfig(key: string, value: unknown): Promise<void> {
     const config = this.getConfig();
     await config.update(key, value, vscode.ConfigurationTarget.Global);
   }
@@ -229,7 +229,7 @@ export class TestHelpers {
    *   const ext = TestHelpers.getExtension();
    *   assert.ok(ext, 'Extension should be installed');
    */
-  static getExtension(): vscode.Extension<any> | undefined {
+  static getExtension(): vscode.Extension<unknown> | undefined {
     return vscode.extensions.getExtension('user.modaledit-line-indicator');
   }
 
