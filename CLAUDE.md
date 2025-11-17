@@ -14,6 +14,8 @@ This project uses **Make** as the primary build system. All development commands
 
 ### Essential Commands
 
+**IMPORTANT**: Use Make for all development tasks. npm commands are available but Make is preferred.
+
 ```bash
 # First-time setup or after pulling changes
 make all              # Full pipeline: clean → install → compile → lint → validate
@@ -25,7 +27,7 @@ make format           # Format code with Prettier
 make validate         # Full validation check before committing
 
 # Testing
-make test             # Run extension tests
+make test             # Run extension tests (uses vscode-test, ~3 seconds)
 make coverage         # Generate code coverage report
 # Press F5 in VS Code to launch Extension Development Host for manual testing
 
@@ -34,6 +36,13 @@ make package          # Create .vsix file
 make install-ext      # Install to VS Code
 make reinstall        # Uninstall and reinstall extension
 ```
+
+**Direct npm equivalents** (use only if Make unavailable):
+- `npm run compile` = TypeScript compilation
+- `npm run watch` = Watch mode
+- `npm test` = Run tests
+- `npm run lint:fix` = Auto-fix linting
+- `npm run format` = Format code
 
 ### Validation Before Commits
 
@@ -67,10 +76,15 @@ Always run `make validate` before committing. This runs:
 - Output channel: "ModalEdit Line Indicator" (View → Output)
 
 **Mode Detection Mechanism**:
-- Queries `modaledit.normal` context using `vscode.commands.executeCommand('getContext', 'modaledit.normal')`
-- Returns `Promise<boolean>` - must be awaited
-- Falls back to `false` if ModalEdit extension not available
-- No direct mode change events - relies on selection changes as proxy
+- Detects mode by checking cursor style via `editor.options.cursorStyle`
+- Block cursor (value 2) = Normal mode, Line cursor (value 1) = Insert mode
+- Falls back to `false` (insert mode) if no editor is active
+- Uses 50ms polling timer to detect cursor style changes
+  - **Why polling?** VS Code API does NOT emit events when `cursorStyle` changes
+  - ModalEdit changes cursor style but no event fires, so polling is required
+- Polling starts on activation and stops when extension is disabled or disposed
+- Polling is idempotent - won't create duplicate timers if started multiple times
+- Tracks `lastKnownCursorStyle` to avoid redundant updates on same style
 
 **Decoration System**:
 - Two `TextEditorDecorationType` instances created on initialization (normal, insert)
@@ -82,27 +96,32 @@ Always run `make validate` before committing. This runs:
 **Event-Driven Updates**:
 - Listens to `onDidChangeTextEditorSelection` (cursor movement triggers mode check)
 - Listens to `onDidChangeActiveTextEditor` (switching editors triggers update)
-- Listens to `onDidChangeConfiguration` (settings changes trigger decoration reload)
+- Listens to `onDidChangeConfiguration` (settings changes trigger decoration reload or enable/disable)
 - 10ms debounce on `updateHighlight()` prevents excessive redraws during rapid cursor movement
+- 50ms cursor style polling provides real-time mode change detection
 
 **Resource Management**:
 - All event listeners stored in `disposables` array
-- On deactivation: clear decorations → dispose listeners → dispose decoration types
+- On deactivation: stop polling → clear decorations → dispose listeners → dispose decoration types
+- On disable (via config): stop polling timer and clear decorations
+- On enable (via config): start polling timer and apply decorations
 - Decorations must be disposed when recreating (config changes)
-- Debounce timer must be cleared on disposal
+- Both debounce timer and polling timer must be cleared on disposal
 
 ### Data Flow
 
 ```
 User switches mode (ModalEdit handles this)
   ↓
-ModalEdit sets context key 'modaledit.normal'
+ModalEdit changes cursor style (Block = Normal, Line = Insert)
   ↓
-Cursor moves or selection changes
+Polling timer detects cursor style change (every 50ms)
+  OR
+Cursor moves/selection changes
   ↓
-onDidChangeTextEditorSelection fires
+Extension checks editor.options.cursorStyle
   ↓
-Extension queries 'modaledit.normal' context
+Determines mode: Block cursor (2) = Normal, else = Insert
   ↓
 Applies appropriate decoration (normal or insert)
   ↓
@@ -171,6 +190,11 @@ Configuration changes trigger `reloadDecorations()` which:
 ```bash
 make test              # Run all 54 automated tests (~3 seconds)
 make coverage          # Generate coverage report (process isolation limitation documented)
+
+# Run specific test suite (bypass Make):
+npm test -- --grep "mode detection"        # Run modeDetection.test.ts
+npm test -- --grep "decoration lifecycle"  # Run decorationLifecycle.test.ts
+npm test -- --grep "configuration"         # Run configuration.test.ts
 ```
 
 **Test Suites** (7 total, 54 tests):

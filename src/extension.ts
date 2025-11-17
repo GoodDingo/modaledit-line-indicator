@@ -331,14 +331,13 @@ class ModalEditLineIndicator implements vscode.Disposable {
         this.enabled = newValue;
 
         if (this.enabled) {
+          this.startCursorStylePolling();
           await this.updateHighlight();
           vscode.window.showInformationMessage('ModalEdit Line Indicator: Enabled');
         } else {
-          // Clear all decorations
-          vscode.window.visibleTextEditors.forEach(editor => {
-            editor.setDecorations(this.decorations.normal, []);
-            editor.setDecorations(this.decorations.insert, []);
-          });
+          // Clear all decorations and stop polling
+          this.clearAllDecorations();
+          this.stopCursorStylePolling();
           vscode.window.showInformationMessage('ModalEdit Line Indicator: Disabled');
         }
       })
@@ -361,10 +360,12 @@ class ModalEditLineIndicator implements vscode.Disposable {
           this.enabled = newEnabled;
 
           if (!newEnabled) {
-            // When disabling, clear all decorations immediately
+            // When disabling, clear all decorations and stop polling immediately
             this.clearAllDecorations();
+            this.stopCursorStylePolling();
           } else {
-            // When enabling, apply decorations
+            // When enabling, start polling and apply decorations
+            this.startCursorStylePolling();
             this.updateHighlight();
           }
         } else if (affectsUs) {
@@ -447,6 +448,12 @@ class ModalEditLineIndicator implements vscode.Disposable {
    * This is needed because VS Code doesn't fire events when cursor style changes
    */
   private startCursorStylePolling(): void {
+    // Don't start if already running
+    if (this.cursorStylePollTimer) {
+      this.logger.debug('Cursor style polling already running, skipping start');
+      return;
+    }
+
     this.logger.log('Starting cursor style polling (every 50ms)...');
 
     this.cursorStylePollTimer = setInterval(async () => {
