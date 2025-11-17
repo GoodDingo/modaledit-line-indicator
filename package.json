@@ -2,7 +2,7 @@
   "name": "modaledit-line-indicator",
   "displayName": "ModalEdit Line Indicator",
   "description": "Dynamic line highlight for ModalEdit normal/insert modes. Changes line highlight color based on current mode for instant visual feedback.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "user",
   "license": "MIT",
   "repository": {
@@ -38,6 +38,18 @@
       {
         "command": "modaledit-line-indicator.updateHighlight",
         "title": "ModalEdit Line Indicator: Update Highlight (Internal)"
+      },
+      {
+        "command": "modaledit-line-indicator.showLogFile",
+        "title": "ModalEdit Line Indicator: Show Log File"
+      },
+      {
+        "command": "modaledit-line-indicator.queryMode",
+        "title": "ModalEdit Line Indicator: Query Current Mode (Debug)"
+      },
+      {
+        "command": "modaledit-line-indicator.clearLog",
+        "title": "ModalEdit Line Indicator: Clear Log File"
       }
     ],
     "configuration": {
@@ -120,15 +132,15 @@
     "@commitlint/config-conventional": "^20.0.0",
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^22.0.0",
+    "@types/node": "^24.10.1",
     "@types/vscode": "^1.106.0",
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
-    "@typescript-eslint/parser": "^7.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.46.4",
+    "@typescript-eslint/parser": "^8.46.4",
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
-    "@vscode/vsce": "^2.22.0",
+    "@vscode/vsce": "^3.3.2",
     "c8": "^10.1.3",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "husky": "^9.1.7",

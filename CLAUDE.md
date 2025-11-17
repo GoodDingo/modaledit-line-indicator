@@ -14,6 +14,8 @@ This project uses **Make** as the primary build system. All development commands
 
 ### Essential Commands
 
+**IMPORTANT**: Use Make for all development tasks. npm commands are available but Make is preferred.
+
 ```bash
 # First-time setup or after pulling changes
 make all              # Full pipeline: clean → install → compile → lint → validate
@@ -21,10 +23,13 @@ make all              # Full pipeline: clean → install → compile → lint �
 # Active development
 make watch            # Auto-recompile on file changes (keep running during development)
 make lint-fix         # Auto-fix ESLint issues before committing
+make format           # Format code with Prettier
 make validate         # Full validation check before committing
 
 # Testing
-# Press F5 in VS Code to launch Extension Development Host
+make test             # Run extension tests (uses vscode-test, ~3 seconds)
+make coverage         # Generate code coverage report
+# Press F5 in VS Code to launch Extension Development Host for manual testing
 
 # Packaging and installation
 make package          # Create .vsix file
@@ -32,13 +37,22 @@ make install-ext      # Install to VS Code
 make reinstall        # Uninstall and reinstall extension
 ```
 
+**Direct npm equivalents** (use only if Make unavailable):
+- `npm run compile` = TypeScript compilation
+- `npm run watch` = Watch mode
+- `npm test` = Run tests
+- `npm run lint:fix` = Auto-fix linting
+- `npm run format` = Format code
+
 ### Validation Before Commits
 
 Always run `make validate` before committing. This runs:
 - TypeScript compilation check
 - ESLint validation
+- Prettier formatting check
 - package.json manifest field verification
 - Project structure verification
+- Extension tests
 
 ## Architecture
 
@@ -49,43 +63,65 @@ Always run `make validate` before committing. This runs:
 - Holds mode state and decoration instances
 - Registers all VS Code event listeners
 - Handles activation/deactivation
+- Implements `vscode.Disposable` interface for proper cleanup
+
+**Design Pattern**: Single Responsibility Principle - one class manages the complete lifecycle of the extension. All state, decorations, and event listeners are encapsulated within this class.
 
 ### Critical Implementation Details
 
+**Logging Infrastructure**:
+- `ExtensionLogger` class with dual output (VS Code Output Channel + temp file)
+- All significant events logged (activation, mode changes, decoration updates, errors)
+- Log file accessible via `showLogFile` command for troubleshooting
+- Output channel: "ModalEdit Line Indicator" (View → Output)
+
 **Mode Detection Mechanism**:
-- Queries `modaledit.normal` context using `vscode.commands.executeCommand('getContext', 'modaledit.normal')`
-- Returns `Promise<boolean>` - must be awaited
-- Falls back to `false` if ModalEdit extension not available
+- Detects mode by checking cursor style via `editor.options.cursorStyle`
+- Block cursor (value 2) = Normal mode, Line cursor (value 1) = Insert mode
+- Falls back to `false` (insert mode) if no editor is active
+- Uses 50ms polling timer to detect cursor style changes
+  - **Why polling?** VS Code API does NOT emit events when `cursorStyle` changes
+  - ModalEdit changes cursor style but no event fires, so polling is required
+- Polling starts on activation and stops when extension is disabled or disposed
+- Polling is idempotent - won't create duplicate timers if started multiple times
+- Tracks `lastKnownCursorStyle` to avoid redundant updates on same style
 
 **Decoration System**:
 - Two `TextEditorDecorationType` instances created on initialization (normal, insert)
 - Decorations applied exclusively (only one active at a time)
-- Applied to current line only (use transparent colors to hide highlight when desired)
+- Applied to current line only via `getDecorateRanges()`
 - Must be manually cleared when switching modes or disabling extension
+- Must be disposed and recreated when configuration changes
 
 **Event-Driven Updates**:
 - Listens to `onDidChangeTextEditorSelection` (cursor movement triggers mode check)
 - Listens to `onDidChangeActiveTextEditor` (switching editors triggers update)
-- Listens to `onDidChangeConfiguration` (settings changes trigger decoration reload)
-- 10ms debounce on `updateHighlight()` prevents excessive redraws
+- Listens to `onDidChangeConfiguration` (settings changes trigger decoration reload or enable/disable)
+- 10ms debounce on `updateHighlight()` prevents excessive redraws during rapid cursor movement
+- 50ms cursor style polling provides real-time mode change detection
 
 **Resource Management**:
 - All event listeners stored in `disposables` array
-- On deactivation: clear decorations → dispose listeners → dispose decoration types
+- On deactivation: stop polling → clear decorations → dispose listeners → dispose decoration types
+- On disable (via config): stop polling timer and clear decorations
+- On enable (via config): start polling timer and apply decorations
 - Decorations must be disposed when recreating (config changes)
+- Both debounce timer and polling timer must be cleared on disposal
 
 ### Data Flow
 
 ```
 User switches mode (ModalEdit handles this)
   ↓
-ModalEdit sets context key 'modaledit.normal'
+ModalEdit changes cursor style (Block = Normal, Line = Insert)
   ↓
-Cursor moves or selection changes
+Polling timer detects cursor style change (every 50ms)
+  OR
+Cursor moves/selection changes
   ↓
-onDidChangeTextEditorSelection fires
+Extension checks editor.options.cursorStyle
   ↓
-Extension queries 'modaledit.normal' context
+Determines mode: Block cursor (2) = Normal, else = Insert
   ↓
 Applies appropriate decoration (normal or insert)
   ↓
@@ -94,10 +130,14 @@ VS Code renders line highlight
 
 ## Configuration System
 
-All settings namespaced with `modaledit-line-indicator.*`:
-- Color customization: `normalModeBackground`, `normalModeBorder`, `insertModeBackground`, `insertModeBorder`
-- Visual style: `borderStyle` (solid/dashed/dotted), `borderWidth`
-- Behavior: `enabled`
+All settings namespaced with `modaledit-line-indicator.*` (7 total):
+- `enabled` (boolean, default: `true`) - Enable/disable extension
+- `normalModeBackground` (string, default: `#00770020`) - Normal mode background color
+- `normalModeBorder` (string, default: `#005500`) - Normal mode border color
+- `insertModeBackground` (string, default: `#77000020`) - Insert mode background color
+- `insertModeBorder` (string, default: `#aa0000`) - Insert mode border color
+- `borderStyle` (enum: solid/dashed/dotted, default: `solid`) - Border style
+- `borderWidth` (string, default: `2px`) - Border width
 
 Configuration changes trigger `reloadDecorations()` which:
 1. Disposes old decoration types
@@ -111,10 +151,12 @@ Configuration changes trigger `reloadDecorations()` which:
 - Strict mode enabled
 - Source maps enabled for debugging
 - Output directory: `./out`
+- Declaration files generated
 
 ## ESLint Configuration
 
 - TypeScript-aware rules via `@typescript-eslint` plugin
+- Prettier integration for code formatting
 - Naming conventions enforced
 - Semi-colons required
 - Unused variables warned (except `_` prefixed)
@@ -125,12 +167,56 @@ Configuration changes trigger `reloadDecorations()` which:
 **Critical fields**:
 - `main: "./out/extension.js"` - compiled entry point, not source
 - `activationEvents: ["onStartupFinished"]` - activates on VS Code startup
-- `engines.vscode: "^1.80.0"` - minimum VS Code version
+- `engines.vscode: "^1.106.0"` - minimum VS Code version
 - `publisher: "user"` - change before publishing to marketplace
 
-**Commands contributed**:
-- `modaledit-line-indicator.toggleEnabled` - user-facing toggle
-- `modaledit-line-indicator.updateHighlight` - internal command for forced updates
+**Commands contributed** (5 total):
+- `modaledit-line-indicator.toggleEnabled` - Toggle extension on/off (user-facing)
+- `modaledit-line-indicator.updateHighlight` - Force highlight update (internal)
+- `modaledit-line-indicator.queryMode` - Query current mode for debugging
+- `modaledit-line-indicator.showLogFile` - Open log file for troubleshooting
+- `modaledit-line-indicator.clearLog` - Clear log file
+
+## Testing
+
+**Test Infrastructure**:
+- Test framework: Mocha (TDD syntax: `suite`, `test`)
+- Test runner: `@vscode/test-cli` and `@vscode/test-electron`
+- Coverage: c8 (shows 0% due to VS Code extension process isolation - expected limitation)
+- Test helpers: 21 static methods in `src/test/helpers/testHelpers.ts` (reduces boilerplate by ~80%)
+- Manual testing: 33 test cases in `ai_docs/MANUAL-TESTING.md` (required for visual verification)
+
+**Running tests**:
+```bash
+make test              # Run all 54 automated tests (~3 seconds)
+make coverage          # Generate coverage report (process isolation limitation documented)
+
+# Run specific test suite (bypass Make):
+npm test -- --grep "mode detection"        # Run modeDetection.test.ts
+npm test -- --grep "decoration lifecycle"  # Run decorationLifecycle.test.ts
+npm test -- --grep "configuration"         # Run configuration.test.ts
+```
+
+**Test Suites** (7 total, 54 tests):
+- `modeDetection.test.ts` - ModalEdit integration (6 tests)
+- `decorationLifecycle.test.ts` - Decoration creation/disposal (8 tests)
+- `extension.test.ts` - Extension activation/commands (9 tests)
+- `eventHandling.test.ts` - VS Code events (7 tests)
+- `configuration.test.ts` - All config keys (9 tests)
+- `modalEditIntegration.test.ts` - ModalEdit detection/fallback (9 tests)
+- `example.test.ts` - TestHelper usage examples (6 tests)
+
+**Test Patterns** (documented in `src/test/helpers/testPatterns.md`):
+- Standard test structure with setup/teardown
+- ModalEdit integration with graceful skip
+- Decoration testing (creation/disposal in try/finally)
+- Configuration testing (reset in teardown)
+- Event testing (dispose listeners in finally)
+
+**Critical Testing Limitation**:
+- VS Code Decoration API is write-only - cannot query colors programmatically
+- Manual testing REQUIRED for visual verification (33 test cases documented)
+- Coverage tool shows 0% due to Extension Host process isolation (documented limitation)
 
 ## Development Workflow
 
@@ -141,6 +227,7 @@ make watch            # Keep running in terminal
 # Edit src/extension.ts
 # Press F5 to test in Extension Development Host
 make lint-fix         # Before committing
+make format           # Before committing
 make validate         # Verify everything passes
 ```
 
@@ -154,14 +241,30 @@ make validate         # Verify everything passes
 - Colors not changing: ModalEdit extension not installed or mode context not updating
 - Extension not loading: Check `make validate` passes, verify `out/extension.js` exists
 - TypeScript errors: Run `make clean && make compile`
+- Test failures: Tests gracefully skip ModalEdit-specific scenarios if ModalEdit not installed
+- Logging: Check Output channel "ModalEdit Line Indicator" or run `showLogFile` command
 
 ## Files and Directories
 
-**Source**: `src/extension.ts` only - single file extension
-**Output**: `out/extension.js` (generated, git-ignored)
-**Config**: `package.json`, `tsconfig.json`, `.eslintrc.json`
+**Source**:
+- `src/extension.ts` - Main extension code (single file)
+- `src/test/suite/*.test.ts` - 7 test suites (54 tests)
+- `src/test/helpers/testHelpers.ts` - 21 test helper methods
+- `src/test/helpers/testPatterns.md` - 5 documented test patterns
+
+**Output**: `out/` directory (generated, git-ignored)
+
+**Config**: `package.json`, `tsconfig.json`, `.eslintrc.json`, `.prettierrc.json`
+
 **Build**: `Makefile` - use this, not npm directly
-**Documentation**: `README.md` (user-facing), `DEVELOPMENT.md` (developer-facing)
+
+**Documentation**:
+- `README.md` - User-facing documentation
+- `DEVELOPMENT.md` - Developer workflow
+- `CLAUDE.md` - This file (Claude Code guidance)
+- `ai_docs/MANUAL-TESTING.md` - 33 manual test cases for visual verification
+- `ai_docs/COVERAGE-REPORT.md` - Coverage analysis and limitations
+- `ai_docs/test-plan/` - 9 stage reports documenting test migration
 
 ## Performance Considerations
 
@@ -169,6 +272,7 @@ make validate         # Verify everything passes
 - Debounced updates prevent excessive redraws during rapid cursor movement
 - Only current line is highlighted, minimizing decoration count
 - Mode checks are async but lightweight (context query only)
+- No file watching or heavy computation - event-driven only
 
 ## Publishing Checklist
 
@@ -176,6 +280,10 @@ Before publishing to marketplace:
 1. Update `publisher` field in package.json (currently "user")
 2. Update `repository.url` in package.json
 3. Update version following semver
-4. Run `make validate` - must pass
-5. Test in clean VS Code install via `make install-ext`
-6. Run `vsce publish` (requires Personal Access Token)
+4. Run `make validate` - must pass (all 54 tests passing)
+5. Complete manual testing checklist (`ai_docs/MANUAL-TESTING.md` - 33 test cases)
+6. Test in clean VS Code install via `make install-ext`
+7. Verify with real users (beta testing) before claiming production-ready
+8. Run `vsce publish` (requires Personal Access Token)
+
+**IMPORTANT**: Do not claim extension is "production-ready" until verified by real users. Use "ready for review" or "beta testing" instead.
