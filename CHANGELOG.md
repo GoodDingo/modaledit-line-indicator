@@ -5,6 +5,88 @@ All notable changes to the "ModalEdit Line Indicator" extension will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2025-11-17
+
+### Added
+- **Theme-Aware Configuration**: Support for theme-specific styling with `[dark]`, `[light]`, and `[highContrast]` overrides
+- **Real-time Theme Switching**: Decorations automatically update when VS Code theme changes
+- **High Contrast Theme Support**: Dedicated configuration support for high contrast themes
+- Theme detection using `vscode.window.activeColorTheme.kind` API
+- Theme change event listener (`onDidChangeActiveColorTheme`)
+- Configuration merging logic for common properties + theme-specific overrides
+- **39 new automated tests** (total: 94 tests, up from 55)
+  - 10 theme detection tests
+  - 15 configuration merging tests
+  - 14 theme change event tests
+- 8 new test helper methods for theme-specific testing
+- Comprehensive migration guide from v0.1.1 to v0.1.2
+- Practical configuration examples in README (subtle, high-visibility, theme-adaptive)
+
+### Changed
+- **BREAKING**: Configuration structure changed from flat to nested objects
+  - Old: `normalModeBackground`, `normalModeBorder`, `normalModeBorderStyle`, `normalModeBorderWidth`
+  - New: `normalMode: { background, border, borderStyle, borderWidth }`
+  - Applies to all modes: `normalMode`, `insertMode`, `visualMode`, `searchMode`
+- Configuration now supports nested objects with optional theme-specific overrides
+- Decoration creation is theme-aware (uses appropriate overrides based on current theme)
+- Test count increased by 71% (55 → 94 tests)
+- Updated README.md with theme-specific configuration examples and migration guide
+- Updated test helpers to support nested configuration structure
+
+### Fixed
+- Improved configuration flexibility with selective property overrides
+- Better theme compatibility across dark, light, and high contrast themes
+- Automatic decoration updates when switching VS Code themes
+
+### Migration Notes
+
+**No automatic migration** - Users upgrading from v0.1.1 must manually reconfigure:
+
+1. Group mode properties into nested objects
+2. Remove mode prefixes from property names (`normalModeBorder` → `border`)
+3. Repeat for all four modes
+4. Optionally add theme-specific overrides
+
+**Example Migration:**
+
+Before (v0.1.1):
+```json
+{
+  "modaledit-line-indicator.normalModeBackground": "rgba(255, 255, 255, 0)",
+  "modaledit-line-indicator.normalModeBorder": "#00aa00",
+  "modaledit-line-indicator.normalModeBorderStyle": "dotted",
+  "modaledit-line-indicator.normalModeBorderWidth": "2px"
+}
+```
+
+After (v0.1.2):
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "border": "#00aa00",
+    "borderStyle": "dotted",
+    "borderWidth": "2px"
+  }
+}
+```
+
+With theme support (optional):
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "borderStyle": "dotted",
+    "borderWidth": "2px",
+    "[dark]": { "border": "#00ffff" },
+    "[light]": { "border": "#0000aa" }
+  }
+}
+```
+
+See [README.md](README.md#migration-from-v011) for complete migration guide.
+
+---
+
 ## [0.1.1] - 2025-11-17
 
 ### Added

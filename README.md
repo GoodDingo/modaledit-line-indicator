@@ -1,12 +1,13 @@
 # ModalEdit Line Indicator
 
-Dynamic line highlight indicator for ModalEdit extension in VS Code. Provides instant visual feedback for all 4 ModalEdit modes.
+Dynamic line highlight indicator for ModalEdit extension in VS Code. Provides instant visual feedback for all 4 ModalEdit modes with theme-aware styling.
 
 ## Features
 
 - **4-Mode Support**: Automatically changes line highlight for NORMAL, INSERT, VISUAL, and SEARCH modes
-- **Per-Mode Customization**: Independent border color, style, and width for each mode
-- **Real-time Updates**: Instant visual feedback as you switch between modes
+- **Theme-Aware Configuration**: Different colors for dark, light, and high contrast themes
+- **Real-time Theme Switching**: Instantly adapts when you change VS Code themes
+- **Per-Mode Customization**: Independent styling for each mode
 - **Minimal Overhead**: Only highlights the current line
 - **Zero Configuration**: Works out-of-the-box with sensible defaults
 
@@ -22,7 +23,7 @@ Or install manually:
 # From the extension directory
 npm install
 npm run compile
-code --install-extension modaledit-line-indicator-0.0.1.vsix
+code --install-extension modaledit-line-indicator-0.1.2.vsix
 ```
 
 ## Usage
@@ -41,8 +42,12 @@ All modes have transparent backgrounds by default for a clean, minimalist look.
 
 - `ModalEdit Line Indicator: Toggle Enabled/Disabled` - Turn indicator on/off
 - `ModalEdit Line Indicator: Query Current Mode (Debug)` - Show current detected mode
+- `ModalEdit Line Indicator: Show Log File` - Open log file for troubleshooting
+- `ModalEdit Line Indicator: Clear Log` - Clear the log file
 
-### Configuration
+## Configuration
+
+### Basic Configuration
 
 Edit your `settings.json` to customize colors and styles per mode:
 
@@ -50,104 +55,260 @@ Edit your `settings.json` to customize colors and styles per mode:
 {
   "modaledit-line-indicator.enabled": true,
 
-  "modaledit-line-indicator.normalModeBackground": "rgba(255, 255, 255, 0)",
-  "modaledit-line-indicator.normalModeBorder": "#00aa00",
-  "modaledit-line-indicator.normalModeBorderStyle": "dotted",
-  "modaledit-line-indicator.normalModeBorderWidth": "2px",
+  "modaledit-line-indicator.normalMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "border": "#00aa00",
+    "borderStyle": "dotted",
+    "borderWidth": "2px"
+  },
 
-  "modaledit-line-indicator.insertModeBackground": "rgba(255, 255, 255, 0)",
-  "modaledit-line-indicator.insertModeBorder": "#aa0000",
-  "modaledit-line-indicator.insertModeBorderStyle": "solid",
-  "modaledit-line-indicator.insertModeBorderWidth": "2px",
+  "modaledit-line-indicator.insertMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "border": "#aa0000",
+    "borderStyle": "solid",
+    "borderWidth": "2px"
+  },
 
-  "modaledit-line-indicator.visualModeBackground": "rgba(255, 255, 255, 0)",
-  "modaledit-line-indicator.visualModeBorder": "#0000aa",
-  "modaledit-line-indicator.visualModeBorderStyle": "dashed",
-  "modaledit-line-indicator.visualModeBorderWidth": "2px",
+  "modaledit-line-indicator.visualMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "border": "#0000aa",
+    "borderStyle": "dashed",
+    "borderWidth": "2px"
+  },
 
-  "modaledit-line-indicator.searchModeBackground": "rgba(255, 255, 255, 0)",
-  "modaledit-line-indicator.searchModeBorder": "#aaaa00",
-  "modaledit-line-indicator.searchModeBorderStyle": "solid",
-  "modaledit-line-indicator.searchModeBorderWidth": "2px"
+  "modaledit-line-indicator.searchMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "border": "#aaaa00",
+    "borderStyle": "solid",
+    "borderWidth": "2px"
+  }
 }
 ```
 
-## Settings
+### Theme-Specific Configuration
 
-### Global Settings
+You can specify different colors for dark, light, and high contrast themes:
+
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    // Common properties (apply to all themes unless overridden)
+    "background": "rgba(255, 255, 255, 0)",
+    "borderStyle": "dotted",
+    "borderWidth": "2px",
+
+    // Dark theme override
+    "[dark]": {
+      "border": "#00ffff"  // Cyan in dark themes
+    },
+
+    // Light theme override
+    "[light]": {
+      "border": "#0000ff"  // Blue in light themes
+    },
+
+    // High contrast theme override
+    "[highContrast]": {
+      "border": "#ffffff",
+      "borderWidth": "4px"  // Thicker border for better visibility
+    }
+  }
+}
+```
+
+**How It Works:**
+1. **Common properties** (background, border, borderStyle, borderWidth) apply to all themes
+2. **Theme-specific overrides** (`[dark]`, `[light]`, `[highContrast]`) selectively override properties
+3. Extension automatically detects your current theme and applies the appropriate styling
+4. When you switch themes, the extension instantly updates the decorations
+
+### Practical Examples
+
+#### Example 1: Subtle Indicators
+
+Minimal borders that don't distract:
+
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "border": "#00aa00",
+    "borderStyle": "solid",
+    "borderWidth": "1px"
+  },
+  "modaledit-line-indicator.insertMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "border": "#aa0000",
+    "borderStyle": "solid",
+    "borderWidth": "1px"
+  },
+  "modaledit-line-indicator.visualMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "border": "#0000aa",
+    "borderStyle": "solid",
+    "borderWidth": "1px"
+  },
+  "modaledit-line-indicator.searchMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "border": "#aaaa00",
+    "borderStyle": "solid",
+    "borderWidth": "1px"
+  }
+}
+```
+
+#### Example 2: High Visibility with Backgrounds
+
+Bold indicators with colored backgrounds:
+
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "background": "rgba(0, 255, 0, 0.1)",
+    "border": "#00ff00",
+    "borderStyle": "solid",
+    "borderWidth": "3px"
+  },
+  "modaledit-line-indicator.insertMode": {
+    "background": "rgba(255, 0, 0, 0.1)",
+    "border": "#ff0000",
+    "borderStyle": "solid",
+    "borderWidth": "3px"
+  },
+  "modaledit-line-indicator.visualMode": {
+    "background": "rgba(0, 0, 255, 0.1)",
+    "border": "#0000ff",
+    "borderStyle": "solid",
+    "borderWidth": "3px"
+  },
+  "modaledit-line-indicator.searchMode": {
+    "background": "rgba(255, 255, 0, 0.1)",
+    "border": "#ffff00",
+    "borderStyle": "solid",
+    "borderWidth": "3px"
+  }
+}
+```
+
+#### Example 3: Theme-Adaptive (Recommended)
+
+Different colors for dark and light themes:
+
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "borderStyle": "dotted",
+    "borderWidth": "2px",
+    "[dark]": {
+      "border": "#00ffff",  // Bright cyan for dark
+      "background": "rgba(0, 255, 255, 0.05)"
+    },
+    "[light]": {
+      "border": "#0000aa",  // Darker blue for light
+      "background": "rgba(0, 0, 255, 0.05)"
+    }
+  },
+  "modaledit-line-indicator.insertMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "borderStyle": "solid",
+    "borderWidth": "2px",
+    "[dark]": {
+      "border": "#ff6666"  // Softer red for dark
+    },
+    "[light]": {
+      "border": "#cc0000"  // Deeper red for light
+    }
+  },
+  "modaledit-line-indicator.visualMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "borderStyle": "dashed",
+    "borderWidth": "2px",
+    "[dark]": {
+      "border": "#ff00ff"  // Magenta for dark
+    },
+    "[light]": {
+      "border": "#8800aa"  // Purple for light
+    }
+  },
+  "modaledit-line-indicator.searchMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "borderStyle": "solid",
+    "borderWidth": "2px",
+    "[dark]": {
+      "border": "#ffff00"  // Yellow for dark
+    },
+    "[light]": {
+      "border": "#aa8800"  // Gold for light
+    }
+  }
+}
+```
+
+## Settings Reference
+
+### Global Setting
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
 | `enabled` | boolean | `true` | Enable/disable the indicator |
 
-### Normal Mode
+### Mode Configuration
 
-| Setting | Type | Default | Description |
-|---------|------|---------|-------------|
-| `normalModeBackground` | string | `rgba(255, 255, 255, 0)` | Background color (CSS format) |
-| `normalModeBorder` | string | `#00aa00` | Border color (CSS format) |
-| `normalModeBorderStyle` | enum | `dotted` | Border style (solid/dashed/dotted/double/groove/ridge/inset/outset) |
-| `normalModeBorderWidth` | string | `2px` | Border width (CSS format) |
+Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports the following properties:
 
-### Insert Mode
+| Property | Type | Description |
+|----------|------|-------------|
+| `background` | string | Background color (CSS format, e.g., `rgba(255, 0, 0, 0.1)`) |
+| `border` | string | Border color (CSS format, e.g., `#ff0000` or `rgb(255, 0, 0)`) |
+| `borderStyle` | string | Border style: `solid`, `dashed`, `dotted`, `double`, `groove`, `ridge`, `inset`, `outset` |
+| `borderWidth` | string | Border width (CSS format, e.g., `2px`, `0.1em`) |
+| `[dark]` | object | Override properties for dark themes |
+| `[light]` | object | Override properties for light themes |
+| `[highContrast]` | object | Override properties for high contrast themes |
 
-| Setting | Type | Default | Description |
-|---------|------|---------|-------------|
-| `insertModeBackground` | string | `rgba(255, 255, 255, 0)` | Background color (CSS format) |
-| `insertModeBorder` | string | `#aa0000` | Border color (CSS format) |
-| `insertModeBorderStyle` | enum | `solid` | Border style (solid/dashed/dotted/double/groove/ridge/inset/outset) |
-| `insertModeBorderWidth` | string | `2px` | Border width (CSS format) |
+**Theme Override Objects** can contain any combination of the above properties.
 
-### Visual Mode
+## Migration from v0.1.1
 
-| Setting | Type | Default | Description |
-|---------|------|---------|-------------|
-| `visualModeBackground` | string | `rgba(255, 255, 255, 0)` | Background color (CSS format) |
-| `visualModeBorder` | string | `#0000aa` | Border color (CSS format) |
-| `visualModeBorderStyle` | enum | `dashed` | Border style (solid/dashed/dotted/double/groove/ridge/inset/outset) |
-| `visualModeBorderWidth` | string | `2px` | Border width (CSS format) |
+If you're upgrading from version 0.1.1, the configuration format has changed from flat to nested:
 
-### Search Mode
+### Old Format (v0.1.1)
+```json
+{
+  "modaledit-line-indicator.normalModeBackground": "rgba(255, 255, 255, 0)",
+  "modaledit-line-indicator.normalModeBorder": "#00aa00",
+  "modaledit-line-indicator.normalModeBorderStyle": "dotted",
+  "modaledit-line-indicator.normalModeBorderWidth": "2px"
+}
+```
 
-| Setting | Type | Default | Description |
-|---------|------|---------|-------------|
-| `searchModeBackground` | string | `rgba(255, 255, 255, 0)` | Background color (CSS format) |
-| `searchModeBorder` | string | `#aaaa00` | Border color (CSS format) |
-| `searchModeBorderStyle` | enum | `solid` | Border style (solid/dashed/dotted/double/groove/ridge/inset/outset) |
-| `searchModeBorderWidth` | string | `2px` | Border width (CSS format) |
+### New Format (v0.1.2+)
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "border": "#00aa00",
+    "borderStyle": "dotted",
+    "borderWidth": "2px"
+  }
+}
+```
+
+**Migration Steps:**
+1. Open your `settings.json`
+2. Group properties for each mode into a nested object
+3. Rename properties (remove the mode prefix): `normalModeBorder` → `border`
+4. Repeat for all four modes: `normalMode`, `insertMode`, `visualMode`, `searchMode`
+5. (Optional) Add theme-specific overrides using `[dark]`, `[light]`, `[highContrast]` keys
 
 ## Development
 
-### Setup
-
-```bash
-npm install
-npm run compile
-```
-
-### Build
-
-```bash
-npm run compile     # Compile TypeScript
-npm run watch       # Watch for changes and recompile
-```
-
-### Package
-
-```bash
-npm install -g vsce
-vsce package
-```
-
-### Debug
-
-1. Open the extension directory in VS Code
-2. Press `F5` to launch the debug session
-3. The extension will start in a new VS Code window
+See [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow and contribution guidelines.
 
 ## Requirements
 
-- VS Code 1.80.0 or higher
+- VS Code 1.106.0 or higher
 - ModalEdit extension installed and active
 
 ## Troubleshooting
@@ -157,11 +318,21 @@ vsce package
 1. Ensure ModalEdit extension is installed and activated
 2. Check that `modaledit-line-indicator.enabled` is `true`
 3. Try running command: `ModalEdit Line Indicator: Toggle Enabled/Disabled` twice
-4. Restart VS Code
+4. Check logs: Run `ModalEdit Line Indicator: Show Log File` command
+5. Restart VS Code
+
+### Theme-specific colors not applying?
+
+1. Verify your theme kind (dark/light/high contrast) in VS Code
+2. Check that you've defined the appropriate theme override (`[dark]`, `[light]`, or `[highContrast]`)
+3. Ensure theme override property names match exactly (case-sensitive)
+4. Try switching to a different theme and back
 
 ### Extension doesn't load?
 
-Check the VS Code developer console (`Help > Toggle Developer Tools`) for error messages.
+1. Check the VS Code developer console (`Help > Toggle Developer Tools`) for error messages
+2. Run `ModalEdit Line Indicator: Show Log File` to view extension logs
+3. Verify your configuration syntax is valid JSON
 
 ## License
 
@@ -170,3 +341,7 @@ MIT
 ## Contributing
 
 Contributions welcome! Please submit issues and pull requests on GitHub.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for version history and release notes.
