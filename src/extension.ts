@@ -6,6 +6,59 @@ import * as os from 'os';
 type Mode = 'normal' | 'insert' | 'visual' | 'search';
 
 /**
+ * Theme kind supported by VS Code
+ * VS Code provides 4 distinct theme kinds:
+ * - dark: Regular dark theme
+ * - light: Regular light theme
+ * - highContrastDark: High contrast dark theme (ColorThemeKind.HighContrast)
+ * - highContrastLight: High contrast light theme (ColorThemeKind.HighContrastLight)
+ */
+type ThemeKind = 'dark' | 'light' | 'highContrastDark' | 'highContrastLight';
+
+/**
+ * Theme-specific override configuration
+ */
+interface ThemeOverride {
+  background?: string;
+  border?: string;
+  borderStyle?: string;
+  borderWidth?: string;
+}
+
+/**
+ * Mode configuration with optional theme-specific overrides
+ *
+ * STAGE 2: Supports cascading fallback hierarchy
+ * - [dark]: Regular dark theme (also fallback for highContrastDark)
+ * - [light]: Regular light theme (also fallback for highContrastLight)
+ * - [highContrastDark]: High contrast dark theme → falls back to [dark]
+ * - [highContrastLight]: High contrast light theme → falls back to [light]
+ *
+ * Each property (background, border, borderStyle, borderWidth) is resolved
+ * independently through the fallback chain, enabling selective overrides.
+ */
+interface ModeConfig {
+  background?: string;
+  border?: string;
+  borderStyle?: string;
+  borderWidth?: string;
+  '[dark]'?: ThemeOverride;
+  '[light]'?: ThemeOverride;
+  '[highContrastDark]'?: ThemeOverride;
+  '[highContrastLight]'?: ThemeOverride;
+}
+
+/**
+ * Merged configuration after applying theme overrides
+ */
+interface MergedModeConfig {
+  background: string;
+  border: string;
+  borderStyle: string;
+  borderWidth: string;
+}
+
+/**
  * Logger that writes to both VS Code output channel and file
  * Dual output ensures we can review logs even after VS Code closes
  */
@@ -44,6 +97,12 @@ class ExtensionLogger {
 
   debug(message: string, data?: unknown): void {
     const formatted = this.formatMessage('DEBUG', message, data);
+    this.outputChannel.appendLine(formatted);
+    this.writeToFile(formatted);
+  }
+
+  warn(message: string, data?: unknown): void {
+    const formatted = this.formatMessage('WARN', message, data);
     this.outputChannel.appendLine(formatted);
     this.writeToFile(formatted);
   }
@@ -106,6 +165,151 @@ class ModalEditLineIndicator implements vscode.Disposable {
   }
 
   /**
+   * Detects the current VS Code theme kind.
+   * Maps VS Code ColorThemeKind enum to our ThemeKind type.
+   *
+   * VS Code provides 4 distinct theme kinds, and we now distinguish between
+   * high contrast dark and high contrast light themes (Stage 1 of Issue #4).
+   *
+   * @returns 'dark', 'light', 'highContrastDark', or 'highContrastLight'
+   */
+  private getCurrentThemeKind(): ThemeKind {
+    const themeKind = vscode.window.activeColorTheme.kind;
+
+    switch (themeKind) {
+      case vscode.ColorThemeKind.Dark:
+        return 'dark';
+      case vscode.ColorThemeKind.Light:
+        return 'light';
+      case vscode.ColorThemeKind.HighContrast:
+        // HighContrast is the DARK variant of high contrast themes
+        return 'highContrastDark';
+      case vscode.ColorThemeKind.HighContrastLight:
+        return 'highContrastLight';
+      default:
+        this.logger.debug(`Unknown theme kind: ${themeKind}, defaulting to dark`);
+        return 'dark';
+    }
+  }
+
+  /**
+   * Returns the fallback chain for a given theme kind.
+   * Each property is resolved by checking these keys in order until a value is found.
+   *
+   * STAGE 2: Implements cascading fallback hierarchy per Issue #4
+   * - HC Dark falls back to regular dark theme
+   * - HC Light falls back to regular light theme
+   * - Regular themes have no fallback (check theme override only)
+   *
+   * @param themeKind - Current theme kind
+   * @returns Array of theme override keys to check in priority order
+   */
+  private getFallbackChain(themeKind: ThemeKind): string[] {
+    switch (themeKind) {
+      case 'highContrastDark':
+        // HC Dark: [highContrastDark] → [dark] → common → defaults
+        return ['[highContrastDark]', '[dark]'];
+      case 'highContrastLight':
+        // HC Light: [highContrastLight] → [light] → common → defaults
+        return ['[highContrastLight]', '[light]'];
+      case 'dark':
+        // Regular dark: [dark] → common → defaults
+        return ['[dark]'];
+      case 'light':
+        // Regular light: [light] → common → defaults
+        return ['[light]'];
+    }
+  }
+
+  /**
+   * Resolves a single property through the fallback chain.
+   * Checks theme overrides first, then common property, then default value.
+   *
+   * STAGE 2: Property-level cascading resolution (not object-level)
+   * This allows selective overrides without duplicating entire config.
+   *
+   * @param propertyName - Property to resolve (background, border, borderStyle, borderWidth)
+   * @param modeConfig - Mode configuration object from settings
+   * @param fallbackChain - Array of theme keys to check in priority order
+   * @param defaultValue - Default value if not found anywhere
+   * @returns Resolved property value
+   */
+  private resolveProperty(
+    propertyName: keyof ThemeOverride,
+    modeConfig: ModeConfig,
+    fallbackChain: string[],
+    defaultValue: string
+  ): string {
+    // 1. Check theme-specific overrides in priority order
+    for (const themeKey of fallbackChain) {
+      const themeOverride = modeConfig[themeKey as keyof ModeConfig] as ThemeOverride | undefined;
+      if (themeOverride?.[propertyName] !== undefined) {
+        this.logger.debug(
+          `Resolved ${propertyName} from ${themeKey}: ${themeOverride[propertyName]}`
+        );
+        return themeOverride[propertyName]!;
+      }
+    }
+
+    // 2. Check common property (base configuration)
+    if (modeConfig[propertyName] !== undefined) {
+      this.logger.debug(`Resolved ${propertyName} from common config: ${modeConfig[propertyName]}`);
+      return modeConfig[propertyName]!;
+    }
+
+    // 3. Use default value
+    this.logger.debug(`Resolved ${propertyName} from defaults: ${defaultValue}`);
+    return defaultValue;
+  }
+
+  /**
+   * Merges common mode configuration with theme-specific overrides.
+   *
+   * STAGE 2: Implements property-level cascading fallback hierarchy.
+   * Each property (background, border, borderStyle, borderWidth) is resolved
+   * independently through the fallback chain.
+   *
+   * Fallback hierarchy:
+   * - HC Dark: [highContrastDark] → [dark] → common → defaults
+   * - HC Light: [highContrastLight] → [light] → common → defaults
+   * - Regular Dark/Light: [dark/light] → common → defaults
+   *
+   * Example:
+   * {
+   *   borderStyle: "dotted",              // common
+   *   "[dark]": { borderWidth: "2px" },   // dark theme
+   *   "[highContrastDark]": { border: "#ff0000" }  // HC dark
+   * }
+   * When theme = High Contrast Dark:
+   * - border: "#ff0000"             ← from [highContrastDark]
+   * - borderWidth: "2px"            ← from [dark] (fallback)
+   * - borderStyle: "dotted"         ← from common
+   * - background: "rgba(...)"       ← from defaults
+   *
+   * @param modeConfig - Nested configuration object from settings
+   * @returns Merged configuration with all required properties
+   */
+  private getMergedModeConfig(modeConfig: ModeConfig): MergedModeConfig {
+    const themeKind = this.getCurrentThemeKind();
+    const fallbackChain = this.getFallbackChain(themeKind);
+
+    this.logger.debug(
+      `Resolving mode config for theme: ${themeKind}, fallback chain: ${fallbackChain.join(' → ')}`
+    );
+
+    // STAGE 2: Resolve each property independently through the fallback chain
+    // This enables selective overrides (e.g., only override borderWidth for HC, inherit rest from base theme)
+    const merged: MergedModeConfig = {
+      background: this.resolveProperty('background', modeConfig, fallbackChain, '#ffffff'),
+      border: this.resolveProperty('border', modeConfig, fallbackChain, '#ffffff'),
+      borderStyle: this.resolveProperty('borderStyle', modeConfig, fallbackChain, 'solid'),
+      borderWidth: this.resolveProperty('borderWidth', modeConfig, fallbackChain, '2px'),
+    };
+
+    return merged;
+  }
+
+  /**
    * Creates text editor decoration types for all 4 modes.
    * Each mode has its own background, border color, border style, and border width.
    *
@@ -113,23 +317,36 @@ class ModalEditLineIndicator implements vscode.Disposable {
    */
   private createDecorations(): DecorationTypes {
     const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
+    const currentTheme = this.getCurrentThemeKind();
 
-    this.logger.log('Creating decorations for 4 modes');
+    this.logger.log(`Creating decorations for 4 modes (theme: ${currentTheme})`);
 
     // Helper function to create decoration for a specific mode
     const createModeDecoration = (mode: Mode): vscode.TextEditorDecorationType => {
-      const bg = config.get<string>(`${mode}ModeBackground`, 'rgba(255, 255, 255, 0)');
-      const borderColor = config.get<string>(`${mode}ModeBorder`, '#ffffff');
-      const borderStyle = config.get<string>(`${mode}ModeBorderStyle`, 'solid');
-      const borderWidth = config.get<string>(`${mode}ModeBorderWidth`, '2px');
+      // Get nested mode configuration object
+      const modeConfigKey = `${mode}Mode`;
+      const userModeConfig = config.get<ModeConfig>(modeConfigKey);
+      const modeConfig =
+        userModeConfig ??
+        (config.inspect<ModeConfig>(modeConfigKey)?.defaultValue as ModeConfig | undefined) ??
+        {};
+
+      if (!userModeConfig) {
+        this.logger.debug(
+          `Using ${mode} mode defaults from schema because no user configuration was found.`
+        );
+      }
+
+      // Merge common properties with theme-specific overrides
+      const merged = this.getMergedModeConfig(modeConfig);
 
       this.logger.log(
-        `  ${mode.toUpperCase()}: bg=${bg}, border=${borderWidth} ${borderStyle} ${borderColor}`
+        `  ${mode.toUpperCase()}: bg=${merged.background}, border=${merged.borderWidth} ${merged.borderStyle} ${merged.border}`
       );
 
       return vscode.window.createTextEditorDecorationType({
-        backgroundColor: bg,
-        border: `${borderWidth} ${borderStyle} ${borderColor}`,
+        backgroundColor: merged.background,
+        border: `${merged.borderWidth} ${merged.borderStyle} ${merged.border}`,
         isWholeLine: true,
       });
     };
@@ -145,9 +362,9 @@ class ModalEditLineIndicator implements vscode.Disposable {
   /**
    * Detects the current ModalEdit mode using cursor style and selection state.
    *
-   * ModalEdit ALWAYS uses different cursor styles for different modes, though users
-   * can configure which style. The key insight: we can detect VISUAL mode reliably
-   * by checking if there's an active selection, regardless of cursor configuration.
+   * ModalEdit by default uses different cursor styles for different modes, though users
+   * can configure which styles to use. The key insight: we can detect VISUAL mode reliably
+   * by checking if there's an active selection, regardless of cursor styles.
    *
    * Mode detection strategy:
    * 1. Check if editor has a selection (selection.anchor != selection.active)
@@ -223,7 +440,11 @@ class ModalEditLineIndicator implements vscode.Disposable {
     }
 
     this.updateDebounceTimer = setTimeout(async () => {
-      await this.applyDecorations(editor);
+      // Re-check active editor in case it changed during debounce
+      const currentEditor = vscode.window.activeTextEditor;
+      if (currentEditor) {
+        await this.applyDecorations(currentEditor);
+      }
     }, this.DEBOUNCE_MS);
   }
 
@@ -326,9 +547,11 @@ class ModalEditLineIndicator implements vscode.Disposable {
     // Create new decorations with updated config
     this.decorations = this.createDecorations();
 
-    // Reapply to all visible editors
-    for (const editor of vscode.window.visibleTextEditors) {
-      this.applyDecorations(editor);
+    // Reapply to all visible editors only if extension is enabled
+    if (this.enabled) {
+      for (const editor of vscode.window.visibleTextEditors) {
+        this.applyDecorations(editor);
+      }
     }
   }
 
@@ -414,6 +637,14 @@ class ModalEditLineIndicator implements vscode.Disposable {
           this.logger.log('Configuration changed - reloading decorations');
           this.reloadDecorations();
         }
+      })
+    );
+
+    // Listen for theme changes and reload decorations
+    this.disposables.push(
+      vscode.window.onDidChangeActiveColorTheme(theme => {
+        this.logger.log(`Color theme changed to: ${theme.kind} - reloading decorations`);
+        this.reloadDecorations();
       })
     );
 

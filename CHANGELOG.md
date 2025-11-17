@@ -5,6 +5,226 @@ All notable changes to the "ModalEdit Line Indicator" extension will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2025-11-17
+
+### Added
+- **Cascading Fallback Hierarchy** (Stage 2): Property-level cascading configuration resolution
+  - Each property (background, border, borderStyle, borderWidth) resolved independently through fallback chain
+  - **HC Dark**: `[highContrastDark]` → `[dark]` → common → defaults
+  - **HC Light**: `[highContrastLight]` → `[light]` → common → defaults
+  - Enables selective overrides (e.g., only override borderWidth for HC, inherit rest from base theme)
+- **Separate High Contrast Theme Keys** (Stage 1): Distinguished HC dark from HC light
+  - `[highContrastDark]` - High contrast dark theme configuration
+  - `[highContrastLight]` - High contrast light theme configuration
+  - VS Code provides 4 distinct theme kinds, now all properly supported
+- **14 new cascading fallback tests** (total: 113 tests, up from 99)
+  - HC dark/light fallback to base themes
+  - Property-level independence tests
+  - Complete cascade through all 4 levels
+  - Edge cases (empty config, partial overrides, missing base theme)
+- New helper methods for configuration resolution:
+  - `getFallbackChain()` - Returns priority-ordered theme keys for current theme
+  - `resolveProperty()` - Resolves single property through fallback chain with debug logging
+- Enhanced debug logging showing resolution path for each property
+
+### Changed
+- **BREAKING**: Removed `[highContrast]` configuration key
+  - Replaced with `[highContrastDark]` and `[highContrastLight]` (Stage 1: deprecated, Stage 2: removed)
+  - Old: `[highContrast]` applied to both HC dark and HC light themes
+  - New: Separate keys for each variant with proper fallback
+  - **Migration Required**: Users with `[highContrast]` config must split into two keys (see Migration section)
+- Updated `ThemeKind` type from 3 to 4 values: `'dark' | 'light' | 'highContrastDark' | 'highContrastLight'`
+- Updated `ModeConfig` interface to remove `[highContrast]` and add HC dark/light keys
+- Rewrote `getMergedModeConfig()` with property-level cascading logic (Stage 2)
+- Updated `getCurrentThemeKind()` to return distinct values for HC dark vs HC light (Stage 1)
+- Configuration schema in `package.json` updated to document new theme keys and fallback hierarchy
+- Test count increased by 14% (99 → 113 tests)
+
+### Fixed
+- **High Contrast Light Theme Bug**: Fixed white borders on white background in HC light themes
+  - Root cause: Single `[highContrast]` key used dark-optimized colors for both HC variants
+  - Solution: Separate `[highContrastDark]` and `[highContrastLight]` keys with proper fallback
+- **Decorations Bypass Disabled State**: Fixed decorations reappearing when extension is disabled
+  - Root cause: `reloadDecorations()` didn't check `enabled` state before applying decorations
+  - Impact: Theme changes would reapply decorations even when extension was explicitly disabled
+  - Solution: Added `if (this.enabled)` check before reapplying decorations
+- **Editor Context Mismatch**: Fixed decorations applying to wrong editor in edge cases
+  - Root cause: `updateHighlight()` captured editor reference, used it 10ms later after debounce
+  - Impact: If user switched editors within 10ms window, decoration applied to wrong editor
+  - Solution: Re-check `activeTextEditor` inside debounce timeout callback
+- Improved configuration flexibility with cascading fallback hierarchy
+- Better high contrast theme support with dedicated dark/light configurations
+
+### Migration Notes
+
+**From v0.1.2 to v0.1.3** (BREAKING CHANGE - High Contrast Configuration):
+
+If you used `[highContrast]` configuration in v0.1.2, you must update to the new format:
+
+**Before (v0.1.2):**
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "borderStyle": "dotted",
+    "[highContrast]": {
+      "border": "#ffffff",
+      "borderWidth": "4px"
+    }
+  }
+}
+```
+
+**After (v0.1.3):**
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "borderStyle": "dotted",
+    "[highContrastDark]": {
+      "border": "#ffffff",
+      "borderWidth": "4px"
+    },
+    "[highContrastLight]": {
+      "border": "#000000",
+      "borderWidth": "4px"
+    }
+  }
+}
+```
+
+**Why This Change?**
+- VS Code distinguishes between high contrast dark and high contrast light themes
+- Old `[highContrast]` applied same config to both, causing visibility issues
+- Example: White borders on white background in HC light themes
+
+**Cascading Fallback Benefits:**
+- HC themes can inherit most settings from base themes (`[dark]` or `[light]`)
+- Only override what's necessary (e.g., thicker borders for HC)
+- Reduces config duplication
+
+**Example with Cascading:**
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "borderStyle": "dotted",  // Common to all themes
+    "[dark]": {
+      "border": "#00ffff"  // Used by dark theme AND as fallback for HC dark
+    },
+    "[light]": {
+      "border": "#0000ff"  // Used by light theme AND as fallback for HC light
+    },
+    "[highContrastDark]": {
+      "borderWidth": "4px"  // Only override width, inherit border color from [dark]
+    },
+    "[highContrastLight]": {
+      "borderWidth": "4px"  // Only override width, inherit border color from [light]
+    }
+  }
+}
+```
+
+See [README.md](README.md#migration-from-v012) for complete migration guide.
+
+### Technical Details
+
+**Implementation Stages:**
+- **Stage 1**: Theme Detection & Distinction - Distinguished HC dark from HC light at type level
+- **Stage 2**: Cascading Fallback Hierarchy - Implemented property-level fallback resolution
+- **Stage 3**: Schema, Documentation & Cleanup - Updated schemas, docs, and changelog
+
+**Fallback Resolution Algorithm:**
+1. Check theme-specific overrides in priority order (e.g., `[highContrastDark]`, `[dark]`)
+2. Check common property (base configuration)
+3. Use default value
+
+**Test Coverage:**
+- 5 new Stage 1 tests (theme detection)
+- 14 new Stage 2 tests (cascading fallback)
+- Total: 113 automated tests (up from 94 in v0.1.2)
+
+---
+
+## [0.1.2] - 2025-11-17
+
+### Added
+- **Theme-Aware Configuration**: Support for theme-specific styling with `[dark]` and `[light]` overrides
+- **Real-time Theme Switching**: Decorations automatically update when VS Code theme changes
+- **High Contrast Theme Support**: Dedicated configuration support for high contrast themes
+- Theme detection using `vscode.window.activeColorTheme.kind` API
+- Theme change event listener (`onDidChangeActiveColorTheme`)
+- Configuration merging logic for common properties + theme-specific overrides
+- **39 new automated tests** (total: 94 tests, up from 55)
+  - 10 theme detection tests
+  - 15 configuration merging tests
+  - 14 theme change event tests
+- 8 new test helper methods for theme-specific testing
+- Comprehensive migration guide from v0.1.1 to v0.1.2
+- Practical configuration examples in README (subtle, high-visibility, theme-adaptive)
+
+### Changed
+- **BREAKING**: Configuration structure changed from flat to nested objects
+  - Old: `normalModeBackground`, `normalModeBorder`, `normalModeBorderStyle`, `normalModeBorderWidth`
+  - New: `normalMode: { background, border, borderStyle, borderWidth }`
+  - Applies to all modes: `normalMode`, `insertMode`, `visualMode`, `searchMode`
+- Configuration now supports nested objects with optional theme-specific overrides
+- Decoration creation is theme-aware (uses appropriate overrides based on current theme)
+- Test count increased by 71% (55 → 94 tests)
+- Updated README.md with theme-specific configuration examples and migration guide
+- Updated test helpers to support nested configuration structure
+
+### Fixed
+- Improved configuration flexibility with selective property overrides
+- Better theme compatibility across dark, light, and high contrast themes
+- Automatic decoration updates when switching VS Code themes
+
+### Migration Notes
+
+**No automatic migration** - Users upgrading from v0.1.1 must manually reconfigure:
+
+1. Group mode properties into nested objects
+2. Remove mode prefixes from property names (`normalModeBorder` → `border`)
+3. Repeat for all four modes
+4. Optionally add theme-specific overrides
+
+**Example Migration:**
+
+Before (v0.1.1):
+```json
+{
+  "modaledit-line-indicator.normalModeBackground": "rgba(255, 255, 255, 0)",
+  "modaledit-line-indicator.normalModeBorder": "#00aa00",
+  "modaledit-line-indicator.normalModeBorderStyle": "dotted",
+  "modaledit-line-indicator.normalModeBorderWidth": "2px"
+}
+```
+
+After (v0.1.2):
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "border": "#00aa00",
+    "borderStyle": "dotted",
+    "borderWidth": "2px"
+  }
+}
+```
+
+With theme support (optional):
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "borderStyle": "dotted",
+    "borderWidth": "2px",
+    "[dark]": { "border": "#00ffff" },
+    "[light]": { "border": "#0000aa" }
+  }
+}
+```
+
+See [README.md](README.md#migration-from-v011) for complete migration guide.
+
+---
+
 ## [0.1.1] - 2025-11-17
 
 ### Added

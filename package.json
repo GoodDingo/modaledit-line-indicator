@@ -2,7 +2,7 @@
   "name": "modaledit-line-indicator",
   "displayName": "ModalEdit Line Indicator",
   "description": "Dynamic line highlight for ModalEdit modes (normal, insert, visual, search). Changes line highlight color and style based on current mode for instant visual feedback.",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "publisher": "user",
   "license": "MIT",
   "repository": {
@@ -62,141 +62,49 @@
           "scope": "resource",
           "description": "Enable or disable the line highlight indicator"
         },
-        "modaledit-line-indicator.normalModeBackground": {
-          "type": "string",
-          "default": "rgba(255, 255, 255, 0)",
+        "modaledit-line-indicator.normalMode": {
+          "type": "object",
           "scope": "resource",
-          "description": "Background color for normal mode line highlight (CSS color format)"
+          "description": "Normal mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
+          "default": {
+            "background": "rgba(255, 255, 255, 0)",
+            "border": "#00aa00",
+            "borderStyle": "dotted",
+            "borderWidth": "2px"
+          }
         },
-        "modaledit-line-indicator.normalModeBorder": {
-          "type": "string",
-          "default": "#00aa00",
+        "modaledit-line-indicator.insertMode": {
+          "type": "object",
           "scope": "resource",
-          "description": "Border color for normal mode line highlight (CSS color format)"
+          "description": "Insert mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
+          "default": {
+            "background": "rgba(255, 255, 255, 0)",
+            "border": "#aa0000",
+            "borderStyle": "solid",
+            "borderWidth": "2px"
+          }
         },
-        "modaledit-line-indicator.normalModeBorderStyle": {
-          "type": "string",
-          "enum": [
-            "solid",
-            "dashed",
-            "dotted",
-            "double",
-            "groove",
-            "ridge",
-            "inset",
-            "outset"
-          ],
-          "default": "dotted",
+        "modaledit-line-indicator.visualMode": {
+          "type": "object",
           "scope": "resource",
-          "description": "Border style for normal mode line highlight"
+          "description": "Visual mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
+          "default": {
+            "background": "rgba(255, 255, 255, 0)",
+            "border": "#0000aa",
+            "borderStyle": "dashed",
+            "borderWidth": "2px"
+          }
         },
-        "modaledit-line-indicator.normalModeBorderWidth": {
-          "type": "string",
-          "default": "2px",
+        "modaledit-line-indicator.searchMode": {
+          "type": "object",
           "scope": "resource",
-          "description": "Border width for normal mode line highlight (CSS format, e.g., '2px', '0.1em')"
-        },
-        "modaledit-line-indicator.insertModeBackground": {
-          "type": "string",
-          "default": "rgba(255, 255, 255, 0)",
-          "scope": "resource",
-          "description": "Background color for insert mode line highlight (CSS color format)"
-        },
-        "modaledit-line-indicator.insertModeBorder": {
-          "type": "string",
-          "default": "#aa0000",
-          "scope": "resource",
-          "description": "Border color for insert mode line highlight (CSS color format)"
-        },
-        "modaledit-line-indicator.insertModeBorderStyle": {
-          "type": "string",
-          "enum": [
-            "solid",
-            "dashed",
-            "dotted",
-            "double",
-            "groove",
-            "ridge",
-            "inset",
-            "outset"
-          ],
-          "default": "solid",
-          "scope": "resource",
-          "description": "Border style for insert mode line highlight"
-        },
-        "modaledit-line-indicator.insertModeBorderWidth": {
-          "type": "string",
-          "default": "2px",
-          "scope": "resource",
-          "description": "Border width for insert mode line highlight (CSS format, e.g., '2px', '0.1em')"
-        },
-        "modaledit-line-indicator.visualModeBackground": {
-          "type": "string",
-          "default": "rgba(255, 255, 255, 0)",
-          "scope": "resource",
-          "description": "Background color for visual mode line highlight (CSS color format)"
-        },
-        "modaledit-line-indicator.visualModeBorder": {
-          "type": "string",
-          "default": "#0000aa",
-          "scope": "resource",
-          "description": "Border color for visual mode line highlight (CSS color format)"
-        },
-        "modaledit-line-indicator.visualModeBorderStyle": {
-          "type": "string",
-          "enum": [
-            "solid",
-            "dashed",
-            "dotted",
-            "double",
-            "groove",
-            "ridge",
-            "inset",
-            "outset"
-          ],
-          "default": "dashed",
-          "scope": "resource",
-          "description": "Border style for visual mode line highlight"
-        },
-        "modaledit-line-indicator.visualModeBorderWidth": {
-          "type": "string",
-          "default": "2px",
-          "scope": "resource",
-          "description": "Border width for visual mode line highlight (CSS format, e.g., '2px', '0.1em')"
-        },
-        "modaledit-line-indicator.searchModeBackground": {
-          "type": "string",
-          "default": "rgba(255, 255, 255, 0)",
-          "scope": "resource",
-          "description": "Background color for search mode line highlight (CSS color format)"
-        },
-        "modaledit-line-indicator.searchModeBorder": {
-          "type": "string",
-          "default": "#aaaa00",
-          "scope": "resource",
-          "description": "Border color for search mode line highlight (CSS color format)"
-        },
-        "modaledit-line-indicator.searchModeBorderStyle": {
-          "type": "string",
-          "enum": [
-            "solid",
-            "dashed",
-            "dotted",
-            "double",
-            "groove",
-            "ridge",
-            "inset",
-            "outset"
-          ],
-          "default": "solid",
-          "scope": "resource",
-          "description": "Border style for search mode line highlight"
-        },
-        "modaledit-line-indicator.searchModeBorderWidth": {
-          "type": "string",
-          "default": "2px",
-          "scope": "resource",
-          "description": "Border width for search mode line highlight (CSS format, e.g., '2px', '0.1em')"
+          "description": "Search mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
+          "default": {
+            "background": "rgba(255, 255, 255, 0)",
+            "border": "#aaaa00",
+            "borderStyle": "solid",
+            "borderWidth": "2px"
+          }
         }
       }
     }

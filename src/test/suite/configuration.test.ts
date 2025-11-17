@@ -5,6 +5,7 @@ import { TestHelpers } from '../helpers/testHelpers';
  * Configuration Management Tests
  *
  * Tests configuration reading, updating, and validation.
+ * Updated for nested configuration structure with theme-specific overrides.
  */
 suite('Configuration Tests', () => {
   teardown(async () => {
@@ -14,47 +15,71 @@ suite('Configuration Tests', () => {
   test('Default configuration values are correct', () => {
     const config = TestHelpers.getConfig();
 
-    const defaults = {
-      enabled: true,
-      normalModeBackground: 'rgba(255, 255, 255, 0)',
-      normalModeBorder: '#00aa00',
-      normalModeBorderStyle: 'dotted',
-      normalModeBorderWidth: '2px',
-      insertModeBackground: 'rgba(255, 255, 255, 0)',
-      insertModeBorder: '#aa0000',
-      insertModeBorderStyle: 'solid',
-      insertModeBorderWidth: '2px',
-      visualModeBackground: 'rgba(255, 255, 255, 0)',
-      visualModeBorder: '#0000aa',
-      visualModeBorderStyle: 'dashed',
-      visualModeBorderWidth: '2px',
-      searchModeBackground: 'rgba(255, 255, 255, 0)',
-      searchModeBorder: '#aaaa00',
-      searchModeBorderStyle: 'solid',
-      searchModeBorderWidth: '2px',
-    };
+    // Test enabled flag
+    assert.strictEqual(config.get('enabled'), true, 'enabled should default to true');
 
-    Object.entries(defaults).forEach(([key, expectedValue]) => {
-      const actualValue = config.get(key);
-      assert.strictEqual(
-        actualValue,
-        expectedValue,
-        `Config ${key} should default to ${expectedValue}, got ${actualValue}`
-      );
-    });
+    // Test nested mode configurations
+    const normalMode = config.get('normalMode');
+    assert.deepStrictEqual(
+      normalMode,
+      {
+        background: 'rgba(255, 255, 255, 0)',
+        border: '#00aa00',
+        borderStyle: 'dotted',
+        borderWidth: '2px',
+      },
+      'normalMode should have correct defaults'
+    );
+
+    const insertMode = config.get('insertMode');
+    assert.deepStrictEqual(
+      insertMode,
+      {
+        background: 'rgba(255, 255, 255, 0)',
+        border: '#aa0000',
+        borderStyle: 'solid',
+        borderWidth: '2px',
+      },
+      'insertMode should have correct defaults'
+    );
+
+    const visualMode = config.get('visualMode');
+    assert.deepStrictEqual(
+      visualMode,
+      {
+        background: 'rgba(255, 255, 255, 0)',
+        border: '#0000aa',
+        borderStyle: 'dashed',
+        borderWidth: '2px',
+      },
+      'visualMode should have correct defaults'
+    );
+
+    const searchMode = config.get('searchMode');
+    assert.deepStrictEqual(
+      searchMode,
+      {
+        background: 'rgba(255, 255, 255, 0)',
+        border: '#aaaa00',
+        borderStyle: 'solid',
+        borderWidth: '2px',
+      },
+      'searchMode should have correct defaults'
+    );
   });
 
-  test('Can read configuration values', () => {
+  test('Can read nested configuration values', () => {
     const config = TestHelpers.getConfig();
 
     const enabled = config.get('enabled');
-    const normalBg = config.get('normalModeBackground');
+    const normalMode = config.get('normalMode');
 
     assert.strictEqual(typeof enabled, 'boolean');
-    assert.strictEqual(typeof normalBg, 'string');
+    assert.strictEqual(typeof normalMode, 'object');
+    assert.ok(normalMode, 'normalMode should be an object');
   });
 
-  test('Can update configuration values', async () => {
+  test('Can update enabled configuration', async () => {
     await TestHelpers.setConfig('enabled', false);
 
     let config = TestHelpers.getConfig();
@@ -67,78 +92,97 @@ suite('Configuration Tests', () => {
     assert.strictEqual(config.get('enabled'), true);
   });
 
-  test('Can update all configuration values without errors', async () => {
-    const testValues: Record<string, unknown> = {
-      enabled: false,
-      normalModeBackground: '#123456',
-      normalModeBorder: '#654321',
-      normalModeBorderStyle: 'solid',
-      normalModeBorderWidth: '3px',
-      insertModeBackground: '#abcdef',
-      insertModeBorder: '#fedcba',
-      insertModeBorderStyle: 'dashed',
-      insertModeBorderWidth: '4px',
-      visualModeBackground: '#111111',
-      visualModeBorder: '#222222',
-      visualModeBorderStyle: 'dotted',
-      visualModeBorderWidth: '5px',
-      searchModeBackground: '#333333',
-      searchModeBorder: '#444444',
-      searchModeBorderStyle: 'double',
-      searchModeBorderWidth: '6px',
+  test('Can update nested mode configuration', async () => {
+    const newNormalMode = {
+      background: '#123456',
+      border: '#654321',
+      borderStyle: 'solid',
+      borderWidth: '3px',
     };
 
-    // Update all
-    for (const [key, value] of Object.entries(testValues)) {
-      await TestHelpers.setConfig(key, value);
-    }
+    await TestHelpers.setConfig('normalMode', newNormalMode);
 
-    // Verify all
     const config = TestHelpers.getConfig();
-    for (const [key, expectedValue] of Object.entries(testValues)) {
-      const actualValue = config.get(key);
-      assert.strictEqual(
-        actualValue,
-        expectedValue,
-        `Config ${key} should update to ${expectedValue}`
-      );
-    }
+    assert.deepStrictEqual(config.get('normalMode'), newNormalMode);
   });
 
-  test('Can reset configuration to default', async () => {
+  test('Can update mode configuration with theme overrides', async () => {
+    const newNormalMode = {
+      background: 'rgba(255, 255, 255, 0)',
+      borderStyle: 'dotted',
+      borderWidth: '2px',
+      '[dark]': {
+        border: '#00ffff',
+      },
+      '[light]': {
+        border: '#0000ff',
+      },
+    };
+
+    await TestHelpers.setConfig('normalMode', newNormalMode);
+
+    const config = TestHelpers.getConfig();
+    const normalMode = config.get('normalMode') as Record<string, unknown>;
+
+    assert.ok(normalMode, 'normalMode should exist');
+
+    // Compare nested objects using deepStrictEqual
+    assert.deepStrictEqual(normalMode['[dark]'], newNormalMode['[dark]']);
+    assert.deepStrictEqual(normalMode['[light]'], newNormalMode['[light]']);
+  });
+
+  test('Can reset nested configuration to default', async () => {
     // Change configuration
-    await TestHelpers.setConfig('normalModeBackground', '#ff0000');
-    assert.strictEqual(TestHelpers.getConfig().get('normalModeBackground'), '#ff0000');
+    const customConfig = {
+      background: '#ff0000',
+      border: '#00ff00',
+      borderStyle: 'dashed',
+      borderWidth: '5px',
+    };
+
+    await TestHelpers.setConfig('normalMode', customConfig);
+    assert.deepStrictEqual(TestHelpers.getConfig().get('normalMode'), customConfig);
 
     // Reset
-    await TestHelpers.resetConfig('normalModeBackground');
+    await TestHelpers.resetConfig('normalMode');
 
     // Should be back to default
-    assert.strictEqual(
-      TestHelpers.getConfig().get('normalModeBackground'),
-      'rgba(255, 255, 255, 0)'
-    );
+    const defaultNormalMode = {
+      background: 'rgba(255, 255, 255, 0)',
+      border: '#00aa00',
+      borderStyle: 'dotted',
+      borderWidth: '2px',
+    };
+
+    assert.deepStrictEqual(TestHelpers.getConfig().get('normalMode'), defaultNormalMode);
   });
 
   test('Configuration changes are persisted', async () => {
     // Change config
-    await TestHelpers.setConfig('normalModeBorderStyle', 'solid');
+    const newInsertMode = {
+      background: 'rgba(0, 0, 0, 0.1)',
+      border: '#ff00ff',
+      borderStyle: 'double',
+      borderWidth: '4px',
+    };
+
+    await TestHelpers.setConfig('insertMode', newInsertMode);
 
     // Re-read config (simulates reload)
     const config = TestHelpers.getConfig();
 
     // Should still have changed value
-    assert.strictEqual(config.get('normalModeBorderStyle'), 'solid');
+    assert.deepStrictEqual(config.get('insertMode'), newInsertMode);
   });
 
-  test('Invalid configuration values are handled', async () => {
-    // Try to set invalid borderStyle
-    await TestHelpers.setConfig('normalModeBorderStyle', 'invalid-style');
+  test('Invalid nested configuration values are handled', async () => {
+    // Try to set invalid structure
+    await TestHelpers.setConfig('normalMode', { invalid: 'structure' });
 
-    // VS Code might accept it (no validation) or reject it
+    // VS Code might accept it or reject it
     // Either way, should not crash
     const config = TestHelpers.getConfig();
-    const value = config.get('normalModeBorderStyle');
+    const value = config.get('normalMode');
 
     // Test passes if we got here without error
     assert.ok(value !== undefined, 'Should have some value');
@@ -153,30 +197,27 @@ suite('Configuration Tests', () => {
     assert.strictEqual(typeof config.update, 'function', 'Should have update method');
   });
 
-  test('Can read configuration with different types', () => {
+  test('Can read configuration with correct types', () => {
     const config = TestHelpers.getConfig();
 
     // Boolean
     const enabled = config.get<boolean>('enabled');
     assert.strictEqual(typeof enabled, 'boolean');
 
-    // String
-    const bgColor = config.get<string>('normalModeBackground');
-    assert.strictEqual(typeof bgColor, 'string');
+    // Nested object
+    const normalMode = config.get<Record<string, unknown>>('normalMode');
+    assert.strictEqual(typeof normalMode, 'object');
+    assert.ok(normalMode, 'normalMode should be an object');
 
-    // Enum (borderStyle) - now per-mode
-    const normalBorderStyle = config.get<string>('normalModeBorderStyle');
+    // Check object properties
+    assert.strictEqual(typeof normalMode.background, 'string');
+    assert.strictEqual(typeof normalMode.border, 'string');
     assert.ok(
       ['solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 'inset', 'outset'].includes(
-        normalBorderStyle as string
-      )
+        normalMode.borderStyle as string
+      ),
+      'borderStyle should be valid CSS border style'
     );
-
-    const visualBorderStyle = config.get<string>('visualModeBorderStyle');
-    assert.ok(
-      ['solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 'inset', 'outset'].includes(
-        visualBorderStyle as string
-      )
-    );
+    assert.strictEqual(typeof normalMode.borderWidth, 'string');
   });
 });
