@@ -1,13 +1,13 @@
 # ModalEdit Line Indicator
 
-Dynamic line highlight color indicator for ModalEdit extension in VS Code.
+Dynamic line highlight indicator for ModalEdit extension in VS Code. Provides instant visual feedback for all 4 ModalEdit modes.
 
 ## Features
 
-- **Dynamic Colors**: Automatically changes line highlight color based on your current mode
-- **Real-time Updates**: Instant visual feedback as you switch between normal and insert modes
-- **Fully Customizable**: Configure colors, border style, and behavior via settings
-- **Minimal Overhead**: Only highlights the current line by default
+- **4-Mode Support**: Automatically changes line highlight for NORMAL, INSERT, VISUAL, and SEARCH modes
+- **Per-Mode Customization**: Independent border color, style, and width for each mode
+- **Real-time Updates**: Instant visual feedback as you switch between modes
+- **Minimal Overhead**: Only highlights the current line
 - **Zero Configuration**: Works out-of-the-box with sensible defaults
 
 ## Installation
@@ -29,40 +29,92 @@ code --install-extension modaledit-line-indicator-0.0.1.vsix
 
 The extension works automatically once installed and ModalEdit is active.
 
-- **Normal Mode**: Line highlight shows in green (`#00770020` background, `#005500` border)
-- **Insert Mode**: Line highlight shows in red (`#77000020` background, `#aa0000` border)
+**Default Appearance (Border-Only):**
+- **Normal Mode**: Green dotted border (`#00aa00`)
+- **Insert Mode**: Red solid border (`#aa0000`)
+- **Visual Mode**: Blue dashed border (`#0000aa`)
+- **Search Mode**: Yellow solid border (`#aaaa00`)
+
+All modes have transparent backgrounds by default for a clean, minimalist look.
 
 ### Commands
 
 - `ModalEdit Line Indicator: Toggle Enabled/Disabled` - Turn indicator on/off
+- `ModalEdit Line Indicator: Query Current Mode (Debug)` - Show current detected mode
 
 ### Configuration
 
-Edit your `settings.json` to customize colors and behavior:
+Edit your `settings.json` to customize colors and styles per mode:
 
 ```json
 {
   "modaledit-line-indicator.enabled": true,
-  "modaledit-line-indicator.normalModeBackground": "#00770020",
-  "modaledit-line-indicator.normalModeBorder": "#005500",
-  "modaledit-line-indicator.insertModeBackground": "#77000020",
+
+  "modaledit-line-indicator.normalModeBackground": "rgba(255, 255, 255, 0)",
+  "modaledit-line-indicator.normalModeBorder": "#00aa00",
+  "modaledit-line-indicator.normalModeBorderStyle": "dotted",
+  "modaledit-line-indicator.normalModeBorderWidth": "2px",
+
+  "modaledit-line-indicator.insertModeBackground": "rgba(255, 255, 255, 0)",
   "modaledit-line-indicator.insertModeBorder": "#aa0000",
-  "modaledit-line-indicator.borderStyle": "solid",
-  "modaledit-line-indicator.borderWidth": "2px"
+  "modaledit-line-indicator.insertModeBorderStyle": "solid",
+  "modaledit-line-indicator.insertModeBorderWidth": "2px",
+
+  "modaledit-line-indicator.visualModeBackground": "rgba(255, 255, 255, 0)",
+  "modaledit-line-indicator.visualModeBorder": "#0000aa",
+  "modaledit-line-indicator.visualModeBorderStyle": "dashed",
+  "modaledit-line-indicator.visualModeBorderWidth": "2px",
+
+  "modaledit-line-indicator.searchModeBackground": "rgba(255, 255, 255, 0)",
+  "modaledit-line-indicator.searchModeBorder": "#aaaa00",
+  "modaledit-line-indicator.searchModeBorderStyle": "solid",
+  "modaledit-line-indicator.searchModeBorderWidth": "2px"
 }
 ```
 
 ## Settings
 
+### Global Settings
+
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
 | `enabled` | boolean | `true` | Enable/disable the indicator |
-| `normalModeBackground` | string | `#00770020` | Normal mode line background color |
-| `normalModeBorder` | string | `#005500` | Normal mode border color |
-| `insertModeBackground` | string | `#77000020` | Insert mode line background color |
-| `insertModeBorder` | string | `#aa0000` | Insert mode border color |
-| `borderStyle` | enum | `solid` | Border style: `solid`, `dashed`, or `dotted` |
-| `borderWidth` | string | `2px` | Border width |
+
+### Normal Mode
+
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| `normalModeBackground` | string | `rgba(255, 255, 255, 0)` | Background color (CSS format) |
+| `normalModeBorder` | string | `#00aa00` | Border color (CSS format) |
+| `normalModeBorderStyle` | enum | `dotted` | Border style (solid/dashed/dotted/double/groove/ridge/inset/outset) |
+| `normalModeBorderWidth` | string | `2px` | Border width (CSS format) |
+
+### Insert Mode
+
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| `insertModeBackground` | string | `rgba(255, 255, 255, 0)` | Background color (CSS format) |
+| `insertModeBorder` | string | `#aa0000` | Border color (CSS format) |
+| `insertModeBorderStyle` | enum | `solid` | Border style (solid/dashed/dotted/double/groove/ridge/inset/outset) |
+| `insertModeBorderWidth` | string | `2px` | Border width (CSS format) |
+
+### Visual Mode
+
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| `visualModeBackground` | string | `rgba(255, 255, 255, 0)` | Background color (CSS format) |
+| `visualModeBorder` | string | `#0000aa` | Border color (CSS format) |
+| `visualModeBorderStyle` | enum | `dashed` | Border style (solid/dashed/dotted/double/groove/ridge/inset/outset) |
+| `visualModeBorderWidth` | string | `2px` | Border width (CSS format) |
+
+### Search Mode
+
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| `searchModeBackground` | string | `rgba(255, 255, 255, 0)` | Background color (CSS format) |
+| `searchModeBorder` | string | `#aaaa00` | Border color (CSS format) |
+| `searchModeBorderStyle` | enum | `solid` | Border style (solid/dashed/dotted/double/groove/ridge/inset/outset) |
+| `searchModeBorderWidth` | string | `2px` | Border width (CSS format) |
 
 ## Development
 

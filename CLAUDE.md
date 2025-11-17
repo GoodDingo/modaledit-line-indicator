@@ -4,7 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-VS Code extension that provides dynamic line highlighting based on ModalEdit modes. Changes line highlight colors in real-time when switching between normal mode (green) and insert mode (red).
+VS Code extension that provides dynamic line highlighting based on ModalEdit modes. Changes line highlight colors and styles in real-time when switching between modes:
+- **NORMAL mode**: Green dotted border (default)
+- **INSERT mode**: Red solid border (default)
+- **VISUAL mode**: Blue dashed border (default)
+- **SEARCH mode**: Yellow solid border (default)
 
 **External Dependency**: Requires the ModalEdit extension to be installed and active for context key access.
 
@@ -76,29 +80,30 @@ Always run `make validate` before committing. This runs:
 - Output channel: "ModalEdit Line Indicator" (View → Output)
 
 **Mode Detection Mechanism**:
-- Detects mode by checking cursor style via `editor.options.cursorStyle`
-- Block cursor (value 2) = Normal mode, Line cursor (value 1) = Insert mode
-- Falls back to `false` (insert mode) if no editor is active
-- Uses 50ms polling timer to detect cursor style changes
-  - **Why polling?** VS Code API does NOT emit events when `cursorStyle` changes
-  - ModalEdit changes cursor style but no event fires, so polling is required
+- Queries `modaledit.normal` and `modaledit.searching` context keys
+- Returns `Promise<Mode>` - must be awaited
+- Detects VISUAL mode by checking `modaledit.normal === true` AND `editor has selection`
+- Falls back to INSERT mode if ModalEdit extension not available
+- Priority order: SEARCH → INSERT → VISUAL → NORMAL
+- Uses 50ms polling timer to detect mode changes via context keys
+  - **Why polling?** Context keys update without firing VS Code events
+  - Polling provides real-time mode change detection
 - Polling starts on activation and stops when extension is disabled or disposed
 - Polling is idempotent - won't create duplicate timers if started multiple times
-- Tracks `lastKnownCursorStyle` to avoid redundant updates on same style
 
 **Decoration System**:
-- Two `TextEditorDecorationType` instances created on initialization (normal, insert)
+- Four `TextEditorDecorationType` instances created on initialization (normal, insert, visual, search)
 - Decorations applied exclusively (only one active at a time)
 - Applied to current line only via `getDecorateRanges()`
 - Must be manually cleared when switching modes or disabling extension
 - Must be disposed and recreated when configuration changes
 
 **Event-Driven Updates**:
-- Listens to `onDidChangeTextEditorSelection` (cursor movement triggers mode check)
+- Listens to `onDidChangeTextEditorSelection` (cursor movement and selection changes trigger mode check)
 - Listens to `onDidChangeActiveTextEditor` (switching editors triggers update)
 - Listens to `onDidChangeConfiguration` (settings changes trigger decoration reload or enable/disable)
 - 10ms debounce on `updateHighlight()` prevents excessive redraws during rapid cursor movement
-- 50ms cursor style polling provides real-time mode change detection
+- 50ms mode polling provides real-time mode change detection via context keys
 
 **Resource Management**:
 - All event listeners stored in `disposables` array
@@ -130,17 +135,18 @@ VS Code renders line highlight
 
 ## Configuration System
 
-All settings namespaced with `modaledit-line-indicator.*` (7 total):
+All settings namespaced with `modaledit-line-indicator.*` (17 total):
 - `enabled` (boolean, default: `true`) - Enable/disable extension
-- `normalModeBackground` (string, default: `#00770020`) - Normal mode background color
-- `normalModeBorder` (string, default: `#005500`) - Normal mode border color
-- `insertModeBackground` (string, default: `#77000020`) - Insert mode background color
-- `insertModeBorder` (string, default: `#aa0000`) - Insert mode border color
-- `borderStyle` (enum: solid/dashed/dotted, default: `solid`) - Border style
-- `borderWidth` (string, default: `2px`) - Border width
+- **Per-mode settings** (4 modes × 4 properties = 16 settings):
+  - `{mode}ModeBackground` - Background color (default: `rgba(255, 255, 255, 0)` - transparent)
+  - `{mode}ModeBorder` - Border color (green/red/blue/yellow for normal/insert/visual/search)
+  - `{mode}ModeBorderStyle` - Border style (dotted/solid/dashed/solid for normal/insert/visual/search)
+  - `{mode}ModeBorderWidth` - Border width (default: `2px`)
+
+Where `{mode}` is: `normal`, `insert`, `visual`, or `search`.
 
 Configuration changes trigger `reloadDecorations()` which:
-1. Disposes old decoration types
+1. Disposes old decoration types (all 4)
 2. Creates new decoration types with updated settings
 3. Re-applies to all visible editors
 
@@ -287,3 +293,4 @@ Before publishing to marketplace:
 8. Run `vsce publish` (requires Personal Access Token)
 
 **IMPORTANT**: Do not claim extension is "production-ready" until verified by real users. Use "ready for review" or "beta testing" instead.
+- remember that getContext() does NOT exist in VS Code, make sure to use cursor-style based detection

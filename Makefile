@@ -112,7 +112,7 @@ package: validate ## Package extension as .vsix file
 
 install-ext: package ## Install extension to VS Code
 	@echo "$(YELLOW)Installing extension to VS Code...$(NC)"
-	@code --install-extension $(VSIX_FILE)
+	code --install-extension $(VSIX_FILE)
 	@echo "$(GREEN)✓ Extension installed$(NC)"
 
 uninstall-ext: ## Uninstall extension from VS Code

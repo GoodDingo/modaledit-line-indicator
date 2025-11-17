@@ -16,12 +16,22 @@ suite('Configuration Tests', () => {
 
     const defaults = {
       enabled: true,
-      normalModeBackground: '#00770020',
-      normalModeBorder: '#005500',
-      insertModeBackground: '#77000020',
+      normalModeBackground: 'rgba(255, 255, 255, 0)',
+      normalModeBorder: '#00aa00',
+      normalModeBorderStyle: 'dotted',
+      normalModeBorderWidth: '2px',
+      insertModeBackground: 'rgba(255, 255, 255, 0)',
       insertModeBorder: '#aa0000',
-      borderStyle: 'solid',
-      borderWidth: '2px',
+      insertModeBorderStyle: 'solid',
+      insertModeBorderWidth: '2px',
+      visualModeBackground: 'rgba(255, 255, 255, 0)',
+      visualModeBorder: '#0000aa',
+      visualModeBorderStyle: 'dashed',
+      visualModeBorderWidth: '2px',
+      searchModeBackground: 'rgba(255, 255, 255, 0)',
+      searchModeBorder: '#aaaa00',
+      searchModeBorderStyle: 'solid',
+      searchModeBorderWidth: '2px',
     };
 
     Object.entries(defaults).forEach(([key, expectedValue]) => {
@@ -62,10 +72,20 @@ suite('Configuration Tests', () => {
       enabled: false,
       normalModeBackground: '#123456',
       normalModeBorder: '#654321',
+      normalModeBorderStyle: 'solid',
+      normalModeBorderWidth: '3px',
       insertModeBackground: '#abcdef',
       insertModeBorder: '#fedcba',
-      borderStyle: 'dashed',
-      borderWidth: '5px',
+      insertModeBorderStyle: 'dashed',
+      insertModeBorderWidth: '4px',
+      visualModeBackground: '#111111',
+      visualModeBorder: '#222222',
+      visualModeBorderStyle: 'dotted',
+      visualModeBorderWidth: '5px',
+      searchModeBackground: '#333333',
+      searchModeBorder: '#444444',
+      searchModeBorderStyle: 'double',
+      searchModeBorderWidth: '6px',
     };
 
     // Update all
@@ -94,28 +114,31 @@ suite('Configuration Tests', () => {
     await TestHelpers.resetConfig('normalModeBackground');
 
     // Should be back to default
-    assert.strictEqual(TestHelpers.getConfig().get('normalModeBackground'), '#00770020');
+    assert.strictEqual(
+      TestHelpers.getConfig().get('normalModeBackground'),
+      'rgba(255, 255, 255, 0)'
+    );
   });
 
   test('Configuration changes are persisted', async () => {
     // Change config
-    await TestHelpers.setConfig('borderStyle', 'dotted');
+    await TestHelpers.setConfig('normalModeBorderStyle', 'solid');
 
     // Re-read config (simulates reload)
     const config = TestHelpers.getConfig();
 
     // Should still have changed value
-    assert.strictEqual(config.get('borderStyle'), 'dotted');
+    assert.strictEqual(config.get('normalModeBorderStyle'), 'solid');
   });
 
   test('Invalid configuration values are handled', async () => {
     // Try to set invalid borderStyle
-    await TestHelpers.setConfig('borderStyle', 'invalid-style');
+    await TestHelpers.setConfig('normalModeBorderStyle', 'invalid-style');
 
     // VS Code might accept it (no validation) or reject it
     // Either way, should not crash
     const config = TestHelpers.getConfig();
-    const value = config.get('borderStyle');
+    const value = config.get('normalModeBorderStyle');
 
     // Test passes if we got here without error
     assert.ok(value !== undefined, 'Should have some value');
@@ -141,8 +164,19 @@ suite('Configuration Tests', () => {
     const bgColor = config.get<string>('normalModeBackground');
     assert.strictEqual(typeof bgColor, 'string');
 
-    // Enum (borderStyle)
-    const borderStyle = config.get<string>('borderStyle');
-    assert.ok(['solid', 'dashed', 'dotted'].includes(borderStyle as string));
+    // Enum (borderStyle) - now per-mode
+    const normalBorderStyle = config.get<string>('normalModeBorderStyle');
+    assert.ok(
+      ['solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 'inset', 'outset'].includes(
+        normalBorderStyle as string
+      )
+    );
+
+    const visualBorderStyle = config.get<string>('visualModeBorderStyle');
+    assert.ok(
+      ['solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 'inset', 'outset'].includes(
+        visualBorderStyle as string
+      )
+    );
   });
 });

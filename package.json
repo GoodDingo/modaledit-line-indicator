@@ -1,8 +1,8 @@
 {
   "name": "modaledit-line-indicator",
   "displayName": "ModalEdit Line Indicator",
-  "description": "Dynamic line highlight for ModalEdit normal/insert modes. Changes line highlight color based on current mode for instant visual feedback.",
-  "version": "0.1.0",
+  "description": "Dynamic line highlight for ModalEdit modes (normal, insert, visual, search). Changes line highlight color and style based on current mode for instant visual feedback.",
+  "version": "0.1.1",
   "publisher": "user",
   "license": "MIT",
   "repository": {
@@ -64,49 +64,139 @@
         },
         "modaledit-line-indicator.normalModeBackground": {
           "type": "string",
-          "default": "#00770020",
+          "default": "rgba(255, 255, 255, 0)",
           "scope": "resource",
-          "description": "Background color for normal mode line highlight (hex format)"
+          "description": "Background color for normal mode line highlight (CSS color format)"
         },
         "modaledit-line-indicator.normalModeBorder": {
           "type": "string",
-          "default": "#005500",
+          "default": "#00aa00",
           "scope": "resource",
-          "description": "Border color for normal mode line highlight (hex format)"
+          "description": "Border color for normal mode line highlight (CSS color format)"
+        },
+        "modaledit-line-indicator.normalModeBorderStyle": {
+          "type": "string",
+          "enum": [
+            "solid",
+            "dashed",
+            "dotted",
+            "double",
+            "groove",
+            "ridge",
+            "inset",
+            "outset"
+          ],
+          "default": "dotted",
+          "scope": "resource",
+          "description": "Border style for normal mode line highlight"
+        },
+        "modaledit-line-indicator.normalModeBorderWidth": {
+          "type": "string",
+          "default": "2px",
+          "scope": "resource",
+          "description": "Border width for normal mode line highlight (CSS format, e.g., '2px', '0.1em')"
         },
         "modaledit-line-indicator.insertModeBackground": {
           "type": "string",
-          "default": "#77000020",
+          "default": "rgba(255, 255, 255, 0)",
           "scope": "resource",
-          "description": "Background color for insert mode line highlight (hex format)"
+          "description": "Background color for insert mode line highlight (CSS color format)"
         },
         "modaledit-line-indicator.insertModeBorder": {
           "type": "string",
           "default": "#aa0000",
           "scope": "resource",
-          "description": "Border color for insert mode line highlight (hex format)"
+          "description": "Border color for insert mode line highlight (CSS color format)"
         },
-        "modaledit-line-indicator.borderStyle": {
+        "modaledit-line-indicator.insertModeBorderStyle": {
           "type": "string",
           "enum": [
             "solid",
             "dashed",
-            "dotted"
-          ],
-          "enumDescriptions": [
-            "Solid border line",
-            "Dashed border line",
-            "Dotted border line"
+            "dotted",
+            "double",
+            "groove",
+            "ridge",
+            "inset",
+            "outset"
           ],
           "default": "solid",
           "scope": "resource",
-          "description": "Border style for the line highlight"
+          "description": "Border style for insert mode line highlight"
         },
-        "modaledit-line-indicator.borderWidth": {
+        "modaledit-line-indicator.insertModeBorderWidth": {
           "type": "string",
           "default": "2px",
           "scope": "resource",
-          "description": "Border width for the line highlight"
+          "description": "Border width for insert mode line highlight (CSS format, e.g., '2px', '0.1em')"
+        },
+        "modaledit-line-indicator.visualModeBackground": {
+          "type": "string",
+          "default": "rgba(255, 255, 255, 0)",
+          "scope": "resource",
+          "description": "Background color for visual mode line highlight (CSS color format)"
+        },
+        "modaledit-line-indicator.visualModeBorder": {
+          "type": "string",
+          "default": "#0000aa",
+          "scope": "resource",
+          "description": "Border color for visual mode line highlight (CSS color format)"
+        },
+        "modaledit-line-indicator.visualModeBorderStyle": {
+          "type": "string",
+          "enum": [
+            "solid",
+            "dashed",
+            "dotted",
+            "double",
+            "groove",
+            "ridge",
+            "inset",
+            "outset"
+          ],
+          "default": "dashed",
+          "scope": "resource",
+          "description": "Border style for visual mode line highlight"
+        },
+        "modaledit-line-indicator.visualModeBorderWidth": {
+          "type": "string",
+          "default": "2px",
+          "scope": "resource",
+          "description": "Border width for visual mode line highlight (CSS format, e.g., '2px', '0.1em')"
+        },
+        "modaledit-line-indicator.searchModeBackground": {
+          "type": "string",
+          "default": "rgba(255, 255, 255, 0)",
+          "scope": "resource",
+          "description": "Background color for search mode line highlight (CSS color format)"
+        },
+        "modaledit-line-indicator.searchModeBorder": {
+          "type": "string",
+          "default": "#aaaa00",
+          "scope": "resource",
+          "description": "Border color for search mode line highlight (CSS color format)"
+        },
+        "modaledit-line-indicator.searchModeBorderStyle": {
+          "type": "string",
+          "enum": [
+            "solid",
+            "dashed",
+            "dotted",
+            "double",
+            "groove",
+            "ridge",
+            "inset",
+            "outset"
+          ],
+          "default": "solid",
+          "scope": "resource",
+          "description": "Border style for search mode line highlight"
+        },
+        "modaledit-line-indicator.searchModeBorderWidth": {
+          "type": "string",
+          "default": "2px",
+          "scope": "resource",
+          "description": "Border width for search mode line highlight (CSS format, e.g., '2px', '0.1em')"
         }
       }
     }

@@ -209,10 +209,20 @@ export class TestHelpers {
       'enabled',
       'normalModeBackground',
       'normalModeBorder',
+      'normalModeBorderStyle',
+      'normalModeBorderWidth',
       'insertModeBackground',
       'insertModeBorder',
-      'borderStyle',
-      'borderWidth',
+      'insertModeBorderStyle',
+      'insertModeBorderWidth',
+      'visualModeBackground',
+      'visualModeBorder',
+      'visualModeBorderStyle',
+      'visualModeBorderWidth',
+      'searchModeBackground',
+      'searchModeBorder',
+      'searchModeBorderStyle',
+      'searchModeBorderWidth',
     ];
 
     for (const key of keys) {
