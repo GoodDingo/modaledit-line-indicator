@@ -289,4 +289,178 @@ export class TestHelpers {
       isWholeLine: true,
     });
   }
+
+  /**
+   * Get current VS Code theme kind
+   *
+   * @returns Current theme kind (Dark, Light, HighContrast, or HighContrastLight)
+   *
+   * Example:
+   *   const themeKind = TestHelpers.getCurrentThemeKind();
+   *   if (themeKind === vscode.ColorThemeKind.Dark) {
+   *     // Test dark theme behavior
+   *   }
+   */
+  static getCurrentThemeKind(): vscode.ColorThemeKind {
+    return vscode.window.activeColorTheme.kind;
+  }
+
+  /**
+   * Check if current theme is dark
+   *
+   * @returns true if dark theme, false otherwise
+   *
+   * Example:
+   *   if (TestHelpers.isDarkTheme()) {
+   *     // Test dark-specific behavior
+   *   }
+   */
+  static isDarkTheme(): boolean {
+    return vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Dark;
+  }
+
+  /**
+   * Check if current theme is light
+   *
+   * @returns true if light theme, false otherwise
+   *
+   * Example:
+   *   if (TestHelpers.isLightTheme()) {
+   *     // Test light-specific behavior
+   *   }
+   */
+  static isLightTheme(): boolean {
+    return vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.Light;
+  }
+
+  /**
+   * Check if current theme is high contrast
+   *
+   * @returns true if high contrast theme, false otherwise
+   *
+   * Example:
+   *   if (TestHelpers.isHighContrastTheme()) {
+   *     // Test high contrast-specific behavior
+   *   }
+   */
+  static isHighContrastTheme(): boolean {
+    const kind = vscode.window.activeColorTheme.kind;
+    return (
+      kind === vscode.ColorThemeKind.HighContrast ||
+      kind === vscode.ColorThemeKind.HighContrastLight
+    );
+  }
+
+  /**
+   * Set theme-specific override for a mode
+   *
+   * @param mode - Mode name (normalMode, insertMode, visualMode, searchMode)
+   * @param theme - Theme kind ('dark', 'light', or 'highContrast')
+   * @param properties - Properties to override for this theme
+   *
+   * Example:
+   *   await TestHelpers.setThemeOverride('normalMode', 'dark', {
+   *     border: '#00ffff',
+   *     borderWidth: '3px'
+   *   });
+   */
+  static async setThemeOverride(
+    mode: string,
+    theme: 'dark' | 'light' | 'highContrast',
+    properties: Record<string, string>
+  ): Promise<void> {
+    const config = this.getConfig();
+    const currentMode = (config.get(mode) as Record<string, unknown>) || {};
+
+    const updatedMode = {
+      ...currentMode,
+      [`[${theme}]`]: properties,
+    };
+
+    await this.setConfig(mode, updatedMode);
+  }
+
+  /**
+   * Get theme-specific override for a mode
+   *
+   * @param mode - Mode name (normalMode, insertMode, visualMode, searchMode)
+   * @param theme - Theme kind ('dark', 'light', or 'highContrast')
+   * @returns Theme-specific properties or undefined
+   *
+   * Example:
+   *   const darkOverride = TestHelpers.getThemeOverride('normalMode', 'dark');
+   *   assert.strictEqual(darkOverride.border, '#00ffff');
+   */
+  static getThemeOverride(
+    mode: string,
+    theme: 'dark' | 'light' | 'highContrast'
+  ): Record<string, string> | undefined {
+    const config = this.getConfig();
+    const modeConfig = config.get(mode) as Record<string, unknown>;
+
+    if (!modeConfig) {
+      return undefined;
+    }
+
+    return modeConfig[`[${theme}]`] as Record<string, string> | undefined;
+  }
+
+  /**
+   * Set complete nested mode configuration (common + theme overrides)
+   *
+   * @param mode - Mode name
+   * @param commonProps - Common properties for all themes
+   * @param themeOverrides - Optional theme-specific overrides
+   *
+   * Example:
+   *   await TestHelpers.setNestedModeConfig(
+   *     'normalMode',
+   *     { background: 'rgba(255, 255, 255, 0)', borderStyle: 'solid', borderWidth: '2px' },
+   *     {
+   *       dark: { border: '#00ffff' },
+   *       light: { border: '#0000ff' }
+   *     }
+   *   );
+   */
+  static async setNestedModeConfig(
+    mode: string,
+    commonProps: Record<string, string>,
+    themeOverrides?: {
+      dark?: Record<string, string>;
+      light?: Record<string, string>;
+      highContrast?: Record<string, string>;
+    }
+  ): Promise<void> {
+    const config: Record<string, unknown> = { ...commonProps };
+
+    if (themeOverrides) {
+      if (themeOverrides.dark) {
+        config['[dark]'] = themeOverrides.dark;
+      }
+      if (themeOverrides.light) {
+        config['[light]'] = themeOverrides.light;
+      }
+      if (themeOverrides.highContrast) {
+        config['[highContrast]'] = themeOverrides.highContrast;
+      }
+    }
+
+    await this.setConfig(mode, config);
+  }
+
+  /**
+   * Get nested mode configuration
+   *
+   * @param mode - Mode name
+   * @returns Complete mode configuration object
+   *
+   * Example:
+   *   const normalMode = TestHelpers.getNestedModeConfig('normalMode');
+   *   assert.strictEqual(normalMode.border, '#00aa00');
+   *   assert.ok(normalMode['[dark]']);
+   */
+  static getNestedModeConfig(mode: string): Record<string, unknown> {
+    const config = this.getConfig();
+    return (config.get(mode) as Record<string, unknown>) || {};
+  }
 }
