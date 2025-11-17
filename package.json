@@ -2,7 +2,7 @@
   "name": "modaledit-line-indicator",
   "displayName": "ModalEdit Line Indicator",
   "description": "Dynamic line highlight for ModalEdit normal/insert modes. Changes line highlight color based on current mode for instant visual feedback.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "user",
   "license": "MIT",
   "repository": {
@@ -38,6 +38,18 @@
       {
         "command": "modaledit-line-indicator.updateHighlight",
         "title": "ModalEdit Line Indicator: Update Highlight (Internal)"
+      },
+      {
+        "command": "modaledit-line-indicator.showLogFile",
+        "title": "ModalEdit Line Indicator: Show Log File"
+      },
+      {
+        "command": "modaledit-line-indicator.queryMode",
+        "title": "ModalEdit Line Indicator: Query Current Mode (Debug)"
+      },
+      {
+        "command": "modaledit-line-indicator.clearLog",
+        "title": "ModalEdit Line Indicator: Clear Log File"
       }
     ],
     "configuration": {

@@ -1,4 +1,78 @@
 import * as vscode from 'vscode';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as os from 'os';
+
+/**
+ * Logger that writes to both VS Code output channel and file
+ * Dual output ensures we can review logs even after VS Code closes
+ */
+class ExtensionLogger {
+  private outputChannel: vscode.OutputChannel;
+  private logFilePath: string;
+
+  constructor(channelName: string) {
+    this.outputChannel = vscode.window.createOutputChannel(channelName);
+
+    // Log to temp directory - accessible across sessions
+    this.logFilePath = path.join(os.tmpdir(), 'modaledit-line-indicator.log');
+
+    // Clear old log on startup
+    try {
+      fs.writeFileSync(this.logFilePath, '');
+    } catch (err) {
+      // Ignore if can't write - not critical
+    }
+
+    this.log('=== NEW SESSION STARTED ===');
+    this.log(`Log file: ${this.logFilePath}`);
+  }
+
+  private formatMessage(level: string, message: string, data?: any): string {
+    const timestamp = new Date().toISOString();
+    const dataStr = data !== undefined ? ` | ${JSON.stringify(data)}` : '';
+    return `[${timestamp}] [${level}] ${message}${dataStr}`;
+  }
+
+  log(message: string, data?: any): void {
+    const formatted = this.formatMessage('INFO', message, data);
+    this.outputChannel.appendLine(formatted);
+    this.writeToFile(formatted);
+  }
+
+  debug(message: string, data?: any): void {
+    const formatted = this.formatMessage('DEBUG', message, data);
+    this.outputChannel.appendLine(formatted);
+    this.writeToFile(formatted);
+  }
+
+  error(message: string, error?: any): void {
+    const errorStr = error ? error.stack || error.toString() : '';
+    const formatted = this.formatMessage('ERROR', message, { error: errorStr });
+    this.outputChannel.appendLine(formatted);
+    this.writeToFile(formatted);
+  }
+
+  show(): void {
+    this.outputChannel.show();
+  }
+
+  dispose(): void {
+    this.outputChannel.dispose();
+  }
+
+  private writeToFile(message: string): void {
+    try {
+      fs.appendFileSync(this.logFilePath, message + '\n');
+    } catch (err) {
+      // Don't crash if file write fails
+    }
+  }
+
+  getLogFilePath(): string {
+    return this.logFilePath;
+  }
+}
 
 interface ModeState {
   isNormalMode: boolean;
@@ -20,9 +94,17 @@ class ModalEditLineIndicator implements vscode.Disposable {
   private enabled: boolean;
   private disposables: vscode.Disposable[] = [];
   private updateDebounceTimer: NodeJS.Timeout | null = null;
-  private readonly DEBOUNCE_MS = 10; // Debounce rapid updates
+  private readonly DEBOUNCE_MS = 10;
+  private cursorStylePollTimer: NodeJS.Timeout | null = null;
+  private readonly CURSOR_POLL_MS = 50; // Check cursor style every 50ms (faster!)
+  private lastKnownCursorStyle: number | undefined = undefined; // Debounce rapid updates
+  private logger: ExtensionLogger;
 
   constructor() {
+    this.logger = new ExtensionLogger('ModalEdit Line Indicator');
+    this.logger.log('=== ModalEditLineIndicator Constructor ===');
+    this.logger.show(); // Auto-show output channel
+
     const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
     this.enabled = config.get<boolean>('enabled', true);
     this.decorations = this.createDecorations();
@@ -79,18 +161,29 @@ class ModalEditLineIndicator implements vscode.Disposable {
 
   /**
    * Determine if we're currently in ModalEdit normal mode
-   * Uses the context key provided by ModalEdit extension
+   * Detects mode by checking the cursor style that ModalEdit sets
    */
   private async isInNormalMode(): Promise<boolean> {
-    try {
-      // Query the ModalEdit context key
-      // Returns true if in normal mode, false or undefined otherwise
-      return (await vscode.commands.executeCommand('getContext', 'modaledit.normal')) === true;
-    } catch (error) {
-      // If ModalEdit extension is not available, default to not normal mode
-      console.log('ModalEdit extension not detected or context check failed');
+    const editor = vscode.window.activeTextEditor;
+    if (!editor) {
       return false;
     }
+
+    // ModalEdit sets different cursor styles for different modes:
+    // - Normal mode: Block cursor (vscode.TextEditorCursorStyle.Block = 2)
+    // - Insert mode: Line cursor (vscode.TextEditorCursorStyle.Line = 1)
+    const cursorStyle = editor.options.cursorStyle as number | undefined;
+
+    // Block cursor (2) = Normal mode, anything else = Insert mode
+    return cursorStyle === vscode.TextEditorCursorStyle.Block;
+  }
+
+  private getCursorStyleName(style: number | undefined): string {
+    if (style === undefined) {
+      return 'undefined';
+    }
+    const names = ['Line', 'Block', 'Underline', 'LineThin', 'BlockOutline', 'UnderlineThin'];
+    return names[style - 1] || `Unknown(${style})`;
   }
 
   /**
@@ -122,7 +215,22 @@ class ModalEditLineIndicator implements vscode.Disposable {
    */
   private async applyDecorations(editor: vscode.TextEditor): Promise<void> {
     try {
+      const fileName = path.basename(editor.document.fileName);
+      const cursorLine = editor.selection.active.line;
+
       const isNormalMode = await this.isInNormalMode();
+
+      // Only log when mode actually changes
+      const modeChanged = isNormalMode !== this.modeState.isNormalMode;
+      if (modeChanged) {
+        this.logger.log('🎨 MODE CHANGED', {
+          from: this.modeState.isNormalMode ? 'NORMAL' : 'INSERT',
+          to: isNormalMode ? 'NORMAL' : 'INSERT',
+          color: isNormalMode ? 'GREEN' : 'RED',
+          line: cursorLine,
+          file: fileName,
+        });
+      }
 
       // Get the line(s) to decorate
       const ranges = this.getDecorateRanges(editor);
@@ -141,7 +249,7 @@ class ModalEditLineIndicator implements vscode.Disposable {
 
       this.modeState.lastUpdateTime = Date.now();
     } catch (error) {
-      console.error('Error updating line highlight:', error);
+      this.logger.error('Error updating line highlight', error);
     }
   }
 
@@ -153,6 +261,16 @@ class ModalEditLineIndicator implements vscode.Disposable {
     // Only highlight the current cursor line
     const cursorLine = editor.selection.active.line;
     return [new vscode.Range(cursorLine, 0, cursorLine, 0)];
+  }
+
+  /**
+   * Clear all decorations from all visible editors
+   */
+  private clearAllDecorations(): void {
+    vscode.window.visibleTextEditors.forEach(editor => {
+      editor.setDecorations(this.decorations.normal, []);
+      editor.setDecorations(this.decorations.insert, []);
+    });
   }
 
   /**
@@ -179,7 +297,7 @@ class ModalEditLineIndicator implements vscode.Disposable {
   private registerListeners(): void {
     // Update on selection/cursor change
     this.disposables.push(
-      vscode.window.onDidChangeTextEditorSelection(async _e => {
+      vscode.window.onDidChangeTextEditorSelection(async () => {
         await this.updateHighlight();
       })
     );
@@ -193,9 +311,7 @@ class ModalEditLineIndicator implements vscode.Disposable {
       })
     );
 
-    // Listen for ModalEdit mode changes via commands
-    // Note: ModalEdit doesn't directly expose mode change events,
-    // so we rely on selection changes as a proxy
+    // Manual update command
     this.disposables.push(
       vscode.commands.registerCommand('modaledit-line-indicator.updateHighlight', () =>
         this.updateHighlight()
@@ -231,33 +347,204 @@ class ModalEditLineIndicator implements vscode.Disposable {
     // Listen for configuration changes
     this.disposables.push(
       vscode.workspace.onDidChangeConfiguration(e => {
+        const affectsUs = e.affectsConfiguration('modaledit-line-indicator');
+        this.logger.debug('⚙️  EVENT: onDidChangeConfiguration', {
+          affectsUs,
+        });
+
         if (e.affectsConfiguration('modaledit-line-indicator.enabled')) {
-          // Only enabled state changed - no need to recreate decorations
+          // Enabled state changed
           const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
-          this.enabled = config.get<boolean>('enabled', true);
-          this.updateHighlight();
-        } else if (e.affectsConfiguration('modaledit-line-indicator')) {
+          const newEnabled = config.get<boolean>('enabled', true);
+
+          this.logger.log(`Extension ${newEnabled ? 'enabled' : 'disabled'}`);
+          this.enabled = newEnabled;
+
+          if (!newEnabled) {
+            // When disabling, clear all decorations immediately
+            this.clearAllDecorations();
+          } else {
+            // When enabling, apply decorations
+            this.updateHighlight();
+          }
+        } else if (affectsUs) {
           // Visual properties changed - need to reload decorations
+          this.logger.log('Configuration changed - reloading decorations');
           this.reloadDecorations();
+        }
+      })
+    );
+
+    // Command: Show log file location
+    this.disposables.push(
+      vscode.commands.registerCommand('modaledit-line-indicator.showLogFile', () => {
+        const logPath = this.logger.getLogFilePath();
+
+        vscode.window
+          .showInformationMessage(
+            `Log file: ${logPath}`,
+            'Open File',
+            'Copy Path',
+            'Reveal in Finder/Explorer'
+          )
+          .then(choice => {
+            if (choice === 'Open File') {
+              vscode.workspace.openTextDocument(logPath).then(doc => {
+                vscode.window.showTextDocument(doc);
+              });
+            } else if (choice === 'Copy Path') {
+              vscode.env.clipboard.writeText(logPath);
+              vscode.window.showInformationMessage('Path copied to clipboard');
+            } else if (choice === 'Reveal in Finder/Explorer') {
+              vscode.commands.executeCommand('revealFileInOS', vscode.Uri.file(logPath));
+            }
+          });
+      })
+    );
+
+    // Command: Manual mode query
+    this.disposables.push(
+      vscode.commands.registerCommand('modaledit-line-indicator.queryMode', async () => {
+        this.logger.log('=== MANUAL MODE QUERY TRIGGERED ===');
+
+        const isNormal = await this.isInNormalMode();
+        const mode = isNormal ? 'NORMAL (green)' : 'INSERT (red)';
+
+        const modalEditExt = vscode.extensions.getExtension('johtela.vscode-modaledit');
+        const modalEditInfo = modalEditExt
+          ? `ModalEdit v${modalEditExt.packageJSON.version} (active: ${modalEditExt.isActive})`
+          : 'ModalEdit NOT installed';
+
+        const message = `Current Mode: ${mode}\n${modalEditInfo}`;
+
+        this.logger.log('Manual query result', {
+          isNormalMode: isNormal,
+          modalEditPresent: !!modalEditExt,
+          modalEditActive: modalEditExt?.isActive,
+        });
+
+        vscode.window.showInformationMessage(message);
+      })
+    );
+
+    // Command: Clear log file
+    this.disposables.push(
+      vscode.commands.registerCommand('modaledit-line-indicator.clearLog', () => {
+        try {
+          const logPath = this.logger.getLogFilePath();
+          fs.writeFileSync(logPath, '');
+          this.logger.log('=== LOG CLEARED BY USER ===');
+          vscode.window.showInformationMessage('Log file cleared');
+        } catch (error) {
+          vscode.window.showErrorMessage('Failed to clear log file');
         }
       })
     );
   }
 
   /**
+   * Start polling cursor style to detect mode changes
+   * This is needed because VS Code doesn't fire events when cursor style changes
+   */
+  private startCursorStylePolling(): void {
+    this.logger.log('Starting cursor style polling (every 50ms)...');
+
+    this.cursorStylePollTimer = setInterval(async () => {
+      const editor = vscode.window.activeTextEditor;
+      if (!editor) {
+        return;
+      }
+
+      const currentStyle = editor.options.cursorStyle as number | undefined;
+
+      // Only update if cursor style actually changed
+      if (currentStyle !== this.lastKnownCursorStyle) {
+        this.logger.debug('🔄 Cursor style changed (poll)', {
+          from: this.getCursorStyleName(this.lastKnownCursorStyle),
+          to: this.getCursorStyleName(currentStyle),
+        });
+
+        this.lastKnownCursorStyle = currentStyle;
+        await this.updateHighlight();
+      }
+    }, this.CURSOR_POLL_MS);
+
+    this.logger.log('✅ Cursor style polling started');
+  }
+
+  /**
+   * Stop cursor style polling
+   */
+  private stopCursorStylePolling(): void {
+    if (this.cursorStylePollTimer) {
+      clearInterval(this.cursorStylePollTimer);
+      this.cursorStylePollTimer = null;
+      this.logger.log('Cursor style polling stopped');
+    }
+  }
+
+  /**
    * Initialize the extension
    */
   public async activate(): Promise<void> {
-    console.log('ModalEdit Line Indicator: Activating...');
+    try {
+      this.logger.log('=== ACTIVATION START ===');
 
-    this.registerListeners();
+      // Check for ModalEdit extension
+      const modalEditExt = vscode.extensions.getExtension('johtela.vscode-modaledit');
 
-    // Initial update for all open editors
-    for (const editor of vscode.window.visibleTextEditors) {
-      await this.applyDecorations(editor);
+      if (modalEditExt) {
+        this.logger.log('ModalEdit extension FOUND', {
+          id: modalEditExt.id,
+          version: modalEditExt.packageJSON.version,
+          isActive: modalEditExt.isActive,
+        });
+
+        if (!modalEditExt.isActive) {
+          this.logger.log('Activating ModalEdit...');
+          try {
+            await modalEditExt.activate();
+            this.logger.log('ModalEdit activated successfully');
+          } catch (error) {
+            this.logger.error('Failed to activate ModalEdit', error);
+          }
+        }
+
+        // Wait for ModalEdit to set its context
+        this.logger.log('Waiting for ModalEdit to initialize context...');
+        await new Promise(resolve => setTimeout(resolve, 200));
+        this.logger.log('Wait complete, proceeding with mode detection...');
+      } else {
+        this.logger.log('⚠️  ModalEdit extension NOT FOUND - will default to insert mode');
+      }
+
+      // Test initial mode detection
+      this.logger.log('Testing initial mode detection...');
+      const initialMode = await this.isInNormalMode();
+      this.logger.log('Initial mode result', {
+        isNormalMode: initialMode,
+        expectedColor: initialMode ? 'GREEN (normal)' : 'RED (insert)',
+      });
+
+      this.registerListeners();
+
+      // Apply initial decorations
+      this.logger.log('Applying initial decorations', {
+        visibleEditors: vscode.window.visibleTextEditors.length,
+      });
+
+      for (const editor of vscode.window.visibleTextEditors) {
+        await this.applyDecorations(editor);
+      }
+
+      // Start polling cursor style for instant mode change detection
+      this.startCursorStylePolling();
+
+      this.logger.log('=== ACTIVATION COMPLETE ===');
+    } catch (error) {
+      this.logger.error('FATAL: Activation failed', error);
+      throw error; // Re-throw so VS Code knows activation failed
     }
-
-    console.log('ModalEdit Line Indicator: Activated');
   }
 
   /**
@@ -265,7 +552,10 @@ class ModalEditLineIndicator implements vscode.Disposable {
    * Clean up resources when extension is deactivated
    */
   public dispose(): void {
-    console.log('ModalEdit Line Indicator: Deactivating...');
+    this.logger.log('=== DEACTIVATION START ===');
+
+    // Stop cursor style polling
+    this.stopCursorStylePolling();
 
     // Clear pending debounce timer
     if (this.updateDebounceTimer) {
@@ -286,7 +576,8 @@ class ModalEditLineIndicator implements vscode.Disposable {
     this.decorations.normal.dispose();
     this.decorations.insert.dispose();
 
-    console.log('ModalEdit Line Indicator: Deactivated');
+    this.logger.log('=== DEACTIVATION COMPLETE ===');
+    this.logger.dispose();
   }
 }
 
