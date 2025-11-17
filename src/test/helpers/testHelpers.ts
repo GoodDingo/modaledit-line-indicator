@@ -205,25 +205,7 @@ export class TestHelpers {
    *   });
    */
   static async resetAllConfig(): Promise<void> {
-    const keys = [
-      'enabled',
-      'normalModeBackground',
-      'normalModeBorder',
-      'normalModeBorderStyle',
-      'normalModeBorderWidth',
-      'insertModeBackground',
-      'insertModeBorder',
-      'insertModeBorderStyle',
-      'insertModeBorderWidth',
-      'visualModeBackground',
-      'visualModeBorder',
-      'visualModeBorderStyle',
-      'visualModeBorderWidth',
-      'searchModeBackground',
-      'searchModeBorder',
-      'searchModeBorderStyle',
-      'searchModeBorderWidth',
-    ];
+    const keys = ['enabled', 'normalMode', 'insertMode', 'visualMode', 'searchMode'];
 
     for (const key of keys) {
       await this.resetConfig(key);

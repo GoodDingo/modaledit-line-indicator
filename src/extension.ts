@@ -6,6 +6,44 @@ import * as os from 'os';
 type Mode = 'normal' | 'insert' | 'visual' | 'search';
 
 /**
+ * Theme kind supported by VS Code
+ */
+type ThemeKind = 'dark' | 'light' | 'highContrast';
+
+/**
+ * Theme-specific override configuration
+ */
+interface ThemeOverride {
+  background?: string;
+  border?: string;
+  borderStyle?: string;
+  borderWidth?: string;
+}
+
+/**
+ * Mode configuration with optional theme-specific overrides
+ */
+interface ModeConfig {
+  background?: string;
+  border?: string;
+  borderStyle?: string;
+  borderWidth?: string;
+  '[dark]'?: ThemeOverride;
+  '[light]'?: ThemeOverride;
+  '[highContrast]'?: ThemeOverride;
+}
+
+/**
+ * Merged configuration after applying theme overrides
+ */
+interface MergedModeConfig {
+  background: string;
+  border: string;
+  borderStyle: string;
+  borderWidth: string;
+}
+
+/**
  * Logger that writes to both VS Code output channel and file
  * Dual output ensures we can review logs even after VS Code closes
  */
@@ -106,6 +144,78 @@ class ModalEditLineIndicator implements vscode.Disposable {
   }
 
   /**
+   * Detects the current VS Code theme kind.
+   * Maps VS Code ColorThemeKind enum to our ThemeKind type.
+   *
+   * @returns 'dark', 'light', or 'highContrast'
+   */
+  private getCurrentThemeKind(): ThemeKind {
+    const themeKind = vscode.window.activeColorTheme.kind;
+
+    switch (themeKind) {
+      case vscode.ColorThemeKind.Dark:
+        return 'dark';
+      case vscode.ColorThemeKind.Light:
+        return 'light';
+      case vscode.ColorThemeKind.HighContrast:
+      case vscode.ColorThemeKind.HighContrastLight:
+        return 'highContrast';
+      default:
+        this.logger.debug(`Unknown theme kind: ${themeKind}, defaulting to dark`);
+        return 'dark';
+    }
+  }
+
+  /**
+   * Merges common mode configuration with theme-specific overrides.
+   * Theme-specific properties take precedence over common properties.
+   *
+   * Example:
+   * {
+   *   background: "rgba(255, 255, 255, 0)",
+   *   borderStyle: "dotted",
+   *   "[dark]": { border: "#00aa00" }
+   * }
+   * →
+   * { background: "rgba(255, 255, 255, 0)", borderStyle: "dotted", border: "#00aa00", borderWidth: "2px" }
+   *
+   * @param modeConfig - Nested configuration object from settings
+   * @returns Merged configuration with all required properties
+   */
+  private getMergedModeConfig(modeConfig: ModeConfig): MergedModeConfig {
+    const themeKind = this.getCurrentThemeKind();
+
+    // Start with common properties and hardcoded defaults
+    const merged: MergedModeConfig = {
+      background: modeConfig.background || 'rgba(255, 255, 255, 0)',
+      border: modeConfig.border || '#ffffff',
+      borderStyle: modeConfig.borderStyle || 'solid',
+      borderWidth: modeConfig.borderWidth || '2px',
+    };
+
+    // Apply theme-specific overrides
+    const themeKey = `[${themeKind}]` as keyof ModeConfig;
+    const themeOverrides = modeConfig[themeKey] as ThemeOverride | undefined;
+
+    if (themeOverrides) {
+      if (themeOverrides.background !== undefined) {
+        merged.background = themeOverrides.background;
+      }
+      if (themeOverrides.border !== undefined) {
+        merged.border = themeOverrides.border;
+      }
+      if (themeOverrides.borderStyle !== undefined) {
+        merged.borderStyle = themeOverrides.borderStyle;
+      }
+      if (themeOverrides.borderWidth !== undefined) {
+        merged.borderWidth = themeOverrides.borderWidth;
+      }
+    }
+
+    return merged;
+  }
+
+  /**
    * Creates text editor decoration types for all 4 modes.
    * Each mode has its own background, border color, border style, and border width.
    *
@@ -113,23 +223,26 @@ class ModalEditLineIndicator implements vscode.Disposable {
    */
   private createDecorations(): DecorationTypes {
     const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
+    const currentTheme = this.getCurrentThemeKind();
 
-    this.logger.log('Creating decorations for 4 modes');
+    this.logger.log(`Creating decorations for 4 modes (theme: ${currentTheme})`);
 
     // Helper function to create decoration for a specific mode
     const createModeDecoration = (mode: Mode): vscode.TextEditorDecorationType => {
-      const bg = config.get<string>(`${mode}ModeBackground`, 'rgba(255, 255, 255, 0)');
-      const borderColor = config.get<string>(`${mode}ModeBorder`, '#ffffff');
-      const borderStyle = config.get<string>(`${mode}ModeBorderStyle`, 'solid');
-      const borderWidth = config.get<string>(`${mode}ModeBorderWidth`, '2px');
+      // Get nested mode configuration object
+      const modeConfigKey = `${mode}Mode`;
+      const modeConfig = config.get<ModeConfig>(modeConfigKey, {});
+
+      // Merge common properties with theme-specific overrides
+      const merged = this.getMergedModeConfig(modeConfig);
 
       this.logger.log(
-        `  ${mode.toUpperCase()}: bg=${bg}, border=${borderWidth} ${borderStyle} ${borderColor}`
+        `  ${mode.toUpperCase()}: bg=${merged.background}, border=${merged.borderWidth} ${merged.borderStyle} ${merged.border}`
       );
 
       return vscode.window.createTextEditorDecorationType({
-        backgroundColor: bg,
-        border: `${borderWidth} ${borderStyle} ${borderColor}`,
+        backgroundColor: merged.background,
+        border: `${merged.borderWidth} ${merged.borderStyle} ${merged.border}`,
         isWholeLine: true,
       });
     };
@@ -414,6 +527,14 @@ class ModalEditLineIndicator implements vscode.Disposable {
           this.logger.log('Configuration changed - reloading decorations');
           this.reloadDecorations();
         }
+      })
+    );
+
+    // Listen for theme changes and reload decorations
+    this.disposables.push(
+      vscode.window.onDidChangeActiveColorTheme(theme => {
+        this.logger.log(`Color theme changed to: ${theme.kind} - reloading decorations`);
+        this.reloadDecorations();
       })
     );
 
