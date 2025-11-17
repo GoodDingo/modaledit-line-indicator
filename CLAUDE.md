@@ -156,19 +156,36 @@ VS Code renders line highlight
 
 ## Configuration System
 
-All settings namespaced with `modaledit-line-indicator.*` (17 total):
+All settings namespaced with `modaledit-line-indicator.*` (5 total):
 - `enabled` (boolean, default: `true`) - Enable/disable extension
-- **Per-mode settings** (4 modes × 4 properties = 16 settings):
-  - `{mode}ModeBackground` - Background color (default: `rgba(255, 255, 255, 0)` - transparent)
-  - `{mode}ModeBorder` - Border color (green/red/blue/yellow for normal/insert/visual/search)
-  - `{mode}ModeBorderStyle` - Border style (dotted/solid/dashed/solid for normal/insert/visual/search)
-  - `{mode}ModeBorderWidth` - Border width (default: `2px`)
+- **Per-mode nested objects** (4 modes with theme-aware properties):
+  - `normalMode`, `insertMode`, `visualMode`, `searchMode`
+  - Each mode supports: `background`, `border`, `borderStyle`, `borderWidth`
+  - Theme-specific overrides: `[dark]`, `[light]`, `[highContrast]`
 
-Where `{mode}` is: `normal`, `insert`, `visual`, or `search`.
+**Configuration Structure** (v0.1.2+):
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "background": "rgba(255, 255, 255, 0)",
+    "border": "#00aa00",
+    "borderStyle": "dotted",
+    "borderWidth": "2px",
+    "[dark]": { "border": "#00ffff" },
+    "[light]": { "border": "#0000ff" }
+  }
+}
+```
+
+**Theme Detection & Merging**:
+- Uses `vscode.window.activeColorTheme.kind` to detect current theme
+- `getMergedModeConfig()` merges common properties + theme-specific overrides
+- Theme change listener (`onDidChangeActiveColorTheme`) triggers decoration reload
+- Supports: Dark, Light, HighContrast, HighContrastLight
 
 Configuration changes trigger `reloadDecorations()` which:
 1. Disposes old decoration types (all 4)
-2. Creates new decoration types with updated settings
+2. Creates new decoration types with theme-aware merged settings
 3. Re-applies to all visible editors
 
 ## TypeScript Configuration
@@ -215,23 +232,27 @@ Configuration changes trigger `reloadDecorations()` which:
 
 **Running tests**:
 ```bash
-make test              # Run all 54 automated tests (~3 seconds)
+make test              # Run all 94 automated tests (~3 seconds)
 make coverage          # Generate coverage report (process isolation limitation documented)
 
 # Run specific test suite (bypass Make):
-npm test -- --grep "mode detection"        # Run modeDetection.test.ts
-npm test -- --grep "decoration lifecycle"  # Run decorationLifecycle.test.ts
+npm test -- --grep "theme detection"       # Run themeDetection.test.ts
+npm test -- --grep "config merging"        # Run configMerging.test.ts
+npm test -- --grep "theme change"          # Run themeChangeEvent.test.ts
 npm test -- --grep "configuration"         # Run configuration.test.ts
 ```
 
-**Test Suites** (7 total, 54 tests):
+**Test Suites** (10 total, 94 tests):
 - `modeDetection.test.ts` - ModalEdit integration (6 tests)
 - `decorationLifecycle.test.ts` - Decoration creation/disposal (8 tests)
 - `extension.test.ts` - Extension activation/commands (9 tests)
 - `eventHandling.test.ts` - VS Code events (7 tests)
-- `configuration.test.ts` - All config keys (9 tests)
+- `configuration.test.ts` - Nested config structure (9 tests)
 - `modalEditIntegration.test.ts` - ModalEdit detection/fallback (9 tests)
 - `example.test.ts` - TestHelper usage examples (6 tests)
+- `themeDetection.test.ts` - Theme kind detection (10 tests)
+- `configMerging.test.ts` - Theme-aware config merging (15 tests)
+- `themeChangeEvent.test.ts` - Theme change event handling (14 tests)
 
 **Test Patterns** (documented in `src/test/helpers/testPatterns.md`):
 - Standard test structure with setup/teardown
@@ -277,8 +298,8 @@ make validate         # Verify everything passes
 
 **Source**:
 - `src/extension.ts` - Main extension code (single file)
-- `src/test/suite/*.test.ts` - 7 test suites (54 tests)
-- `src/test/helpers/testHelpers.ts` - 21 test helper methods
+- `src/test/suite/*.test.ts` - 10 test suites (94 tests)
+- `src/test/helpers/testHelpers.ts` - 29 test helper methods (includes 8 theme-specific helpers)
 - `src/test/helpers/testPatterns.md` - 5 documented test patterns
 
 **Output**: `out/` directory (generated, git-ignored)
@@ -310,7 +331,7 @@ Before publishing to marketplace:
 1. Update `publisher` field in package.json (currently "user")
 2. Update `repository.url` in package.json
 3. Update version following semver
-4. Run `make validate` - must pass (all 54 tests passing)
+4. Run `make validate` - must pass (all 94 tests passing)
 5. Complete manual testing checklist (`ai_docs/MANUAL-TESTING.md` - 33 test cases)
 6. Test in clean VS Code install via `make install-ext`
 7. Verify with real users (beta testing) before claiming production-ready
@@ -335,3 +356,12 @@ Before publishing to marketplace:
 - VS Code doesn't fire events when `editor.options.cursorStyle` changes
 - ModalEdit updates cursor style without triggering observable events
 - 50ms polling provides near-instant detection with minimal overhead
+
+## Git Workflow
+
+**CRITICAL**: When creating PRs:
+- Run `git fetch` to update remote refs
+- **ALWAYS** run diffs for `origin/main...HEAD` (not `main...HEAD`)
+- Local `main` branch may be out of sync - always compare against remote
+- Use `git diff origin/main...HEAD --stat` to verify PR contents
+- Use `git log origin/main..HEAD --oneline` to verify PR commits
