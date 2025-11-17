@@ -2,7 +2,7 @@
   "name": "modaledit-line-indicator",
   "displayName": "ModalEdit Line Indicator",
   "description": "Dynamic line highlight for ModalEdit modes (normal, insert, visual, search). Changes line highlight color and style based on current mode for instant visual feedback.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "publisher": "user",
   "license": "MIT",
   "repository": {
@@ -65,7 +65,7 @@
         "modaledit-line-indicator.normalMode": {
           "type": "object",
           "scope": "resource",
-          "description": "Normal mode line highlight configuration. Supports theme-specific overrides with [dark], [light], and [highContrast] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden.",
+          "description": "Normal mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
           "default": {
             "background": "rgba(255, 255, 255, 0)",
             "border": "#00aa00",
@@ -76,7 +76,7 @@
         "modaledit-line-indicator.insertMode": {
           "type": "object",
           "scope": "resource",
-          "description": "Insert mode line highlight configuration. Supports theme-specific overrides with [dark], [light], and [highContrast] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden.",
+          "description": "Insert mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
           "default": {
             "background": "rgba(255, 255, 255, 0)",
             "border": "#aa0000",
@@ -87,7 +87,7 @@
         "modaledit-line-indicator.visualMode": {
           "type": "object",
           "scope": "resource",
-          "description": "Visual mode line highlight configuration. Supports theme-specific overrides with [dark], [light], and [highContrast] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden.",
+          "description": "Visual mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
           "default": {
             "background": "rgba(255, 255, 255, 0)",
             "border": "#0000aa",
@@ -98,7 +98,7 @@
         "modaledit-line-indicator.searchMode": {
           "type": "object",
           "scope": "resource",
-          "description": "Search mode line highlight configuration. Supports theme-specific overrides with [dark], [light], and [highContrast] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden.",
+          "description": "Search mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
           "default": {
             "background": "rgba(255, 255, 255, 0)",
             "border": "#aaaa00",

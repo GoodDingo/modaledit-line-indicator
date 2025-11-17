@@ -23,7 +23,7 @@ Or install manually:
 # From the extension directory
 npm install
 npm run compile
-code --install-extension modaledit-line-indicator-0.1.2.vsix
+code --install-extension modaledit-line-indicator-0.1.3.vsix
 ```
 
 ## Usage
@@ -87,7 +87,7 @@ Edit your `settings.json` to customize colors and styles per mode:
 
 ### Theme-Specific Configuration
 
-You can specify different colors for dark, light, and high contrast themes:
+You can specify different colors for dark, light, and high contrast themes (both dark and light variants):
 
 ```json
 {
@@ -97,19 +97,25 @@ You can specify different colors for dark, light, and high contrast themes:
     "borderStyle": "dotted",
     "borderWidth": "2px",
 
-    // Dark theme override
+    // Dark theme override (also used as fallback for high contrast dark)
     "[dark]": {
       "border": "#00ffff"  // Cyan in dark themes
     },
 
-    // Light theme override
+    // Light theme override (also used as fallback for high contrast light)
     "[light]": {
       "border": "#0000ff"  // Blue in light themes
     },
 
-    // High contrast theme override
-    "[highContrast]": {
+    // High contrast dark theme override
+    "[highContrastDark]": {
       "border": "#ffffff",
+      "borderWidth": "4px"  // Thicker border for better visibility
+    },
+
+    // High contrast light theme override
+    "[highContrastLight]": {
+      "border": "#000000",
       "borderWidth": "4px"  // Thicker border for better visibility
     }
   }
@@ -118,9 +124,12 @@ You can specify different colors for dark, light, and high contrast themes:
 
 **How It Works:**
 1. **Common properties** (background, border, borderStyle, borderWidth) apply to all themes
-2. **Theme-specific overrides** (`[dark]`, `[light]`, `[highContrast]`) selectively override properties
-3. Extension automatically detects your current theme and applies the appropriate styling
-4. When you switch themes, the extension instantly updates the decorations
+2. **Theme-specific overrides** (`[dark]`, `[light]`, `[highContrastDark]`, `[highContrastLight]`) selectively override properties
+3. **Cascading fallback hierarchy** for high contrast themes:
+   - High Contrast Dark: `[highContrastDark]` → `[dark]` → common → defaults
+   - High Contrast Light: `[highContrastLight]` → `[light]` → common → defaults
+4. Extension automatically detects your current theme and applies the appropriate styling
+5. When you switch themes, the extension instantly updates the decorations
 
 ### Practical Examples
 
@@ -263,11 +272,19 @@ Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports the 
 | `border` | string | Border color (CSS format, e.g., `#ff0000` or `rgb(255, 0, 0)`) |
 | `borderStyle` | string | Border style: `solid`, `dashed`, `dotted`, `double`, `groove`, `ridge`, `inset`, `outset` |
 | `borderWidth` | string | Border width (CSS format, e.g., `2px`, `0.1em`) |
-| `[dark]` | object | Override properties for dark themes |
-| `[light]` | object | Override properties for light themes |
-| `[highContrast]` | object | Override properties for high contrast themes |
+| `[dark]` | object | Override properties for dark themes (also fallback for HC dark) |
+| `[light]` | object | Override properties for light themes (also fallback for HC light) |
+| `[highContrastDark]` | object | Override properties for high contrast dark themes |
+| `[highContrastLight]` | object | Override properties for high contrast light themes |
 
 **Theme Override Objects** can contain any combination of the above properties.
+
+**Cascading Fallback**: Each property (background, border, borderStyle, borderWidth) is resolved independently through the fallback chain:
+- **HC Dark**: `[highContrastDark]` → `[dark]` → common → defaults
+- **HC Light**: `[highContrastLight]` → `[light]` → common → defaults
+- **Regular Dark/Light**: `[dark/light]` → common → defaults
+
+This allows selective overrides (e.g., only override `borderWidth` for high contrast, inherit other properties from the base theme).
 
 ## Migration from v0.1.1
 
@@ -283,7 +300,7 @@ If you're upgrading from version 0.1.1, the configuration format has changed fro
 }
 ```
 
-### New Format (v0.1.2+)
+### New Format (v0.1.3+)
 ```json
 {
   "modaledit-line-indicator.normalMode": {
@@ -300,7 +317,47 @@ If you're upgrading from version 0.1.1, the configuration format has changed fro
 2. Group properties for each mode into a nested object
 3. Rename properties (remove the mode prefix): `normalModeBorder` → `border`
 4. Repeat for all four modes: `normalMode`, `insertMode`, `visualMode`, `searchMode`
-5. (Optional) Add theme-specific overrides using `[dark]`, `[light]`, `[highContrast]` keys
+5. (Optional) Add theme-specific overrides using `[dark]`, `[light]`, `[highContrastDark]`, `[highContrastLight]` keys
+
+## Migration from v0.1.2
+
+If you're upgrading from v0.1.2 and used `[highContrast]` configuration:
+
+**BREAKING CHANGE**: The `[highContrast]` key has been removed in favor of separate `[highContrastDark]` and `[highContrastLight]` keys.
+
+**Before (v0.1.2):**
+
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "borderStyle": "dotted",
+    "[highContrast]": {
+      "border": "#ffffff",
+      "borderWidth": "4px"
+    }
+  }
+}
+```
+
+**After (v0.1.3):**
+
+```json
+{
+  "modaledit-line-indicator.normalMode": {
+    "borderStyle": "dotted",
+    "[highContrastDark]": {
+      "border": "#ffffff",
+      "borderWidth": "4px"
+    },
+    "[highContrastLight]": {
+      "border": "#000000",
+      "borderWidth": "4px"
+    }
+  }
+}
+```
+
+**Why?** VS Code distinguishes between high contrast dark and high contrast light themes. The old `[highContrast]` was applied to both, which could result in poor visibility (e.g., white borders on white background in HC light themes).
 
 ## Development
 
@@ -323,10 +380,11 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow and contribution g
 
 ### Theme-specific colors not applying?
 
-1. Verify your theme kind (dark/light/high contrast) in VS Code
-2. Check that you've defined the appropriate theme override (`[dark]`, `[light]`, or `[highContrast]`)
+1. Verify your theme kind (dark/light/high contrast dark/high contrast light) in VS Code
+2. Check that you've defined the appropriate theme override (`[dark]`, `[light]`, `[highContrastDark]`, or `[highContrastLight]`)
 3. Ensure theme override property names match exactly (case-sensitive)
-4. Try switching to a different theme and back
+4. Remember the cascading fallback: HC dark falls back to `[dark]`, HC light falls back to `[light]`
+5. Try switching to a different theme and back
 
 ### Extension doesn't load?
 
