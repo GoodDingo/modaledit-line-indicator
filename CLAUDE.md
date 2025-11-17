@@ -161,9 +161,14 @@ All settings namespaced with `modaledit-line-indicator.*` (5 total):
 - **Per-mode nested objects** (4 modes with theme-aware properties):
   - `normalMode`, `insertMode`, `visualMode`, `searchMode`
   - Each mode supports: `background`, `border`, `borderStyle`, `borderWidth`
-  - Theme-specific overrides: `[dark]`, `[light]`, `[highContrast]`
+  - **Theme-specific overrides** (Stage 1+):
+    - `[dark]` - Regular dark theme
+    - `[light]` - Regular light theme
+    - `[highContrastDark]` - High contrast dark theme (v0.1.3+, Stage 1)
+    - `[highContrastLight]` - High contrast light theme (v0.1.3+, Stage 1)
+    - `[highContrast]` - **DEPRECATED** (Stage 1: backward compatible, Stage 2: removed)
 
-**Configuration Structure** (v0.1.2+):
+**Configuration Structure** (v0.1.3+ with Stage 1):
 ```json
 {
   "modaledit-line-indicator.normalMode": {
@@ -172,16 +177,24 @@ All settings namespaced with `modaledit-line-indicator.*` (5 total):
     "borderStyle": "dotted",
     "borderWidth": "2px",
     "[dark]": { "border": "#00ffff" },
-    "[light]": { "border": "#0000ff" }
+    "[light]": { "border": "#0000ff" },
+    "[highContrastDark]": { "border": "#ffffff", "borderWidth": "4px" },
+    "[highContrastLight]": { "border": "#000000", "borderWidth": "4px" }
   }
 }
 ```
 
-**Theme Detection & Merging**:
+**Theme Detection & Merging** (Stage 1+):
 - Uses `vscode.window.activeColorTheme.kind` to detect current theme
+- **4 distinct theme kinds** detected (Stage 1):
+  - `ColorThemeKind.Dark` (2) → `'dark'`
+  - `ColorThemeKind.Light` (1) → `'light'`
+  - `ColorThemeKind.HighContrast` (3) → `'highContrastDark'` (Stage 1: was `'highContrast'`)
+  - `ColorThemeKind.HighContrastLight` (4) → `'highContrastLight'` (Stage 1: was `'highContrast'`)
 - `getMergedModeConfig()` merges common properties + theme-specific overrides
+- **Stage 1 Backward Compatibility**: Falls back to `[highContrast]` if new HC keys not found
 - Theme change listener (`onDidChangeActiveColorTheme`) triggers decoration reload
-- Supports: Dark, Light, HighContrast, HighContrastLight
+- **Stage 2 (planned)**: Cascading fallback hierarchy (HC dark → dark → common → defaults)
 
 Configuration changes trigger `reloadDecorations()` which:
 1. Disposes old decoration types (all 4)
@@ -232,7 +245,7 @@ Configuration changes trigger `reloadDecorations()` which:
 
 **Running tests**:
 ```bash
-make test              # Run all 94 automated tests (~3 seconds)
+make test              # Run all 99 automated tests (~7 seconds) - Stage 1: was 94 tests
 make coverage          # Generate coverage report (process isolation limitation documented)
 
 # Run specific test suite (bypass Make):
@@ -240,9 +253,10 @@ npm test -- --grep "theme detection"       # Run themeDetection.test.ts
 npm test -- --grep "config merging"        # Run configMerging.test.ts
 npm test -- --grep "theme change"          # Run themeChangeEvent.test.ts
 npm test -- --grep "configuration"         # Run configuration.test.ts
+npm test -- --grep "Stage 1"               # Run Stage 1 specific tests
 ```
 
-**Test Suites** (10 total, 94 tests):
+**Test Suites** (10 total, 99 tests - Stage 1 added 5 tests):
 - `modeDetection.test.ts` - ModalEdit integration (6 tests)
 - `decorationLifecycle.test.ts` - Decoration creation/disposal (8 tests)
 - `extension.test.ts` - Extension activation/commands (9 tests)
@@ -250,7 +264,7 @@ npm test -- --grep "configuration"         # Run configuration.test.ts
 - `configuration.test.ts` - Nested config structure (9 tests)
 - `modalEditIntegration.test.ts` - ModalEdit detection/fallback (9 tests)
 - `example.test.ts` - TestHelper usage examples (6 tests)
-- `themeDetection.test.ts` - Theme kind detection (10 tests)
+- `themeDetection.test.ts` - Theme kind detection (15 tests - **Stage 1: +5 tests**)
 - `configMerging.test.ts` - Theme-aware config merging (15 tests)
 - `themeChangeEvent.test.ts` - Theme change event handling (14 tests)
 

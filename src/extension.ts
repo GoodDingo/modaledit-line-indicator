@@ -7,8 +7,13 @@ type Mode = 'normal' | 'insert' | 'visual' | 'search';
 
 /**
  * Theme kind supported by VS Code
+ * VS Code provides 4 distinct theme kinds:
+ * - dark: Regular dark theme
+ * - light: Regular light theme
+ * - highContrastDark: High contrast dark theme (ColorThemeKind.HighContrast)
+ * - highContrastLight: High contrast light theme (ColorThemeKind.HighContrastLight)
  */
-type ThemeKind = 'dark' | 'light' | 'highContrast';
+type ThemeKind = 'dark' | 'light' | 'highContrastDark' | 'highContrastLight';
 
 /**
  * Theme-specific override configuration
@@ -22,6 +27,12 @@ interface ThemeOverride {
 
 /**
  * Mode configuration with optional theme-specific overrides
+ * Supports theme-specific overrides:
+ * - [dark]: Regular dark theme
+ * - [light]: Regular light theme
+ * - [highContrastDark]: High contrast dark theme (new in v0.1.3)
+ * - [highContrastLight]: High contrast light theme (new in v0.1.3)
+ * - [highContrast]: DEPRECATED - will be removed in Stage 2 (use [highContrastDark] and [highContrastLight])
  */
 interface ModeConfig {
   background?: string;
@@ -30,7 +41,9 @@ interface ModeConfig {
   borderWidth?: string;
   '[dark]'?: ThemeOverride;
   '[light]'?: ThemeOverride;
-  '[highContrast]'?: ThemeOverride;
+  '[highContrast]'?: ThemeOverride; // DEPRECATED - backward compatibility only
+  '[highContrastDark]'?: ThemeOverride;
+  '[highContrastLight]'?: ThemeOverride;
 }
 
 /**
@@ -82,6 +95,12 @@ class ExtensionLogger {
 
   debug(message: string, data?: unknown): void {
     const formatted = this.formatMessage('DEBUG', message, data);
+    this.outputChannel.appendLine(formatted);
+    this.writeToFile(formatted);
+  }
+
+  warn(message: string, data?: unknown): void {
+    const formatted = this.formatMessage('WARN', message, data);
     this.outputChannel.appendLine(formatted);
     this.writeToFile(formatted);
   }
@@ -147,7 +166,10 @@ class ModalEditLineIndicator implements vscode.Disposable {
    * Detects the current VS Code theme kind.
    * Maps VS Code ColorThemeKind enum to our ThemeKind type.
    *
-   * @returns 'dark', 'light', or 'highContrast'
+   * VS Code provides 4 distinct theme kinds, and we now distinguish between
+   * high contrast dark and high contrast light themes (Stage 1 of Issue #4).
+   *
+   * @returns 'dark', 'light', 'highContrastDark', or 'highContrastLight'
    */
   private getCurrentThemeKind(): ThemeKind {
     const themeKind = vscode.window.activeColorTheme.kind;
@@ -158,8 +180,11 @@ class ModalEditLineIndicator implements vscode.Disposable {
       case vscode.ColorThemeKind.Light:
         return 'light';
       case vscode.ColorThemeKind.HighContrast:
+        // HighContrast is the DARK variant of high contrast themes
+        return 'highContrastDark';
       case vscode.ColorThemeKind.HighContrastLight:
-        return 'highContrast';
+        // HighContrastLight is the LIGHT variant of high contrast themes
+        return 'highContrastLight';
       default:
         this.logger.debug(`Unknown theme kind: ${themeKind}, defaulting to dark`);
         return 'dark';
@@ -185,6 +210,15 @@ class ModalEditLineIndicator implements vscode.Disposable {
   private getMergedModeConfig(modeConfig: ModeConfig): MergedModeConfig {
     const themeKind = this.getCurrentThemeKind();
 
+    // STAGE 1 BACKWARD COMPATIBILITY: Warn about deprecated [highContrast] config
+    if (modeConfig['[highContrast]']) {
+      this.logger.warn(
+        'DEPRECATED: [highContrast] config key will be removed in Stage 2. ' +
+          'Please migrate to [highContrastDark] and [highContrastLight] instead. ' +
+          'See Issue #4 for migration guide.'
+      );
+    }
+
     // Start with common properties and hardcoded defaults
     const merged: MergedModeConfig = {
       background: modeConfig.background || 'rgba(255, 255, 255, 0)',
@@ -194,8 +228,25 @@ class ModalEditLineIndicator implements vscode.Disposable {
     };
 
     // Apply theme-specific overrides
-    const themeKey = `[${themeKind}]` as keyof ModeConfig;
-    const themeOverrides = modeConfig[themeKey] as ThemeOverride | undefined;
+    // Stage 1: Now returns highContrastDark or highContrastLight instead of highContrast
+    // For backward compatibility, if specific HC config not found, fall back to deprecated [highContrast]
+    let themeKey = `[${themeKind}]` as keyof ModeConfig;
+    let themeOverrides = modeConfig[themeKey] as ThemeOverride | undefined;
+
+    // STAGE 1 BACKWARD COMPATIBILITY: Fall back to [highContrast] if new HC keys not found
+    if (
+      !themeOverrides &&
+      (themeKind === 'highContrastDark' || themeKind === 'highContrastLight')
+    ) {
+      themeKey = '[highContrast]' as keyof ModeConfig;
+      themeOverrides = modeConfig[themeKey] as ThemeOverride | undefined;
+      if (themeOverrides) {
+        this.logger.debug(
+          `Using deprecated [highContrast] config for ${themeKind}. ` +
+            `Consider adding [${themeKind}] config instead.`
+        );
+      }
+    }
 
     if (themeOverrides) {
       if (themeOverrides.background !== undefined) {
