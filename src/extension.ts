@@ -185,7 +185,6 @@ class ModalEditLineIndicator implements vscode.Disposable {
         // HighContrast is the DARK variant of high contrast themes
         return 'highContrastDark';
       case vscode.ColorThemeKind.HighContrastLight:
-        // HighContrastLight is the LIGHT variant of high contrast themes
         return 'highContrastLight';
       default:
         this.logger.debug(`Unknown theme kind: ${themeKind}, defaulting to dark`);
@@ -331,7 +330,17 @@ class ModalEditLineIndicator implements vscode.Disposable {
     const createModeDecoration = (mode: Mode): vscode.TextEditorDecorationType => {
       // Get nested mode configuration object
       const modeConfigKey = `${mode}Mode`;
-      const modeConfig = config.get<ModeConfig>(modeConfigKey, {});
+      const userModeConfig = config.get<ModeConfig>(modeConfigKey);
+      const modeConfig =
+        userModeConfig ??
+        (config.inspect<ModeConfig>(modeConfigKey)?.defaultValue as ModeConfig | undefined) ??
+        {};
+
+      if (!userModeConfig) {
+        this.logger.debug(
+          `Using ${mode} mode defaults from schema because no user configuration was found.`
+        );
+      }
 
       // Merge common properties with theme-specific overrides
       const merged = this.getMergedModeConfig(modeConfig);
@@ -358,9 +367,9 @@ class ModalEditLineIndicator implements vscode.Disposable {
   /**
    * Detects the current ModalEdit mode using cursor style and selection state.
    *
-   * ModalEdit ALWAYS uses different cursor styles for different modes, though users
-   * can configure which style. The key insight: we can detect VISUAL mode reliably
-   * by checking if there's an active selection, regardless of cursor configuration.
+   * ModalEdit by default uses different cursor styles for different modes, though users
+   * can configure which styles to use. The key insight: we can detect VISUAL mode reliably
+   * by checking if there's an active selection, regardless of cursor styles.
    *
    * Mode detection strategy:
    * 1. Check if editor has a selection (selection.anchor != selection.active)
