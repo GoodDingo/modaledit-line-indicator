@@ -66,6 +66,10 @@ suite('Configuration Tests', () => {
       },
       'searchMode should have correct defaults'
     );
+
+    // Test logLevel configuration
+    const logLevel = config.get('logLevel');
+    assert.strictEqual(logLevel, 'error', 'logLevel should default to error');
   });
 
   test('Can read nested configuration values', () => {
@@ -219,5 +223,41 @@ suite('Configuration Tests', () => {
       'borderStyle should be valid CSS border style'
     );
     assert.strictEqual(typeof normalMode.borderWidth, 'string');
+  });
+
+  test('Can read and update logLevel configuration', async () => {
+    const config = TestHelpers.getConfig();
+
+    // Test default value
+    assert.strictEqual(config.get('logLevel'), 'error', 'Default logLevel should be error');
+
+    // Test updating to each valid level
+    const validLevels = ['error', 'warn', 'info', 'debug'];
+
+    for (const level of validLevels) {
+      await TestHelpers.setConfig('logLevel', level);
+      const updatedConfig = TestHelpers.getConfig();
+      assert.strictEqual(
+        updatedConfig.get('logLevel'),
+        level,
+        `logLevel should be updatable to ${level}`
+      );
+    }
+
+    // Reset to default
+    await TestHelpers.resetConfig('logLevel');
+    const resetConfig = TestHelpers.getConfig();
+    assert.strictEqual(resetConfig.get('logLevel'), 'error', 'logLevel should reset to error');
+  });
+
+  test('logLevel configuration has correct type', () => {
+    const config = TestHelpers.getConfig();
+    const logLevel = config.get<string>('logLevel');
+
+    assert.strictEqual(typeof logLevel, 'string', 'logLevel should be a string');
+    assert.ok(
+      ['error', 'warn', 'info', 'debug'].includes(logLevel || ''),
+      'logLevel should be one of the valid enum values'
+    );
   });
 });

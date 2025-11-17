@@ -16,6 +16,27 @@ type Mode = 'normal' | 'insert' | 'visual' | 'search';
 type ThemeKind = 'dark' | 'light' | 'highContrastDark' | 'highContrastLight';
 
 /**
+ * Log level for filtering log messages
+ * Hierarchy: error < warn < info < debug
+ * - error: Only errors (most restrictive)
+ * - warn: Errors and warnings
+ * - info: Errors, warnings, and general lifecycle events
+ * - debug: Everything including detailed diagnostics (most verbose)
+ */
+type LogLevel = 'error' | 'warn' | 'info' | 'debug';
+
+/**
+ * Numeric values for log level comparison
+ * Higher value = more verbose
+ */
+const LOG_LEVEL_VALUES: Record<LogLevel, number> = {
+  error: 0,
+  warn: 1,
+  info: 2,
+  debug: 3,
+};
+
+/**
  * Theme-specific override configuration
  */
 interface ThemeOverride {
@@ -83,6 +104,25 @@ class ExtensionLogger {
     this.log(`Log file: ${this.logFilePath}`);
   }
 
+  /**
+   * Get current log level from configuration
+   * @returns Current log level, defaults to 'error' if not configured
+   */
+  private getCurrentLogLevel(): LogLevel {
+    const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
+    return (config.get<LogLevel>('logLevel') || 'error') as LogLevel;
+  }
+
+  /**
+   * Check if a message at the given level should be logged
+   * @param messageLevel Level of the message to log
+   * @returns true if message should be logged based on current configuration
+   */
+  private shouldLog(messageLevel: LogLevel): boolean {
+    const currentLevel = this.getCurrentLogLevel();
+    return LOG_LEVEL_VALUES[currentLevel] >= LOG_LEVEL_VALUES[messageLevel];
+  }
+
   private formatMessage(level: string, message: string, data?: unknown): string {
     const timestamp = new Date().toISOString();
     const dataStr = data !== undefined ? ` | ${JSON.stringify(data)}` : '';
@@ -90,24 +130,36 @@ class ExtensionLogger {
   }
 
   log(message: string, data?: unknown): void {
+    if (!this.shouldLog('info')) {
+      return;
+    }
     const formatted = this.formatMessage('INFO', message, data);
     this.outputChannel.appendLine(formatted);
     this.writeToFile(formatted);
   }
 
   debug(message: string, data?: unknown): void {
+    if (!this.shouldLog('debug')) {
+      return;
+    }
     const formatted = this.formatMessage('DEBUG', message, data);
     this.outputChannel.appendLine(formatted);
     this.writeToFile(formatted);
   }
 
   warn(message: string, data?: unknown): void {
+    if (!this.shouldLog('warn')) {
+      return;
+    }
     const formatted = this.formatMessage('WARN', message, data);
     this.outputChannel.appendLine(formatted);
     this.writeToFile(formatted);
   }
 
   error(message: string, error?: unknown): void {
+    if (!this.shouldLog('error')) {
+      return;
+    }
     const errorStr = error instanceof Error ? error.stack || error.message : String(error || '');
     const formatted = this.formatMessage('ERROR', message, { error: errorStr });
     this.outputChannel.appendLine(formatted);
