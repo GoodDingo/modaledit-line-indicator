@@ -300,12 +300,7 @@ class ModalEditLineIndicator implements vscode.Disposable {
     // STAGE 2: Resolve each property independently through the fallback chain
     // This enables selective overrides (e.g., only override borderWidth for HC, inherit rest from base theme)
     const merged: MergedModeConfig = {
-      background: this.resolveProperty(
-        'background',
-        modeConfig,
-        fallbackChain,
-        'rgba(255, 255, 255, 0)'
-      ),
+      background: this.resolveProperty('background', modeConfig, fallbackChain, '#ffffff'),
       border: this.resolveProperty('border', modeConfig, fallbackChain, '#ffffff'),
       borderStyle: this.resolveProperty('borderStyle', modeConfig, fallbackChain, 'solid'),
       borderWidth: this.resolveProperty('borderWidth', modeConfig, fallbackChain, '2px'),
