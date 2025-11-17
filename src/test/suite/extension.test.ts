@@ -47,12 +47,16 @@ suite('Extension Test Suite', () => {
     const config = TestHelpers.getConfig();
 
     assert.strictEqual(config.get('enabled'), true);
-    assert.strictEqual(config.get('normalModeBackground'), '#00770020');
-    assert.strictEqual(config.get('normalModeBorder'), '#005500');
-    assert.strictEqual(config.get('insertModeBackground'), '#77000020');
+    assert.strictEqual(config.get('normalModeBackground'), 'rgba(255, 255, 255, 0)');
+    assert.strictEqual(config.get('normalModeBorder'), '#00aa00');
+    assert.strictEqual(config.get('normalModeBorderStyle'), 'dotted');
+    assert.strictEqual(config.get('normalModeBorderWidth'), '2px');
+    assert.strictEqual(config.get('insertModeBackground'), 'rgba(255, 255, 255, 0)');
     assert.strictEqual(config.get('insertModeBorder'), '#aa0000');
-    assert.strictEqual(config.get('borderStyle'), 'solid');
-    assert.strictEqual(config.get('borderWidth'), '2px');
+    assert.strictEqual(config.get('insertModeBorderStyle'), 'solid');
+    assert.strictEqual(config.get('insertModeBorderWidth'), '2px');
+    assert.strictEqual(config.get('visualModeBorder'), '#0000aa');
+    assert.strictEqual(config.get('searchModeBorder'), '#aaaa00');
   });
 
   test('Toggle command should work', async () => {

@@ -4,7 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-VS Code extension that provides dynamic line highlighting based on ModalEdit modes. Changes line highlight colors in real-time when switching between normal mode (green) and insert mode (red).
+VS Code extension that provides dynamic line highlighting based on ModalEdit modes. Changes line highlight colors and styles in real-time when switching between modes:
+- **NORMAL mode**: Green dotted border (default)
+- **INSERT mode**: Red solid border (default)
+- **VISUAL mode**: Blue dashed border (default)
+- **SEARCH mode**: Yellow solid border (default)
 
 **External Dependency**: Requires the ModalEdit extension to be installed and active for context key access.
 
@@ -75,30 +79,51 @@ Always run `make validate` before committing. This runs:
 - Log file accessible via `showLogFile` command for troubleshooting
 - Output channel: "ModalEdit Line Indicator" (View → Output)
 
-**Mode Detection Mechanism**:
-- Detects mode by checking cursor style via `editor.options.cursorStyle`
-- Block cursor (value 2) = Normal mode, Line cursor (value 1) = Insert mode
-- Falls back to `false` (insert mode) if no editor is active
-- Uses 50ms polling timer to detect cursor style changes
-  - **Why polling?** VS Code API does NOT emit events when `cursorStyle` changes
-  - ModalEdit changes cursor style but no event fires, so polling is required
-- Polling starts on activation and stops when extension is disabled or disposed
-- Polling is idempotent - won't create duplicate timers if started multiple times
-- Tracks `lastKnownCursorStyle` to avoid redundant updates on same style
+**Mode Detection Mechanism** (CRITICAL - Configuration-Independent):
+- **IMPORTANT**: VS Code does NOT provide a `getContext()` API - context keys are read-only for `when` clauses
+- Uses **hybrid detection**: cursor style + selection state (works across all user configurations)
+- Returns `Mode` synchronously (not async)
+
+**Detection Strategy**:
+1. **Priority 1 - Selection-based**: If `hasSelection && cursorStyle !== Line` → VISUAL mode
+2. **Priority 2 - Cursor patterns**: Map cursor styles to modes with selection awareness
+
+**Why This Works Universally**:
+- Users can configure ANY cursor style for each mode in ModalEdit
+- VISUAL mode is fundamentally about having a selection
+- INSERT mode always uses Line cursor (ModalEdit convention)
+- Detection works regardless of user's `selectCursorStyle`, `normalCursorStyle`, etc.
+
+**Cursor Style Mapping** (handles all configurations):
+- `Block (2)` or `BlockOutline (5)`: VISUAL if selection, else NORMAL
+- `Underline (3)` or `UnderlineThin (6)`: SEARCH mode
+- `LineThin (4)`: VISUAL if selection, else INSERT
+- `Line (1)`: INSERT mode (default)
+
+**Polling System**:
+- 50ms polling timer detects mode changes (cursor style updates don't fire events)
+- Polls `detectCurrentMode()` synchronously every 50ms
+- Starts on activation, stops on disable/disposal
+- Idempotent - won't create duplicate timers
 
 **Decoration System**:
-- Two `TextEditorDecorationType` instances created on initialization (normal, insert)
+- Four `TextEditorDecorationType` instances created on initialization (normal, insert, visual, search)
 - Decorations applied exclusively (only one active at a time)
 - Applied to current line only via `getDecorateRanges()`
 - Must be manually cleared when switching modes or disabling extension
 - Must be disposed and recreated when configuration changes
 
 **Event-Driven Updates**:
-- Listens to `onDidChangeTextEditorSelection` (cursor movement triggers mode check)
+- Listens to `onDidChangeTextEditorSelection` (cursor movement and selection changes trigger mode check)
 - Listens to `onDidChangeActiveTextEditor` (switching editors triggers update)
 - Listens to `onDidChangeConfiguration` (settings changes trigger decoration reload or enable/disable)
 - 10ms debounce on `updateHighlight()` prevents excessive redraws during rapid cursor movement
-- 50ms cursor style polling provides real-time mode change detection
+- 50ms mode polling provides real-time mode change detection via cursor style
+
+**Logging Strategy** (reduces noise):
+- Debug logs only appear when cursor style OR selection state changes
+- Mode change logs only appear when mode actually transitions
+- Applied decoration logs only appear on mode changes (not every cursor move)
 
 **Resource Management**:
 - All event listeners stored in `disposables` array
@@ -113,34 +138,36 @@ Always run `make validate` before committing. This runs:
 ```
 User switches mode (ModalEdit handles this)
   ↓
-ModalEdit changes cursor style (Block = Normal, Line = Insert)
+ModalEdit changes cursor style + updates selection state
   ↓
-Polling timer detects cursor style change (every 50ms)
+Polling timer detects change (every 50ms)
   OR
-Cursor moves/selection changes
+Selection/cursor event fires
   ↓
-Extension checks editor.options.cursorStyle
+detectCurrentMode() checks:
+  1. hasSelection && cursorStyle !== Line? → VISUAL
+  2. Cursor style pattern → NORMAL/INSERT/SEARCH
   ↓
-Determines mode: Block cursor (2) = Normal, else = Insert
-  ↓
-Applies appropriate decoration (normal or insert)
+Mode changed? Apply new decoration, log change
+Mode same? Skip (no logging, no decoration update)
   ↓
 VS Code renders line highlight
 ```
 
 ## Configuration System
 
-All settings namespaced with `modaledit-line-indicator.*` (7 total):
+All settings namespaced with `modaledit-line-indicator.*` (17 total):
 - `enabled` (boolean, default: `true`) - Enable/disable extension
-- `normalModeBackground` (string, default: `#00770020`) - Normal mode background color
-- `normalModeBorder` (string, default: `#005500`) - Normal mode border color
-- `insertModeBackground` (string, default: `#77000020`) - Insert mode background color
-- `insertModeBorder` (string, default: `#aa0000`) - Insert mode border color
-- `borderStyle` (enum: solid/dashed/dotted, default: `solid`) - Border style
-- `borderWidth` (string, default: `2px`) - Border width
+- **Per-mode settings** (4 modes × 4 properties = 16 settings):
+  - `{mode}ModeBackground` - Background color (default: `rgba(255, 255, 255, 0)` - transparent)
+  - `{mode}ModeBorder` - Border color (green/red/blue/yellow for normal/insert/visual/search)
+  - `{mode}ModeBorderStyle` - Border style (dotted/solid/dashed/solid for normal/insert/visual/search)
+  - `{mode}ModeBorderWidth` - Border width (default: `2px`)
+
+Where `{mode}` is: `normal`, `insert`, `visual`, or `search`.
 
 Configuration changes trigger `reloadDecorations()` which:
-1. Disposes old decoration types
+1. Disposes old decoration types (all 4)
 2. Creates new decoration types with updated settings
 3. Re-applies to all visible editors
 
@@ -238,10 +265,12 @@ make validate         # Verify everything passes
 - Look for "ModalEdit Line Indicator: Activating..." and "Activated" messages
 
 **Common issues**:
-- Colors not changing: ModalEdit extension not installed or mode context not updating
+- Colors not changing: ModalEdit extension not installed or inactive
+- Mode detection incorrect: Check cursor style configuration in ModalEdit settings (`selectCursorStyle`, etc.)
 - Extension not loading: Check `make validate` passes, verify `out/extension.js` exists
 - TypeScript errors: Run `make clean && make compile`
 - Test failures: Tests gracefully skip ModalEdit-specific scenarios if ModalEdit not installed
+- Too many logs: Logs are already filtered to only show state changes - if still excessive, check for rapid mode switching
 - Logging: Check Output channel "ModalEdit Line Indicator" or run `showLogFile` command
 
 ## Files and Directories
@@ -271,7 +300,8 @@ make validate         # Verify everything passes
 - Decorations only applied to visible editors (not all open files)
 - Debounced updates prevent excessive redraws during rapid cursor movement
 - Only current line is highlighted, minimizing decoration count
-- Mode checks are async but lightweight (context query only)
+- Mode detection is synchronous and lightweight (no async overhead)
+- Logging is conditional - only writes when state changes
 - No file watching or heavy computation - event-driven only
 
 ## Publishing Checklist
@@ -287,3 +317,21 @@ Before publishing to marketplace:
 8. Run `vsce publish` (requires Personal Access Token)
 
 **IMPORTANT**: Do not claim extension is "production-ready" until verified by real users. Use "ready for review" or "beta testing" instead.
+
+## Critical Design Decisions
+
+**Why cursor-style detection instead of context keys?**
+- VS Code does NOT provide `getContext()` API - context keys are read-only for `when` clauses
+- ModalEdit ALWAYS sets different cursor styles for different modes
+- Hybrid approach (cursor + selection) works universally across all user configurations
+
+**Why synchronous detection?**
+- Originally tried async `executeCommand('getContext')` but this command doesn't exist
+- Cursor style is immediately available via `editor.options.cursorStyle`
+- Selection state is immediately available via `editor.selection.isEmpty`
+- No async overhead = better performance
+
+**Why polling instead of events?**
+- VS Code doesn't fire events when `editor.options.cursorStyle` changes
+- ModalEdit updates cursor style without triggering observable events
+- 50ms polling provides near-instant detection with minimal overhead
