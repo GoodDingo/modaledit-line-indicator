@@ -259,32 +259,6 @@ suite('Theme Detection Tests', () => {
     assert.ok(true, 'Extension should handle both HC variants');
   });
 
-  test('Stage 1: Backward compatibility with [highContrast] config', async () => {
-    await TestHelpers.ensureExtensionActive();
-
-    // Stage 1 maintains backward compatibility - old [highContrast] config still works
-    // but emits deprecation warning
-
-    // Set up config with deprecated [highContrast] key
-    await TestHelpers.setConfig('normalMode', {
-      borderStyle: 'dotted',
-      borderWidth: '2px',
-      '[highContrast]': {
-        border: '#ffffff',
-        borderWidth: '4px',
-      },
-    });
-
-    await TestHelpers.wait(100);
-
-    // Extension should not crash - it should use the deprecated config with a warning
-    // We can't verify the warning directly, but we can verify no crash
-    assert.ok(true, 'Extension should handle deprecated [highContrast] config gracefully');
-
-    // Cleanup
-    await TestHelpers.resetConfig('normalMode');
-  });
-
   test('Stage 1: New [highContrastDark] and [highContrastLight] configs supported', async () => {
     await TestHelpers.ensureExtensionActive();
 

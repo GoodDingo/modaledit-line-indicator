@@ -319,46 +319,6 @@ If you're upgrading from version 0.1.1, the configuration format has changed fro
 4. Repeat for all four modes: `normalMode`, `insertMode`, `visualMode`, `searchMode`
 5. (Optional) Add theme-specific overrides using `[dark]`, `[light]`, `[highContrastDark]`, `[highContrastLight]` keys
 
-## Migration from v0.1.2
-
-If you're upgrading from v0.1.2 and used `[highContrast]` configuration:
-
-**BREAKING CHANGE**: The `[highContrast]` key has been removed in favor of separate `[highContrastDark]` and `[highContrastLight]` keys.
-
-**Before (v0.1.2):**
-
-```json
-{
-  "modaledit-line-indicator.normalMode": {
-    "borderStyle": "dotted",
-    "[highContrast]": {
-      "border": "#ffffff",
-      "borderWidth": "4px"
-    }
-  }
-}
-```
-
-**After (v0.1.3):**
-
-```json
-{
-  "modaledit-line-indicator.normalMode": {
-    "borderStyle": "dotted",
-    "[highContrastDark]": {
-      "border": "#ffffff",
-      "borderWidth": "4px"
-    },
-    "[highContrastLight]": {
-      "border": "#000000",
-      "borderWidth": "4px"
-    }
-  }
-}
-```
-
-**Why?** VS Code distinguishes between high contrast dark and high contrast light themes. The old `[highContrast]` was applied to both, which could result in poor visibility (e.g., white borders on white background in HC light themes).
-
 ## Development
 
 See [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow and contribution guidelines.

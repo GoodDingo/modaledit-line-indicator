@@ -355,7 +355,7 @@ export class TestHelpers {
    * Set theme-specific override for a mode
    *
    * @param mode - Mode name (normalMode, insertMode, visualMode, searchMode)
-   * @param theme - Theme kind ('dark', 'light', or 'highContrast')
+   * @param theme - Theme kind ('dark' or 'light')
    * @param properties - Properties to override for this theme
    *
    * Example:
@@ -366,7 +366,7 @@ export class TestHelpers {
    */
   static async setThemeOverride(
     mode: string,
-    theme: 'dark' | 'light' | 'highContrast',
+    theme: 'dark' | 'light',
     properties: Record<string, string>
   ): Promise<void> {
     const config = this.getConfig();
@@ -384,7 +384,7 @@ export class TestHelpers {
    * Get theme-specific override for a mode
    *
    * @param mode - Mode name (normalMode, insertMode, visualMode, searchMode)
-   * @param theme - Theme kind ('dark', 'light', or 'highContrast')
+   * @param theme - Theme kind ('dark' or 'light')
    * @returns Theme-specific properties or undefined
    *
    * Example:
@@ -393,7 +393,7 @@ export class TestHelpers {
    */
   static getThemeOverride(
     mode: string,
-    theme: 'dark' | 'light' | 'highContrast'
+    theme: 'dark' | 'light'
   ): Record<string, string> | undefined {
     const config = this.getConfig();
     const modeConfig = config.get(mode) as Record<string, unknown>;
@@ -428,7 +428,6 @@ export class TestHelpers {
     themeOverrides?: {
       dark?: Record<string, string>;
       light?: Record<string, string>;
-      highContrast?: Record<string, string>;
     }
   ): Promise<void> {
     const config: Record<string, unknown> = { ...commonProps };
@@ -439,9 +438,6 @@ export class TestHelpers {
       }
       if (themeOverrides.light) {
         config['[light]'] = themeOverrides.light;
-      }
-      if (themeOverrides.highContrast) {
-        config['[highContrast]'] = themeOverrides.highContrast;
       }
     }
 

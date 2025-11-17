@@ -146,7 +146,7 @@ See [README.md](README.md#migration-from-v012) for complete migration guide.
 ## [0.1.2] - 2025-11-17
 
 ### Added
-- **Theme-Aware Configuration**: Support for theme-specific styling with `[dark]`, `[light]`, and `[highContrast]` overrides
+- **Theme-Aware Configuration**: Support for theme-specific styling with `[dark]` and `[light]` overrides
 - **Real-time Theme Switching**: Decorations automatically update when VS Code theme changes
 - **High Contrast Theme Support**: Dedicated configuration support for high contrast themes
 - Theme detection using `vscode.window.activeColorTheme.kind` API

@@ -212,9 +212,6 @@ suite('Theme Change Event Tests', () => {
       '[light]': {
         border: '#0000ff',
       },
-      '[highContrast]': {
-        border: '#ffffff',
-      },
     };
 
     await TestHelpers.setConfig('normalMode', config);
@@ -230,14 +227,6 @@ suite('Theme Change Event Tests', () => {
       assert.ok(normalMode['[dark]'], 'Dark override should be available for dark theme');
     } else if (currentTheme.kind === vscode.ColorThemeKind.Light) {
       assert.ok(normalMode['[light]'], 'Light override should be available for light theme');
-    } else if (
-      currentTheme.kind === vscode.ColorThemeKind.HighContrast ||
-      currentTheme.kind === vscode.ColorThemeKind.HighContrastLight
-    ) {
-      assert.ok(
-        normalMode['[highContrast]'],
-        'HighContrast override should be available for HC theme'
-      );
     }
   });
 

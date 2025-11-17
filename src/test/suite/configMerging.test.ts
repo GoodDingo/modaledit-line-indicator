@@ -120,39 +120,6 @@ suite('Configuration Merging Tests', () => {
     assert.deepStrictEqual(normalMode['[light]'], configWithMultipleThemes['[light]']);
   });
 
-  test('All three theme overrides - [dark], [light], and [highContrast]', async () => {
-    const configWithAllThemes = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#808080',
-      borderStyle: 'solid',
-      borderWidth: '2px',
-      '[dark]': {
-        border: '#00ffff',
-      },
-      '[light]': {
-        border: '#0000ff',
-      },
-      '[highContrast]': {
-        border: '#ffffff',
-        borderWidth: '4px',
-      },
-    };
-
-    await TestHelpers.setConfig('normalMode', configWithAllThemes);
-    await TestHelpers.waitForDebounce();
-
-    const config = TestHelpers.getConfig();
-    const normalMode = config.get('normalMode') as Record<string, unknown>;
-
-    assert.ok(normalMode['[dark]'], 'Dark override should exist');
-    assert.ok(normalMode['[light]'], 'Light override should exist');
-    assert.ok(normalMode['[highContrast]'], 'HighContrast override should exist');
-
-    const highContrastOverride = normalMode['[highContrast]'] as Record<string, string>;
-    assert.strictEqual(highContrastOverride.border, '#ffffff');
-    assert.strictEqual(highContrastOverride.borderWidth, '4px');
-  });
-
   test('Missing theme key - no [light] defined', async () => {
     const configWithOnlyDark = {
       background: 'rgba(255, 255, 255, 0)',
@@ -345,14 +312,6 @@ suite('Configuration Merging Tests', () => {
         border: '#0000ff',
         borderStyle: 'dotted',
       },
-
-      // High contrast: white border, very thick, solid
-      '[highContrast]': {
-        border: '#ffffff',
-        borderWidth: '5px',
-        borderStyle: 'solid',
-        background: 'rgba(255, 255, 255, 0.3)',
-      },
     };
 
     await TestHelpers.setConfig('normalMode', complexConfig);
@@ -364,7 +323,6 @@ suite('Configuration Merging Tests', () => {
     // Verify all theme overrides are stored correctly
     const dark = normalMode['[dark]'] as Record<string, string>;
     const light = normalMode['[light]'] as Record<string, string>;
-    const highContrast = normalMode['[highContrast]'] as Record<string, string>;
 
     // Dark theme verification
     assert.strictEqual(dark.border, '#00ffff');
@@ -375,12 +333,6 @@ suite('Configuration Merging Tests', () => {
     assert.strictEqual(light.border, '#0000ff');
     assert.strictEqual(light.borderStyle, 'dotted');
     assert.strictEqual(light.borderWidth, undefined, 'Should use common borderWidth');
-
-    // High contrast verification
-    assert.strictEqual(highContrast.border, '#ffffff');
-    assert.strictEqual(highContrast.borderWidth, '5px');
-    assert.strictEqual(highContrast.borderStyle, 'solid');
-    assert.strictEqual(highContrast.background, 'rgba(255, 255, 255, 0.3)');
   });
 
   test('Updating theme override preserves common properties', async () => {
