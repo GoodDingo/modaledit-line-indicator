@@ -60,6 +60,12 @@ Always run `make validate` before committing. This runs:
 
 ### Critical Implementation Details
 
+**Logging Infrastructure**:
+- `ExtensionLogger` class with dual output (VS Code Output Channel + temp file)
+- All significant events logged (activation, mode changes, decoration updates, errors)
+- Log file accessible via `showLogFile` command for troubleshooting
+- Output channel: "ModalEdit Line Indicator" (View → Output)
+
 **Mode Detection Mechanism**:
 - Queries `modaledit.normal` context using `vscode.commands.executeCommand('getContext', 'modaledit.normal')`
 - Returns `Promise<boolean>` - must be awaited
@@ -105,10 +111,14 @@ VS Code renders line highlight
 
 ## Configuration System
 
-All settings namespaced with `modaledit-line-indicator.*`:
-- Color customization: `normalModeBackground`, `normalModeBorder`, `insertModeBackground`, `insertModeBorder`
-- Visual style: `borderStyle` (solid/dashed/dotted), `borderWidth`
-- Behavior: `enabled`
+All settings namespaced with `modaledit-line-indicator.*` (7 total):
+- `enabled` (boolean, default: `true`) - Enable/disable extension
+- `normalModeBackground` (string, default: `#00770020`) - Normal mode background color
+- `normalModeBorder` (string, default: `#005500`) - Normal mode border color
+- `insertModeBackground` (string, default: `#77000020`) - Insert mode background color
+- `insertModeBorder` (string, default: `#aa0000`) - Insert mode border color
+- `borderStyle` (enum: solid/dashed/dotted, default: `solid`) - Border style
+- `borderWidth` (string, default: `2px`) - Border width
 
 Configuration changes trigger `reloadDecorations()` which:
 1. Disposes old decoration types
@@ -141,28 +151,48 @@ Configuration changes trigger `reloadDecorations()` which:
 - `engines.vscode: "^1.106.0"` - minimum VS Code version
 - `publisher: "user"` - change before publishing to marketplace
 
-**Commands contributed**:
-- `modaledit-line-indicator.toggleEnabled` - user-facing toggle
-- `modaledit-line-indicator.updateHighlight` - internal command for forced updates
+**Commands contributed** (5 total):
+- `modaledit-line-indicator.toggleEnabled` - Toggle extension on/off (user-facing)
+- `modaledit-line-indicator.updateHighlight` - Force highlight update (internal)
+- `modaledit-line-indicator.queryMode` - Query current mode for debugging
+- `modaledit-line-indicator.showLogFile` - Open log file for troubleshooting
+- `modaledit-line-indicator.clearLog` - Clear log file
 
 ## Testing
 
 **Test Infrastructure**:
-- Test framework: Mocha
+- Test framework: Mocha (TDD syntax: `suite`, `test`)
 - Test runner: `@vscode/test-cli` and `@vscode/test-electron`
-- Coverage: c8 (generates HTML and text reports)
-- Tests located in: `src/test/suite/`
+- Coverage: c8 (shows 0% due to VS Code extension process isolation - expected limitation)
+- Test helpers: 21 static methods in `src/test/helpers/testHelpers.ts` (reduces boilerplate by ~80%)
+- Manual testing: 33 test cases in `ai_docs/MANUAL-TESTING.md` (required for visual verification)
 
 **Running tests**:
 ```bash
-make test              # Run all tests
-make coverage          # Generate coverage report
+make test              # Run all 54 automated tests (~3 seconds)
+make coverage          # Generate coverage report (process isolation limitation documented)
 ```
 
-**Test entry points**:
-- `src/test/runTest.ts` - Test runner configuration
-- `src/test/suite/index.ts` - Test suite setup
-- `src/test/suite/extension.test.ts` - Extension tests
+**Test Suites** (7 total, 54 tests):
+- `modeDetection.test.ts` - ModalEdit integration (6 tests)
+- `decorationLifecycle.test.ts` - Decoration creation/disposal (8 tests)
+- `extension.test.ts` - Extension activation/commands (9 tests)
+- `eventHandling.test.ts` - VS Code events (7 tests)
+- `configuration.test.ts` - All config keys (9 tests)
+- `modalEditIntegration.test.ts` - ModalEdit detection/fallback (9 tests)
+- `example.test.ts` - TestHelper usage examples (6 tests)
+
+**Test Patterns** (documented in `src/test/helpers/testPatterns.md`):
+- Standard test structure with setup/teardown
+- ModalEdit integration with graceful skip
+- Decoration testing (creation/disposal in try/finally)
+- Configuration testing (reset in teardown)
+- Event testing (dispose listeners in finally)
+
+**Critical Testing Limitation**:
+- VS Code Decoration API is write-only - cannot query colors programmatically
+- Manual testing REQUIRED for visual verification (33 test cases documented)
+- Coverage tool shows 0% due to Extension Host process isolation (documented limitation)
 
 ## Development Workflow
 
@@ -187,16 +217,30 @@ make validate         # Verify everything passes
 - Colors not changing: ModalEdit extension not installed or mode context not updating
 - Extension not loading: Check `make validate` passes, verify `out/extension.js` exists
 - TypeScript errors: Run `make clean && make compile`
-- Test failures: Ensure ModalEdit extension is installed in test environment
+- Test failures: Tests gracefully skip ModalEdit-specific scenarios if ModalEdit not installed
+- Logging: Check Output channel "ModalEdit Line Indicator" or run `showLogFile` command
 
 ## Files and Directories
 
-**Source**: `src/extension.ts` only - single file extension
-**Tests**: `src/test/` directory
-**Output**: `out/extension.js` (generated, git-ignored)
-**Config**: `package.json`, `tsconfig.json`, `.eslintrc.json`
+**Source**:
+- `src/extension.ts` - Main extension code (single file)
+- `src/test/suite/*.test.ts` - 7 test suites (54 tests)
+- `src/test/helpers/testHelpers.ts` - 21 test helper methods
+- `src/test/helpers/testPatterns.md` - 5 documented test patterns
+
+**Output**: `out/` directory (generated, git-ignored)
+
+**Config**: `package.json`, `tsconfig.json`, `.eslintrc.json`, `.prettierrc.json`
+
 **Build**: `Makefile` - use this, not npm directly
-**Documentation**: `README.md` (user-facing), `DEVELOPMENT.md` (developer-facing)
+
+**Documentation**:
+- `README.md` - User-facing documentation
+- `DEVELOPMENT.md` - Developer workflow
+- `CLAUDE.md` - This file (Claude Code guidance)
+- `ai_docs/MANUAL-TESTING.md` - 33 manual test cases for visual verification
+- `ai_docs/COVERAGE-REPORT.md` - Coverage analysis and limitations
+- `ai_docs/test-plan/` - 9 stage reports documenting test migration
 
 ## Performance Considerations
 
@@ -212,7 +256,10 @@ Before publishing to marketplace:
 1. Update `publisher` field in package.json (currently "user")
 2. Update `repository.url` in package.json
 3. Update version following semver
-4. Run `make validate` - must pass
-5. Run `make coverage` - ensure adequate test coverage
+4. Run `make validate` - must pass (all 54 tests passing)
+5. Complete manual testing checklist (`ai_docs/MANUAL-TESTING.md` - 33 test cases)
 6. Test in clean VS Code install via `make install-ext`
-7. Run `vsce publish` (requires Personal Access Token)
+7. Verify with real users (beta testing) before claiming production-ready
+8. Run `vsce publish` (requires Personal Access Token)
+
+**IMPORTANT**: Do not claim extension is "production-ready" until verified by real users. Use "ready for review" or "beta testing" instead.
