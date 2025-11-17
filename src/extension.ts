@@ -27,12 +27,15 @@ interface ThemeOverride {
 
 /**
  * Mode configuration with optional theme-specific overrides
- * Supports theme-specific overrides:
- * - [dark]: Regular dark theme
- * - [light]: Regular light theme
- * - [highContrastDark]: High contrast dark theme (new in v0.1.3)
- * - [highContrastLight]: High contrast light theme (new in v0.1.3)
- * - [highContrast]: DEPRECATED - will be removed in Stage 2 (use [highContrastDark] and [highContrastLight])
+ *
+ * STAGE 2: Supports cascading fallback hierarchy
+ * - [dark]: Regular dark theme (also fallback for highContrastDark)
+ * - [light]: Regular light theme (also fallback for highContrastLight)
+ * - [highContrastDark]: High contrast dark theme → falls back to [dark]
+ * - [highContrastLight]: High contrast light theme → falls back to [light]
+ *
+ * Each property (background, border, borderStyle, borderWidth) is resolved
+ * independently through the fallback chain, enabling selective overrides.
  */
 interface ModeConfig {
   background?: string;
@@ -41,7 +44,6 @@ interface ModeConfig {
   borderWidth?: string;
   '[dark]'?: ThemeOverride;
   '[light]'?: ThemeOverride;
-  '[highContrast]'?: ThemeOverride; // DEPRECATED - backward compatibility only
   '[highContrastDark]'?: ThemeOverride;
   '[highContrastLight]'?: ThemeOverride;
 }
@@ -192,76 +194,123 @@ class ModalEditLineIndicator implements vscode.Disposable {
   }
 
   /**
+   * Returns the fallback chain for a given theme kind.
+   * Each property is resolved by checking these keys in order until a value is found.
+   *
+   * STAGE 2: Implements cascading fallback hierarchy per Issue #4
+   * - HC Dark falls back to regular dark theme
+   * - HC Light falls back to regular light theme
+   * - Regular themes have no fallback (check theme override only)
+   *
+   * @param themeKind - Current theme kind
+   * @returns Array of theme override keys to check in priority order
+   */
+  private getFallbackChain(themeKind: ThemeKind): string[] {
+    switch (themeKind) {
+      case 'highContrastDark':
+        // HC Dark: [highContrastDark] → [dark] → common → defaults
+        return ['[highContrastDark]', '[dark]'];
+      case 'highContrastLight':
+        // HC Light: [highContrastLight] → [light] → common → defaults
+        return ['[highContrastLight]', '[light]'];
+      case 'dark':
+        // Regular dark: [dark] → common → defaults
+        return ['[dark]'];
+      case 'light':
+        // Regular light: [light] → common → defaults
+        return ['[light]'];
+    }
+  }
+
+  /**
+   * Resolves a single property through the fallback chain.
+   * Checks theme overrides first, then common property, then default value.
+   *
+   * STAGE 2: Property-level cascading resolution (not object-level)
+   * This allows selective overrides without duplicating entire config.
+   *
+   * @param propertyName - Property to resolve (background, border, borderStyle, borderWidth)
+   * @param modeConfig - Mode configuration object from settings
+   * @param fallbackChain - Array of theme keys to check in priority order
+   * @param defaultValue - Default value if not found anywhere
+   * @returns Resolved property value
+   */
+  private resolveProperty(
+    propertyName: keyof ThemeOverride,
+    modeConfig: ModeConfig,
+    fallbackChain: string[],
+    defaultValue: string
+  ): string {
+    // 1. Check theme-specific overrides in priority order
+    for (const themeKey of fallbackChain) {
+      const themeOverride = modeConfig[themeKey as keyof ModeConfig] as ThemeOverride | undefined;
+      if (themeOverride?.[propertyName] !== undefined) {
+        this.logger.debug(
+          `Resolved ${propertyName} from ${themeKey}: ${themeOverride[propertyName]}`
+        );
+        return themeOverride[propertyName]!;
+      }
+    }
+
+    // 2. Check common property (base configuration)
+    if (modeConfig[propertyName] !== undefined) {
+      this.logger.debug(`Resolved ${propertyName} from common config: ${modeConfig[propertyName]}`);
+      return modeConfig[propertyName]!;
+    }
+
+    // 3. Use default value
+    this.logger.debug(`Resolved ${propertyName} from defaults: ${defaultValue}`);
+    return defaultValue;
+  }
+
+  /**
    * Merges common mode configuration with theme-specific overrides.
-   * Theme-specific properties take precedence over common properties.
+   *
+   * STAGE 2: Implements property-level cascading fallback hierarchy.
+   * Each property (background, border, borderStyle, borderWidth) is resolved
+   * independently through the fallback chain.
+   *
+   * Fallback hierarchy:
+   * - HC Dark: [highContrastDark] → [dark] → common → defaults
+   * - HC Light: [highContrastLight] → [light] → common → defaults
+   * - Regular Dark/Light: [dark/light] → common → defaults
    *
    * Example:
    * {
-   *   background: "rgba(255, 255, 255, 0)",
-   *   borderStyle: "dotted",
-   *   "[dark]": { border: "#00aa00" }
+   *   borderStyle: "dotted",              // common
+   *   "[dark]": { borderWidth: "2px" },   // dark theme
+   *   "[highContrastDark]": { border: "#ff0000" }  // HC dark
    * }
-   * →
-   * { background: "rgba(255, 255, 255, 0)", borderStyle: "dotted", border: "#00aa00", borderWidth: "2px" }
+   * When theme = High Contrast Dark:
+   * - border: "#ff0000"             ← from [highContrastDark]
+   * - borderWidth: "2px"            ← from [dark] (fallback)
+   * - borderStyle: "dotted"         ← from common
+   * - background: "rgba(...)"       ← from defaults
    *
    * @param modeConfig - Nested configuration object from settings
    * @returns Merged configuration with all required properties
    */
   private getMergedModeConfig(modeConfig: ModeConfig): MergedModeConfig {
     const themeKind = this.getCurrentThemeKind();
+    const fallbackChain = this.getFallbackChain(themeKind);
 
-    // STAGE 1 BACKWARD COMPATIBILITY: Warn about deprecated [highContrast] config
-    if (modeConfig['[highContrast]']) {
-      this.logger.warn(
-        'DEPRECATED: [highContrast] config key will be removed in Stage 2. ' +
-          'Please migrate to [highContrastDark] and [highContrastLight] instead. ' +
-          'See Issue #4 for migration guide.'
-      );
-    }
+    this.logger.debug(
+      `Resolving mode config for theme: ${themeKind}, fallback chain: ${fallbackChain.join(' → ')}`
+    );
 
-    // Start with common properties and hardcoded defaults
+    // STAGE 2: Resolve each property independently through the fallback chain
+    // This enables selective overrides (e.g., only override borderWidth for HC, inherit rest from base theme)
     const merged: MergedModeConfig = {
-      background: modeConfig.background || 'rgba(255, 255, 255, 0)',
-      border: modeConfig.border || '#ffffff',
-      borderStyle: modeConfig.borderStyle || 'solid',
-      borderWidth: modeConfig.borderWidth || '2px',
+      background: this.resolveProperty(
+        'background',
+        modeConfig,
+        fallbackChain,
+        'rgba(255, 255, 255, 0)'
+      ),
+      border: this.resolveProperty('border', modeConfig, fallbackChain, '#ffffff'),
+      borderStyle: this.resolveProperty('borderStyle', modeConfig, fallbackChain, 'solid'),
+      borderWidth: this.resolveProperty('borderWidth', modeConfig, fallbackChain, '2px'),
     };
-
-    // Apply theme-specific overrides
-    // Stage 1: Now returns highContrastDark or highContrastLight instead of highContrast
-    // For backward compatibility, if specific HC config not found, fall back to deprecated [highContrast]
-    let themeKey = `[${themeKind}]` as keyof ModeConfig;
-    let themeOverrides = modeConfig[themeKey] as ThemeOverride | undefined;
-
-    // STAGE 1 BACKWARD COMPATIBILITY: Fall back to [highContrast] if new HC keys not found
-    if (
-      !themeOverrides &&
-      (themeKind === 'highContrastDark' || themeKind === 'highContrastLight')
-    ) {
-      themeKey = '[highContrast]' as keyof ModeConfig;
-      themeOverrides = modeConfig[themeKey] as ThemeOverride | undefined;
-      if (themeOverrides) {
-        this.logger.debug(
-          `Using deprecated [highContrast] config for ${themeKind}. ` +
-            `Consider adding [${themeKind}] config instead.`
-        );
-      }
-    }
-
-    if (themeOverrides) {
-      if (themeOverrides.background !== undefined) {
-        merged.background = themeOverrides.background;
-      }
-      if (themeOverrides.border !== undefined) {
-        merged.border = themeOverrides.border;
-      }
-      if (themeOverrides.borderStyle !== undefined) {
-        merged.borderStyle = themeOverrides.borderStyle;
-      }
-      if (themeOverrides.borderWidth !== undefined) {
-        merged.borderWidth = themeOverrides.borderWidth;
-      }
-    }
 
     return merged;
   }

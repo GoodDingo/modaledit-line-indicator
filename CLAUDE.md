@@ -161,40 +161,60 @@ All settings namespaced with `modaledit-line-indicator.*` (5 total):
 - **Per-mode nested objects** (4 modes with theme-aware properties):
   - `normalMode`, `insertMode`, `visualMode`, `searchMode`
   - Each mode supports: `background`, `border`, `borderStyle`, `borderWidth`
-  - **Theme-specific overrides** (Stage 1+):
-    - `[dark]` - Regular dark theme
-    - `[light]` - Regular light theme
-    - `[highContrastDark]` - High contrast dark theme (v0.1.3+, Stage 1)
-    - `[highContrastLight]` - High contrast light theme (v0.1.3+, Stage 1)
-    - `[highContrast]` - **DEPRECATED** (Stage 1: backward compatible, Stage 2: removed)
+  - **Theme-specific overrides** (Stage 2):
+    - `[dark]` - Regular dark theme (also serves as fallback for `[highContrastDark]`)
+    - `[light]` - Regular light theme (also serves as fallback for `[highContrastLight]`)
+    - `[highContrastDark]` - High contrast dark theme → falls back to `[dark]`
+    - `[highContrastLight]` - High contrast light theme → falls back to `[light]`
 
-**Configuration Structure** (v0.1.3+ with Stage 1):
+**Configuration Structure** (v0.1.3+ with Stage 2):
 ```json
 {
   "modaledit-line-indicator.normalMode": {
+    // Common properties (apply to all themes unless overridden)
     "background": "rgba(255, 255, 255, 0)",
-    "border": "#00aa00",
     "borderStyle": "dotted",
     "borderWidth": "2px",
-    "[dark]": { "border": "#00ffff" },
-    "[light]": { "border": "#0000ff" },
-    "[highContrastDark]": { "border": "#ffffff", "borderWidth": "4px" },
-    "[highContrastLight]": { "border": "#000000", "borderWidth": "4px" }
+
+    // Theme-specific overrides
+    "[dark]": {
+      "border": "#00ffff"  // Used by dark + HC dark (as fallback)
+    },
+    "[light]": {
+      "border": "#0000ff"  // Used by light + HC light (as fallback)
+    },
+    "[highContrastDark]": {
+      "borderWidth": "4px"  // Overrides only borderWidth
+      // border falls back to [dark].border (#00ffff)
+      // borderStyle falls back to common (dotted)
+      // background falls back to common
+    },
+    "[highContrastLight]": {
+      "border": "#000000",  // Overrides border
+      "borderWidth": "4px"  // Overrides borderWidth
+      // borderStyle falls back to common (dotted)
+      // background falls back to common
+    }
   }
 }
 ```
 
-**Theme Detection & Merging** (Stage 1+):
+**Theme Detection & Merging** (Stage 2):
 - Uses `vscode.window.activeColorTheme.kind` to detect current theme
-- **4 distinct theme kinds** detected (Stage 1):
+- **4 distinct theme kinds** detected:
   - `ColorThemeKind.Dark` (2) → `'dark'`
   - `ColorThemeKind.Light` (1) → `'light'`
-  - `ColorThemeKind.HighContrast` (3) → `'highContrastDark'` (Stage 1: was `'highContrast'`)
-  - `ColorThemeKind.HighContrastLight` (4) → `'highContrastLight'` (Stage 1: was `'highContrast'`)
-- `getMergedModeConfig()` merges common properties + theme-specific overrides
-- **Stage 1 Backward Compatibility**: Falls back to `[highContrast]` if new HC keys not found
+  - `ColorThemeKind.HighContrast` (3) → `'highContrastDark'`
+  - `ColorThemeKind.HighContrastLight` (4) → `'highContrastLight'`
+- **Property-level cascading fallback** (Stage 2):
+  - Each property resolved **independently** through fallback chain
+  - Enables selective overrides (e.g., only override `borderWidth` for HC, inherit rest)
+- **Fallback Hierarchy**:
+  - **HC Dark**: `[highContrastDark]` → `[dark]` → common → defaults
+  - **HC Light**: `[highContrastLight]` → `[light]` → common → defaults
+  - **Regular Dark/Light**: `[dark/light]` → common → defaults
 - Theme change listener (`onDidChangeActiveColorTheme`) triggers decoration reload
-- **Stage 2 (planned)**: Cascading fallback hierarchy (HC dark → dark → common → defaults)
+- **Stage 2 BREAKING CHANGE**: Removed `[highContrast]` support (use `[highContrastDark]` and `[highContrastLight]`)
 
 Configuration changes trigger `reloadDecorations()` which:
 1. Disposes old decoration types (all 4)
@@ -245,7 +265,7 @@ Configuration changes trigger `reloadDecorations()` which:
 
 **Running tests**:
 ```bash
-make test              # Run all 99 automated tests (~7 seconds) - Stage 1: was 94 tests
+make test              # Run all 113 automated tests (~10 seconds) - Stage 2: was 99 tests
 make coverage          # Generate coverage report (process isolation limitation documented)
 
 # Run specific test suite (bypass Make):
@@ -254,9 +274,10 @@ npm test -- --grep "config merging"        # Run configMerging.test.ts
 npm test -- --grep "theme change"          # Run themeChangeEvent.test.ts
 npm test -- --grep "configuration"         # Run configuration.test.ts
 npm test -- --grep "Stage 1"               # Run Stage 1 specific tests
+npm test -- --grep "Stage 2"               # Run Stage 2 specific tests (cascading fallback)
 ```
 
-**Test Suites** (10 total, 99 tests - Stage 1 added 5 tests):
+**Test Suites** (11 total, 113 tests - Stage 1: +5 tests, Stage 2: +14 tests):
 - `modeDetection.test.ts` - ModalEdit integration (6 tests)
 - `decorationLifecycle.test.ts` - Decoration creation/disposal (8 tests)
 - `extension.test.ts` - Extension activation/commands (9 tests)
@@ -267,6 +288,7 @@ npm test -- --grep "Stage 1"               # Run Stage 1 specific tests
 - `themeDetection.test.ts` - Theme kind detection (15 tests - **Stage 1: +5 tests**)
 - `configMerging.test.ts` - Theme-aware config merging (15 tests)
 - `themeChangeEvent.test.ts` - Theme change event handling (14 tests)
+- `cascadingFallback.test.ts` - Cascading fallback hierarchy (**Stage 2: 14 tests** - NEW)
 
 **Test Patterns** (documented in `src/test/helpers/testPatterns.md`):
 - Standard test structure with setup/teardown
