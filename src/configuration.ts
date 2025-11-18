@@ -22,6 +22,7 @@ export type ThemeKind = 'dark' | 'light' | 'darkHC' | 'lightHC';
 export interface DecorationConfig {
   // ===== Text Styling =====
   backgroundColor?: string; // Background color (CSS color, rgba(), or ThemeColor)
+  background?: string; // DEPRECATED v0.2.0: Use backgroundColor (kept for migration)
   color?: string; // Text color (CSS color or ThemeColor)
   opacity?: string; // Opacity (0.0 to 1.0)
 
@@ -231,14 +232,8 @@ export class ConfigurationManager {
     const migrated: ModeConfig = { ...config };
 
     // Helper to migrate a single object (common config or theme override)
-    const migrateObject = (
-      obj: Record<string, unknown> | undefined
-    ): Record<string, unknown> | undefined => {
-      if (!obj) {
-        return obj;
-      }
-
-      const result: Record<string, unknown> = { ...obj };
+    const migrateObject = (obj: DecorationConfig): DecorationConfig => {
+      const result: DecorationConfig = { ...obj };
 
       // Migrate background → backgroundColor
       if (result.background !== undefined && result.backgroundColor === undefined) {
@@ -256,7 +251,13 @@ export class ConfigurationManager {
         const hasWidth = result.borderWidth !== undefined;
 
         // If we have all three components and border is just a color (no spaces), create CSS shorthand
-        if (hasColor && hasStyle && hasWidth && !result.border.includes(' ')) {
+        if (
+          hasColor &&
+          hasStyle &&
+          hasWidth &&
+          typeof result.border === 'string' &&
+          !result.border.includes(' ')
+        ) {
           result.border = `${result.borderWidth} ${result.borderStyle} ${result.border}`;
           delete result.borderStyle;
           delete result.borderWidth;
@@ -272,15 +273,21 @@ export class ConfigurationManager {
     };
 
     // Migrate common properties
-    const commonMigrated = migrateObject(migrated);
+    const commonMigrated = migrateObject(migrated as DecorationConfig);
     Object.assign(migrated, commonMigrated);
 
     // Migrate theme-specific overrides
-    const themeKeys: (keyof ModeConfig)[] = ['dark', 'light', 'darkHC', 'lightHC'];
-    for (const key of themeKeys) {
-      if (migrated[key]) {
-        migrated[key] = migrateObject(migrated[key]);
-      }
+    if (migrated.dark) {
+      migrated.dark = migrateObject(migrated.dark) as ThemeOverride;
+    }
+    if (migrated.light) {
+      migrated.light = migrateObject(migrated.light) as ThemeOverride;
+    }
+    if (migrated.darkHC) {
+      migrated.darkHC = migrateObject(migrated.darkHC) as ThemeOverride;
+    }
+    if (migrated.lightHC) {
+      migrated.lightHC = migrateObject(migrated.lightHC) as ThemeOverride;
     }
 
     return migrated;
