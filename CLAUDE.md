@@ -175,10 +175,10 @@ Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports:
   "border": "#00aa00",
   "borderStyle": "dotted",
   "borderWidth": "2px",
-  "[dark]": { "border": "#00ffff" },
-  "[light]": { "border": "#0000ff" },
-  "[highContrastDark]": { "borderWidth": "4px" },
-  "[highContrastLight]": { "border": "#000000", "borderWidth": "4px" }
+  "dark": { "border": "#00ffff" },
+  "light": { "border": "#0000ff" },
+  "darkHC": { "borderWidth": "4px" },
+  "lightHC": { "border": "#000000", "borderWidth": "4px" }
 }
 ```
 
@@ -197,14 +197,14 @@ Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports:
 **CRITICAL**: Each property resolves independently through fallback chain.
 
 Fallback chains:
-- **HC Dark**: `[highContrastDark]` → `[dark]` → common → defaults
-- **HC Light**: `[highContrastLight]` → `[light]` → common → defaults
-- **Regular Dark**: `[dark]` → common → defaults
-- **Regular Light**: `[light]` → common → defaults
+- **HC Dark**: `darkHC` → `dark` → common → defaults
+- **HC Light**: `lightHC` → `light` → common → defaults
+- **Regular Dark**: `dark` → common → defaults
+- **Regular Light**: `light` → common → defaults
 
 **Example**: For HC Dark theme, `border` property resolution:
-1. Check `config["[highContrastDark]"].border`
-2. If undefined, check `config["[dark]"].border`
+1. Check `config["darkHC"].border`
+2. If undefined, check `config["dark"].border`
 3. If undefined, check `config.border`
 4. If undefined, use `defaults.border`
 

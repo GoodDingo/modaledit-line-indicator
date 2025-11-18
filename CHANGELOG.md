@@ -5,6 +5,31 @@ All notable changes to the "ModalEdit Line Indicator" extension will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2025-11-18
+
+### Added
+- **Expanded Configuration System**: 23+ decoration properties with direct 1:1 mapping to VS Code DecorationRenderOptions API
+- **Theme-Specific Overrides**: Support for `dark`, `light`, `darkHC`, `lightHC` theme configurations
+- **Property-Level Cascading Fallback**: Each property resolves independently through fallback chain
+- **CSS Shorthand Support**: `border` and `outline` properties support CSS shorthand notation
+- **Full IntelliSense Support**: Enum constraints and type definitions for all properties
+
+### Changed
+- **Configuration Format**: Theme keys now use `dark`, `light`, `darkHC`, `lightHC` (removed brackets for cleaner syntax)
+- **Decoration Properties**: All 23 VS Code DecorationRenderOptions properties now supported:
+  - Text styling: `backgroundColor`, `color`, `opacity`
+  - Border: `border`, `borderColor`, `borderRadius`, `borderSpacing`, `borderStyle`, `borderWidth`
+  - Outline: `outline`, `outlineColor`, `outlineStyle`, `outlineWidth`
+  - Font: `fontStyle`, `fontWeight`, `letterSpacing`, `textDecoration`
+  - Cursor: `cursor`
+  - Overview ruler: `overviewRulerColor`, `overviewRulerLane`
+  - Gutter: `gutterIconPath`, `gutterIconSize`
+  - Advanced: `rangeBehavior`
+
+### Removed
+- **Migration Code**: Removed all v0.2.0 migration logic (extension was never publicly released)
+- **Deprecated Properties**: Removed temporary `background` property alias (use `backgroundColor`)
+
 ## [0.2.0] - 2025-11-18
 
 ### Added

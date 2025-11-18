@@ -22,7 +22,6 @@ export type ThemeKind = 'dark' | 'light' | 'darkHC' | 'lightHC';
 export interface DecorationConfig {
   // ===== Text Styling =====
   backgroundColor?: string; // Background color (CSS color, rgba(), or ThemeColor)
-  background?: string; // DEPRECATED v0.2.0: Use backgroundColor (kept for migration)
   color?: string; // Text color (CSS color or ThemeColor)
   opacity?: string; // Opacity (0.0 to 1.0)
 
@@ -185,10 +184,9 @@ export class ConfigurationManager {
    *
    * This is the ONLY public API method. It handles everything:
    * 1. Read VS Code configuration
-   * 2. Migrate old v0.2.0 properties to v0.3.0 format
-   * 3. Detect current theme
-   * 4. Apply cascading fallback
-   * 5. Merge with defaults
+   * 2. Detect current theme
+   * 3. Apply cascading fallback
+   * 4. Merge with defaults
    *
    * @param mode - The mode to get configuration for
    * @returns Complete merged configuration with all properties resolved
@@ -209,88 +207,9 @@ export class ConfigurationManager {
       );
     }
 
-    // Migrate old v0.2.0 properties to v0.3.0 format
-    const migratedConfig = this.migrateOldProperties(modeConfig);
-
     // Get defaults and merge
     const defaults = this.getDefaultsForMode(mode);
-    return this.getMergedModeConfig(migratedConfig, defaults);
-  }
-
-  /**
-   * Migrates old v0.2.0 property names to v0.3.0 format
-   *
-   * Handles:
-   * - background → backgroundColor
-   * - border + borderStyle + borderWidth → CSS border shorthand
-   * - Migrates theme-specific overrides as well
-   *
-   * @param config - Configuration object (may contain old property names)
-   * @returns Migrated configuration with v0.3.0 property names
-   */
-  private migrateOldProperties(config: ModeConfig): ModeConfig {
-    const migrated: ModeConfig = { ...config };
-
-    // Helper to migrate a single object (common config or theme override)
-    const migrateObject = (obj: DecorationConfig): DecorationConfig => {
-      const result: DecorationConfig = { ...obj };
-
-      // Migrate background → backgroundColor
-      if (result.background !== undefined && result.backgroundColor === undefined) {
-        result.backgroundColor = result.background;
-        delete result.background;
-      }
-
-      // Migrate separate border properties → CSS shorthand
-      // Handle both cases:
-      // 1. border (color) + borderStyle + borderWidth → full CSS shorthand
-      // 2. Just borderStyle + borderWidth → keep as is (may be partial config)
-      if (result.borderStyle !== undefined || result.borderWidth !== undefined) {
-        const hasColor = result.border !== undefined;
-        const hasStyle = result.borderStyle !== undefined;
-        const hasWidth = result.borderWidth !== undefined;
-
-        // If we have all three components and border is just a color (no spaces), create CSS shorthand
-        if (
-          hasColor &&
-          hasStyle &&
-          hasWidth &&
-          typeof result.border === 'string' &&
-          !result.border.includes(' ')
-        ) {
-          result.border = `${result.borderWidth} ${result.borderStyle} ${result.border}`;
-          delete result.borderStyle;
-          delete result.borderWidth;
-        }
-        // If we have just width and style (no color), create partial shorthand
-        else if (!hasColor && hasStyle && hasWidth) {
-          // Keep individual properties for now - they'll be handled by property resolution
-          // (This allows for selective overrides)
-        }
-      }
-
-      return result;
-    };
-
-    // Migrate common properties
-    const commonMigrated = migrateObject(migrated as DecorationConfig);
-    Object.assign(migrated, commonMigrated);
-
-    // Migrate theme-specific overrides
-    if (migrated.dark) {
-      migrated.dark = migrateObject(migrated.dark) as ThemeOverride;
-    }
-    if (migrated.light) {
-      migrated.light = migrateObject(migrated.light) as ThemeOverride;
-    }
-    if (migrated.darkHC) {
-      migrated.darkHC = migrateObject(migrated.darkHC) as ThemeOverride;
-    }
-    if (migrated.lightHC) {
-      migrated.lightHC = migrateObject(migrated.lightHC) as ThemeOverride;
-    }
-
-    return migrated;
+    return this.getMergedModeConfig(modeConfig, defaults);
   }
 
   /**
@@ -452,8 +371,7 @@ export class ConfigurationManager {
 
     // Define all properties we want to resolve
     // Single source of truth for all supported properties
-    // NOTE: Excluded deprecated v0.2.0 properties (background, borderStyle, borderWidth)
-    //       These are migrated to new format before resolution
+    // NOTE: borderStyle and borderWidth are valid VS Code API fallback properties
     const propertiesToResolve: (keyof DecorationConfig)[] = [
       // Text styling
       'backgroundColor',

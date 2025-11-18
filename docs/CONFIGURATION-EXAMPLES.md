@@ -96,11 +96,11 @@ Different colors for dark and light themes (automatically switches when you chan
     "background": "rgba(255, 255, 255, 0)",
     "borderStyle": "dotted",
     "borderWidth": "2px",
-    "[dark]": {
+    "dark": {
       "border": "#00ffff",
       "background": "rgba(0, 255, 255, 0.05)"
     },
-    "[light]": {
+    "light": {
       "border": "#0000aa",
       "background": "rgba(0, 0, 255, 0.05)"
     }
@@ -109,10 +109,10 @@ Different colors for dark and light themes (automatically switches when you chan
     "background": "rgba(255, 255, 255, 0)",
     "borderStyle": "solid",
     "borderWidth": "2px",
-    "[dark]": {
+    "dark": {
       "border": "#ff6666"
     },
-    "[light]": {
+    "light": {
       "border": "#cc0000"
     }
   },
@@ -120,10 +120,10 @@ Different colors for dark and light themes (automatically switches when you chan
     "background": "rgba(255, 255, 255, 0)",
     "borderStyle": "dashed",
     "borderWidth": "2px",
-    "[dark]": {
+    "dark": {
       "border": "#ff00ff"
     },
-    "[light]": {
+    "light": {
       "border": "#8800aa"
     }
   },
@@ -131,10 +131,10 @@ Different colors for dark and light themes (automatically switches when you chan
     "background": "rgba(255, 255, 255, 0)",
     "borderStyle": "solid",
     "borderWidth": "2px",
-    "[dark]": {
+    "dark": {
       "border": "#ffff00"
     },
-    "[light]": {
+    "light": {
       "border": "#aa8800"
     }
   }
@@ -158,12 +158,12 @@ You can override individual properties for specific themes while keeping others 
     "borderWidth": "2px",
 
     // Only override border color for dark themes
-    "[dark]": {
+    "dark": {
       "border": "#00ffff"
     },
 
     // Only override border width for light themes
-    "[light]": {
+    "light": {
       "borderWidth": "3px"
     }
   }
@@ -191,23 +191,23 @@ High contrast themes support both dark and light variants with cascading fallbac
     "borderWidth": "2px",
 
     // Fallback for regular dark themes
-    "[dark]": {
+    "dark": {
       "border": "#00ffff"
     },
 
     // Fallback for regular light themes
-    "[light]": {
+    "light": {
       "border": "#0000ff"
     },
 
-    // High contrast dark (falls back to [dark] if not specified)
-    "[highContrastDark]": {
+    // High contrast dark (falls back to dark if not specified)
+    "darkHC": {
       "border": "#ffffff",
       "borderWidth": "4px"
     },
 
-    // High contrast light (falls back to [light] if not specified)
-    "[highContrastLight]": {
+    // High contrast light (falls back to light if not specified)
+    "lightHC": {
       "border": "#000000",
       "borderWidth": "4px"
     }
@@ -216,10 +216,10 @@ High contrast themes support both dark and light variants with cascading fallbac
 ```
 
 **Cascading fallback hierarchy:**
-- **High Contrast Dark**: `[highContrastDark]` → `[dark]` → common → defaults
-- **High Contrast Light**: `[highContrastLight]` → `[light]` → common → defaults
-- **Regular Dark**: `[dark]` → common → defaults
-- **Regular Light**: `[light]` → common → defaults
+- **High Contrast Dark**: `darkHC` → `dark` → common → defaults
+- **High Contrast Light**: `lightHC` → `light` → common → defaults
+- **Regular Dark**: `dark` → common → defaults
+- **Regular Light**: `light` → common → defaults
 
 **Use case:** Need specific styling for high contrast themes (accessibility requirements).
 

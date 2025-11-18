@@ -174,23 +174,23 @@ You can specify different colors for dark, light, and high contrast themes (both
     "borderWidth": "2px",
 
     // Dark theme override (also used as fallback for high contrast dark)
-    "[dark]": {
+    "dark": {
       "border": "#00ffff"  // Cyan in dark themes
     },
 
     // Light theme override (also used as fallback for high contrast light)
-    "[light]": {
+    "light": {
       "border": "#0000ff"  // Blue in light themes
     },
 
     // High contrast dark theme override
-    "[highContrastDark]": {
+    "darkHC": {
       "border": "#ffffff",
       "borderWidth": "4px"  // Thicker border for better visibility
     },
 
     // High contrast light theme override
-    "[highContrastLight]": {
+    "lightHC": {
       "border": "#000000",
       "borderWidth": "4px"  // Thicker border for better visibility
     }
@@ -200,10 +200,10 @@ You can specify different colors for dark, light, and high contrast themes (both
 
 **How It Works:**
 1. **Common properties** (background, border, borderStyle, borderWidth) apply to all themes
-2. **Theme-specific overrides** (`[dark]`, `[light]`, `[highContrastDark]`, `[highContrastLight]`) selectively override properties
+2. **Theme-specific overrides** (`dark`, `light`, `darkHC`, `lightHC`) selectively override properties
 3. **Cascading fallback hierarchy** for high contrast themes:
-   - High Contrast Dark: `[highContrastDark]` → `[dark]` → common → defaults
-   - High Contrast Light: `[highContrastLight]` → `[light]` → common → defaults
+   - High Contrast Dark: `darkHC` → `dark` → common → defaults
+   - High Contrast Light: `lightHC` → `light` → common → defaults
 4. Extension automatically detects your current theme and applies the appropriate styling
 5. When you switch themes, the extension instantly updates the decorations
 
@@ -220,8 +220,8 @@ You can specify different colors for dark, light, and high contrast themes (both
 ```json
 {
   "modaledit-line-indicator.normalMode": {
-    "[dark]": { "border": "#00ffff" },
-    "[light]": { "border": "#0000ff" }
+    "dark": { "border": "#00ffff" },
+    "light": { "border": "#0000ff" }
   }
 }
 ```
@@ -246,10 +246,10 @@ Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports the 
 | `border` | CSS color | Varies by mode* | Any CSS color | `#00aa00`, `rgb(0,170,0)`, `cyan` |
 | `borderStyle` | CSS keyword | Varies by mode** | `solid` \| `dashed` \| `dotted` \| `double` \| `groove` \| `ridge` \| `inset` \| `outset` | `dotted`, `solid` |
 | `borderWidth` | CSS length | `2px` | Positive length | `1px`, `0.5em`, `3px` |
-| `[dark]` | object | _(none)_ | Any property overrides | `{ "border": "#00ffff" }` |
-| `[light]` | object | _(none)_ | Any property overrides | `{ "border": "#0000ff" }` |
-| `[highContrastDark]` | object | _(none)_ | Any property overrides | `{ "borderWidth": "4px" }` |
-| `[highContrastLight]` | object | _(none)_ | Any property overrides | `{ "border": "#000000" }` |
+| `dark` | object | _(none)_ | Any property overrides | `{ "border": "#00ffff" }` |
+| `light` | object | _(none)_ | Any property overrides | `{ "border": "#0000ff" }` |
+| `darkHC` | object | _(none)_ | Any property overrides | `{ "borderWidth": "4px" }` |
+| `lightHC` | object | _(none)_ | Any property overrides | `{ "border": "#000000" }` |
 
 **Default border colors by mode:**
 - *Normal: `#00aa00` (green), Insert: `#aa0000` (red), Visual: `#0000aa` (blue), Search: `#aaaa00` (yellow)*
@@ -260,9 +260,9 @@ Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports the 
 **Theme Override Objects** can contain any combination of the above properties.
 
 **Cascading Fallback**: Each property (background, border, borderStyle, borderWidth) is resolved independently through the fallback chain:
-- **HC Dark**: `[highContrastDark]` → `[dark]` → common → defaults
-- **HC Light**: `[highContrastLight]` → `[light]` → common → defaults
-- **Regular Dark/Light**: `[dark/light]` → common → defaults
+- **HC Dark**: `darkHC` → `dark` → common → defaults
+- **HC Light**: `lightHC` → `light` → common → defaults
+- **Regular Dark/Light**: `dark/light` → common → defaults
 
 This allows selective overrides (e.g., only override `borderWidth` for high contrast, inherit other properties from the base theme).
 
@@ -303,18 +303,18 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow and contribution g
 
 **Diagnosis & Fix:**
 1. **Check theme detection:** View logs (Output Channel) for "Color theme changed to: X"
-2. **Verify theme kind:** VS Code uses 4 kinds (dark, light, highContrastDark, highContrastLight)
-3. **Add theme override:** Settings → Add `[dark]` or `[light]` configuration:
+2. **Verify theme kind:** VS Code uses 4 kinds (dark, light, darkHC, lightHC)
+3. **Add theme override:** Settings → Add `dark` or `light` configuration:
    ```json
    {
      "modaledit-line-indicator.normalMode": {
-       "[dark]": { "border": "#00ffff" },
-       "[light]": { "border": "#0000ff" }
+       "dark": { "border": "#00ffff" },
+       "light": { "border": "#0000ff" }
      }
    }
    ```
 4. **Test switching:** Change theme → Colors should update immediately
-5. **High contrast:** Use `[highContrastDark]` and `[highContrastLight]` with thicker borders (`borderWidth: "4px"`)
+5. **High contrast:** Use `darkHC` and `lightHC` with thicker borders (`borderWidth: "4px"`)
 
 #### "Performance lag/stutter"
 
