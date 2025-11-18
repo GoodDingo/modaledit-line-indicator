@@ -4,7 +4,7 @@
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.0.x   | :white_check_mark: |
+| 0.1.x   | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
@@ -13,7 +13,7 @@ If you discover a security vulnerability in ModalEdit Line Indicator, please rep
 ### How to Report
 
 1. **Do not** open a public issue
-2. Email the maintainer at: [Your email or create a private security advisory on GitHub]
+2. Use GitHub's private security advisory feature or email the maintainer
 3. Include:
    - Description of the vulnerability
    - Steps to reproduce

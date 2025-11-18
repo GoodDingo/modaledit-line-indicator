@@ -141,8 +141,6 @@ Each property resolves independently (enables selective overrides).
 
 **Test helpers**: 29 static methods in `src/test/helpers/testHelpers.ts` (reduces boilerplate ~80%)
 
-**Manual testing required**: 33 cases in `ai_docs/MANUAL-TESTING.md` (Decoration API is write-only)
-
 ## TypeScript/ESLint
 
 - Target: ES2020, Module: CommonJS, Strict mode, Output: `./out`
@@ -153,7 +151,7 @@ Each property resolves independently (enables selective overrides).
 - `main: "./out/extension.js"` (compiled, not source)
 - `activationEvents: ["onStartupFinished"]`
 - `engines.vscode: "^1.106.0"`
-- `publisher: "user"` (change before publishing)
+- `publisher: "gooddingo"`
 
 **5 commands**: `toggleEnabled`, `updateHighlight`, `queryMode`, `showLogFile`, `clearLog`
 
@@ -211,13 +209,10 @@ make lint-fix && make format && make validate  # Before commit
 
 ## Publishing Checklist
 
-1. Update `publisher` and `repository.url` in package.json
-2. Update version (semver)
-3. `make validate` must pass (113 tests)
-4. Complete 33 manual test cases
-5. Test in clean VS Code install
-6. Beta test with real users before "production-ready"
-7. `vsce publish`
+1. Update version (semver)
+2. `make validate` must pass (113 tests)
+3. Test in clean VS Code install
+4. `vsce publish`
 
 ## Critical Design Decisions
 

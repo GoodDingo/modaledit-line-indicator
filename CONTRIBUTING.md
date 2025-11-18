@@ -46,12 +46,13 @@ This project uses Make as the primary build system:
 
 - `make all` - Full build pipeline (clean, install, compile, lint, validate)
 - `make watch` - Auto-recompile on file changes
-- `make test` - Run tests
+- `make test` - Run tests (113 automated tests)
 - `make coverage` - Generate code coverage report
 - `make lint` - Run ESLint
 - `make lint-fix` - Auto-fix ESLint issues
 - `make format` - Format code with Prettier
-- `make validate` - Full validation (compile, lint, test)
+- `make format-check` - Check code formatting
+- `make validate` - Full validation (compile, lint, format-check, test)
 
 ### Code Quality Standards
 
@@ -61,9 +62,9 @@ This project uses Make as the primary build system:
 - Run `make lint-fix` before committing
 
 #### Testing
-- Write tests for new features
-- Maintain test coverage above 70%
+- Write tests for new features and bug fixes
 - Run `make test` before submitting PR
+- Use test helpers from `src/test/helpers/testHelpers.ts`
 
 #### Formatting
 - Code is automatically formatted with Prettier
@@ -144,10 +145,12 @@ test: add integration tests for mode switching
 
 ```
 src/
-  extension.ts          # Main extension code
+  extension.ts          # Main extension class
+  configuration.ts      # Configuration module
+  logging.ts           # Logging module
   test/
-    suite/
-      extension.test.ts # Integration tests
+    suite/             # Test suites
+    helpers/           # Test helpers
     runTest.ts         # Test runner
 .vscode/               # VS Code workspace configuration
 .github/               # GitHub workflows and templates

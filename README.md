@@ -2,21 +2,77 @@
 
 Dynamic line highlight indicator for ModalEdit extension in VS Code. Provides instant visual feedback for all 4 ModalEdit modes with theme-aware styling.
 
+## Prerequisites
+
+**Required:** [ModalEdit](https://marketplace.visualstudio.com/items?itemName=johtela.vscode-modaledit) extension
+
+This extension provides visual feedback for ModalEdit modes. Without ModalEdit, the extension will show a warning and display insert mode styling only.
+
+### Installing ModalEdit
+
+1. **Install from Marketplace:**
+   - Open VS Code
+   - Go to Extensions (`Ctrl+Shift+X` / `Cmd+Shift+X`)
+   - Search for "ModalEdit"
+   - Click Install on "ModalEdit" by johtela
+   - Or [click here to install](https://marketplace.visualstudio.com/items?itemName=johtela.vscode-modaledit)
+
+2. **Verify ModalEdit is working:**
+   - Open any file
+   - Press `Esc` (enter Normal mode)
+   - Press `i` (enter Insert mode)
+   - **Expected:** Cursor style changes between modes
+   - **If cursor doesn't change:** Check ModalEdit configuration (see [ModalEdit docs](https://github.com/johtela/vscode-modaledit#configuration))
+
+3. **Configure ModalEdit cursor styles (recommended):**
+
+   Add to your `settings.json`:
+   ```json
+   {
+     "modaledit.normal.cursorStyle": "block",
+     "modaledit.insert.cursorStyle": "line",
+     "modaledit.visual.cursorStyle": "underline"
+   }
+   ```
+
+✅ **ModalEdit working?** Continue to Quick Start below
+❌ **ModalEdit not working?** See [ModalEdit troubleshooting](https://github.com/johtela/vscode-modaledit#troubleshooting)
+
 ## Quick Start
 
-1. **Install:** VS Code Marketplace → "ModalEdit Line Indicator"
-2. **Verify:** Open a file → Press `Esc` → See green dotted border on current line
-3. **Test modes:**
-   - `Esc` = Normal mode (green dotted border)
-   - `i` = Insert mode (red solid border)
-   - `v` = Visual mode (blue dashed border)
-   - `/` = Search mode (yellow solid border)
-4. **Customize:** Settings → Search "modaledit-line-indicator"
+**Note:** VS Code will automatically prompt to install ModalEdit when you install this extension.
 
-<!-- TODO: Add screenshot showing green border after activating -->
+### Stage 1: Verify ModalEdit Works
 
-✅ **Working?** Skip to [Configuration](#configuration) for customization options
-❌ **Issues?** See [Troubleshooting](#troubleshooting) for common problems
+1. **Install ModalEdit** (if not already installed - see [Prerequisites](#prerequisites))
+2. **Test ModalEdit modes:**
+   - Press `Esc` → Cursor should become a block (Normal mode)
+   - Press `i` → Cursor should become a line (Insert mode)
+   - Press `v` → Cursor should become an underline (Visual mode)
+
+✅ **Cursor changes?** Proceed to Stage 2
+❌ **Cursor doesn't change?** Fix ModalEdit first - see [Prerequisites](#prerequisites)
+
+### Stage 2: Verify Line Indicator Works
+
+1. **Install this extension:** VS Code Marketplace → "ModalEdit Line Indicator"
+2. **Test mode indicators:**
+   - Press `Esc` → See **green dotted border** on current line (Normal mode)
+   - Press `i` → See **red solid border** (Insert mode)
+   - Press `v` → See **blue dashed border** (Visual mode)
+   - Press `/` → See **yellow solid border** (Search mode)
+
+✅ **Borders appear and change colors?** Success! Extension is working
+❌ **No borders or wrong colors?** See [Troubleshooting](#troubleshooting)
+
+### Customize
+
+Settings → Search "modaledit-line-indicator" → Customize colors, borders, and theme-specific styling
+
+**Next steps:**
+- 🎨 [Configuration](#configuration) - Customize colors and styles
+- 🐛 [Troubleshooting](#troubleshooting) - Fix common issues
+- 📖 [Features](#features) - Learn about theme-aware styling
 
 ## Features
 
@@ -26,46 +82,6 @@ Dynamic line highlight indicator for ModalEdit extension in VS Code. Provides in
 - **Per-Mode Customization**: Independent styling for each mode
 - **Minimal Overhead**: Only highlights the current line
 - **Zero Configuration**: Works out-of-the-box with sensible defaults
-
-## Visual Examples
-
-<!-- TODO: Add screenshots here before release -->
-<!-- Required images (create and place in images/ directory): -->
-<!-- 1. images/normal-mode.png - Normal mode with green dotted border -->
-<!-- 2. images/insert-mode.png - Insert mode with red solid border -->
-<!-- 3. images/visual-mode.png - Visual mode with blue dashed border -->
-<!-- 4. images/search-mode.png - Search mode with yellow solid border -->
-<!-- 5. images/mode-switching.gif - Animated GIF showing mode transitions (Esc→i→v, 3-5 seconds) -->
-<!-- 6. images/settings-ui.png - Settings UI with example configuration -->
-<!-- 7. images/output-channel.png - Output Channel logs example -->
-
-**Normal Mode (Green Dotted Border)**
-<!-- ![Normal Mode](images/normal-mode.png) -->
-*TODO: Screenshot showing current line with green dotted border. Caption: "Normal mode provides a green dotted border for clear visual feedback."*
-
-**Insert Mode (Red Solid Border)**
-<!-- ![Insert Mode](images/insert-mode.png) -->
-*TODO: Screenshot showing current line with red solid border. Caption: "Insert mode uses a red solid border to indicate editing state."*
-
-**Visual Mode (Blue Dashed Border)**
-<!-- ![Visual Mode](images/visual-mode.png) -->
-*TODO: Screenshot showing current line with blue dashed border. Caption: "Visual mode displays a blue dashed border for selection operations."*
-
-**Search Mode (Yellow Solid Border)**
-<!-- ![Search Mode](images/search-mode.png) -->
-*TODO: Screenshot showing current line with yellow solid border. Caption: "Search mode highlights with a yellow solid border."*
-
-**Mode Switching Demo**
-<!-- ![Mode Switching](images/mode-switching.gif) -->
-*TODO: Animated GIF (3-5 seconds) showing transitions between modes (Esc→i→v). Caption: "Instant visual feedback when switching between ModalEdit modes."*
-
-**Settings Configuration**
-<!-- ![Settings UI](images/settings-ui.png) -->
-*TODO: Screenshot of VS Code settings UI showing modaledit-line-indicator configuration options. Caption: "Easy customization through VS Code settings."*
-
-**Output Channel Logs**
-<!-- ![Output Channel](images/output-channel.png) -->
-*TODO: Screenshot of Output Channel showing extension logs. Caption: "Detailed logging for troubleshooting and debugging."*
 
 ## Installation
 
@@ -250,10 +266,6 @@ Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports the 
 
 This allows selective overrides (e.g., only override `borderWidth` for high contrast, inherit other properties from the base theme).
 
----
-
-**Upgrading from older versions?** See [CHANGELOG.md](CHANGELOG.md#migration-notes) for migration guides.
-
 ## Development
 
 See [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow and contribution guidelines.
@@ -261,9 +273,10 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow and contribution g
 ## Requirements
 
 - VS Code 1.106.0+ (High Contrast Light theme support requires this API version)
-- **Recommended:** ModalEdit extension
+- **Required:** [ModalEdit extension](https://marketplace.visualstudio.com/items?itemName=johtela.vscode-modaledit)
   - **With ModalEdit:** Full 4-mode detection (normal/insert/visual/search)
-  - **Without ModalEdit:** Works but always shows insert mode styling
+  - **Without ModalEdit:** Extension shows warning and displays insert mode styling only
+  - See [Prerequisites](#prerequisites) section for installation instructions
 
 ## Troubleshooting
 
@@ -302,19 +315,6 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow and contribution g
    ```
 4. **Test switching:** Change theme → Colors should update immediately
 5. **High contrast:** Use `[highContrastDark]` and `[highContrastLight]` with thicker borders (`borderWidth: "4px"`)
-
-#### "Output Channel keeps appearing"
-
-**Symptoms:** Output panel opens automatically on VS Code startup.
-
-**Affected Versions:** v0.1.0 - v0.1.2 (fixed in v0.1.3+)
-
-**Workaround for older versions:**
-1. Close Output panel
-2. Settings → "modaledit-line-indicator.logLevel" → Set to `"error"` (less verbose)
-3. Or upgrade to v0.1.3+
-
-**Fixed in v0.1.3:** Output panel no longer auto-opens on startup.
 
 #### "Performance lag/stutter"
 

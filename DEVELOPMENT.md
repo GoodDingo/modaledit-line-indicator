@@ -4,8 +4,8 @@ This guide provides instructions for developing, building, and validating the Mo
 
 ## Prerequisites
 
-- Node.js 16+ and npm
-- VS Code 1.80.0 or higher
+- Node.js 18+ and npm
+- VS Code 1.106.0 or higher
 - Git
 - Make (standard on macOS/Linux, use WSL or GNU Make on Windows)
 
@@ -27,20 +27,22 @@ make validate    # Validate extension
 ```
 vscode-coloring-plugin/
 ├── src/
-│   └── extension.ts          # Main extension code
-├── out/                       # Compiled JavaScript (generated)
+│   ├── extension.ts          # Main extension code
+│   ├── configuration.ts      # Configuration module
+│   ├── logging.ts           # Logging module
+│   └── test/                # Test suites
+├── out/                      # Compiled JavaScript (generated)
 │   └── extension.js
-├── package.json              # Extension manifest
-├── tsconfig.json             # TypeScript configuration
-├── .eslintrc.json           # ESLint configuration
-├── .eslintignore            # ESLint ignore patterns
-├── .gitignore               # Git ignore patterns
-├── .vscodeignore            # VS Code packaging ignore patterns
-├── Makefile                 # Build automation
-├── README.md                # User documentation
-├── DEVELOPMENT.md           # This file
-├── CLAUDE.md                # Claude Code instructions
-└── instructions.md          # Template source
+├── package.json             # Extension manifest
+├── tsconfig.json            # TypeScript configuration
+├── .eslintrc.json          # ESLint configuration
+├── .eslintignore           # ESLint ignore patterns
+├── .gitignore              # Git ignore patterns
+├── .vscodeignore           # VS Code packaging ignore patterns
+├── Makefile                # Build automation
+├── README.md               # User documentation
+├── DEVELOPMENT.md          # This file
+└── CLAUDE.md               # Claude Code instructions
 
 ```
 
@@ -62,13 +64,17 @@ vscode-coloring-plugin/
 |---------|-------------|
 | `make lint` | Run ESLint on source files |
 | `make lint-fix` | Run ESLint and auto-fix issues |
+| `make format` | Format code with Prettier |
+| `make format-check` | Check code formatting without modifying |
 
-### Validation
+### Validation & Testing
 
 | Command | Description |
 |---------|-------------|
-| `make validate` | Full validation (compile + lint + manifest + structure checks) |
+| `make validate` | Full validation (compile + lint + format-check + test + checks) |
 | `make check` | Alias for validate |
+| `make test` | Run all tests (113 automated tests, ~12s) |
+| `make coverage` | Generate code coverage report |
 | `make check-manifest` | Verify package.json has all required fields |
 | `make check-structure` | Verify required files and directories exist |
 
@@ -141,8 +147,10 @@ make validate
 This runs:
 - ✅ TypeScript compilation
 - ✅ ESLint checks
+- ✅ Prettier format checking
 - ✅ package.json manifest validation
 - ✅ Project structure validation
+- ✅ All 113 automated tests
 
 ## npm Scripts
 
@@ -154,10 +162,13 @@ The Makefile wraps these npm scripts (you can also call them directly):
   "compile": "tsc -p ./",
   "watch": "tsc -watch -p ./",
   "pretest": "npm run compile && npm run lint",
+  "test": "vscode-test",
   "lint": "eslint src --ext ts",
   "lint:fix": "eslint src --ext ts --fix",
+  "format": "prettier --write \"src/**/*.ts\"",
+  "format:check": "prettier --check \"src/**/*.ts\"",
   "package": "vsce package",
-  "clean": "rm -rf out"
+  "clean": "rm -rf out coverage .nyc_output"
 }
 ```
 
@@ -239,13 +250,11 @@ make lint        # Check remaining issues
 Before publishing to VS Code Marketplace:
 
 1. ✅ Update version in `package.json`
-2. ✅ Update `CHANGELOG.md` (if exists)
+2. ✅ Update `CHANGELOG.md`
 3. ✅ Run `make validate` - all checks must pass
-4. ✅ Update publisher name in `package.json`
-5. ✅ Update repository URL in `package.json`
-6. ✅ Test extension thoroughly in clean VS Code install
-7. ✅ Create package: `make package`
-8. ✅ Publish: `vsce publish` (requires marketplace account)
+4. ✅ Test extension thoroughly in clean VS Code install
+5. ✅ Create and push version tag (e.g., `v0.1.0`)
+   - GitHub Actions will automatically build, test, and publish
 
 ## Git Workflow
 
@@ -266,4 +275,4 @@ git push
 
 ## Contact & Contributing
 
-See CONTRIBUTING.md for contribution guidelines (when created).
+See CONTRIBUTING.md for contribution guidelines.
