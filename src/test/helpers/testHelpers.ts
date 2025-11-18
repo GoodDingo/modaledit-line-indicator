@@ -222,7 +222,7 @@ export class TestHelpers {
    *   assert.ok(ext, 'Extension should be installed');
    */
   static getExtension(): vscode.Extension<unknown> | undefined {
-    return vscode.extensions.getExtension('user.modaledit-line-indicator');
+    return vscode.extensions.getExtension('gooddingo.modaledit-line-indicator');
   }
 
   /**

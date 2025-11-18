@@ -3,7 +3,7 @@
   "displayName": "ModalEdit Line Indicator",
   "description": "Dynamic line highlight for ModalEdit modes (normal, insert, visual, search). Changes line highlight color and style based on current mode for instant visual feedback.",
   "version": "0.1.4",
-  "publisher": "mira-hedl",
+  "publisher": "gooddingo",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -68,7 +68,12 @@
         },
         "modaledit-line-indicator.logLevel": {
           "type": "string",
-          "enum": ["error", "warn", "info", "debug"],
+          "enum": [
+            "error",
+            "warn",
+            "info",
+            "debug"
+          ],
           "default": "error",
           "scope": "window",
           "description": "Logging verbosity level. error: only errors (default), warn: errors and warnings, info: general lifecycle events and mode changes, debug: detailed diagnostics including cursor state and theme resolution"

@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Configuration Examples**: Simplified README config section from 120 to 20 lines with link to detailed docs
 - **Migration Guides**: Consolidated to single source in CHANGELOG with clear version labels
 - **Settings Reference**: Enhanced table with defaults, valid values, and copy-pasteable examples
-- **Publisher Metadata**: Updated to "mira-hedl" with correct GitHub repository URLs
+- **Publisher Metadata**: Updated to "gooddingo" with correct GitHub repository URLs
 - **Package Optimization**: Comprehensive .vscodeignore excludes dev files (expected ~67% size reduction)
 
 ### Fixed
