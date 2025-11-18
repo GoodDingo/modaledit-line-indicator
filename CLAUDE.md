@@ -166,12 +166,18 @@ Key methods:
 
 Namespace: `modaledit-line-indicator.*` (6 settings: `enabled` + `logLevel` + 4 modes)
 
+**IMPORTANT - v0.3.0 Configuration Format**:
+- Uses unbracketed theme keys: `dark`, `light`, `darkHC`, `lightHC` (NOT `"[dark]"`, `"[light]"`, etc.)
+- Uses `backgroundColor` property (NOT `background`)
+- Supports 23+ DecorationRenderOptions properties with 1:1 VS Code API mapping
+- No migration code exists - this is the only format that has ever existed
+
 ### Per-mode structure
 
 Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports:
 ```json
 {
-  "background": "rgba(255, 255, 255, 0)",
+  "backgroundColor": "rgba(255, 255, 255, 0)",
   "border": "#00aa00",
   "borderStyle": "dotted",
   "borderWidth": "2px",
@@ -355,3 +361,7 @@ Configuration module functions accept optional logger interface (`logger?: { deb
 - `git fetch` first
 - Compare `origin/main...HEAD` (NOT `main...HEAD`)
 - Verify: `git diff origin/main...HEAD --stat`, `git log origin/main..HEAD --oneline`
+
+## Documentation, comments, migrations, changes in general
+
+**IMPORTANT**: This is *CRITICAL* always ALWAYS remember that this plugin/extension was not release yet, therefore there are no "historical changes", not migrations, no "used to be" as when the plugin will be released it will be like it is for all users for the first time, therefore keeping all references to history would confuse users. Therefore always replace historical or old data with new and current state (without historical changes or migrations). CURRENT STATE is ALWAYS THE KING!!
