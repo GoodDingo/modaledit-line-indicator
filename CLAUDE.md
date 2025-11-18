@@ -177,14 +177,12 @@ Namespace: `modaledit-line-indicator.*` (6 settings: `enabled` + `logLevel` + 4 
 Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports:
 ```json
 {
-  "backgroundColor": "rgba(255, 255, 255, 0)",
-  "border": "#00aa00",
-  "borderStyle": "dotted",
-  "borderWidth": "2px",
-  "dark": { "border": "#00ffff" },
-  "light": { "border": "#0000ff" },
-  "darkHC": { "borderWidth": "4px" },
-  "lightHC": { "border": "#000000", "borderWidth": "4px" }
+  "backgroundColor": "rgba(0, 0, 0, 0)",
+  "border": "2px dotted #00aa00",
+  "dark": { "border": "2px dotted #00ffff" },
+  "light": { "border": "2px dotted #0000ff" },
+  "darkHC": { "border": "4px dotted #ffffff" },
+  "lightHC": { "border": "4px dotted #000000" }
 }
 ```
 

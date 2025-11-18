@@ -239,7 +239,7 @@ export class ConfigurationManager {
    *
    * @returns 'dark', 'light', 'darkHC', or 'lightHC'
    */
-  private getCurrentThemeKind(): ThemeKind {
+  public getCurrentThemeKind(): ThemeKind {
     const themeKind = vscode.window.activeColorTheme.kind;
 
     switch (themeKind) {

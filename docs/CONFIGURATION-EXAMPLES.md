@@ -19,28 +19,20 @@ Minimal borders that don't distract from your code:
 ```json
 {
   "modaledit-line-indicator.normalMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#00aa00",
-    "borderStyle": "solid",
-    "borderWidth": "1px"
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "1px solid #00aa00"
   },
   "modaledit-line-indicator.insertMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#aa0000",
-    "borderStyle": "solid",
-    "borderWidth": "1px"
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "1px solid #aa0000"
   },
   "modaledit-line-indicator.visualMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#0000aa",
-    "borderStyle": "solid",
-    "borderWidth": "1px"
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "1px solid #0000aa"
   },
   "modaledit-line-indicator.searchMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#aaaa00",
-    "borderStyle": "solid",
-    "borderWidth": "1px"
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "1px solid #aaaa00"
   }
 }
 ```
@@ -56,28 +48,20 @@ Bold indicators with colored backgrounds for maximum visibility:
 ```json
 {
   "modaledit-line-indicator.normalMode": {
-    "background": "rgba(0, 255, 0, 0.1)",
-    "border": "#00ff00",
-    "borderStyle": "solid",
-    "borderWidth": "3px"
+    "backgroundColor": "rgba(0, 255, 0, 0.1)",
+    "border": "3px solid #00ff00"
   },
   "modaledit-line-indicator.insertMode": {
-    "background": "rgba(255, 0, 0, 0.1)",
-    "border": "#ff0000",
-    "borderStyle": "solid",
-    "borderWidth": "3px"
+    "backgroundColor": "rgba(255, 0, 0, 0.1)",
+    "border": "3px solid #ff0000"
   },
   "modaledit-line-indicator.visualMode": {
-    "background": "rgba(0, 0, 255, 0.1)",
-    "border": "#0000ff",
-    "borderStyle": "solid",
-    "borderWidth": "3px"
+    "backgroundColor": "rgba(0, 0, 255, 0.1)",
+    "border": "3px solid #0000ff"
   },
   "modaledit-line-indicator.searchMode": {
-    "background": "rgba(255, 255, 0, 0.1)",
-    "border": "#ffff00",
-    "borderStyle": "solid",
-    "borderWidth": "3px"
+    "backgroundColor": "rgba(255, 255, 0, 0.1)",
+    "border": "3px solid #ffff00"
   }
 }
 ```
@@ -93,49 +77,45 @@ Different colors for dark and light themes (automatically switches when you chan
 ```json
 {
   "modaledit-line-indicator.normalMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "borderStyle": "dotted",
-    "borderWidth": "2px",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "2px dotted #00aa00",
     "dark": {
-      "border": "#00ffff",
-      "background": "rgba(0, 255, 255, 0.05)"
+      "border": "2px dotted #00ffff",
+      "backgroundColor": "rgba(0, 255, 255, 0.05)"
     },
     "light": {
-      "border": "#0000aa",
-      "background": "rgba(0, 0, 255, 0.05)"
+      "border": "2px dotted #0000aa",
+      "backgroundColor": "rgba(0, 0, 255, 0.05)"
     }
   },
   "modaledit-line-indicator.insertMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "borderStyle": "solid",
-    "borderWidth": "2px",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "2px solid #aa0000",
     "dark": {
-      "border": "#ff6666"
+      "border": "2px solid #ff6666"
     },
     "light": {
-      "border": "#cc0000"
+      "border": "2px solid #cc0000"
     }
   },
   "modaledit-line-indicator.visualMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "borderStyle": "dashed",
-    "borderWidth": "2px",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "2px dashed #0000aa",
     "dark": {
-      "border": "#ff00ff"
+      "border": "2px dashed #ff00ff"
     },
     "light": {
-      "border": "#8800aa"
+      "border": "2px dashed #8800aa"
     }
   },
   "modaledit-line-indicator.searchMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "borderStyle": "solid",
-    "borderWidth": "2px",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "2px solid #aaaa00",
     "dark": {
-      "border": "#ffff00"
+      "border": "2px solid #ffff00"
     },
     "light": {
-      "border": "#aa8800"
+      "border": "2px solid #aa8800"
     }
   }
 }
@@ -152,19 +132,17 @@ You can override individual properties for specific themes while keeping others 
 ```json
 {
   "modaledit-line-indicator.normalMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#00aa00",
-    "borderStyle": "dotted",
-    "borderWidth": "2px",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "2px dotted #00aa00",
 
-    // Only override border color for dark themes
+    // Only override border for dark themes
     "dark": {
-      "border": "#00ffff"
+      "border": "2px dotted #00ffff"
     },
 
-    // Only override border width for light themes
+    // Only override border width for light themes (thicker)
     "light": {
-      "borderWidth": "3px"
+      "border": "3px dotted #00aa00"
     }
   }
 }
@@ -173,8 +151,8 @@ You can override individual properties for specific themes while keeping others 
 **How it works:**
 - Properties not specified in theme overrides inherit from common properties
 - Each property resolves independently through the fallback chain
-- Dark theme: border=#00ffff (overridden), borderWidth=2px (common), borderStyle=dotted (common)
-- Light theme: border=#00aa00 (common), borderWidth=3px (overridden), borderStyle=dotted (common)
+- Dark theme: border="2px dotted #00ffff" (overridden), backgroundColor inherited from common
+- Light theme: border="3px dotted #00aa00" (overridden, thicker), backgroundColor inherited from common
 
 ---
 
@@ -185,31 +163,27 @@ High contrast themes support both dark and light variants with cascading fallbac
 ```json
 {
   "modaledit-line-indicator.normalMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#00aa00",
-    "borderStyle": "dotted",
-    "borderWidth": "2px",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "2px dotted #00aa00",
 
     // Fallback for regular dark themes
     "dark": {
-      "border": "#00ffff"
+      "border": "2px dotted #00ffff"
     },
 
     // Fallback for regular light themes
     "light": {
-      "border": "#0000ff"
+      "border": "2px dotted #0000ff"
     },
 
     // High contrast dark (falls back to dark if not specified)
     "darkHC": {
-      "border": "#ffffff",
-      "borderWidth": "4px"
+      "border": "4px dotted #ffffff"
     },
 
     // High contrast light (falls back to light if not specified)
     "lightHC": {
-      "border": "#000000",
-      "borderWidth": "4px"
+      "border": "4px dotted #000000"
     }
   }
 }
@@ -239,7 +213,7 @@ Valid `borderStyle` values:
 - `outset` - 3D outset border
 
 ### Color Formats
-Valid color formats for `border` and `background`:
+Valid color formats for `border` shorthand and `backgroundColor`:
 - Hex: `#00aa00`, `#0a0`
 - RGB: `rgb(0, 170, 0)`
 - RGBA: `rgba(0, 170, 0, 0.1)` (last value is opacity 0-1)
@@ -257,9 +231,10 @@ Valid `borderWidth` formats:
 
 1. **Start simple**: Use Example 1 or 2, then add theme overrides if needed
 2. **Test your colors**: Switch between dark/light themes to verify visibility
-3. **Use rgba for backgrounds**: Low opacity (0.05-0.1) provides subtle highlight without obscuring code
-4. **High contrast themes**: Thicker borders (3-4px) improve visibility
-5. **Cascading advantage**: Override only what you need, inherit the rest
+3. **Use rgba for backgroundColor**: Low opacity (0.05-0.1) provides subtle highlight without obscuring code
+4. **High contrast themes**: Thicker borders (3-4px) and solid style improve visibility
+5. **CSS shorthand**: Use `"border": "2px dotted #00aa00"` for concise configuration
+6. **Cascading advantage**: Override only what you need, inherit the rest
 
 ---
 
