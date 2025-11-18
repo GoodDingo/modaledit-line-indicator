@@ -2,7 +2,7 @@
   "name": "modaledit-line-indicator",
   "displayName": "ModalEdit Line Indicator",
   "description": "Dynamic line highlight for ModalEdit modes (normal, insert, visual, search). Changes line highlight color and style based on current mode for instant visual feedback.",
-  "version": "1.0.5",
+  "version": "0.2.0",
   "publisher": "gooddingo",
   "license": "MIT",
   "repository": {

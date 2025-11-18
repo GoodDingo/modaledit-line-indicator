@@ -95,7 +95,7 @@ Or install manually:
 # From the extension directory
 npm install
 npm run compile
-code --install-extension modaledit-line-indicator-1.0.5.vsix
+code --install-extension modaledit-line-indicator-0.2.0.vsix
 ```
 
 ## Usage
