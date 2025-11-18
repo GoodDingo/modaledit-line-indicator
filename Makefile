@@ -1,7 +1,7 @@
 # Makefile for VS Code Extension: ModalEdit Line Indicator
 # Ensures code is compiled, linted, validated and ready for installation
 
-.PHONY: help all clean install compile lint lint-fix validate check package test install-ext uninstall-ext
+.PHONY: help all clean install build watch lint lint-fix format format-check validate package test coverage install-ext
 
 # Default target
 .DEFAULT_GOAL := help
@@ -27,7 +27,7 @@ help: ## Display this help message
 
 ##@ Development
 
-all: clean install compile lint validate ## Run full build pipeline (clean, install, compile, lint, validate)
+all: clean install lint validate ## Run full build pipeline (clean, install, lint, validate)
 	@echo "$(GREEN)✓ Full build pipeline completed successfully!$(NC)"
 
 clean: ## Remove compiled output and build artifacts
@@ -42,11 +42,6 @@ install: ## Install npm dependencies
 	@echo "$(YELLOW)Installing dependencies...$(NC)"
 	@npm install
 	@echo "$(GREEN)✓ Dependencies installed$(NC)"
-
-compile: ## Type-check TypeScript (no emit)
-	@echo "$(YELLOW)Type-checking TypeScript...$(NC)"
-	@npm run compile
-	@echo "$(GREEN)✓ Type-check complete$(NC)"
 
 build: ## Build production bundle with esbuild
 	@echo "$(YELLOW)Building production bundle...$(NC)"
@@ -81,38 +76,12 @@ format-check: ## Check code formatting
 
 ##@ Validation
 
-validate: compile build lint format-check check-manifest check-structure test ## Validate extension is ready for packaging
+validate: build lint format-check test ## Validate extension is ready for packaging
 	@echo "$(GREEN)✓ Extension validation complete!$(NC)"
-
-check: validate ## Alias for validate
-
-check-manifest: ## Verify package.json has required fields
-	@echo "$(YELLOW)Checking package.json manifest...$(NC)"
-	@node -e "const pkg = require('./package.json'); \
-		const required = ['name', 'version', 'publisher', 'engines', 'main', 'contributes']; \
-		const missing = required.filter(f => !pkg[f]); \
-		if (missing.length > 0) { \
-			console.error('$(RED)✗ Missing required fields:', missing.join(', '), '$(NC)'); \
-			process.exit(1); \
-		} else { \
-			console.log('$(GREEN)✓ All required manifest fields present$(NC)'); \
-		}"
-
-check-structure: ## Verify required files and directories exist
-	@echo "$(YELLOW)Checking project structure...$(NC)"
-	@test -f package.json || (echo "$(RED)✗ Missing package.json$(NC)" && exit 1)
-	@test -f tsconfig.json || (echo "$(RED)✗ Missing tsconfig.json$(NC)" && exit 1)
-	@test -f eslint.config.js || (echo "$(RED)✗ Missing eslint.config.js$(NC)" && exit 1)
-	@test -f esbuild.config.js || (echo "$(RED)✗ Missing esbuild.config.js$(NC)" && exit 1)
-	@test -d src || (echo "$(RED)✗ Missing src/ directory$(NC)" && exit 1)
-	@test -f src/extension.ts || (echo "$(RED)✗ Missing src/extension.ts$(NC)" && exit 1)
-	@test -d dist || (echo "$(RED)✗ Missing dist/ directory - run 'make build' first$(NC)" && exit 1)
-	@test -f dist/extension.js || (echo "$(RED)✗ Missing dist/extension.js - run 'make build' first$(NC)" && exit 1)
-	@echo "$(GREEN)✓ Project structure valid$(NC)"
 
 ##@ Packaging & Installation
 
-package: compile build lint format-check check-manifest test check-structure ## Package extension as .vsix file (with minified JS)
+package: build lint format-check test ## Package extension as .vsix file (with minified JS)
 	@echo "$(YELLOW)Packaging extension...$(NC)"
 	@npm run package
 	@test -f $(VSIX_FILE) && echo "$(GREEN)✓ Package created: $(VSIX_FILE)$(NC)" || (echo "$(RED)✗ Package creation failed$(NC)" && exit 1)
@@ -121,13 +90,6 @@ install-ext: package ## Install extension to VS Code
 	@echo "$(YELLOW)Installing extension to VS Code...$(NC)"
 	code --install-extension $(VSIX_FILE)
 	@echo "$(GREEN)✓ Extension installed$(NC)"
-
-uninstall-ext: ## Uninstall extension from VS Code
-	@echo "$(YELLOW)Uninstalling extension from VS Code...$(NC)"
-	@code --uninstall-extension user.$(EXT_NAME) || true
-	@echo "$(GREEN)✓ Extension uninstalled$(NC)"
-
-reinstall: uninstall-ext install-ext ## Uninstall and reinstall extension
 
 ##@ Testing
 
@@ -141,20 +103,3 @@ coverage: ## Generate code coverage report
 	@npm run coverage
 	@echo "$(GREEN)✓ Coverage report generated$(NC)"
 	@echo "$(CYAN)View HTML report: open coverage/index.html$(NC)"
-
-##@ Information
-
-info: ## Display extension information
-	@echo "$(CYAN)Extension Information:$(NC)"
-	@echo "  Name:        $(shell node -p "require('./package.json').name")"
-	@echo "  Version:     $(shell node -p "require('./package.json').version")"
-	@echo "  Publisher:   $(shell node -p "require('./package.json').publisher")"
-	@echo "  Description: $(shell node -p "require('./package.json').description")"
-	@echo ""
-	@echo "$(CYAN)Build Status:$(NC)"
-	@test -d dist && echo "  Built:       $(GREEN)Yes$(NC)" || echo "  Built:       $(RED)No$(NC)"
-	@test -f $(VSIX_FILE) && echo "  Packaged:    $(GREEN)Yes ($(VSIX_FILE))$(NC)" || echo "  Packaged:    $(RED)No$(NC)"
-	@test -d node_modules && echo "  Dependencies:$(GREEN)Installed$(NC)" || echo "  Dependencies:$(RED)Not installed$(NC)"
-
-version: ## Display extension version
-	@echo "$(EXT_VERSION)"

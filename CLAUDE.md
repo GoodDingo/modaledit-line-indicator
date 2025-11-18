@@ -35,23 +35,20 @@ VS Code extension providing dynamic line highlighting for ModalEdit modes (NORMA
 
 ```bash
 # Development cycle
-make all              # Full pipeline: clean → install → build → lint → validate
+make all              # Full pipeline: clean → install → lint → validate
 make watch            # Auto-rebuild on changes (esbuild watch mode)
-make validate         # Pre-commit check (type-check → build → lint → test)
+make validate         # Pre-commit check (build → lint → format-check → test)
 
 # Building
 make build            # Production bundle (minified, no source maps)
 npm run build         # Same as make build
 npm run watch         # Watch mode with source maps
 
-# Type checking
-make compile          # Type-check only (tsc --noEmit)
-npm run compile       # Same as make compile
-
 # Testing
 make test             # Run all 113 tests (~9s) on VS Code 1.85.0
 npm test              # Same as make test
 npm test -- --grep "theme detection"  # Run specific test suite
+make coverage         # Generate code coverage report
 
 # Code quality
 make lint             # Run ESLint v9 (flat config)
@@ -60,9 +57,12 @@ make format           # Format with Prettier
 make format-check     # Check formatting
 
 # Package & deploy
-make package          # Create .vsix (runs full validation first)
+make package          # Create .vsix (runs validation: build → lint → format-check → test)
 make install-ext      # Install extension to VS Code
 make clean            # Remove dist/, out/, coverage/
+
+# Utilities
+make install          # Install npm dependencies
 
 # Debugging
 # Press F5 in VS Code → Extension Development Host

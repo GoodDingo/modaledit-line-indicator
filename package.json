@@ -42,7 +42,6 @@
   "extensionDependencies": [
     "johtela.vscode-modaledit"
   ],
-  "extensionPack": [],
   "activationEvents": [
     "onStartupFinished"
   ],
@@ -159,7 +158,6 @@
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
-    "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.10.1",
     "@types/vscode": "^1.85.0",
