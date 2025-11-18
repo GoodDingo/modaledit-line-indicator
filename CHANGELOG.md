@@ -57,7 +57,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Migration Notes
 
-**From v0.1.2 to v0.1.3** (BREAKING CHANGE - High Contrast Configuration):
+#### From v0.1.2 to v0.1.3
+
+**Skip this if installing for first time.**
+
+If upgrading from v0.1.2 and you used `[highContrast]` configuration, apply these changes:
+
+**BREAKING CHANGE - High Contrast Configuration**
 
 If you used `[highContrast]` configuration in v0.1.2, you must update to the new format:
 
@@ -178,7 +184,15 @@ See [README.md](README.md#migration-from-v012) for complete migration guide.
 
 ### Migration Notes
 
-**No automatic migration** - Users upgrading from v0.1.1 must manually reconfigure:
+#### From v0.1.1 to v0.1.2
+
+**Skip this if installing for first time.**
+
+If upgrading from v0.1.1, apply these changes:
+
+**BREAKING CHANGE - Configuration Structure**
+
+No automatic migration - Users must manually reconfigure:
 
 1. Group mode properties into nested objects
 2. Remove mode prefixes from property names (`normalModeBorder` → `border`)

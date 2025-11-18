@@ -1,11 +1,52 @@
+# Version control
 .git
 .gitignore
+.github/
+
+# Build config
 tsconfig.json
 .eslintrc.json
 .prettierrc.json
+.editorconfig
+
+# Source files (only compiled output needed)
 src/
+
+# Source maps
 out/**/*.map
+
+# Dependencies
 node_modules/
+
+# Package files
 *.vsix
+
+# Development and testing
+.vscode/
+.vscode-test/
+coverage/
+.nyc_output/
+*.log
+
+# Development documentation (keep README, CHANGELOG, LICENSE only)
+research/
+ai_docs/
+grumpy-review.md
+honest-judgement-mk1.md
+pre-release-audit.md
+pre-release-improvement-plan.md
+DEVELOPMENT.md
+CONTRIBUTING.md
+CLAUDE.md
+SECURITY.md
+
+# Git hooks
+.husky/
+
+# OS files
 .DS_Store
-README.md
+Thumbs.db
+desktop.ini
+
+# Claude Code
+.claude/

@@ -41,8 +41,9 @@ export class ExtensionLogger {
     // Clear old log on startup
     try {
       fs.writeFileSync(this.logFilePath, '');
-    } catch (_err) {
-      // Ignore if can't write - not critical
+    } catch (err) {
+      // Non-critical - log to console for diagnostics
+      console.error(`ModalEdit Line Indicator: Cannot write to log file ${this.logFilePath}:`, err);
     }
 
     this.log('=== NEW SESSION STARTED ===');
@@ -122,8 +123,9 @@ export class ExtensionLogger {
   private writeToFile(message: string): void {
     try {
       fs.appendFileSync(this.logFilePath, message + '\n');
-    } catch (_err) {
-      // Don't crash if file write fails
+    } catch (err) {
+      // Don't crash if file write fails, but log to console for diagnostics
+      console.error(`ModalEdit Line Indicator: Log file write failed (${this.logFilePath}):`, err);
     }
   }
 

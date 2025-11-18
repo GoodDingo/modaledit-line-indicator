@@ -2,6 +2,22 @@
 
 Dynamic line highlight indicator for ModalEdit extension in VS Code. Provides instant visual feedback for all 4 ModalEdit modes with theme-aware styling.
 
+## Quick Start
+
+1. **Install:** VS Code Marketplace → "ModalEdit Line Indicator"
+2. **Verify:** Open a file → Press `Esc` → See green dotted border on current line
+3. **Test modes:**
+   - `Esc` = Normal mode (green dotted border)
+   - `i` = Insert mode (red solid border)
+   - `v` = Visual mode (blue dashed border)
+   - `/` = Search mode (yellow solid border)
+4. **Customize:** Settings → Search "modaledit-line-indicator"
+
+<!-- TODO: Add screenshot showing green border after activating -->
+
+✅ **Working?** Skip to [Configuration](#configuration) for customization options
+❌ **Issues?** See [Troubleshooting](#troubleshooting) for common problems
+
 ## Features
 
 - **4-Mode Support**: Automatically changes line highlight for NORMAL, INSERT, VISUAL, and SEARCH modes
@@ -10,6 +26,46 @@ Dynamic line highlight indicator for ModalEdit extension in VS Code. Provides in
 - **Per-Mode Customization**: Independent styling for each mode
 - **Minimal Overhead**: Only highlights the current line
 - **Zero Configuration**: Works out-of-the-box with sensible defaults
+
+## Visual Examples
+
+<!-- TODO: Add screenshots here before release -->
+<!-- Required images (create and place in images/ directory): -->
+<!-- 1. images/normal-mode.png - Normal mode with green dotted border -->
+<!-- 2. images/insert-mode.png - Insert mode with red solid border -->
+<!-- 3. images/visual-mode.png - Visual mode with blue dashed border -->
+<!-- 4. images/search-mode.png - Search mode with yellow solid border -->
+<!-- 5. images/mode-switching.gif - Animated GIF showing mode transitions (Esc→i→v, 3-5 seconds) -->
+<!-- 6. images/settings-ui.png - Settings UI with example configuration -->
+<!-- 7. images/output-channel.png - Output Channel logs example -->
+
+**Normal Mode (Green Dotted Border)**
+<!-- ![Normal Mode](images/normal-mode.png) -->
+*TODO: Screenshot showing current line with green dotted border. Caption: "Normal mode provides a green dotted border for clear visual feedback."*
+
+**Insert Mode (Red Solid Border)**
+<!-- ![Insert Mode](images/insert-mode.png) -->
+*TODO: Screenshot showing current line with red solid border. Caption: "Insert mode uses a red solid border to indicate editing state."*
+
+**Visual Mode (Blue Dashed Border)**
+<!-- ![Visual Mode](images/visual-mode.png) -->
+*TODO: Screenshot showing current line with blue dashed border. Caption: "Visual mode displays a blue dashed border for selection operations."*
+
+**Search Mode (Yellow Solid Border)**
+<!-- ![Search Mode](images/search-mode.png) -->
+*TODO: Screenshot showing current line with yellow solid border. Caption: "Search mode highlights with a yellow solid border."*
+
+**Mode Switching Demo**
+<!-- ![Mode Switching](images/mode-switching.gif) -->
+*TODO: Animated GIF (3-5 seconds) showing transitions between modes (Esc→i→v). Caption: "Instant visual feedback when switching between ModalEdit modes."*
+
+**Settings Configuration**
+<!-- ![Settings UI](images/settings-ui.png) -->
+*TODO: Screenshot of VS Code settings UI showing modaledit-line-indicator configuration options. Caption: "Easy customization through VS Code settings."*
+
+**Output Channel Logs**
+<!-- ![Output Channel](images/output-channel.png) -->
+*TODO: Screenshot of Output Channel showing extension logs. Caption: "Detailed logging for troubleshooting and debugging."*
 
 ## Installation
 
@@ -40,10 +96,14 @@ All modes have transparent backgrounds by default for a clean, minimalist look.
 
 ### Commands
 
-- `ModalEdit Line Indicator: Toggle Enabled/Disabled` - Turn indicator on/off
-- `ModalEdit Line Indicator: Query Current Mode (Debug)` - Show current detected mode
-- `ModalEdit Line Indicator: Show Log File` - Open log file for troubleshooting
-- `ModalEdit Line Indicator: Clear Log` - Clear the log file
+**How to run:** Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) → Type command name
+
+| Command | When to Use | What It Does |
+|---------|-------------|--------------|
+| **Toggle Enabled/Disabled** | Temporarily disable (e.g., screen sharing, presentation) | Turns extension on/off without changing settings |
+| **Query Current Mode (Debug)** | Colors don't match expected mode | Shows detected mode + ModalEdit status in popup |
+| **Show Log File** | Troubleshooting bugs or unexpected behavior | Opens detailed diagnostic logs with timestamps |
+| **Clear Log File** | Before filing bug report | Resets log for clean reproduction of issue |
 
 ## Configuration
 
@@ -131,128 +191,26 @@ You can specify different colors for dark, light, and high contrast themes (both
 4. Extension automatically detects your current theme and applies the appropriate styling
 5. When you switch themes, the extension instantly updates the decorations
 
-### Practical Examples
+### Quick Configuration Examples
 
-#### Example 1: Subtle Indicators
+**Change one color:**
+```json
+{
+  "modaledit-line-indicator.normalMode": { "border": "#00ff00" }
+}
+```
 
-Minimal borders that don't distract:
-
+**Theme-specific colors:**
 ```json
 {
   "modaledit-line-indicator.normalMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#00aa00",
-    "borderStyle": "solid",
-    "borderWidth": "1px"
-  },
-  "modaledit-line-indicator.insertMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#aa0000",
-    "borderStyle": "solid",
-    "borderWidth": "1px"
-  },
-  "modaledit-line-indicator.visualMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#0000aa",
-    "borderStyle": "solid",
-    "borderWidth": "1px"
-  },
-  "modaledit-line-indicator.searchMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#aaaa00",
-    "borderStyle": "solid",
-    "borderWidth": "1px"
+    "[dark]": { "border": "#00ffff" },
+    "[light]": { "border": "#0000ff" }
   }
 }
 ```
 
-#### Example 2: High Visibility with Backgrounds
-
-Bold indicators with colored backgrounds:
-
-```json
-{
-  "modaledit-line-indicator.normalMode": {
-    "background": "rgba(0, 255, 0, 0.1)",
-    "border": "#00ff00",
-    "borderStyle": "solid",
-    "borderWidth": "3px"
-  },
-  "modaledit-line-indicator.insertMode": {
-    "background": "rgba(255, 0, 0, 0.1)",
-    "border": "#ff0000",
-    "borderStyle": "solid",
-    "borderWidth": "3px"
-  },
-  "modaledit-line-indicator.visualMode": {
-    "background": "rgba(0, 0, 255, 0.1)",
-    "border": "#0000ff",
-    "borderStyle": "solid",
-    "borderWidth": "3px"
-  },
-  "modaledit-line-indicator.searchMode": {
-    "background": "rgba(255, 255, 0, 0.1)",
-    "border": "#ffff00",
-    "borderStyle": "solid",
-    "borderWidth": "3px"
-  }
-}
-```
-
-#### Example 3: Theme-Adaptive (Recommended)
-
-Different colors for dark and light themes:
-
-```json
-{
-  "modaledit-line-indicator.normalMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "borderStyle": "dotted",
-    "borderWidth": "2px",
-    "[dark]": {
-      "border": "#00ffff",  // Bright cyan for dark
-      "background": "rgba(0, 255, 255, 0.05)"
-    },
-    "[light]": {
-      "border": "#0000aa",  // Darker blue for light
-      "background": "rgba(0, 0, 255, 0.05)"
-    }
-  },
-  "modaledit-line-indicator.insertMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "borderStyle": "solid",
-    "borderWidth": "2px",
-    "[dark]": {
-      "border": "#ff6666"  // Softer red for dark
-    },
-    "[light]": {
-      "border": "#cc0000"  // Deeper red for light
-    }
-  },
-  "modaledit-line-indicator.visualMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "borderStyle": "dashed",
-    "borderWidth": "2px",
-    "[dark]": {
-      "border": "#ff00ff"  // Magenta for dark
-    },
-    "[light]": {
-      "border": "#8800aa"  // Purple for light
-    }
-  },
-  "modaledit-line-indicator.searchMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "borderStyle": "solid",
-    "borderWidth": "2px",
-    "[dark]": {
-      "border": "#ffff00"  // Yellow for dark
-    },
-    "[light]": {
-      "border": "#aa8800"  // Gold for light
-    }
-  }
-}
-```
+**More examples:** See [docs/CONFIGURATION-EXAMPLES.md](docs/CONFIGURATION-EXAMPLES.md) for detailed configuration examples including subtle indicators, high visibility with backgrounds, and advanced theme-adaptive configurations.
 
 ## Settings Reference
 
@@ -266,16 +224,22 @@ Different colors for dark and light themes:
 
 Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports the following properties:
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `background` | string | Background color (CSS format, e.g., `rgba(255, 0, 0, 0.1)`) |
-| `border` | string | Border color (CSS format, e.g., `#ff0000` or `rgb(255, 0, 0)`) |
-| `borderStyle` | string | Border style: `solid`, `dashed`, `dotted`, `double`, `groove`, `ridge`, `inset`, `outset` |
-| `borderWidth` | string | Border width (CSS format, e.g., `2px`, `0.1em`) |
-| `[dark]` | object | Override properties for dark themes (also fallback for HC dark) |
-| `[light]` | object | Override properties for light themes (also fallback for HC light) |
-| `[highContrastDark]` | object | Override properties for high contrast dark themes |
-| `[highContrastLight]` | object | Override properties for high contrast light themes |
+| Property | Type | Default | Valid Values | Examples |
+|----------|------|---------|--------------|----------|
+| `background` | CSS color | `rgba(255,255,255,0)` | Any CSS color | `#00ff00`, `rgba(0,255,0,0.1)`, `transparent` |
+| `border` | CSS color | Varies by mode* | Any CSS color | `#00aa00`, `rgb(0,170,0)`, `cyan` |
+| `borderStyle` | CSS keyword | Varies by mode** | `solid` \| `dashed` \| `dotted` \| `double` \| `groove` \| `ridge` \| `inset` \| `outset` | `dotted`, `solid` |
+| `borderWidth` | CSS length | `2px` | Positive length | `1px`, `0.5em`, `3px` |
+| `[dark]` | object | _(none)_ | Any property overrides | `{ "border": "#00ffff" }` |
+| `[light]` | object | _(none)_ | Any property overrides | `{ "border": "#0000ff" }` |
+| `[highContrastDark]` | object | _(none)_ | Any property overrides | `{ "borderWidth": "4px" }` |
+| `[highContrastLight]` | object | _(none)_ | Any property overrides | `{ "border": "#000000" }` |
+
+**Default border colors by mode:**
+- *Normal: `#00aa00` (green), Insert: `#aa0000` (red), Visual: `#0000aa` (blue), Search: `#aaaa00` (yellow)*
+
+**Default border styles by mode:**
+- **Normal: `dotted`, Insert: `solid`, Visual: `dashed`, Search: `solid`*
 
 **Theme Override Objects** can contain any combination of the above properties.
 
@@ -286,38 +250,9 @@ Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports the 
 
 This allows selective overrides (e.g., only override `borderWidth` for high contrast, inherit other properties from the base theme).
 
-## Migration from v0.1.1
+---
 
-If you're upgrading from version 0.1.1, the configuration format has changed from flat to nested:
-
-### Old Format (v0.1.1)
-```json
-{
-  "modaledit-line-indicator.normalModeBackground": "rgba(255, 255, 255, 0)",
-  "modaledit-line-indicator.normalModeBorder": "#00aa00",
-  "modaledit-line-indicator.normalModeBorderStyle": "dotted",
-  "modaledit-line-indicator.normalModeBorderWidth": "2px"
-}
-```
-
-### New Format (v0.1.3+)
-```json
-{
-  "modaledit-line-indicator.normalMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#00aa00",
-    "borderStyle": "dotted",
-    "borderWidth": "2px"
-  }
-}
-```
-
-**Migration Steps:**
-1. Open your `settings.json`
-2. Group properties for each mode into a nested object
-3. Rename properties (remove the mode prefix): `normalModeBorder` → `border`
-4. Repeat for all four modes: `normalMode`, `insertMode`, `visualMode`, `searchMode`
-5. (Optional) Add theme-specific overrides using `[dark]`, `[light]`, `[highContrastDark]`, `[highContrastLight]` keys
+**Upgrading from older versions?** See [CHANGELOG.md](CHANGELOG.md#migration-notes) for migration guides.
 
 ## Development
 
@@ -325,32 +260,136 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow and contribution g
 
 ## Requirements
 
-- VS Code 1.106.0 or higher
-- ModalEdit extension installed and active
+- VS Code 1.106.0+ (High Contrast Light theme support requires this API version)
+- **Recommended:** ModalEdit extension
+  - **With ModalEdit:** Full 4-mode detection (normal/insert/visual/search)
+  - **Without ModalEdit:** Works but always shows insert mode styling
 
 ## Troubleshooting
 
-### Colors not changing when switching modes?
+### Common Issues
 
-1. Ensure ModalEdit extension is installed and activated
-2. Check that `modaledit-line-indicator.enabled` is `true`
-3. Try running command: `ModalEdit Line Indicator: Toggle Enabled/Disabled` twice
-4. Check logs: Run `ModalEdit Line Indicator: Show Log File` command
-5. Restart VS Code
+#### "Nothing visible after install"
 
-### Theme-specific colors not applying?
+**Symptoms:** Extension installed but no border appears on current line.
 
-1. Verify your theme kind (dark/light/high contrast dark/high contrast light) in VS Code
-2. Check that you've defined the appropriate theme override (`[dark]`, `[light]`, `[highContrastDark]`, or `[highContrastLight]`)
-3. Ensure theme override property names match exactly (case-sensitive)
-4. Remember the cascading fallback: HC dark falls back to `[dark]`, HC light falls back to `[light]`
-5. Try switching to a different theme and back
+**Diagnosis & Fix:**
+1. **Verify ModalEdit installed:** Extensions → Search "ModalEdit" → Check if installed
+2. **Test mode switch:** Press `Esc` (Normal mode) → Should see green dotted border
+3. **Check enabled setting:** Settings → "modaledit-line-indicator.enabled" should be `true`
+4. **View logs:** Command Palette → "ModalEdit Line Indicator: Show Log File"
+   - Look for "ModalEdit extension FOUND" or "NOT FOUND"
+   - Check for any ERROR entries
+5. **Restart VS Code:** Sometimes required after first install
 
-### Extension doesn't load?
+**Without ModalEdit:** Extension works but always shows insert mode (red solid border). Install ModalEdit for full 4-mode support.
 
-1. Check the VS Code developer console (`Help > Toggle Developer Tools`) for error messages
-2. Run `ModalEdit Line Indicator: Show Log File` to view extension logs
-3. Verify your configuration syntax is valid JSON
+#### "Wrong colors for my theme"
+
+**Symptoms:** Colors don't match your dark/light theme, or invisible in high contrast.
+
+**Diagnosis & Fix:**
+1. **Check theme detection:** View logs (Output Channel) for "Color theme changed to: X"
+2. **Verify theme kind:** VS Code uses 4 kinds (dark, light, highContrastDark, highContrastLight)
+3. **Add theme override:** Settings → Add `[dark]` or `[light]` configuration:
+   ```json
+   {
+     "modaledit-line-indicator.normalMode": {
+       "[dark]": { "border": "#00ffff" },
+       "[light]": { "border": "#0000ff" }
+     }
+   }
+   ```
+4. **Test switching:** Change theme → Colors should update immediately
+5. **High contrast:** Use `[highContrastDark]` and `[highContrastLight]` with thicker borders (`borderWidth: "4px"`)
+
+#### "Output Channel keeps appearing"
+
+**Symptoms:** Output panel opens automatically on VS Code startup.
+
+**Affected Versions:** v0.1.0 - v0.1.2 (fixed in v0.1.3+)
+
+**Workaround for older versions:**
+1. Close Output panel
+2. Settings → "modaledit-line-indicator.logLevel" → Set to `"error"` (less verbose)
+3. Or upgrade to v0.1.3+
+
+**Fixed in v0.1.3:** Output panel no longer auto-opens on startup.
+
+#### "Performance lag/stutter"
+
+**Symptoms:** Cursor movement feels sluggish, high CPU usage.
+
+**Expected:** Smooth performance on modern hardware (<5% CPU, <5ms decoration updates).
+
+**Diagnosis & Fix:**
+1. **Check CPU usage:** Activity Monitor/Task Manager → VS Code process
+2. **If high CPU (>10%):**
+   - Disable other decoration extensions temporarily
+   - Check for conflicting extensions (other vim/modal editing tools)
+   - Verify no infinite loops in logs (shouldn't happen, but check)
+3. **If consistently slow:**
+   - Report as performance bug with system specs
+   - Include CPU model, RAM, VS Code version
+   - Attach logs showing decoration update times
+
+**Temporary disable:** Command Palette → "ModalEdit Line Indicator: Toggle Enabled/Disabled"
+
+#### "Borders not visible in [theme name]"
+
+**Symptoms:** Border present but hard to see against background.
+
+**Diagnosis & Fix:**
+1. **Identify theme colors:** Check your theme's background color
+2. **Add high-contrast colors:** Settings → Override border colors for better visibility:
+   ```json
+   {
+     "modaledit-line-indicator.normalMode": {
+       "border": "#00ff00",      // Bright green
+       "borderWidth": "3px"       // Thicker for visibility
+     }
+   }
+   ```
+3. **Test different styles:** Try `borderStyle: "solid"` instead of `"dotted"` for better visibility
+4. **Add background:** Use semi-transparent background for extra visibility:
+   ```json
+   {
+     "modaledit-line-indicator.normalMode": {
+       "border": "#00ff00",
+       "background": "rgba(0, 255, 0, 0.1)"  // Subtle green tint
+     }
+   }
+   ```
+
+### Diagnostic Commands
+
+**Access via:** Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) → Type command name
+
+- **"Show Log File":** Open detailed diagnostic logs (includes mode detection, theme changes, errors)
+- **"Query Current Mode (Debug)":** Shows currently detected mode + ModalEdit status
+- **"Toggle Enabled/Disabled":** Temporarily disable extension to test if it's causing issues
+- **"Clear Log File":** Reset logs before reproducing a bug for clean log output
+
+### Getting Help
+
+If issues persist after trying above solutions:
+
+1. **Collect diagnostics:**
+   - Run "Clear Log File" command
+   - Reproduce the issue
+   - Run "Show Log File" command
+   - Copy relevant log entries
+
+2. **Check existing issues:** [GitHub Issues](https://github.com/GoodDingo/modaledit-line-indicator/issues)
+
+3. **File new issue with:**
+   - VS Code version (`Help → About`)
+   - Extension version (Extensions panel)
+   - ModalEdit version (if installed)
+   - OS and version
+   - Steps to reproduce
+   - Relevant log entries
+   - Screenshots (if visual issue)
 
 ## License
 
