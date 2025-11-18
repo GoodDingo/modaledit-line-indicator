@@ -2,12 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import { ExtensionLogger } from './logging';
-import {
-  ModeConfig,
-  getMergedModeConfig,
-  getCurrentThemeKind,
-  getDefaultsForMode,
-} from './configuration';
+import { ConfigurationManager } from './configuration';
 
 type Mode = 'normal' | 'insert' | 'visual' | 'search';
 
@@ -29,11 +24,14 @@ class ModalEditLineIndicator implements vscode.Disposable {
   private readonly MODE_POLL_MS = 50; // Check mode every 50ms for instant detection
   private logger: ExtensionLogger;
   private lastLoggedStateKey: string = '';
+  private configManager: ConfigurationManager;
 
   constructor() {
     this.logger = new ExtensionLogger('ModalEdit Line Indicator');
     this.logger.log('=== ModalEditLineIndicator Constructor ===');
     this.logger.show(); // Auto-show output channel
+
+    this.configManager = ConfigurationManager.getInstance(this.logger);
 
     const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
     this.enabled = config.get<boolean>('enabled', true);
@@ -47,30 +45,11 @@ class ModalEditLineIndicator implements vscode.Disposable {
    * @returns Object containing decoration types for normal, insert, visual, and search modes
    */
   private createDecorations(): DecorationTypes {
-    const config = vscode.workspace.getConfiguration('modaledit-line-indicator');
-    const currentTheme = getCurrentThemeKind(this.logger);
-
-    this.logger.log(`Creating decorations for 4 modes (theme: ${currentTheme})`);
+    this.logger.log('Creating decorations for 4 modes');
 
     // Helper function to create decoration for a specific mode
     const createModeDecoration = (mode: Mode): vscode.TextEditorDecorationType => {
-      // Get nested mode configuration object
-      const modeConfigKey = `${mode}Mode`;
-      const userModeConfig = config.get<ModeConfig>(modeConfigKey);
-      const modeConfig =
-        userModeConfig ??
-        (config.inspect<ModeConfig>(modeConfigKey)?.defaultValue as ModeConfig | undefined) ??
-        {};
-
-      if (!userModeConfig) {
-        this.logger.debug(
-          `Using ${mode} mode defaults from schema because no user configuration was found.`
-        );
-      }
-
-      // Get defaults for this mode and merge with user config
-      const defaults = getDefaultsForMode(mode);
-      const merged = getMergedModeConfig(modeConfig, defaults, this.logger);
+      const merged = this.configManager.getConfig(mode);
 
       this.logger.log(
         `  ${mode.toUpperCase()}: bg=${merged.background}, border=${merged.borderWidth} ${merged.borderStyle} ${merged.border}`
