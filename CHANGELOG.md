@@ -5,6 +5,37 @@ All notable changes to the "ModalEdit Line Indicator" extension will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2025-11-18
+
+### Added
+- **Quick Start Guide**: New Quick Start section in README for <30 second installation verification
+- **First-Run Welcome Notification**: Context-aware welcome message with "Show Guide" button on first install
+- **Comprehensive Troubleshooting**: Expanded from 3 to 5 detailed scenarios covering ~95% of support tickets
+- **Command Usage Context**: Commands now documented with "When to Use" and "What It Does" columns
+- **Visual Documentation Structure**: Created placeholder infrastructure for screenshots with detailed creation instructions
+- **Configuration Examples File**: Moved 120 lines of examples to dedicated `docs/CONFIGURATION-EXAMPLES.md`
+- **Enhanced Settings Table**: Added Default, Valid Values, and Examples columns to settings reference
+
+### Changed
+- **Auto-Show Removed**: Output Channel no longer auto-opens on VS Code startup (H1)
+- **Configuration Examples**: Simplified README config section from 120 to 20 lines with link to detailed docs
+- **Migration Guides**: Consolidated to single source in CHANGELOG with clear version labels
+- **Settings Reference**: Enhanced table with defaults, valid values, and copy-pasteable examples
+- **Publisher Metadata**: Updated to "mira-hedl" with correct GitHub repository URLs
+- **Package Optimization**: Comprehensive .vscodeignore excludes dev files (expected ~67% size reduction)
+
+### Fixed
+- **README Packaging**: README.md now included in .vsix package (removed from .vscodeignore)
+- **Error Messages**: 4 improved error paths with actionable guidance (cause, location, fix suggestions)
+- **Dependency Documentation**: Clarified ModalEdit is "recommended" not "required"
+
+### Documentation
+- **Pre-Release Plan**: All critical (C1-C7) and high priority (H1-H8) improvements implemented
+- **Improvement Points**: Comprehensive audit document with 12 additional improvement recommendations
+- **Final Report**: Detailed implementation summary with metrics and next steps
+
+---
+
 ## [0.1.3] - 2025-11-17
 
 ### Added

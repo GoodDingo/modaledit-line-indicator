@@ -2,7 +2,7 @@
 
 This directory contains visual assets for the extension documentation.
 
-## Required Screenshots for v0.1.3 Release
+## Required Screenshots for v0.1.4 Release
 
 Before publishing to marketplace, create and add the following images:
 
