@@ -29,7 +29,6 @@ class ModalEditLineIndicator implements vscode.Disposable {
   constructor() {
     this.logger = new ExtensionLogger('ModalEdit Line Indicator');
     this.logger.log('=== ModalEditLineIndicator Constructor ===');
-    this.logger.show(); // Auto-show output channel
 
     this.configManager = ConfigurationManager.getInstance(this.logger);
 
@@ -425,8 +424,12 @@ class ModalEditLineIndicator implements vscode.Disposable {
           fs.writeFileSync(logPath, '');
           this.logger.log('=== LOG CLEARED BY USER ===');
           vscode.window.showInformationMessage('Log file cleared');
-        } catch (_error) {
-          vscode.window.showErrorMessage('Failed to clear log file');
+        } catch (error) {
+          const err = error as Error;
+          vscode.window.showErrorMessage(
+            `Failed to clear log file: ${err.message}. Try manually deleting: ${this.logger.getLogFilePath()}`
+          );
+          this.logger.error('Clear log failed', error);
         }
       })
     );
@@ -502,6 +505,17 @@ class ModalEditLineIndicator implements vscode.Disposable {
             this.logger.log('ModalEdit activated successfully');
           } catch (error) {
             this.logger.error('Failed to activate ModalEdit', error);
+            vscode.window
+              .showWarningMessage(
+                'ModalEdit Line Indicator: Could not activate ModalEdit extension. ' +
+                  'Mode detection may not work correctly.',
+                'Show Logs'
+              )
+              .then(choice => {
+                if (choice === 'Show Logs') {
+                  this.logger.show();
+                }
+              });
           }
         }
 
@@ -589,9 +603,68 @@ export function activate(context: vscode.ExtensionContext): void {
   indicator = new ModalEditLineIndicator();
   context.subscriptions.push(indicator);
 
-  indicator.activate().catch(error => {
-    console.error('Error activating ModalEdit Line Indicator:', error);
-  });
+  indicator
+    .activate()
+    .then(() => {
+      // Check if ModalEdit is installed
+      const modalEditInstalled = !!vscode.extensions.getExtension('johtela.vscode-modaledit');
+      const hasSeenWarning = context.globalState.get('hasSeenModalEditWarning', false);
+
+      // Show warning if ModalEdit not installed and user hasn't dismissed
+      if (!modalEditInstalled && !hasSeenWarning) {
+        vscode.window
+          .showWarningMessage(
+            'ModalEdit Line Indicator requires the ModalEdit extension for full functionality. ' +
+              'Without ModalEdit, only insert mode styling will be displayed.',
+            'Install ModalEdit',
+            'Learn More',
+            'Dismiss'
+          )
+          .then(choice => {
+            if (choice === 'Install ModalEdit') {
+              // Open extension search for ModalEdit
+              vscode.commands.executeCommand(
+                'workbench.extensions.search',
+                '@id:johtela.vscode-modaledit'
+              );
+            } else if (choice === 'Learn More') {
+              // Open Prerequisites documentation
+              vscode.env.openExternal(
+                vscode.Uri.parse(
+                  'https://github.com/GoodDingo/modaledit-line-indicator/blob/main/README.md#prerequisites'
+                )
+              );
+            } else if (choice === 'Dismiss') {
+              // Store dismissal in globalState
+              context.globalState.update('hasSeenModalEditWarning', true);
+            }
+          });
+      }
+
+      // First-run welcome notification (only if ModalEdit IS installed)
+      const isFirstRun = !context.globalState.get('hasRun', false);
+      if (isFirstRun && modalEditInstalled) {
+        vscode.window
+          .showInformationMessage(
+            'ModalEdit Line Indicator active! Switch modes (Esc/i/v) to see line highlighting.',
+            'Show Guide',
+            'Got It'
+          )
+          .then(choice => {
+            if (choice === 'Show Guide') {
+              vscode.env.openExternal(
+                vscode.Uri.parse(
+                  'https://github.com/GoodDingo/modaledit-line-indicator/blob/main/README.md#quick-start'
+                )
+              );
+            }
+          });
+        context.globalState.update('hasRun', true);
+      }
+    })
+    .catch(error => {
+      console.error('Error activating ModalEdit Line Indicator:', error);
+    });
 }
 
 /**

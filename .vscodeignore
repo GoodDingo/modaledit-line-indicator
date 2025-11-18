@@ -1,11 +1,62 @@
+# Version control
 .git
 .gitignore
+.github/
+
+# Build config
 tsconfig.json
-.eslintrc.json
+eslint.config.js
 .prettierrc.json
+.editorconfig
+esbuild.config.js
+
+# Source files (only bundled output needed)
 src/
-out/**/*.map
+
+# Build artifacts (keep only dist/extension.js)
+out/
+dist/**/*.map
+
+# Dependencies
 node_modules/
+
+# Package files
 *.vsix
+
+# Development and testing
+.vscode/
+.vscode-test/
+coverage/
+.nyc_output/
+*.log
+
+# Development documentation (keep README, CHANGELOG, LICENSE only)
+research/
+ai_docs/
+grumpy-review.md
+honest-judgement-mk1.md
+pre-release-audit.md
+pre-release-improvement-plan.md
+DEVELOPMENT.md
+CONTRIBUTING.md
+CLAUDE.md
+SECURITY.md
+
+# Git hooks
+.husky/
+
+# OS files
 .DS_Store
-README.md
+Thumbs.db
+desktop.ini
+
+# Claude Code
+.claude/
+
+# Others
+pre-release-improvement-plan
+docs/
+commitlint.config.js
+gh-actions-failure-analysis.md
+improvement-points.md
+Makefile

@@ -2,33 +2,50 @@
   "name": "modaledit-line-indicator",
   "displayName": "ModalEdit Line Indicator",
   "description": "Dynamic line highlight for ModalEdit modes (normal, insert, visual, search). Changes line highlight color and style based on current mode for instant visual feedback.",
-  "version": "0.1.3",
-  "publisher": "user",
+  "version": "0.2.0",
+  "publisher": "gooddingo",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/modaledit-line-indicator"
+    "url": "https://github.com/GoodDingo/modaledit-line-indicator.git"
   },
+  "bugs": {
+    "url": "https://github.com/GoodDingo/modaledit-line-indicator/issues"
+  },
+  "homepage": "https://github.com/GoodDingo/modaledit-line-indicator#readme",
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
+  "qna": "https://github.com/GoodDingo/modaledit-line-indicator/issues",
   "engines": {
-    "vscode": "^1.106.0"
+    "vscode": "^1.85.0"
   },
   "categories": [
     "Other",
-    "Themes",
-    "Keymaps"
+    "Visualization"
   ],
   "keywords": [
     "modaledit",
     "vim",
     "modal",
     "indicator",
-    "color",
-    "highlight"
+    "line",
+    "highlight",
+    "cursor",
+    "mode",
+    "visual feedback",
+    "modal editing",
+    "vim mode"
+  ],
+  "extensionDependencies": [
+    "johtela.vscode-modaledit"
   ],
   "activationEvents": [
     "onStartupFinished"
   ],
-  "main": "./out/extension.js",
+  "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
@@ -64,7 +81,12 @@
         },
         "modaledit-line-indicator.logLevel": {
           "type": "string",
-          "enum": ["error", "warn", "info", "debug"],
+          "enum": [
+            "error",
+            "warn",
+            "info",
+            "debug"
+          ],
           "default": "error",
           "scope": "window",
           "description": "Logging verbosity level. error: only errors (default), warn: errors and warnings, info: general lifecycle events and mode changes, debug: detailed diagnostics including cursor state and theme resolution"
@@ -117,35 +139,36 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.config.js --production",
+    "compile": "tsc --noEmit",
+    "compile:tests": "tsc -p ./",
+    "watch": "node esbuild.config.js --watch",
+    "pretest": "npm run compile && npm run compile:tests && npm run build && npm run lint",
     "test": "vscode-test",
-    "test:unit": "c8 npm run test",
     "coverage": "c8 --reporter=html --reporter=text npm run test",
     "lint": "eslint src --ext ts",
     "lint:fix": "eslint src --ext ts --fix",
     "format": "prettier --write \"src/**/*.ts\"",
     "format:check": "prettier --check \"src/**/*.ts\"",
     "package": "vsce package",
-    "clean": "rm -rf out coverage .nyc_output",
+    "clean": "rm -rf dist out coverage .nyc_output",
     "prepare": "husky"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
-    "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.10.1",
-    "@types/vscode": "^1.106.0",
-    "@typescript-eslint/eslint-plugin": "^8.46.4",
-    "@typescript-eslint/parser": "^8.46.4",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^8.47.0",
+    "@typescript-eslint/parser": "^8.47.0",
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
     "@vscode/vsce": "^3.3.2",
     "c8": "^10.1.3",
-    "eslint": "^8.57.1",
+    "esbuild": "^0.27.0",
+    "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "husky": "^9.1.7",

@@ -1,9 +1,14 @@
 # Compiled output
 out/
 dist/
-*.js
+out/**/*.js
+dist/**/*.js
 *.js.map
 *.d.ts
+
+# Allow root-level config files
+!*.config.js
+!.*.cjs
 
 # Node modules
 node_modules/

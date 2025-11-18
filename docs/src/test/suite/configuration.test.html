@@ -1,0 +1,568 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>
+            Project
+        </title>
+        <link rel="icon" type="image/icon" href="../../../images/favicon.svg" />
+        <link rel="stylesheet" href="../../../dist/normal.css" />
+        
+    </head>
+    <body data-syntax-highlight="monokai"
+        data-theme="purple-rain">
+        
+        <div id="navbar">
+            
+    <div class="navmenu ">
+        
+    <div class="navitem " >
+        <a class="title enabled" href="../../../index.html" >
+            
+            <span>Project</span>
+        </a>
+        
+    </div>
+    <div class="navitem " >
+        <a   >
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 10l6 6l6 -6h-12" />
+        </svg>
+            <span>Syntax Highlight</span>
+        </a>
+        
+    <div class="navmenu toggle">
+        
+    <div class="navitem " id="coding-horror">
+        <a   onclick="document.body.syntaxHighlight('coding-horror')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Coding Horror</span>
+        </a>
+        
+    </div>
+    <div class="navitem active" id="monokai">
+        <a   onclick="document.body.syntaxHighlight('monokai')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Monokai</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="solarized-light">
+        <a   onclick="document.body.syntaxHighlight('solarized-light')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Solarized Light</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="son-of-obsidian">
+        <a   onclick="document.body.syntaxHighlight('son-of-obsidian')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Son of Obsidian</span>
+        </a>
+        
+    </div>
+    </div>
+    </div>
+    <div class="navitem " >
+        <a   >
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 10l6 6l6 -6h-12" />
+        </svg>
+            <span>Theme</span>
+        </a>
+        
+    <div class="navmenu toggle">
+        
+    <div class="navitem " id="blueberry">
+        <a   onclick="document.body.theme('blueberry')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Blueberry</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="book-cover">
+        <a   onclick="document.body.theme('book-cover')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Book Cover</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="brownie">
+        <a   onclick="document.body.theme('brownie')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Brownie</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="camouflage">
+        <a   onclick="document.body.theme('camouflage')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Camouflage</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="chocolate">
+        <a   onclick="document.body.theme('chocolate')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Chocolate</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="greyhound">
+        <a   onclick="document.body.theme('greyhound')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Greyhound</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="ice-age">
+        <a   onclick="document.body.theme('ice-age')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Ice Age</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="mustard">
+        <a   onclick="document.body.theme('mustard')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Mustard</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="peachy">
+        <a   onclick="document.body.theme('peachy')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Peachy</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="red-alert">
+        <a   onclick="document.body.theme('red-alert')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Red Alert</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="ultra-violet">
+        <a   onclick="document.body.theme('ultra-violet')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Ultra Violet</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="vintage">
+        <a   onclick="document.body.theme('vintage')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Vintage</span>
+        </a>
+        
+    </div>
+    </div>
+    </div>
+    </div>
+            
+    <a class="hamburger">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </a>
+        </div>
+        
+        <div class="layout">
+            <div class="sidepane narrow-scrollbars">
+                
+        <div class="tocmenu">
+            <h3>Table of Contents</h3>
+            
+    <ul>
+        
+    </ul>
+        </div>
+                <div class="toc-button"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M7 7l5 5l-5 5" />
+            <path d="M13 7l5 5l-5 5" />
+        </svg></div>
+            </div>
+            
+        <div class="contentarea closepopups">
+            <pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">import</span> <span class="punctuation">*</span> <span class="keyword">as</span> <span id="6" data-toggle="tooltip" data-title="typeof assert">assert</span> <span class="keyword">from</span> <span class="string">&#039;assert&#039;</span><span class="punctuation">;</span>
+<span class="keyword">import</span> <span class="punctuation">{</span> <span id="42" data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span> <span class="punctuation">}</span> <span class="keyword">from</span> <span class="string">&#039;../helpers/testHelpers&#039;</span><span class="punctuation">;</span>
+</code></pre>
+<p>Configuration Management Tests</p>
+<p>Tests configuration reading, updating, and validation.
+Updated for nested configuration structure with theme-specific overrides.</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span data-toggle="tooltip" data-title="Mocha.SuiteFunction">suite</span><span class="punctuation">(</span><span class="string">&#039;Configuration Tests&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+  <span data-toggle="tooltip" data-title="Mocha.HookFunction&lt;void&gt;">teardown</span><span class="punctuation">(</span><span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5309"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;void&gt;">resetAllConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Default configuration values are correct&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="446" data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Test enabled flag</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><a href="configuration.test.html#446"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;enabled&#039;</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;enabled should default to true&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Test nested mode configurations</span>
+    <span class="keyword">const</span> <span id="643" data-toggle="tooltip" data-title="unknown">normalMode</span> <span class="punctuation">=</span> <a href="configuration.test.html#446"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">deepStrictEqual</span><span class="punctuation">(</span>
+      <a href="configuration.test.html#643"><span data-toggle="tooltip" data-title="unknown">normalMode</span></a><span class="punctuation">,</span>
+      <span class="punctuation">{</span>
+        <span id="736" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(255, 255, 255, 0)&#039;</span><span class="punctuation">,</span>
+        <span id="782" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#00aa00&#039;</span><span class="punctuation">,</span>
+        <span id="809" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dotted&#039;</span><span class="punctuation">,</span>
+        <span id="840" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;normalMode should have correct defaults&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">const</span> <span id="943" data-toggle="tooltip" data-title="unknown">insertMode</span> <span class="punctuation">=</span> <a href="configuration.test.html#446"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;insertMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">deepStrictEqual</span><span class="punctuation">(</span>
+      <a href="configuration.test.html#943"><span data-toggle="tooltip" data-title="unknown">insertMode</span></a><span class="punctuation">,</span>
+      <span class="punctuation">{</span>
+        <span id="1036" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(255, 255, 255, 0)&#039;</span><span class="punctuation">,</span>
+        <span id="1082" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#aa0000&#039;</span><span class="punctuation">,</span>
+        <span id="1109" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;solid&#039;</span><span class="punctuation">,</span>
+        <span id="1139" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;insertMode should have correct defaults&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">const</span> <span id="1242" data-toggle="tooltip" data-title="unknown">visualMode</span> <span class="punctuation">=</span> <a href="configuration.test.html#446"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;visualMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">deepStrictEqual</span><span class="punctuation">(</span>
+      <a href="configuration.test.html#1242"><span data-toggle="tooltip" data-title="unknown">visualMode</span></a><span class="punctuation">,</span>
+      <span class="punctuation">{</span>
+        <span id="1335" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(255, 255, 255, 0)&#039;</span><span class="punctuation">,</span>
+        <span id="1381" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#0000aa&#039;</span><span class="punctuation">,</span>
+        <span id="1408" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dashed&#039;</span><span class="punctuation">,</span>
+        <span id="1439" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;visualMode should have correct defaults&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">const</span> <span id="1542" data-toggle="tooltip" data-title="unknown">searchMode</span> <span class="punctuation">=</span> <a href="configuration.test.html#446"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;searchMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">deepStrictEqual</span><span class="punctuation">(</span>
+      <a href="configuration.test.html#1542"><span data-toggle="tooltip" data-title="unknown">searchMode</span></a><span class="punctuation">,</span>
+      <span class="punctuation">{</span>
+        <span id="1635" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(255, 255, 255, 0)&#039;</span><span class="punctuation">,</span>
+        <span id="1681" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#aaaa00&#039;</span><span class="punctuation">,</span>
+        <span id="1708" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;solid&#039;</span><span class="punctuation">,</span>
+        <span id="1738" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;searchMode should have correct defaults&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Test logLevel configuration</span>
+    <span class="keyword">const</span> <span id="1876" data-toggle="tooltip" data-title="unknown">logLevel</span> <span class="punctuation">=</span> <a href="configuration.test.html#446"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;logLevel&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><a href="configuration.test.html#1876"><span data-toggle="tooltip" data-title="unknown">logLevel</span></a><span class="punctuation">,</span> <span class="string">&#039;error&#039;</span><span class="punctuation">,</span> <span class="string">&#039;logLevel should default to error&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Can read nested configuration values&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="2062" data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">const</span> <span id="2107" data-toggle="tooltip" data-title="unknown">enabled</span> <span class="punctuation">=</span> <a href="configuration.test.html#2062"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;enabled&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="2150" data-toggle="tooltip" data-title="unknown">normalMode</span> <span class="punctuation">=</span> <a href="configuration.test.html#2062"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="configuration.test.html#2107"><span data-toggle="tooltip" data-title="unknown">enabled</span></a><span class="punctuation">,</span> <span class="string">&#039;boolean&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="configuration.test.html#2150"><span data-toggle="tooltip" data-title="unknown">normalMode</span></a><span class="punctuation">,</span> <span class="string">&#039;object&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="configuration.test.html#2150"><span data-toggle="tooltip" data-title="unknown">normalMode</span></a><span class="punctuation">,</span> <span class="string">&#039;normalMode should be an object&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Can update enabled configuration&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;enabled&#039;</span><span class="punctuation">,</span> <span class="keyword">false</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">let</span> <span id="2479" data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><a href="configuration.test.html#2479"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;enabled&#039;</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="keyword">false</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;enabled&#039;</span><span class="punctuation">,</span> <span class="keyword">true</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Re-get config to see updated value</span>
+    <a href="configuration.test.html#2479"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><a href="configuration.test.html#2479"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;enabled&#039;</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="keyword">true</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Can update nested mode configuration&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="2830" data-toggle="tooltip" data-title="{ background: string; border: string; borderStyle: string; borderWidth: string; }">newNormalMode</span> <span class="punctuation">=</span> <span class="punctuation">{</span>
+      <span id="2848" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;#123456&#039;</span><span class="punctuation">,</span>
+      <span id="2877" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#654321&#039;</span><span class="punctuation">,</span>
+      <span id="2902" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;solid&#039;</span><span class="punctuation">,</span>
+      <span id="2930" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;3px&#039;</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <a href="configuration.test.html#2830"><span data-toggle="tooltip" data-title="{ background: string; border: string; borderStyle: string; borderWidth: string; }">newNormalMode</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">const</span> <span id="3037" data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">deepStrictEqual</span><span class="punctuation">(</span><a href="configuration.test.html#3037"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">,</span> <a href="configuration.test.html#2830"><span data-toggle="tooltip" data-title="{ background: string; border: string; borderStyle: string; borderWidth: string; }">newNormalMode</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Can update mode configuration with theme overrides&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="3232" data-toggle="tooltip" data-title="{ background: string; borderStyle: string; borderWidth: string; &#039;[dark]&#039;: { border: string; }; &#039;[light]&#039;: { border: string; }; }">newNormalMode</span> <span class="punctuation">=</span> <span class="punctuation">{</span>
+      <span id="3250" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(255, 255, 255, 0)&#039;</span><span class="punctuation">,</span>
+      <span id="3294" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dotted&#039;</span><span class="punctuation">,</span>
+      <span id="3323" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span>
+      <span class="string">&#039;[dark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="3367" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#00ffff&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[light]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="3422" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#0000ff&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <a href="configuration.test.html#3232"><span data-toggle="tooltip" data-title="{ background: string; borderStyle: string; borderWidth: string; &#039;[dark]&#039;: { border: string; }; &#039;[light]&#039;: { border: string; }; }">newNormalMode</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">const</span> <span id="3539" data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="3583" data-toggle="tooltip" data-title="Record&lt;string, unknown&gt;">normalMode</span> <span class="punctuation">=</span> <a href="configuration.test.html#3539"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span> <span class="keyword">as</span> <span class="typename" data-toggle="tooltip" data-title="Record&lt;K, T&gt;">Record</span><span class="punctuation">&lt;</span><span class="keyword">string</span><span class="punctuation">,</span> <span class="keyword">unknown</span><span class="punctuation">&gt;</span><span class="punctuation">;</span>
+
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="configuration.test.html#3583"><span data-toggle="tooltip" data-title="Record&lt;string, unknown&gt;">normalMode</span></a><span class="punctuation">,</span> <span class="string">&#039;normalMode should exist&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Compare nested objects using deepStrictEqual</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">deepStrictEqual</span><span class="punctuation">(</span><a href="configuration.test.html#3583"><span data-toggle="tooltip" data-title="Record&lt;string, unknown&gt;">normalMode</span></a><span class="punctuation">[</span><span class="string">&#039;[dark]&#039;</span><span class="punctuation">]</span><span class="punctuation">,</span> <a href="configuration.test.html#3232"><span data-toggle="tooltip" data-title="{ background: string; borderStyle: string; borderWidth: string; &#039;[dark]&#039;: { border: string; }; &#039;[light]&#039;: { border: string; }; }">newNormalMode</span></a><span class="punctuation">[</span><span class="string">&#039;[dark]&#039;</span><span class="punctuation">]</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">deepStrictEqual</span><span class="punctuation">(</span><a href="configuration.test.html#3583"><span data-toggle="tooltip" data-title="Record&lt;string, unknown&gt;">normalMode</span></a><span class="punctuation">[</span><span class="string">&#039;[light]&#039;</span><span class="punctuation">]</span><span class="punctuation">,</span> <a href="configuration.test.html#3232"><span data-toggle="tooltip" data-title="{ background: string; borderStyle: string; borderWidth: string; &#039;[dark]&#039;: { border: string; }; &#039;[light]&#039;: { border: string; }; }">newNormalMode</span></a><span class="punctuation">[</span><span class="string">&#039;[light]&#039;</span><span class="punctuation">]</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Can reset nested configuration to default&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="comment">// Change configuration</span>
+    <span class="keyword">const</span> <span id="4020" data-toggle="tooltip" data-title="{ background: string; border: string; borderStyle: string; borderWidth: string; }">customConfig</span> <span class="punctuation">=</span> <span class="punctuation">{</span>
+      <span id="4037" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;#ff0000&#039;</span><span class="punctuation">,</span>
+      <span id="4066" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#00ff00&#039;</span><span class="punctuation">,</span>
+      <span id="4091" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dashed&#039;</span><span class="punctuation">,</span>
+      <span id="4120" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;5px&#039;</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <a href="configuration.test.html#4020"><span data-toggle="tooltip" data-title="{ background: string; border: string; borderStyle: string; borderWidth: string; }">customConfig</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">deepStrictEqual</span><span class="punctuation">(</span><a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">,</span> <a href="configuration.test.html#4020"><span data-toggle="tooltip" data-title="{ background: string; border: string; borderStyle: string; borderWidth: string; }">customConfig</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Reset</span>
+    <span class="keyword">await</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Should be back to default</span>
+    <span class="keyword">const</span> <span id="4407" data-toggle="tooltip" data-title="{ background: string; border: string; borderStyle: string; borderWidth: string; }">defaultNormalMode</span> <span class="punctuation">=</span> <span class="punctuation">{</span>
+      <span id="4429" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(255, 255, 255, 0)&#039;</span><span class="punctuation">,</span>
+      <span id="4473" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#00aa00&#039;</span><span class="punctuation">,</span>
+      <span id="4498" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dotted&#039;</span><span class="punctuation">,</span>
+      <span id="4527" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">;</span>
+
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">deepStrictEqual</span><span class="punctuation">(</span><a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">,</span> <a href="configuration.test.html#4407"><span data-toggle="tooltip" data-title="{ background: string; border: string; borderStyle: string; borderWidth: string; }">defaultNormalMode</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Configuration changes are persisted&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="comment">// Change config</span>
+    <span class="keyword">const</span> <span id="4749" data-toggle="tooltip" data-title="{ background: string; border: string; borderStyle: string; borderWidth: string; }">newInsertMode</span> <span class="punctuation">=</span> <span class="punctuation">{</span>
+      <span id="4767" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(0, 0, 0, 0.1)&#039;</span><span class="punctuation">,</span>
+      <span id="4807" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#ff00ff&#039;</span><span class="punctuation">,</span>
+      <span id="4832" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;double&#039;</span><span class="punctuation">,</span>
+      <span id="4861" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;4px&#039;</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;insertMode&#039;</span><span class="punctuation">,</span> <a href="configuration.test.html#4749"><span data-toggle="tooltip" data-title="{ background: string; border: string; borderStyle: string; borderWidth: string; }">newInsertMode</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Re-read config (simulates reload)</span>
+    <span class="keyword">const</span> <span id="5009" data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Should still have changed value</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">deepStrictEqual</span><span class="punctuation">(</span><a href="configuration.test.html#5009"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;insertMode&#039;</span><span class="punctuation">)</span><span class="punctuation">,</span> <a href="configuration.test.html#4749"><span data-toggle="tooltip" data-title="{ background: string; border: string; borderStyle: string; borderWidth: string; }">newInsertMode</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Invalid nested configuration values are handled&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="comment">// Try to set invalid structure</span>
+    <span class="keyword">await</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span> <span id="5315" data-toggle="tooltip" data-title="string">invalid</span><span class="punctuation">:</span> <span class="string">&#039;structure&#039;</span> <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// VS Code might accept it or reject it</span>
+    <span class="comment">// Either way, should not crash</span>
+    <span class="keyword">const</span> <span id="5431" data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="5475" data-toggle="tooltip" data-title="unknown">value</span> <span class="punctuation">=</span> <a href="configuration.test.html#5431"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Test passes if we got here without error</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="configuration.test.html#5475"><span data-toggle="tooltip" data-title="unknown">value</span></a> <span class="punctuation">!==</span> <span data-toggle="tooltip" data-title="undefined">undefined</span><span class="punctuation">,</span> <span class="string">&#039;Should have some value&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Configuration scope is correct&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="5686" data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Check that we&#039;re getting workspace configuration</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="configuration.test.html#5686"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">,</span> <span class="string">&#039;Configuration should exist&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="configuration.test.html#5686"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">,</span> <span class="string">&#039;function&#039;</span><span class="punctuation">,</span> <span class="string">&#039;Should have get method&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="configuration.test.html#5686"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(section: string, value: any, configurationTarget?: ConfigurationTarget | boolean | null, overrideInLanguage?: boolean) =&gt; Thenable&lt;void&gt;">update</span><span class="punctuation">,</span> <span class="string">&#039;function&#039;</span><span class="punctuation">,</span> <span class="string">&#039;Should have update method&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Can read configuration with correct types&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="6075" data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Boolean</span>
+    <span class="keyword">const</span> <span id="6135" data-toggle="tooltip" data-title="boolean | undefined">enabled</span> <span class="punctuation">=</span> <a href="configuration.test.html#6075"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">&lt;</span><span class="keyword">boolean</span><span class="punctuation">&gt;</span><span class="punctuation">(</span><span class="string">&#039;enabled&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="configuration.test.html#6135"><span data-toggle="tooltip" data-title="boolean | undefined">enabled</span></a><span class="punctuation">,</span> <span class="string">&#039;boolean&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Nested object</span>
+    <span class="keyword">const</span> <span id="6260" data-toggle="tooltip" data-title="Record&lt;string, unknown&gt; | undefined">normalMode</span> <span class="punctuation">=</span> <a href="configuration.test.html#6075"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">&lt;</span><span class="typename" data-toggle="tooltip" data-title="Record&lt;K, T&gt;">Record</span><span class="punctuation">&lt;</span><span class="keyword">string</span><span class="punctuation">,</span> <span class="keyword">unknown</span><span class="punctuation">&gt;</span><span class="punctuation">&gt;</span><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="configuration.test.html#6260"><span data-toggle="tooltip" data-title="Record&lt;string, unknown&gt; | undefined">normalMode</span></a><span class="punctuation">,</span> <span class="string">&#039;object&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="configuration.test.html#6260"><span data-toggle="tooltip" data-title="Record&lt;string, unknown&gt; | undefined">normalMode</span></a><span class="punctuation">,</span> <span class="string">&#039;normalMode should be an object&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Check object properties</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="configuration.test.html#6260"><span data-toggle="tooltip" data-title="Record&lt;string, unknown&gt;">normalMode</span></a><span class="punctuation">.</span>background<span class="punctuation">,</span> <span class="string">&#039;string&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="configuration.test.html#6260"><span data-toggle="tooltip" data-title="Record&lt;string, unknown&gt;">normalMode</span></a><span class="punctuation">.</span>border<span class="punctuation">,</span> <span class="string">&#039;string&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span>
+      <span class="punctuation">[</span><span class="string">&#039;solid&#039;</span><span class="punctuation">,</span> <span class="string">&#039;dashed&#039;</span><span class="punctuation">,</span> <span class="string">&#039;dotted&#039;</span><span class="punctuation">,</span> <span class="string">&#039;double&#039;</span><span class="punctuation">,</span> <span class="string">&#039;groove&#039;</span><span class="punctuation">,</span> <span class="string">&#039;ridge&#039;</span><span class="punctuation">,</span> <span class="string">&#039;inset&#039;</span><span class="punctuation">,</span> <span class="string">&#039;outset&#039;</span><span class="punctuation">]</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(searchElement: string, fromIndex?: number) =&gt; boolean">includes</span><span class="punctuation">(</span>
+        <a href="configuration.test.html#6260"><span data-toggle="tooltip" data-title="Record&lt;string, unknown&gt;">normalMode</span></a><span class="punctuation">.</span>borderStyle <span class="keyword">as</span> <span class="keyword">string</span>
+      <span class="punctuation">)</span><span class="punctuation">,</span>
+      <span class="string">&#039;borderStyle should be valid CSS border style&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="configuration.test.html#6260"><span data-toggle="tooltip" data-title="Record&lt;string, unknown&gt;">normalMode</span></a><span class="punctuation">.</span>borderWidth<span class="punctuation">,</span> <span class="string">&#039;string&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Can read and update logLevel configuration&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="6962" data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Test default value</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><a href="configuration.test.html#6962"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;logLevel&#039;</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="string">&#039;error&#039;</span><span class="punctuation">,</span> <span class="string">&#039;Default logLevel should be error&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Test updating to each valid level</span>
+    <span class="keyword">const</span> <span id="7168" data-toggle="tooltip" data-title="string[]">validLevels</span> <span class="punctuation">=</span> <span class="punctuation">[</span><span class="string">&#039;error&#039;</span><span class="punctuation">,</span> <span class="string">&#039;warn&#039;</span><span class="punctuation">,</span> <span class="string">&#039;info&#039;</span><span class="punctuation">,</span> <span class="string">&#039;debug&#039;</span><span class="punctuation">]</span><span class="punctuation">;</span>
+
+    <span class="keyword">for</span> <span class="punctuation">(</span><span class="keyword">const</span> <span id="7234" data-toggle="tooltip" data-title="string">level</span> <span class="keyword">of</span> <a href="configuration.test.html#7168"><span data-toggle="tooltip" data-title="string[]">validLevels</span></a><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="keyword">await</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;logLevel&#039;</span><span class="punctuation">,</span> <a href="configuration.test.html#7234"><span data-toggle="tooltip" data-title="string">level</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+      <span class="keyword">const</span> <span id="7324" data-toggle="tooltip" data-title="WorkspaceConfiguration">updatedConfig</span> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+      <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span>
+        <a href="configuration.test.html#7324"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">updatedConfig</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;logLevel&#039;</span><span class="punctuation">)</span><span class="punctuation">,</span>
+        <a href="configuration.test.html#7234"><span data-toggle="tooltip" data-title="string">level</span></a><span class="punctuation">,</span>
+        <span class="string">`logLevel should be updatable to ${</span><a href="configuration.test.html#7234"><span data-toggle="tooltip" data-title="string">level</span></a><span class="string">}`</span>
+      <span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+
+    <span class="comment">// Reset to default</span>
+    <span class="keyword">await</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;logLevel&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="7593" data-toggle="tooltip" data-title="WorkspaceConfiguration">resetConfig</span> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><a href="configuration.test.html#7593"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">resetConfig</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;logLevel&#039;</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="string">&#039;error&#039;</span><span class="punctuation">,</span> <span class="string">&#039;logLevel should reset to error&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;logLevel configuration has correct type&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="7803" data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="configuration.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="7847" data-toggle="tooltip" data-title="string | undefined">logLevel</span> <span class="punctuation">=</span> <a href="configuration.test.html#7803"><span data-toggle="tooltip" data-title="WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">&lt;</span><span class="keyword">string</span><span class="punctuation">&gt;</span><span class="punctuation">(</span><span class="string">&#039;logLevel&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="configuration.test.html#7847"><span data-toggle="tooltip" data-title="string | undefined">logLevel</span></a><span class="punctuation">,</span> <span class="string">&#039;string&#039;</span><span class="punctuation">,</span> <span class="string">&#039;logLevel should be a string&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="configuration.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span>
+      <span class="punctuation">[</span><span class="string">&#039;error&#039;</span><span class="punctuation">,</span> <span class="string">&#039;warn&#039;</span><span class="punctuation">,</span> <span class="string">&#039;info&#039;</span><span class="punctuation">,</span> <span class="string">&#039;debug&#039;</span><span class="punctuation">]</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(searchElement: string, fromIndex?: number) =&gt; boolean">includes</span><span class="punctuation">(</span><a href="configuration.test.html#7847"><span data-toggle="tooltip" data-title="string | undefined">logLevel</span></a> <span class="punctuation">||</span> <span class="string">&#039;&#039;</span><span class="punctuation">)</span><span class="punctuation">,</span>
+      <span class="string">&#039;logLevel should be one of the valid enum values&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+<span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+</code></pre>
+
+        </div>
+            <div class="sidepane narrow-scrollbars">
+                
+        <div class="pagemenu">
+            <h3>On This Page</h3>
+                <ul class="pagetree">
+                </ul>
+        </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <a class="footer-button disabled">
+            Previous
+        </a>
+            <div class="footer-text">
+                <p>Copyright © 2023</p>
+                <p>Generated by 
+                    <a href="https://johtela.github.io/litscript">LiTScript</a>
+                </p>
+            </div>
+            <a class="footer-button disabled">
+            Next
+        </a>
+        </div>
+    
+        <script src="../../../dist/normal.js"></script>
+    </body>
+    </html>

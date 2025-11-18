@@ -1,0 +1,426 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>
+            Project
+        </title>
+        <link rel="icon" type="image/icon" href="../../../images/favicon.svg" />
+        <link rel="stylesheet" href="../../../dist/normal.css" />
+        
+    </head>
+    <body data-syntax-highlight="monokai"
+        data-theme="purple-rain">
+        
+        <div id="navbar">
+            
+    <div class="navmenu ">
+        
+    <div class="navitem " >
+        <a class="title enabled" href="../../../index.html" >
+            
+            <span>Project</span>
+        </a>
+        
+    </div>
+    <div class="navitem " >
+        <a   >
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 10l6 6l6 -6h-12" />
+        </svg>
+            <span>Syntax Highlight</span>
+        </a>
+        
+    <div class="navmenu toggle">
+        
+    <div class="navitem " id="coding-horror">
+        <a   onclick="document.body.syntaxHighlight('coding-horror')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Coding Horror</span>
+        </a>
+        
+    </div>
+    <div class="navitem active" id="monokai">
+        <a   onclick="document.body.syntaxHighlight('monokai')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Monokai</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="solarized-light">
+        <a   onclick="document.body.syntaxHighlight('solarized-light')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Solarized Light</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="son-of-obsidian">
+        <a   onclick="document.body.syntaxHighlight('son-of-obsidian')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Son of Obsidian</span>
+        </a>
+        
+    </div>
+    </div>
+    </div>
+    <div class="navitem " >
+        <a   >
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 10l6 6l6 -6h-12" />
+        </svg>
+            <span>Theme</span>
+        </a>
+        
+    <div class="navmenu toggle">
+        
+    <div class="navitem " id="blueberry">
+        <a   onclick="document.body.theme('blueberry')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Blueberry</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="book-cover">
+        <a   onclick="document.body.theme('book-cover')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Book Cover</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="brownie">
+        <a   onclick="document.body.theme('brownie')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Brownie</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="camouflage">
+        <a   onclick="document.body.theme('camouflage')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Camouflage</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="chocolate">
+        <a   onclick="document.body.theme('chocolate')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Chocolate</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="greyhound">
+        <a   onclick="document.body.theme('greyhound')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Greyhound</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="ice-age">
+        <a   onclick="document.body.theme('ice-age')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Ice Age</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="mustard">
+        <a   onclick="document.body.theme('mustard')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Mustard</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="peachy">
+        <a   onclick="document.body.theme('peachy')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Peachy</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="red-alert">
+        <a   onclick="document.body.theme('red-alert')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Red Alert</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="ultra-violet">
+        <a   onclick="document.body.theme('ultra-violet')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Ultra Violet</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="vintage">
+        <a   onclick="document.body.theme('vintage')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Vintage</span>
+        </a>
+        
+    </div>
+    </div>
+    </div>
+    </div>
+            
+    <a class="hamburger">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </a>
+        </div>
+        
+        <div class="layout">
+            <div class="sidepane narrow-scrollbars">
+                
+        <div class="tocmenu">
+            <h3>Table of Contents</h3>
+            
+    <ul>
+        
+    </ul>
+        </div>
+                <div class="toc-button"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M7 7l5 5l-5 5" />
+            <path d="M13 7l5 5l-5 5" />
+        </svg></div>
+            </div>
+            
+        <div class="contentarea closepopups">
+            <pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">import</span> <span class="punctuation">*</span> <span class="keyword">as</span> <span id="6" data-toggle="tooltip" data-title="typeof assert">assert</span> <span class="keyword">from</span> <span class="string">&#039;assert&#039;</span><span class="punctuation">;</span>
+<span class="keyword">import</span> <span class="punctuation">*</span> <span class="keyword">as</span> <span id="40" data-toggle="tooltip" data-title="typeof vscode">vscode</span> <span class="keyword">from</span> <span class="string">&#039;vscode&#039;</span><span class="punctuation">;</span>
+<span class="keyword">import</span> <span class="punctuation">{</span> <span id="76" data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span> <span class="punctuation">}</span> <span class="keyword">from</span> <span class="string">&#039;../helpers/testHelpers&#039;</span><span class="punctuation">;</span>
+</code></pre>
+<p>Mode Detection Tests</p>
+<p>Tests the extension's ability to detect ModalEdit's current mode.</p>
+<p>IMPORTANT: Cannot test decoration colors (API limitation).
+These tests verify the LOGIC of mode detection, not visual output.</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span data-toggle="tooltip" data-title="Mocha.SuiteFunction">suite</span><span class="punctuation">(</span><span class="string">&#039;Mode Detection Tests&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+  <span data-toggle="tooltip" data-title="Mocha.HookFunction&lt;void&gt;">teardown</span><span class="punctuation">(</span><span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1486"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;void&gt;">closeAllEditors</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Extension detects ModalEdit if installed&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="541" data-toggle="tooltip" data-title="vscode.Extension&lt;unknown&gt; | undefined">modalEdit</span> <span class="punctuation">=</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#2547"><span class="member" data-toggle="tooltip" data-title="() =&gt; vscode.Extension&lt;unknown&gt; | undefined">getModalEditExtension</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">if</span> <span class="punctuation">(</span><a href="modeDetection.test.html#541"><span data-toggle="tooltip" data-title="vscode.Extension&lt;unknown&gt; | undefined">modalEdit</span></a><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span data-toggle="tooltip" data-title="Console">console</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(message?: any, ...optionalParams: any[]) =&gt; void">log</span><span class="punctuation">(</span><span class="string">&#039;✓ ModalEdit detected:&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+        <span id="657" data-toggle="tooltip" data-title="string">id</span><span class="punctuation">:</span> <a href="modeDetection.test.html#541"><span data-toggle="tooltip" data-title="vscode.Extension&lt;unknown&gt;">modalEdit</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="string">id</span><span class="punctuation">,</span>
+        <span id="683" data-toggle="tooltip" data-title="any">version</span><span class="punctuation">:</span> <a href="modeDetection.test.html#541"><span data-toggle="tooltip" data-title="vscode.Extension&lt;unknown&gt;">modalEdit</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="any">packageJSON</span><span class="punctuation">.</span>version<span class="punctuation">,</span>
+        <span id="731" data-toggle="tooltip" data-title="boolean">isActive</span><span class="punctuation">:</span> <a href="modeDetection.test.html#541"><span data-toggle="tooltip" data-title="vscode.Extension&lt;unknown&gt;">modalEdit</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="boolean">isActive</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+      <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="modeDetection.test.html#541"><span data-toggle="tooltip" data-title="vscode.Extension&lt;unknown&gt;">modalEdit</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="any">packageJSON</span><span class="punctuation">.</span>version<span class="punctuation">,</span> <span class="string">&#039;Should have version&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span> <span class="keyword">else</span> <span class="punctuation">{</span>
+      <span data-toggle="tooltip" data-title="Console">console</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(message?: any, ...optionalParams: any[]) =&gt; void">log</span><span class="punctuation">(</span><span class="string">&#039;⚠️  ModalEdit not installed - some tests will be skipped&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+
+    <span class="comment">// Test passes either way - informational only</span>
+    <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Can query modaledit.normal context&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">if</span> <span class="punctuation">(</span><span class="punctuation">!</span><span class="punctuation">(</span><span class="keyword">await</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#3002"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureModalEditActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span data-toggle="tooltip" data-title="Console">console</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(message?: any, ...optionalParams: any[]) =&gt; void">log</span><span class="punctuation">(</span><span class="string">&#039;Skipping - ModalEdit not installed&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+      <span class="keyword">return</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+
+    <span class="comment">// Query the context</span>
+    <span class="keyword">const</span> <span id="1257" data-toggle="tooltip" data-title="boolean | undefined">contextValue</span> <span class="punctuation">=</span> <span class="keyword">await</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#3712"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean | undefined&gt;">queryModalEditContext</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span data-toggle="tooltip" data-title="Console">console</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(message?: any, ...optionalParams: any[]) =&gt; void">log</span><span class="punctuation">(</span><span class="string">&#039;Context value:&#039;</span><span class="punctuation">,</span> <a href="modeDetection.test.html#1257"><span data-toggle="tooltip" data-title="boolean | undefined">contextValue</span></a><span class="punctuation">,</span> <span class="string">&#039;Type:&#039;</span><span class="punctuation">,</span> <span class="keyword">typeof</span> <a href="modeDetection.test.html#1257"><span data-toggle="tooltip" data-title="boolean | undefined">contextValue</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Should be boolean or undefined (not null, not string, etc.)</span>
+    <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span>
+      <span class="keyword">typeof</span> <a href="modeDetection.test.html#1257"><span data-toggle="tooltip" data-title="boolean | undefined">contextValue</span></a> <span class="punctuation">===</span> <span class="string">&#039;boolean&#039;</span> <span class="punctuation">||</span> <a href="modeDetection.test.html#1257"><span data-toggle="tooltip" data-title="undefined">contextValue</span></a> <span class="punctuation">===</span> <span data-toggle="tooltip" data-title="undefined">undefined</span><span class="punctuation">,</span>
+      <span class="string">`Context should be boolean or undefined, got: ${</span><span class="keyword">typeof</span> <a href="modeDetection.test.html#1257"><span data-toggle="tooltip" data-title="boolean | undefined">contextValue</span></a><span class="string">}`</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Extension activates without errors&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="1708" data-toggle="tooltip" data-title="vscode.Extension&lt;unknown&gt; | undefined">ext</span> <span class="punctuation">=</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5760"><span class="member" data-toggle="tooltip" data-title="() =&gt; vscode.Extension&lt;unknown&gt; | undefined">getExtension</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="modeDetection.test.html#1708"><span data-toggle="tooltip" data-title="vscode.Extension&lt;unknown&gt; | undefined">ext</span></a><span class="punctuation">,</span> <span class="string">&#039;Extension should be installed&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><a href="modeDetection.test.html#1708"><span data-toggle="tooltip" data-title="vscode.Extension&lt;unknown&gt;">ext</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="boolean">isActive</span><span class="punctuation">,</span> <span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;Extension should be active&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Extension works gracefully without ModalEdit&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="comment">// This tests fallback behavior</span>
+    <span class="comment">// Even without ModalEdit, extension should activate and not crash</span>
+
+    <span class="keyword">const</span> <span id="2064" data-toggle="tooltip" data-title="vscode.Extension&lt;unknown&gt; | undefined">ext</span> <span class="punctuation">=</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5760"><span class="member" data-toggle="tooltip" data-title="() =&gt; vscode.Extension&lt;unknown&gt; | undefined">getExtension</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="modeDetection.test.html#2064"><span data-toggle="tooltip" data-title="vscode.Extension&lt;unknown&gt; | undefined">ext</span></a><span class="punctuation">,</span> <span class="string">&#039;Extension should be installed&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Should be able to open editors without errors</span>
+    <span class="keyword">const</span> <span id="2215" data-toggle="tooltip" data-title="vscode.TextEditor">editor</span> <span class="punctuation">=</span> <span class="keyword">await</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1038"><span class="member" data-toggle="tooltip" data-title="(content: string) =&gt; Promise&lt;vscode.TextEditor&gt;">createTestEditor</span></a><span class="punctuation">(</span><span class="string">&#039;test content&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="modeDetection.test.html#2215"><span data-toggle="tooltip" data-title="vscode.TextEditor">editor</span></a><span class="punctuation">,</span> <span class="string">&#039;Should open editor without ModalEdit&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Should not crash when cursor moves</span>
+    <span class="keyword">await</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6728"><span class="member" data-toggle="tooltip" data-title="(editor: vscode.TextEditor, line: number) =&gt; Promise&lt;void&gt;">moveCursorToLine</span></a><span class="punctuation">(</span><a href="modeDetection.test.html#2215"><span data-toggle="tooltip" data-title="vscode.TextEditor">editor</span></a><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Test passes if we got here without exceptions</span>
+    <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Context query handles errors gracefully&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="comment">// Query context with potentially invalid key</span>
+    <span class="keyword">let</span> <span id="2637" data-toggle="tooltip" data-title="boolean | undefined">result</span><span class="punctuation">:</span> <span class="keyword">boolean</span> <span class="punctuation">|</span> <span class="keyword">undefined</span><span class="punctuation">;</span>
+
+    <span class="keyword">try</span> <span class="punctuation">{</span>
+      <a href="modeDetection.test.html#2637"><span data-toggle="tooltip" data-title="boolean | undefined">result</span></a> <span class="punctuation">=</span> <span class="keyword">await</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#3712"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean | undefined&gt;">queryModalEditContext</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span> <span class="keyword">catch</span> <span class="punctuation">(</span><span id="2749" data-toggle="tooltip" data-title="unknown">_error</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ (message?: string | Error): never; (actual: unknown, expected: unknown, message?: string | Error, operator?: string, stackStartFn?: Function): never; }">fail</span><span class="punctuation">(</span><span class="string">&#039;Context query should not throw, should return undefined&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+
+    <span class="comment">// Result should be boolean or undefined, never throw</span>
+    <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span>
+      <span class="keyword">typeof</span> <a href="modeDetection.test.html#2637"><span data-toggle="tooltip" data-title="boolean | undefined">result</span></a> <span class="punctuation">===</span> <span class="string">&#039;boolean&#039;</span> <span class="punctuation">||</span> <a href="modeDetection.test.html#2637"><span data-toggle="tooltip" data-title="undefined">result</span></a> <span class="punctuation">===</span> <span data-toggle="tooltip" data-title="undefined">undefined</span><span class="punctuation">,</span>
+      <span class="string">&#039;Should handle query gracefully&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Extension handles multiple editors&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="comment">// Open multiple editors</span>
+    <span class="keyword">const</span> <span id="3126" data-toggle="tooltip" data-title="vscode.TextEditor">editor1</span> <span class="punctuation">=</span> <span class="keyword">await</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1038"><span class="member" data-toggle="tooltip" data-title="(content: string) =&gt; Promise&lt;vscode.TextEditor&gt;">createTestEditor</span></a><span class="punctuation">(</span><span class="string">&#039;file 1 content&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="3200" data-toggle="tooltip" data-title="vscode.TextEditor">editor2</span> <span class="punctuation">=</span> <span class="keyword">await</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1038"><span class="member" data-toggle="tooltip" data-title="(content: string) =&gt; Promise&lt;vscode.TextEditor&gt;">createTestEditor</span></a><span class="punctuation">(</span><span class="string">&#039;file 2 content&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="3274" data-toggle="tooltip" data-title="vscode.TextEditor">editor3</span> <span class="punctuation">=</span> <span class="keyword">await</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1038"><span class="member" data-toggle="tooltip" data-title="(content: string) =&gt; Promise&lt;vscode.TextEditor&gt;">createTestEditor</span></a><span class="punctuation">(</span><span class="string">&#039;file 3 content&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Note: VS Code may not show all 3 editors as &quot;visible&quot; depending on layout</span>
+    <span class="comment">// Just verify we can create and switch between them without errors</span>
+    <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="modeDetection.test.html#3126"><span data-toggle="tooltip" data-title="vscode.TextEditor">editor1</span></a><span class="punctuation">,</span> <span class="string">&#039;Editor 1 should be created&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="modeDetection.test.html#3200"><span data-toggle="tooltip" data-title="vscode.TextEditor">editor2</span></a><span class="punctuation">,</span> <span class="string">&#039;Editor 2 should be created&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="modeDetection.test.html#3274"><span data-toggle="tooltip" data-title="vscode.TextEditor">editor3</span></a><span class="punctuation">,</span> <span class="string">&#039;Editor 3 should be created&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Should handle switching between editors without errors</span>
+    <span class="keyword">await</span> <a href="modeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ (document: vscode.TextDocument, column?: vscode.ViewColumn, preserveFocus?: boolean): Thenable&lt;vscode.TextEditor&gt;; (document: vscode.TextDocument, options?: vscode.TextDocumentShowOptions): Thenable&lt;vscode.TextEditor&gt;; (uri: vscode.Uri, options?: vscode.TextDocumentShowOptions): Thenable&lt;vscode.TextEditor&gt;; }">showTextDocument</span><span class="punctuation">(</span><a href="modeDetection.test.html#3126"><span data-toggle="tooltip" data-title="vscode.TextEditor">editor1</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.TextDocument">document</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">await</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#2187"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;void&gt;">waitForDebounce</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="modeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ (document: vscode.TextDocument, column?: vscode.ViewColumn, preserveFocus?: boolean): Thenable&lt;vscode.TextEditor&gt;; (document: vscode.TextDocument, options?: vscode.TextDocumentShowOptions): Thenable&lt;vscode.TextEditor&gt;; (uri: vscode.Uri, options?: vscode.TextDocumentShowOptions): Thenable&lt;vscode.TextEditor&gt;; }">showTextDocument</span><span class="punctuation">(</span><a href="modeDetection.test.html#3200"><span data-toggle="tooltip" data-title="vscode.TextEditor">editor2</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.TextDocument">document</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">await</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#2187"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;void&gt;">waitForDebounce</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="modeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ (document: vscode.TextDocument, column?: vscode.ViewColumn, preserveFocus?: boolean): Thenable&lt;vscode.TextEditor&gt;; (document: vscode.TextDocument, options?: vscode.TextDocumentShowOptions): Thenable&lt;vscode.TextEditor&gt;; (uri: vscode.Uri, options?: vscode.TextDocumentShowOptions): Thenable&lt;vscode.TextEditor&gt;; }">showTextDocument</span><span class="punctuation">(</span><a href="modeDetection.test.html#3274"><span data-toggle="tooltip" data-title="vscode.TextEditor">editor3</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.TextDocument">document</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">await</span> <a href="modeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#2187"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;void&gt;">waitForDebounce</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Test passes if no errors occurred</span>
+    <a href="modeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+<span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+</code></pre>
+
+        </div>
+            <div class="sidepane narrow-scrollbars">
+                
+        <div class="pagemenu">
+            <h3>On This Page</h3>
+                <ul class="pagetree">
+                </ul>
+        </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <a class="footer-button disabled">
+            Previous
+        </a>
+            <div class="footer-text">
+                <p>Copyright © 2023</p>
+                <p>Generated by 
+                    <a href="https://johtela.github.io/litscript">LiTScript</a>
+                </p>
+            </div>
+            <a class="footer-button disabled">
+            Next
+        </a>
+        </div>
+    
+        <script src="../../../dist/normal.js"></script>
+    </body>
+    </html>
