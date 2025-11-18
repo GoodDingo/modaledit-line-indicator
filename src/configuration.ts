@@ -22,7 +22,6 @@ export type ThemeKind = 'dark' | 'light' | 'darkHC' | 'lightHC';
 export interface DecorationConfig {
   // ===== Text Styling =====
   backgroundColor?: string; // Background color (CSS color, rgba(), or ThemeColor)
-  background?: string; // DEPRECATED: Use backgroundColor instead (kept for v0.2.0 compatibility)
   color?: string; // Text color (CSS color or ThemeColor)
   opacity?: string; // Opacity (0.0 to 1.0)
 
@@ -109,53 +108,37 @@ export interface Logger {
 /**
  * Default configuration for normal mode (v0.3.0 format)
  * Uses backgroundColor and CSS border shorthand
- * STAGE 1: Includes old property names for backwards compatibility
  */
 export const DEFAULT_NORMAL_MODE: MergedModeConfig = {
   backgroundColor: 'rgba(255, 255, 255, 0)',
-  background: 'rgba(255, 255, 255, 0)', // v0.2.0 compatibility
   border: '2px dotted #00aa00',
-  borderStyle: 'dotted', // v0.2.0 compatibility
-  borderWidth: '2px', // v0.2.0 compatibility
 };
 
 /**
  * Default configuration for insert mode (v0.3.0 format)
  * Uses backgroundColor and CSS border shorthand
- * STAGE 1: Includes old property names for backwards compatibility
  */
 export const DEFAULT_INSERT_MODE: MergedModeConfig = {
   backgroundColor: 'rgba(255, 255, 255, 0)',
-  background: 'rgba(255, 255, 255, 0)', // v0.2.0 compatibility
   border: '2px solid #aa0000',
-  borderStyle: 'solid', // v0.2.0 compatibility
-  borderWidth: '2px', // v0.2.0 compatibility
 };
 
 /**
  * Default configuration for visual mode (v0.3.0 format)
  * Uses backgroundColor and CSS border shorthand
- * STAGE 1: Includes old property names for backwards compatibility
  */
 export const DEFAULT_VISUAL_MODE: MergedModeConfig = {
   backgroundColor: 'rgba(255, 255, 255, 0)',
-  background: 'rgba(255, 255, 255, 0)', // v0.2.0 compatibility
   border: '2px dashed #0000aa',
-  borderStyle: 'dashed', // v0.2.0 compatibility
-  borderWidth: '2px', // v0.2.0 compatibility
 };
 
 /**
  * Default configuration for search mode (v0.3.0 format)
  * Uses backgroundColor and CSS border shorthand
- * STAGE 1: Includes old property names for backwards compatibility
  */
 export const DEFAULT_SEARCH_MODE: MergedModeConfig = {
   backgroundColor: 'rgba(255, 255, 255, 0)',
-  background: 'rgba(255, 255, 255, 0)', // v0.2.0 compatibility
   border: '2px solid #aaaa00',
-  borderStyle: 'solid', // v0.2.0 compatibility
-  borderWidth: '2px', // v0.2.0 compatibility
 };
 
 /**
@@ -201,9 +184,10 @@ export class ConfigurationManager {
    *
    * This is the ONLY public API method. It handles everything:
    * 1. Read VS Code configuration
-   * 2. Detect current theme
-   * 3. Apply cascading fallback
-   * 4. Merge with defaults
+   * 2. Migrate old v0.2.0 properties to v0.3.0 format
+   * 3. Detect current theme
+   * 4. Apply cascading fallback
+   * 5. Merge with defaults
    *
    * @param mode - The mode to get configuration for
    * @returns Complete merged configuration with all properties resolved
@@ -224,9 +208,82 @@ export class ConfigurationManager {
       );
     }
 
+    // Migrate old v0.2.0 properties to v0.3.0 format
+    const migratedConfig = this.migrateOldProperties(modeConfig);
+
     // Get defaults and merge
     const defaults = this.getDefaultsForMode(mode);
-    return this.getMergedModeConfig(modeConfig, defaults);
+    return this.getMergedModeConfig(migratedConfig, defaults);
+  }
+
+  /**
+   * Migrates old v0.2.0 property names to v0.3.0 format
+   *
+   * Handles:
+   * - background → backgroundColor
+   * - border + borderStyle + borderWidth → CSS border shorthand
+   * - Migrates theme-specific overrides as well
+   *
+   * @param config - Configuration object (may contain old property names)
+   * @returns Migrated configuration with v0.3.0 property names
+   */
+  private migrateOldProperties(config: ModeConfig): ModeConfig {
+    const migrated: ModeConfig = { ...config };
+
+    // Helper to migrate a single object (common config or theme override)
+    const migrateObject = (
+      obj: Record<string, unknown> | undefined
+    ): Record<string, unknown> | undefined => {
+      if (!obj) {
+        return obj;
+      }
+
+      const result: Record<string, unknown> = { ...obj };
+
+      // Migrate background → backgroundColor
+      if (result.background !== undefined && result.backgroundColor === undefined) {
+        result.backgroundColor = result.background;
+        delete result.background;
+      }
+
+      // Migrate separate border properties → CSS shorthand
+      // Handle both cases:
+      // 1. border (color) + borderStyle + borderWidth → full CSS shorthand
+      // 2. Just borderStyle + borderWidth → keep as is (may be partial config)
+      if (result.borderStyle !== undefined || result.borderWidth !== undefined) {
+        const hasColor = result.border !== undefined;
+        const hasStyle = result.borderStyle !== undefined;
+        const hasWidth = result.borderWidth !== undefined;
+
+        // If we have all three components and border is just a color (no spaces), create CSS shorthand
+        if (hasColor && hasStyle && hasWidth && !result.border.includes(' ')) {
+          result.border = `${result.borderWidth} ${result.borderStyle} ${result.border}`;
+          delete result.borderStyle;
+          delete result.borderWidth;
+        }
+        // If we have just width and style (no color), create partial shorthand
+        else if (!hasColor && hasStyle && hasWidth) {
+          // Keep individual properties for now - they'll be handled by property resolution
+          // (This allows for selective overrides)
+        }
+      }
+
+      return result;
+    };
+
+    // Migrate common properties
+    const commonMigrated = migrateObject(migrated);
+    Object.assign(migrated, commonMigrated);
+
+    // Migrate theme-specific overrides
+    const themeKeys: (keyof ModeConfig)[] = ['dark', 'light', 'darkHC', 'lightHC'];
+    for (const key of themeKeys) {
+      if (migrated[key]) {
+        migrated[key] = migrateObject(migrated[key]);
+      }
+    }
+
+    return migrated;
   }
 
   /**
@@ -290,17 +347,17 @@ export class ConfigurationManager {
   private getFallbackChain(themeKind: ThemeKind): string[] {
     switch (themeKind) {
       case 'darkHC':
-        // HC Dark: [highContrastDark] → [dark] → common → defaults
-        return ['[highContrastDark]', '[dark]'];
+        // HC Dark: darkHC → dark → common → defaults
+        return ['darkHC', 'dark'];
       case 'lightHC':
-        // HC Light: [highContrastLight] → [light] → common → defaults
-        return ['[highContrastLight]', '[light]'];
+        // HC Light: lightHC → light → common → defaults
+        return ['lightHC', 'light'];
       case 'dark':
-        // Regular dark: [dark] → common → defaults
-        return ['[dark]'];
+        // Regular dark: dark → common → defaults
+        return ['dark'];
       case 'light':
-        // Regular light: [light] → common → defaults
-        return ['[light]'];
+        // Regular light: light → common → defaults
+        return ['light'];
     }
   }
 
@@ -308,21 +365,21 @@ export class ConfigurationManager {
    * Resolves a single property through the fallback chain.
    * Checks theme overrides first, then common property, then default value.
    *
-   * STAGE 2: Property-level cascading resolution (not object-level)
+   * STAGE 2: Generic property resolution for ANY DecorationConfig property
    * This allows selective overrides without duplicating entire config.
    *
-   * @param propertyName - Property to resolve (background, border, borderStyle, borderWidth)
+   * @param propertyName - Property to resolve (any key from DecorationConfig)
    * @param modeConfig - Mode configuration object from settings
    * @param fallbackChain - Array of theme keys to check in priority order
-   * @param defaultValue - Default value if not found anywhere
-   * @returns Resolved property value
+   * @param defaultValue - Default value if not found anywhere (may be undefined for optional properties)
+   * @returns Resolved property value or undefined
    */
   private resolveProperty(
-    propertyName: keyof ThemeOverride,
+    propertyName: keyof DecorationConfig,
     modeConfig: ModeConfig,
     fallbackChain: string[],
-    defaultValue: string
-  ): string {
+    defaultValue?: string
+  ): string | undefined {
     // 1. Check theme-specific overrides in priority order
     for (const themeKey of fallbackChain) {
       const themeOverride = modeConfig[themeKey as keyof ModeConfig] as ThemeOverride | undefined;
@@ -330,7 +387,7 @@ export class ConfigurationManager {
         this.logger?.debug(
           `Resolved ${propertyName} from ${themeKey}: ${themeOverride[propertyName]}`
         );
-        return themeOverride[propertyName]!;
+        return themeOverride[propertyName];
       }
     }
 
@@ -339,41 +396,41 @@ export class ConfigurationManager {
       this.logger?.debug(
         `Resolved ${propertyName} from common config: ${modeConfig[propertyName]}`
       );
-      return modeConfig[propertyName]!;
+      return modeConfig[propertyName];
     }
 
-    // 3. Use default value
-    this.logger?.debug(`Resolved ${propertyName} from defaults: ${defaultValue}`);
+    // 3. Use default value (may be undefined for optional properties)
+    if (defaultValue !== undefined) {
+      this.logger?.debug(`Resolved ${propertyName} from defaults: ${defaultValue}`);
+    }
     return defaultValue;
   }
 
   /**
    * Merges common mode configuration with theme-specific overrides.
    *
-   * STAGE 2: Implements property-level cascading fallback hierarchy.
-   * Each property (background, border, borderStyle, borderWidth) is resolved
-   * independently through the fallback chain.
+   * STAGE 2: Generic property-level cascading fallback hierarchy.
+   * Each property is resolved independently through the fallback chain.
    *
    * Fallback hierarchy:
-   * - HC Dark: [highContrastDark] → [dark] → common → defaults
-   * - HC Light: [highContrastLight] → [light] → common → defaults
-   * - Regular Dark/Light: [dark/light] → common → defaults
+   * - HC Dark: darkHC → dark → common → defaults
+   * - HC Light: lightHC → light → common → defaults
+   * - Regular Dark/Light: dark/light → common → defaults
    *
    * Example:
    * {
-   *   borderStyle: "dotted",              // common
-   *   "[dark]": { borderWidth: "2px" },   // dark theme
-   *   "[highContrastDark]": { border: "#ff0000" }  // HC dark
+   *   borderStyle: "dotted",                    // common
+   *   dark: { border: "2px solid #00ff00" },    // dark theme
+   *   darkHC: { border: "4px solid #ff0000" }   // HC dark
    * }
    * When theme = High Contrast Dark:
-   * - border: "#ff0000"             ← from [highContrastDark]
-   * - borderWidth: "2px"            ← from [dark] (fallback)
+   * - border: "4px solid #ff0000"   ← from darkHC
    * - borderStyle: "dotted"         ← from common
-   * - background: "rgba(...)"       ← from defaults
+   * - backgroundColor: "rgba(...)"  ← from defaults
    *
    * @param modeConfig - Nested configuration object from settings
    * @param defaults - Default configuration values to use as fallback
-   * @returns Merged configuration with all required properties
+   * @returns Merged configuration with all properties resolved
    */
   private getMergedModeConfig(
     modeConfig: ModeConfig,
@@ -386,29 +443,58 @@ export class ConfigurationManager {
       `Resolving mode config for theme: ${themeKind}, fallback chain: ${fallbackChain.join(' → ')}`
     );
 
-    // STAGE 2: Resolve each property independently through the fallback chain
-    // This enables selective overrides (e.g., only override borderWidth for HC, inherit rest from base theme)
-    const merged: MergedModeConfig = {
-      background: this.resolveProperty(
-        'background',
+    // Define all properties we want to resolve
+    // Single source of truth for all supported properties
+    // NOTE: Excluded deprecated v0.2.0 properties (background, borderStyle, borderWidth)
+    //       These are migrated to new format before resolution
+    const propertiesToResolve: (keyof DecorationConfig)[] = [
+      // Text styling
+      'backgroundColor',
+      'color',
+      'opacity',
+      // Border (CSS shorthand only)
+      'border',
+      'borderColor',
+      'borderRadius',
+      'borderSpacing',
+      // Outline
+      'outline',
+      'outlineColor',
+      'outlineStyle',
+      'outlineWidth',
+      // Font
+      'fontStyle',
+      'fontWeight',
+      'letterSpacing',
+      'textDecoration',
+      // Cursor
+      'cursor',
+      // Overview ruler
+      'overviewRulerColor',
+      'overviewRulerLane',
+      // Gutter
+      'gutterIconPath',
+      'gutterIconSize',
+      // Advanced
+      'rangeBehavior',
+    ];
+
+    // GENERIC RESOLUTION: Loop through all properties
+    const merged: MergedModeConfig = {};
+
+    for (const prop of propertiesToResolve) {
+      const value = this.resolveProperty(
+        prop,
         modeConfig,
         fallbackChain,
-        defaults.background!
-      ),
-      border: this.resolveProperty('border', modeConfig, fallbackChain, defaults.border!),
-      borderStyle: this.resolveProperty(
-        'borderStyle',
-        modeConfig,
-        fallbackChain,
-        defaults.borderStyle!
-      ),
-      borderWidth: this.resolveProperty(
-        'borderWidth',
-        modeConfig,
-        fallbackChain,
-        defaults.borderWidth!
-      ),
-    };
+        defaults[prop] // May be undefined for optional properties
+      );
+
+      // Only add to merged config if value exists
+      if (value !== undefined) {
+        merged[prop] = value;
+      }
+    }
 
     return merged;
   }

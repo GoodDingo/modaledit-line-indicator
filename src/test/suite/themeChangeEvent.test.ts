@@ -79,10 +79,8 @@ suite('Theme Change Event Tests', () => {
     // (actual theme changes are hard to trigger in tests)
     for (let i = 0; i < 5; i++) {
       const config = {
-        background: 'rgba(255, 255, 255, 0)',
-        border: `#${i}${i}${i}${i}${i}${i}`,
-        borderStyle: 'solid',
-        borderWidth: '2px',
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        border: `2px solid #${i}${i}${i}${i}${i}${i}`,
       };
 
       await TestHelpers.setConfig('normalMode', config);
@@ -99,10 +97,8 @@ suite('Theme Change Event Tests', () => {
 
     // Set initial config
     const initialConfig = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#ff0000',
-      borderStyle: 'solid',
-      borderWidth: '2px',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #ff0000',
     };
 
     await TestHelpers.setConfig('normalMode', initialConfig);
@@ -110,14 +106,12 @@ suite('Theme Change Event Tests', () => {
 
     let config = TestHelpers.getConfig();
     let normalMode = config.get('normalMode') as Record<string, string>;
-    assert.strictEqual(normalMode.border, '#ff0000');
+    assert.strictEqual(normalMode.border, '2px solid #ff0000');
 
     // Update config (this triggers onDidChangeConfiguration, not theme change)
     const updatedConfig = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#00ff00',
-      borderStyle: 'solid',
-      borderWidth: '2px',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #00ff00',
     };
 
     await TestHelpers.setConfig('normalMode', updatedConfig);
@@ -125,7 +119,7 @@ suite('Theme Change Event Tests', () => {
 
     config = TestHelpers.getConfig();
     normalMode = config.get('normalMode') as Record<string, string>;
-    assert.strictEqual(normalMode.border, '#00ff00');
+    assert.strictEqual(normalMode.border, '2px solid #00ff00');
   });
 
   test('Theme-specific config persists across config changes', async () => {
@@ -133,15 +127,13 @@ suite('Theme Change Event Tests', () => {
 
     // Set config with theme overrides
     const configWithTheme = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#808080',
-      borderStyle: 'solid',
-      borderWidth: '2px',
-      '[dark]': {
-        border: '#00ffff',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #808080',
+      dark: {
+        border: '2px solid #00ffff',
       },
-      '[light]': {
-        border: '#0000ff',
+      light: {
+        border: '2px solid #0000ff',
       },
     };
 
@@ -159,8 +151,8 @@ suite('Theme Change Event Tests', () => {
     const config = TestHelpers.getConfig();
     const normalMode = config.get('normalMode') as Record<string, unknown>;
 
-    assert.ok(normalMode['[dark]'], 'Dark theme config should persist');
-    assert.ok(normalMode['[light]'], 'Light theme config should persist');
+    assert.ok(normalMode.dark, 'Dark theme config should persist');
+    assert.ok(normalMode.light, 'Light theme config should persist');
   });
 
   test('Decoration reload happens after theme change', async () => {
@@ -168,13 +160,10 @@ suite('Theme Change Event Tests', () => {
 
     // Set a config with theme overrides
     const config = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#808080',
-      borderStyle: 'solid',
-      borderWidth: '2px',
-      '[dark]': {
-        border: '#00ffff',
-        borderWidth: '3px',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #808080',
+      dark: {
+        border: '3px solid #00ffff',
       },
     };
 
@@ -185,7 +174,7 @@ suite('Theme Change Event Tests', () => {
     // (simulates what would happen on theme change)
     const modifiedConfig = {
       ...config,
-      borderStyle: 'dashed', // Small change to trigger reload
+      border: '2px dashed #808080', // Small change to trigger reload
     };
 
     await TestHelpers.setConfig('normalMode', modifiedConfig);
@@ -202,15 +191,13 @@ suite('Theme Change Event Tests', () => {
 
     // Set config with different values for different themes
     const config = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#808080',
-      borderStyle: 'solid',
-      borderWidth: '2px',
-      '[dark]': {
-        border: '#00ffff',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #808080',
+      dark: {
+        border: '2px solid #00ffff',
       },
-      '[light]': {
-        border: '#0000ff',
+      light: {
+        border: '2px solid #0000ff',
       },
     };
 
@@ -224,9 +211,9 @@ suite('Theme Change Event Tests', () => {
 
     // Verify appropriate theme override exists
     if (currentTheme.kind === vscode.ColorThemeKind.Dark) {
-      assert.ok(normalMode['[dark]'], 'Dark override should be available for dark theme');
+      assert.ok(normalMode.dark, 'Dark override should be available for dark theme');
     } else if (currentTheme.kind === vscode.ColorThemeKind.Light) {
-      assert.ok(normalMode['[light]'], 'Light override should be available for light theme');
+      assert.ok(normalMode.light, 'Light override should be available for light theme');
     }
   });
 
@@ -246,10 +233,9 @@ suite('Theme Change Event Tests', () => {
     // Trigger multiple decoration reloads
     for (let i = 0; i < 10; i++) {
       const config = {
-        background: 'rgba(255, 255, 255, 0)',
-        border: `#${String(i).repeat(6)}`,
-        borderStyle: i % 2 === 0 ? 'solid' : 'dashed',
-        borderWidth: '2px',
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        border:
+          i % 2 === 0 ? `2px solid #${String(i).repeat(6)}` : `2px dashed #${String(i).repeat(6)}`,
       };
 
       await TestHelpers.setConfig('normalMode', config);
@@ -270,12 +256,10 @@ suite('Theme Change Event Tests', () => {
 
     // Set config with theme overrides while disabled
     const config = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#ff0000',
-      borderStyle: 'solid',
-      borderWidth: '2px',
-      '[dark]': {
-        border: '#00ffff',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #ff0000',
+      dark: {
+        border: '2px solid #00ffff',
       },
     };
 
@@ -291,7 +275,7 @@ suite('Theme Change Event Tests', () => {
     assert.strictEqual(storedConfig.get('enabled'), true);
 
     const normalMode = storedConfig.get('normalMode') as Record<string, unknown>;
-    assert.ok(normalMode['[dark]'], 'Theme config should be preserved');
+    assert.ok(normalMode.dark, 'Theme config should be preserved');
   });
 
   test('Theme detection works immediately after activation', async () => {
@@ -314,12 +298,10 @@ suite('Theme Change Event Tests', () => {
 
     for (let i = 0; i < modes.length; i++) {
       const config = {
-        background: 'rgba(255, 255, 255, 0)',
-        border: colors[i],
-        borderStyle: 'solid',
-        borderWidth: '2px',
-        '[dark]': {
-          border: colors[i].replace('aa', 'ff'),
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        border: `2px solid ${colors[i]}`,
+        dark: {
+          border: `2px solid ${colors[i].replace('aa', 'ff')}`,
         },
       };
 
@@ -339,7 +321,11 @@ suite('Theme Change Event Tests', () => {
 
     modes.forEach((mode, i) => {
       const modeConfig = storedConfig.get(mode) as Record<string, unknown>;
-      assert.strictEqual(modeConfig.border, colors[i], `${mode} should have correct border`);
+      assert.strictEqual(
+        modeConfig.border,
+        `2px solid ${colors[i]}`,
+        `${mode} should have correct border`
+      );
     });
   });
 });

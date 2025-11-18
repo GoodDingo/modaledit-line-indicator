@@ -52,22 +52,23 @@ suite('Extension Test Suite', () => {
     // Test nested mode configurations
     const normalMode = config.get('normalMode');
     assert.ok(normalMode);
-    assert.strictEqual((normalMode as Record<string, string>).background, 'rgba(255, 255, 255, 0)');
-    assert.strictEqual((normalMode as Record<string, string>).border, '#00aa00');
-    assert.strictEqual((normalMode as Record<string, string>).borderStyle, 'dotted');
-    assert.strictEqual((normalMode as Record<string, string>).borderWidth, '2px');
+    assert.strictEqual(
+      (normalMode as Record<string, string>).backgroundColor,
+      'rgba(255, 255, 255, 0)'
+    );
+    assert.strictEqual((normalMode as Record<string, string>).border, '2px dotted #00aa00');
 
     const insertMode = config.get('insertMode');
     assert.ok(insertMode);
-    assert.strictEqual((insertMode as Record<string, string>).border, '#aa0000');
+    assert.strictEqual((insertMode as Record<string, string>).border, '2px solid #aa0000');
 
     const visualMode = config.get('visualMode');
     assert.ok(visualMode);
-    assert.strictEqual((visualMode as Record<string, string>).border, '#0000aa');
+    assert.strictEqual((visualMode as Record<string, string>).border, '2px dashed #0000aa');
 
     const searchMode = config.get('searchMode');
     assert.ok(searchMode);
-    assert.strictEqual((searchMode as Record<string, string>).border, '#aaaa00');
+    assert.strictEqual((searchMode as Record<string, string>).border, '2px solid #aaaa00');
   });
 
   test('Toggle command should work', async () => {
@@ -104,10 +105,8 @@ suite('Extension Test Suite', () => {
 
     // Change nested configuration
     const newNormalMode = {
-      background: '#ff0000',
-      border: '#00aa00',
-      borderStyle: 'solid',
-      borderWidth: '3px',
+      backgroundColor: '#ff0000',
+      border: '3px solid #00aa00',
     };
     await TestHelpers.setConfig('normalMode', newNormalMode);
 

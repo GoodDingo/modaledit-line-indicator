@@ -94,45 +94,37 @@
         "modaledit-line-indicator.normalMode": {
           "type": "object",
           "scope": "resource",
-          "description": "Normal mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
+          "description": "Normal mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (backgroundColor, border) apply to all themes unless overridden. The 'border' property uses CSS shorthand format (e.g., '2px dotted #00aa00'). Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
           "default": {
-            "background": "rgba(255, 255, 255, 0)",
-            "border": "#00aa00",
-            "borderStyle": "dotted",
-            "borderWidth": "2px"
+            "backgroundColor": "rgba(255, 255, 255, 0)",
+            "border": "2px dotted #00aa00"
           }
         },
         "modaledit-line-indicator.insertMode": {
           "type": "object",
           "scope": "resource",
-          "description": "Insert mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
+          "description": "Insert mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (backgroundColor, border) apply to all themes unless overridden. The 'border' property uses CSS shorthand format (e.g., '2px solid #aa0000'). Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
           "default": {
-            "background": "rgba(255, 255, 255, 0)",
-            "border": "#aa0000",
-            "borderStyle": "solid",
-            "borderWidth": "2px"
+            "backgroundColor": "rgba(255, 255, 255, 0)",
+            "border": "2px solid #aa0000"
           }
         },
         "modaledit-line-indicator.visualMode": {
           "type": "object",
           "scope": "resource",
-          "description": "Visual mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
+          "description": "Visual mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (backgroundColor, border) apply to all themes unless overridden. The 'border' property uses CSS shorthand format (e.g., '2px dashed #0000aa'). Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
           "default": {
-            "background": "rgba(255, 255, 255, 0)",
-            "border": "#0000aa",
-            "borderStyle": "dashed",
-            "borderWidth": "2px"
+            "backgroundColor": "rgba(255, 255, 255, 0)",
+            "border": "2px dashed #0000aa"
           }
         },
         "modaledit-line-indicator.searchMode": {
           "type": "object",
           "scope": "resource",
-          "description": "Search mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
+          "description": "Search mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (backgroundColor, border) apply to all themes unless overridden. The 'border' property uses CSS shorthand format (e.g., '2px solid #aaaa00'). Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
           "default": {
-            "background": "rgba(255, 255, 255, 0)",
-            "border": "#aaaa00",
-            "borderStyle": "solid",
-            "borderWidth": "2px"
+            "backgroundColor": "rgba(255, 255, 255, 0)",
+            "border": "2px solid #aaaa00"
           }
         }
       }

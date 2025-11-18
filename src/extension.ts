@@ -48,16 +48,15 @@ class ModalEditLineIndicator implements vscode.Disposable {
 
     // Helper function to create decoration for a specific mode
     const createModeDecoration = (mode: Mode): vscode.TextEditorDecorationType => {
-      const merged = this.configManager.getConfig(mode);
+      const config = this.configManager.getConfig(mode);
 
-      this.logger.log(
-        `  ${mode.toUpperCase()}: bg=${merged.background}, border=${merged.borderWidth} ${merged.borderStyle} ${merged.border}`
-      );
+      this.logger.log(`  ${mode.toUpperCase()}: ${JSON.stringify(config)}`);
 
+      // PASSTHROUGH: Spread config directly into VS Code API
+      // HARDCODED: isWholeLine always true (this is a LINE highlighter)
       return vscode.window.createTextEditorDecorationType({
-        backgroundColor: merged.background,
-        border: `${merged.borderWidth} ${merged.borderStyle} ${merged.border}`,
-        isWholeLine: true,
+        ...(config as vscode.DecorationRenderOptions), // ALL properties from config
+        isWholeLine: true, // ALWAYS true, NOT configurable
       });
     };
 
