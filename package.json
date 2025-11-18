@@ -62,6 +62,13 @@
           "scope": "resource",
           "description": "Enable or disable the line highlight indicator"
         },
+        "modaledit-line-indicator.logLevel": {
+          "type": "string",
+          "enum": ["error", "warn", "info", "debug"],
+          "default": "error",
+          "scope": "window",
+          "description": "Logging verbosity level. error: only errors (default), warn: errors and warnings, info: general lifecycle events and mode changes, debug: detailed diagnostics including cursor state and theme resolution"
+        },
         "modaledit-line-indicator.normalMode": {
           "type": "object",
           "scope": "resource",
