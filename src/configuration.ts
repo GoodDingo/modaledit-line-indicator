@@ -5,53 +5,98 @@ import * as vscode from 'vscode';
  * VS Code provides 4 distinct theme kinds:
  * - dark: Regular dark theme
  * - light: Regular light theme
- * - highContrastDark: High contrast dark theme (ColorThemeKind.HighContrast)
- * - highContrastLight: High contrast light theme (ColorThemeKind.HighContrastLight)
+ * - darkHC: High contrast dark theme (ColorThemeKind.HighContrast)
+ * - lightHC: High contrast light theme (ColorThemeKind.HighContrastLight)
  */
-export type ThemeKind = 'dark' | 'light' | 'highContrastDark' | 'highContrastLight';
+export type ThemeKind = 'dark' | 'light' | 'darkHC' | 'lightHC';
+
+/**
+ * Complete DecorationRenderOptions interface
+ * Maps 1:1 to vscode.DecorationRenderOptions
+ * All properties optional - only backgroundColor and border have defaults
+ *
+ * This interface represents the complete set of styling properties available
+ * for decorations in VS Code. By providing direct passthrough to the VS Code API,
+ * we eliminate transformation logic and support all current and future properties.
+ */
+export interface DecorationConfig {
+  // ===== Text Styling =====
+  backgroundColor?: string; // Background color (CSS color, rgba(), or ThemeColor)
+  background?: string; // DEPRECATED: Use backgroundColor instead (kept for v0.2.0 compatibility)
+  color?: string; // Text color (CSS color or ThemeColor)
+  opacity?: string; // Opacity (0.0 to 1.0)
+
+  // ===== Border (CSS shorthand OR individual properties) =====
+  border?: string; // CSS border shorthand: "2px dotted #00aa00"
+  borderColor?: string; // Border color (used if border not specified)
+  borderRadius?: string; // Border radius
+  borderSpacing?: string; // Border spacing
+  borderStyle?: string; // Border style (solid, dotted, dashed, etc.)
+  borderWidth?: string; // Border width (used if border not specified)
+
+  // ===== Outline (CSS shorthand OR individual properties) =====
+  outline?: string; // CSS outline shorthand: "1px solid #ff0000"
+  outlineColor?: string; // Outline color
+  outlineStyle?: string; // Outline style
+  outlineWidth?: string; // Outline width
+
+  // ===== Font Styling =====
+  fontStyle?: string; // Font style (normal, italic, oblique)
+  fontWeight?: string; // Font weight (normal, bold, 100-900)
+  letterSpacing?: string; // Letter spacing
+  textDecoration?: string; // Text decoration (underline, line-through, etc.)
+
+  // ===== Cursor =====
+  cursor?: string; // CSS cursor (pointer, default, etc.)
+
+  // ===== Overview Ruler =====
+  overviewRulerColor?: string; // Color in overview ruler
+  overviewRulerLane?: string; // Position: 'Left' | 'Center' | 'Right' | 'Full'
+
+  // ===== Gutter Icon =====
+  gutterIconPath?: string; // Absolute path or URI to gutter icon
+  gutterIconSize?: string; // Icon size: 'auto' | 'contain' | 'cover' | percentage
+
+  // ===== Advanced =====
+  rangeBehavior?: string; // 'OpenOpen' | 'ClosedClosed' | 'OpenClosed' | 'ClosedOpen'
+
+  // ===== Attachments (deferred - complex) =====
+  // before?: ThemableDecorationAttachmentRenderOptions;
+  // after?: ThemableDecorationAttachmentRenderOptions;
+}
 
 /**
  * Theme-specific override configuration
+ * Now supports all DecorationConfig properties instead of just 4
  */
-export interface ThemeOverride {
-  background?: string;
-  border?: string;
-  borderStyle?: string;
-  borderWidth?: string;
-}
+export type ThemeOverride = DecorationConfig;
 
 /**
  * Mode configuration with optional theme-specific overrides
  *
- * STAGE 2: Supports cascading fallback hierarchy
- * - [dark]: Regular dark theme (also fallback for highContrastDark)
- * - [light]: Regular light theme (also fallback for highContrastLight)
- * - [highContrastDark]: High contrast dark theme → falls back to [dark]
- * - [highContrastLight]: High contrast light theme → falls back to [light]
+ * Extends DecorationConfig to support ALL decoration properties.
+ * Supports cascading fallback hierarchy:
+ * - dark: Regular dark theme (also fallback for darkHC)
+ * - light: Regular light theme (also fallback for lightHC)
+ * - darkHC: High contrast dark theme → falls back to dark
+ * - lightHC: High contrast light theme → falls back to light
  *
- * Each property (background, border, borderStyle, borderWidth) is resolved
- * independently through the fallback chain, enabling selective overrides.
+ * Each property is resolved independently through the fallback chain,
+ * enabling selective overrides.
  */
-export interface ModeConfig {
-  background?: string;
-  border?: string;
-  borderStyle?: string;
-  borderWidth?: string;
-  '[dark]'?: ThemeOverride;
-  '[light]'?: ThemeOverride;
-  '[highContrastDark]'?: ThemeOverride;
-  '[highContrastLight]'?: ThemeOverride;
+export interface ModeConfig extends DecorationConfig {
+  // Theme-specific overrides (no brackets, shorter HC names)
+  dark?: ThemeOverride;
+  light?: ThemeOverride;
+  darkHC?: ThemeOverride;
+  lightHC?: ThemeOverride;
 }
 
 /**
  * Merged configuration after applying theme overrides
+ * Now supports ALL DecorationConfig properties instead of just 4 required ones
  */
-export interface MergedModeConfig {
-  background: string;
-  border: string;
-  borderStyle: string;
-  borderWidth: string;
-}
+export type MergedModeConfig = DecorationConfig;
 
 /**
  * Logger interface for optional logging
@@ -62,47 +107,55 @@ export interface Logger {
 }
 
 /**
- * Default configuration for normal mode
- * Matches package.json defaults
+ * Default configuration for normal mode (v0.3.0 format)
+ * Uses backgroundColor and CSS border shorthand
+ * STAGE 1: Includes old property names for backwards compatibility
  */
 export const DEFAULT_NORMAL_MODE: MergedModeConfig = {
-  background: 'rgba(255, 255, 255, 0)',
-  border: '#00aa00',
-  borderStyle: 'dotted',
-  borderWidth: '2px',
+  backgroundColor: 'rgba(255, 255, 255, 0)',
+  background: 'rgba(255, 255, 255, 0)', // v0.2.0 compatibility
+  border: '2px dotted #00aa00',
+  borderStyle: 'dotted', // v0.2.0 compatibility
+  borderWidth: '2px', // v0.2.0 compatibility
 };
 
 /**
- * Default configuration for insert mode
- * Matches package.json defaults
+ * Default configuration for insert mode (v0.3.0 format)
+ * Uses backgroundColor and CSS border shorthand
+ * STAGE 1: Includes old property names for backwards compatibility
  */
 export const DEFAULT_INSERT_MODE: MergedModeConfig = {
-  background: 'rgba(255, 255, 255, 0)',
-  border: '#aa0000',
-  borderStyle: 'solid',
-  borderWidth: '2px',
+  backgroundColor: 'rgba(255, 255, 255, 0)',
+  background: 'rgba(255, 255, 255, 0)', // v0.2.0 compatibility
+  border: '2px solid #aa0000',
+  borderStyle: 'solid', // v0.2.0 compatibility
+  borderWidth: '2px', // v0.2.0 compatibility
 };
 
 /**
- * Default configuration for visual mode
- * Matches package.json defaults
+ * Default configuration for visual mode (v0.3.0 format)
+ * Uses backgroundColor and CSS border shorthand
+ * STAGE 1: Includes old property names for backwards compatibility
  */
 export const DEFAULT_VISUAL_MODE: MergedModeConfig = {
-  background: 'rgba(255, 255, 255, 0)',
-  border: '#0000aa',
-  borderStyle: 'dashed',
-  borderWidth: '2px',
+  backgroundColor: 'rgba(255, 255, 255, 0)',
+  background: 'rgba(255, 255, 255, 0)', // v0.2.0 compatibility
+  border: '2px dashed #0000aa',
+  borderStyle: 'dashed', // v0.2.0 compatibility
+  borderWidth: '2px', // v0.2.0 compatibility
 };
 
 /**
- * Default configuration for search mode
- * Matches package.json defaults
+ * Default configuration for search mode (v0.3.0 format)
+ * Uses backgroundColor and CSS border shorthand
+ * STAGE 1: Includes old property names for backwards compatibility
  */
 export const DEFAULT_SEARCH_MODE: MergedModeConfig = {
-  background: 'rgba(255, 255, 255, 0)',
-  border: '#aaaa00',
-  borderStyle: 'solid',
-  borderWidth: '2px',
+  backgroundColor: 'rgba(255, 255, 255, 0)',
+  background: 'rgba(255, 255, 255, 0)', // v0.2.0 compatibility
+  border: '2px solid #aaaa00',
+  borderStyle: 'solid', // v0.2.0 compatibility
+  borderWidth: '2px', // v0.2.0 compatibility
 };
 
 /**
@@ -201,7 +254,7 @@ export class ConfigurationManager {
    * VS Code provides 4 distinct theme kinds, and we now distinguish between
    * high contrast dark and high contrast light themes (Stage 1 of Issue #4).
    *
-   * @returns 'dark', 'light', 'highContrastDark', or 'highContrastLight'
+   * @returns 'dark', 'light', 'darkHC', or 'lightHC'
    */
   private getCurrentThemeKind(): ThemeKind {
     const themeKind = vscode.window.activeColorTheme.kind;
@@ -213,9 +266,9 @@ export class ConfigurationManager {
         return 'light';
       case vscode.ColorThemeKind.HighContrast:
         // HighContrast is the DARK variant of high contrast themes
-        return 'highContrastDark';
+        return 'darkHC';
       case vscode.ColorThemeKind.HighContrastLight:
-        return 'highContrastLight';
+        return 'lightHC';
       default:
         this.logger?.debug(`Unknown theme kind: ${themeKind}, defaulting to dark`);
         return 'dark';
@@ -236,10 +289,10 @@ export class ConfigurationManager {
    */
   private getFallbackChain(themeKind: ThemeKind): string[] {
     switch (themeKind) {
-      case 'highContrastDark':
+      case 'darkHC':
         // HC Dark: [highContrastDark] → [dark] → common → defaults
         return ['[highContrastDark]', '[dark]'];
-      case 'highContrastLight':
+      case 'lightHC':
         // HC Light: [highContrastLight] → [light] → common → defaults
         return ['[highContrastLight]', '[light]'];
       case 'dark':
@@ -340,20 +393,20 @@ export class ConfigurationManager {
         'background',
         modeConfig,
         fallbackChain,
-        defaults.background
+        defaults.background!
       ),
-      border: this.resolveProperty('border', modeConfig, fallbackChain, defaults.border),
+      border: this.resolveProperty('border', modeConfig, fallbackChain, defaults.border!),
       borderStyle: this.resolveProperty(
         'borderStyle',
         modeConfig,
         fallbackChain,
-        defaults.borderStyle
+        defaults.borderStyle!
       ),
       borderWidth: this.resolveProperty(
         'borderWidth',
         modeConfig,
         fallbackChain,
-        defaults.borderWidth
+        defaults.borderWidth!
       ),
     };
 
