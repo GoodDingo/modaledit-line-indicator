@@ -32,6 +32,7 @@ all: clean install compile lint validate ## Run full build pipeline (clean, inst
 
 clean: ## Remove compiled output and build artifacts
 	@echo "$(YELLOW)Cleaning build artifacts...$(NC)"
+	@rm -rf dist/
 	@rm -rf out/
 	@rm -rf *.vsix
 	@rm -rf node_modules/.cache
@@ -42,13 +43,18 @@ install: ## Install npm dependencies
 	@npm install
 	@echo "$(GREEN)✓ Dependencies installed$(NC)"
 
-compile: ## Compile TypeScript to JavaScript
-	@echo "$(YELLOW)Compiling TypeScript...$(NC)"
+compile: ## Type-check TypeScript (no emit)
+	@echo "$(YELLOW)Type-checking TypeScript...$(NC)"
 	@npm run compile
-	@echo "$(GREEN)✓ Compilation complete$(NC)"
+	@echo "$(GREEN)✓ Type-check complete$(NC)"
 
-watch: ## Watch and recompile on changes
-	@echo "$(YELLOW)Starting TypeScript watch mode...$(NC)"
+build: ## Build production bundle with esbuild
+	@echo "$(YELLOW)Building production bundle...$(NC)"
+	@npm run build
+	@echo "$(GREEN)✓ Build complete$(NC)"
+
+watch: ## Watch and rebuild on changes
+	@echo "$(YELLOW)Starting esbuild watch mode...$(NC)"
 	@npm run watch
 
 ##@ Code Quality
@@ -75,7 +81,7 @@ format-check: ## Check code formatting
 
 ##@ Validation
 
-validate: compile lint format-check check-manifest check-structure test ## Validate extension is ready for packaging
+validate: compile build lint format-check check-manifest check-structure test ## Validate extension is ready for packaging
 	@echo "$(GREEN)✓ Extension validation complete!$(NC)"
 
 check: validate ## Alias for validate
@@ -96,16 +102,17 @@ check-structure: ## Verify required files and directories exist
 	@echo "$(YELLOW)Checking project structure...$(NC)"
 	@test -f package.json || (echo "$(RED)✗ Missing package.json$(NC)" && exit 1)
 	@test -f tsconfig.json || (echo "$(RED)✗ Missing tsconfig.json$(NC)" && exit 1)
-	@test -f .eslintrc.json || (echo "$(RED)✗ Missing .eslintrc.json$(NC)" && exit 1)
+	@test -f eslint.config.js || (echo "$(RED)✗ Missing eslint.config.js$(NC)" && exit 1)
+	@test -f esbuild.config.js || (echo "$(RED)✗ Missing esbuild.config.js$(NC)" && exit 1)
 	@test -d src || (echo "$(RED)✗ Missing src/ directory$(NC)" && exit 1)
 	@test -f src/extension.ts || (echo "$(RED)✗ Missing src/extension.ts$(NC)" && exit 1)
-	@test -d out || (echo "$(RED)✗ Missing out/ directory - run 'make compile' first$(NC)" && exit 1)
-	@test -f out/extension.js || (echo "$(RED)✗ Missing out/extension.js - run 'make compile' first$(NC)" && exit 1)
+	@test -d dist || (echo "$(RED)✗ Missing dist/ directory - run 'make build' first$(NC)" && exit 1)
+	@test -f dist/extension.js || (echo "$(RED)✗ Missing dist/extension.js - run 'make build' first$(NC)" && exit 1)
 	@echo "$(GREEN)✓ Project structure valid$(NC)"
 
 ##@ Packaging & Installation
 
-package: validate ## Package extension as .vsix file
+package: compile build lint format-check check-manifest test check-structure ## Package extension as .vsix file (with minified JS)
 	@echo "$(YELLOW)Packaging extension...$(NC)"
 	@npm run package
 	@test -f $(VSIX_FILE) && echo "$(GREEN)✓ Package created: $(VSIX_FILE)$(NC)" || (echo "$(RED)✗ Package creation failed$(NC)" && exit 1)
@@ -124,12 +131,12 @@ reinstall: uninstall-ext install-ext ## Uninstall and reinstall extension
 
 ##@ Testing
 
-test: compile ## Run extension tests
+test: ## Run extension tests
 	@echo "$(YELLOW)Running tests...$(NC)"
 	@npm test
 	@echo "$(GREEN)✓ Tests complete$(NC)"
 
-coverage: compile ## Generate code coverage report
+coverage: ## Generate code coverage report
 	@echo "$(YELLOW)Generating coverage report...$(NC)"
 	@npm run coverage
 	@echo "$(GREEN)✓ Coverage report generated$(NC)"
@@ -145,7 +152,7 @@ info: ## Display extension information
 	@echo "  Description: $(shell node -p "require('./package.json').description")"
 	@echo ""
 	@echo "$(CYAN)Build Status:$(NC)"
-	@test -d out && echo "  Compiled:    $(GREEN)Yes$(NC)" || echo "  Compiled:    $(RED)No$(NC)"
+	@test -d dist && echo "  Built:       $(GREEN)Yes$(NC)" || echo "  Built:       $(RED)No$(NC)"
 	@test -f $(VSIX_FILE) && echo "  Packaged:    $(GREEN)Yes ($(VSIX_FILE))$(NC)" || echo "  Packaged:    $(RED)No$(NC)"
 	@test -d node_modules && echo "  Dependencies:$(GREEN)Installed$(NC)" || echo "  Dependencies:$(RED)Not installed$(NC)"
 

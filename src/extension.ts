@@ -606,23 +606,59 @@ export function activate(context: vscode.ExtensionContext): void {
   indicator
     .activate()
     .then(() => {
-      // First-run welcome notification
-      const isFirstRun = !context.globalState.get('hasRun', false);
-      if (isFirstRun) {
-        const modalEditInstalled = !!vscode.extensions.getExtension('johtela.vscode-modaledit');
-        const message = modalEditInstalled
-          ? 'ModalEdit Line Indicator active! Switch modes (Esc/i/v) to see line highlighting.'
-          : 'ModalEdit Line Indicator active but ModalEdit not found. Install ModalEdit for full functionality.';
+      // Check if ModalEdit is installed
+      const modalEditInstalled = !!vscode.extensions.getExtension('johtela.vscode-modaledit');
+      const hasSeenWarning = context.globalState.get('hasSeenModalEditWarning', false);
 
-        vscode.window.showInformationMessage(message, 'Show Guide', 'Got It').then(choice => {
-          if (choice === 'Show Guide') {
-            vscode.env.openExternal(
-              vscode.Uri.parse(
-                'https://github.com/GoodDingo/modaledit-line-indicator/blob/main/README.md#quick-start'
-              )
-            );
-          }
-        });
+      // Show warning if ModalEdit not installed and user hasn't dismissed
+      if (!modalEditInstalled && !hasSeenWarning) {
+        vscode.window
+          .showWarningMessage(
+            'ModalEdit Line Indicator requires the ModalEdit extension for full functionality. ' +
+              'Without ModalEdit, only insert mode styling will be displayed.',
+            'Install ModalEdit',
+            'Learn More',
+            'Dismiss'
+          )
+          .then(choice => {
+            if (choice === 'Install ModalEdit') {
+              // Open extension search for ModalEdit
+              vscode.commands.executeCommand(
+                'workbench.extensions.search',
+                '@id:johtela.vscode-modaledit'
+              );
+            } else if (choice === 'Learn More') {
+              // Open Prerequisites documentation
+              vscode.env.openExternal(
+                vscode.Uri.parse(
+                  'https://github.com/GoodDingo/modaledit-line-indicator/blob/main/README.md#prerequisites'
+                )
+              );
+            } else if (choice === 'Dismiss') {
+              // Store dismissal in globalState
+              context.globalState.update('hasSeenModalEditWarning', true);
+            }
+          });
+      }
+
+      // First-run welcome notification (only if ModalEdit IS installed)
+      const isFirstRun = !context.globalState.get('hasRun', false);
+      if (isFirstRun && modalEditInstalled) {
+        vscode.window
+          .showInformationMessage(
+            'ModalEdit Line Indicator active! Switch modes (Esc/i/v) to see line highlighting.',
+            'Show Guide',
+            'Got It'
+          )
+          .then(choice => {
+            if (choice === 'Show Guide') {
+              vscode.env.openExternal(
+                vscode.Uri.parse(
+                  'https://github.com/GoodDingo/modaledit-line-indicator/blob/main/README.md#quick-start'
+                )
+              );
+            }
+          });
         context.globalState.update('hasRun', true);
       }
     })

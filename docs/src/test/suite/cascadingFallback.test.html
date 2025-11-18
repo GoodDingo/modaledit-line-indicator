@@ -1,0 +1,683 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>
+            Project
+        </title>
+        <link rel="icon" type="image/icon" href="../../../images/favicon.svg" />
+        <link rel="stylesheet" href="../../../dist/normal.css" />
+        
+    </head>
+    <body data-syntax-highlight="monokai"
+        data-theme="purple-rain">
+        
+        <div id="navbar">
+            
+    <div class="navmenu ">
+        
+    <div class="navitem " >
+        <a class="title enabled" href="../../../index.html" >
+            
+            <span>Project</span>
+        </a>
+        
+    </div>
+    <div class="navitem " >
+        <a   >
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 10l6 6l6 -6h-12" />
+        </svg>
+            <span>Syntax Highlight</span>
+        </a>
+        
+    <div class="navmenu toggle">
+        
+    <div class="navitem " id="coding-horror">
+        <a   onclick="document.body.syntaxHighlight('coding-horror')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Coding Horror</span>
+        </a>
+        
+    </div>
+    <div class="navitem active" id="monokai">
+        <a   onclick="document.body.syntaxHighlight('monokai')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Monokai</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="solarized-light">
+        <a   onclick="document.body.syntaxHighlight('solarized-light')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Solarized Light</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="son-of-obsidian">
+        <a   onclick="document.body.syntaxHighlight('son-of-obsidian')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Son of Obsidian</span>
+        </a>
+        
+    </div>
+    </div>
+    </div>
+    <div class="navitem " >
+        <a   >
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 10l6 6l6 -6h-12" />
+        </svg>
+            <span>Theme</span>
+        </a>
+        
+    <div class="navmenu toggle">
+        
+    <div class="navitem " id="blueberry">
+        <a   onclick="document.body.theme('blueberry')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Blueberry</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="book-cover">
+        <a   onclick="document.body.theme('book-cover')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Book Cover</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="brownie">
+        <a   onclick="document.body.theme('brownie')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Brownie</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="camouflage">
+        <a   onclick="document.body.theme('camouflage')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Camouflage</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="chocolate">
+        <a   onclick="document.body.theme('chocolate')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Chocolate</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="greyhound">
+        <a   onclick="document.body.theme('greyhound')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Greyhound</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="ice-age">
+        <a   onclick="document.body.theme('ice-age')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Ice Age</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="mustard">
+        <a   onclick="document.body.theme('mustard')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Mustard</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="peachy">
+        <a   onclick="document.body.theme('peachy')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Peachy</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="red-alert">
+        <a   onclick="document.body.theme('red-alert')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Red Alert</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="ultra-violet">
+        <a   onclick="document.body.theme('ultra-violet')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Ultra Violet</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="vintage">
+        <a   onclick="document.body.theme('vintage')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Vintage</span>
+        </a>
+        
+    </div>
+    </div>
+    </div>
+    </div>
+            
+    <a class="hamburger">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </a>
+        </div>
+        
+        <div class="layout">
+            <div class="sidepane narrow-scrollbars">
+                
+        <div class="tocmenu">
+            <h3>Table of Contents</h3>
+            
+    <ul>
+        
+    </ul>
+        </div>
+                <div class="toc-button"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M7 7l5 5l-5 5" />
+            <path d="M13 7l5 5l-5 5" />
+        </svg></div>
+            </div>
+            
+        <div class="contentarea closepopups">
+            <pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">import</span> <span class="punctuation">*</span> <span class="keyword">as</span> <span id="6" data-toggle="tooltip" data-title="typeof assert">assert</span> <span class="keyword">from</span> <span class="string">&#039;assert&#039;</span><span class="punctuation">;</span>
+<span class="keyword">import</span> <span class="punctuation">{</span> <span id="42" data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span> <span class="punctuation">}</span> <span class="keyword">from</span> <span class="string">&#039;../helpers/testHelpers&#039;</span><span class="punctuation">;</span>
+</code></pre>
+<p>Cascading Fallback Tests (Stage 2)</p>
+<p>Tests the property-level cascading fallback hierarchy implemented in Stage 2.
+Verifies that each property resolves through the correct fallback chain.</p>
+<p>Fallback hierarchy:</p>
+<ul>
+<li>HC Dark: [highContrastDark] → [dark] → common → defaults</li>
+<li>HC Light: [highContrastLight] → [light] → common → defaults</li>
+<li>Regular Dark/Light: [dark/light] → common → defaults</li>
+</ul>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span data-toggle="tooltip" data-title="Mocha.SuiteFunction">suite</span><span class="punctuation">(</span><span class="string">&#039;Cascading Fallback Tests (Stage 2)&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+  <span class="comment">// HC DARK FALLBACK TESTS</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: HC dark uses [highContrastDark] when present&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Config has [highContrastDark] with all properties</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span id="817" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(0, 0, 0, 0.1)&#039;</span><span class="punctuation">,</span> <span class="comment">// common</span>
+      <span class="string">&#039;[dark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="885" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#00ff00&#039;</span><span class="punctuation">,</span> <span class="comment">// should NOT be used (HC dark has its own)</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="995" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#ff0000&#039;</span><span class="punctuation">,</span> <span class="comment">// Should be used for HC dark</span>
+        <span id="1022" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;4px&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Extension should use [highContrastDark] config</span>
+    <span class="comment">// We can&#039;t verify colors directly, but we can verify no crash</span>
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;Extension should use [highContrastDark] config&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: HC dark falls back to [dark] when property not in [highContrastDark]&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Config has partial [highContrastDark], rest should fall back to [dark]</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span id="1657" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dotted&#039;</span><span class="punctuation">,</span> <span class="comment">// common</span>
+      <span class="string">&#039;[dark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="1714" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#00ff00&#039;</span><span class="punctuation">,</span> <span class="comment">// Should be used for HC dark (fallback)</span>
+        <span id="1741" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;3px&#039;</span><span class="punctuation">,</span> <span class="comment">// Should be used for HC dark (fallback)</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="1890" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;5px&#039;</span><span class="punctuation">,</span> <span class="comment">// Only override borderWidth for HC dark</span>
+        <span class="comment">// border should fall back to [dark]</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// HC dark should use:</span>
+    <span class="comment">// - borderWidth: &#039;5px&#039; from [highContrastDark]</span>
+    <span class="comment">// - border: &#039;#00ff00&#039; from [dark] (fallback)</span>
+    <span class="comment">// - borderStyle: &#039;dotted&#039; from common</span>
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;HC dark should fall back to [dark] for missing properties&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: HC dark falls back to common when not in HC or dark&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Config has only common properties, no HC or dark overrides</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span id="2614" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(255, 0, 0, 0.3)&#039;</span><span class="punctuation">,</span> <span class="comment">// common</span>
+      <span id="2656" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#ff00ff&#039;</span><span class="punctuation">,</span> <span class="comment">// common</span>
+      <span id="2691" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dashed&#039;</span><span class="punctuation">,</span> <span class="comment">// common</span>
+      <span id="2730" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span> <span class="comment">// common</span>
+      <span class="string">&#039;[dark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span class="comment">// Partial dark override</span>
+        <span id="2794" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#00ff00&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span class="comment">// Only borderWidth in HC dark</span>
+        <span id="2893" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;6px&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// HC dark should use:</span>
+    <span class="comment">// - borderWidth: &#039;6px&#039; from [highContrastDark]</span>
+    <span class="comment">// - border: &#039;#00ff00&#039; from [dark]</span>
+    <span class="comment">// - background: common (not in HC or dark)</span>
+    <span class="comment">// - borderStyle: common (not in HC or dark)</span>
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;HC dark should fall back to common for properties not in HC or dark&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: HC dark uses defaults when property nowhere&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Config has minimal properties</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="3616" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#ffffff&#039;</span><span class="punctuation">,</span> <span class="comment">// Only border specified</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// HC dark should use:</span>
+    <span class="comment">// - border: &#039;#ffffff&#039; from [highContrastDark]</span>
+    <span class="comment">// - background, borderStyle, borderWidth: defaults</span>
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;HC dark should use defaults for missing properties&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span class="comment">// HC LIGHT FALLBACK TESTS</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: HC light uses [highContrastLight] when present&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span class="string">&#039;[light]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="4211" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#0000ff&#039;</span><span class="punctuation">,</span> <span class="comment">// should NOT be used</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastLight]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="4300" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#000000&#039;</span><span class="punctuation">,</span> <span class="comment">// Should be used for HC light</span>
+        <span id="4327" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;4px&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;Extension should use [highContrastLight] config&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: HC light falls back to [light] when property not in [highContrastLight]&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span id="4768" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;solid&#039;</span><span class="punctuation">,</span> <span class="comment">// common</span>
+      <span class="string">&#039;[light]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="4825" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#0000ff&#039;</span><span class="punctuation">,</span> <span class="comment">// Should be used for HC light (fallback)</span>
+        <span id="4852" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(0, 0, 255, 0.2)&#039;</span><span class="punctuation">,</span> <span class="comment">// Should be used for HC light (fallback)</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastLight]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="5020" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;5px&#039;</span><span class="punctuation">,</span> <span class="comment">// Only override borderWidth for HC light</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// HC light should use:</span>
+    <span class="comment">// - borderWidth: &#039;5px&#039; from [highContrastLight]</span>
+    <span class="comment">// - border: &#039;#0000ff&#039; from [light] (fallback)</span>
+    <span class="comment">// - background: &#039;rgba(0, 0, 255, 0.2)&#039; from [light] (fallback)</span>
+    <span class="comment">// - borderStyle: &#039;solid&#039; from common</span>
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;HC light should fall back to [light] for missing properties&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span class="comment">// PROPERTY-LEVEL INDEPENDENCE TESTS</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: Each property resolved independently through fallback chain&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Complex config where each property comes from different level</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span id="5823" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(100, 100, 100, 0.5)&#039;</span><span class="punctuation">,</span> <span class="comment">// common (used by HC dark)</span>
+      <span id="5869" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dotted&#039;</span><span class="punctuation">,</span> <span class="comment">// common (used by HC dark)</span>
+      <span class="string">&#039;[dark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="5972" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;3px&#039;</span><span class="punctuation">,</span> <span class="comment">// dark theme (used as fallback by HC dark)</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="6083" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#ff0000&#039;</span><span class="punctuation">,</span> <span class="comment">// HC dark (highest priority)</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// HC dark should use:</span>
+    <span class="comment">// - border: &#039;#ff0000&#039; from [highContrastDark]</span>
+    <span class="comment">// - borderWidth: &#039;3px&#039; from [dark] (fallback)</span>
+    <span class="comment">// - background: common</span>
+    <span class="comment">// - borderStyle: common</span>
+    <span class="comment">// Each property resolved independently!</span>
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;Each property should be resolved independently through fallback chain&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: Complete cascade uses all 4 levels (HC → base → common → defaults)&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// One property from each level</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span id="6806" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dashed&#039;</span><span class="punctuation">,</span> <span class="comment">// common (level 3)</span>
+      <span class="string">&#039;[dark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="6873" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span> <span class="comment">// dark theme (level 2)</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="6964" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#ffffff&#039;</span><span class="punctuation">,</span> <span class="comment">// HC dark (level 1)</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="comment">// background not specified anywhere → defaults (level 4)</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// HC dark should use:</span>
+    <span class="comment">// - border: from [highContrastDark] (level 1)</span>
+    <span class="comment">// - borderWidth: from [dark] (level 2)</span>
+    <span class="comment">// - borderStyle: from common (level 3)</span>
+    <span class="comment">// - background: from defaults (level 4)</span>
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;All 4 cascading levels should be utilized&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span class="comment">// REGULAR THEME TESTS (no fallback to HC)</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: Regular dark ignores [highContrastDark] config&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Config has both dark and HC dark</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span class="string">&#039;[dark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="7742" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#00ff00&#039;</span><span class="punctuation">,</span> <span class="comment">// Regular dark should use this</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="7840" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#ff0000&#039;</span><span class="punctuation">,</span> <span class="comment">// Should NOT be used by regular dark</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Regular dark should NOT use HC dark config (no fallback upward)</span>
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;Regular dark should ignore HC dark config&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: Regular light has no fallback chain (only [light] → common → defaults)&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span id="8351" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dotted&#039;</span><span class="punctuation">,</span> <span class="comment">// common</span>
+      <span class="string">&#039;[light]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="8409" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#0000ff&#039;</span><span class="punctuation">,</span>
+        <span id="8436" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastLight]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="8504" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#000000&#039;</span><span class="punctuation">,</span> <span class="comment">// Should NOT be used by regular light</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Regular light should use: [light] → common → defaults</span>
+    <span class="comment">// Should NOT check [highContrastLight]</span>
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;Regular light should have simple fallback chain&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span class="comment">// CROSS-MODE FALLBACK TESTS</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: All 4 modes can have independent HC fallback configs&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span class="string">&#039;[dark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span> <span id="9088" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#00ff00&#039;</span> <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span> <span id="9139" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;4px&#039;</span> <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;insertMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span class="string">&#039;[dark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span> <span id="9236" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#ff0000&#039;</span> <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span> <span id="9287" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;5px&#039;</span> <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;visualMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span class="string">&#039;[dark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span> <span id="9384" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#0000ff&#039;</span> <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span> <span id="9435" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;6px&#039;</span> <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;searchMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span class="string">&#039;[dark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span> <span id="9532" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#ffff00&#039;</span> <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span> <span id="9583" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;7px&#039;</span> <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">200</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Each mode should have independent fallback resolution</span>
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;All 4 modes should support independent HC fallback configs&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Cleanup</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;insertMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;visualMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;searchMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span class="comment">// EDGE CASES</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: Empty config uses all defaults&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span class="comment">// Completely empty - all properties should use defaults</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// All properties should use defaults:</span>
+    <span class="comment">// - background: &#039;rgba(255, 255, 255, 0)&#039;</span>
+    <span class="comment">// - border: &#039;#ffffff&#039;</span>
+    <span class="comment">// - borderStyle: &#039;solid&#039;</span>
+    <span class="comment">// - borderWidth: &#039;2px&#039;</span>
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;Empty config should use all defaults&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: HC config without base theme config&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Only HC config, no [dark] config</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span id="10791" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dotted&#039;</span><span class="punctuation">,</span> <span class="comment">// common</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="10860" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#ffffff&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="comment">// No [dark] config - should skip to common/defaults</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// HC dark should use:</span>
+    <span class="comment">// - border: &#039;#ffffff&#039; from [highContrastDark]</span>
+    <span class="comment">// - borderStyle: &#039;dotted&#039; from common</span>
+    <span class="comment">// - borderWidth, background: defaults (no [dark] to fall back to)</span>
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;HC config should work without base theme config&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 2: Partial override in each level of cascade&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span id="11490" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(0, 0, 0, 0.1)&#039;</span><span class="punctuation">,</span> <span class="comment">// common (only background)</span>
+      <span class="string">&#039;[dark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="11576" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dashed&#039;</span><span class="punctuation">,</span> <span class="comment">// dark theme (only borderStyle)</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="11679" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;8px&#039;</span><span class="punctuation">,</span> <span class="comment">// HC dark (only borderWidth)</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="comment">// border comes from defaults</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// HC dark should use:</span>
+    <span class="comment">// - borderWidth: &#039;8px&#039; from [highContrastDark]</span>
+    <span class="comment">// - borderStyle: &#039;dashed&#039; from [dark]</span>
+    <span class="comment">// - background: &#039;rgba(0, 0, 0, 0.1)&#039; from common</span>
+    <span class="comment">// - border: &#039;#ffffff&#039; from defaults</span>
+    <a href="cascadingFallback.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;Partial overrides at each cascade level should work&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="cascadingFallback.test.html#42"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+<span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+</code></pre>
+
+        </div>
+            <div class="sidepane narrow-scrollbars">
+                
+        <div class="pagemenu">
+            <h3>On This Page</h3>
+                <ul class="pagetree">
+                </ul>
+        </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <a class="footer-button disabled">
+            Previous
+        </a>
+            <div class="footer-text">
+                <p>Copyright © 2023</p>
+                <p>Generated by 
+                    <a href="https://johtela.github.io/litscript">LiTScript</a>
+                </p>
+            </div>
+            <a class="footer-button disabled">
+            Next
+        </a>
+        </div>
+    
+        <script src="../../../dist/normal.js"></script>
+    </body>
+    </html>

@@ -1,0 +1,700 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>
+            Project
+        </title>
+        <link rel="icon" type="image/icon" href="../images/favicon.svg" />
+        <link rel="stylesheet" href="../dist/normal.css" />
+        
+    </head>
+    <body data-syntax-highlight="monokai"
+        data-theme="purple-rain">
+        
+        <div id="navbar">
+            
+    <div class="navmenu ">
+        
+    <div class="navitem " >
+        <a class="title enabled" href="../index.html" >
+            
+            <span>Project</span>
+        </a>
+        
+    </div>
+    <div class="navitem " >
+        <a   >
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 10l6 6l6 -6h-12" />
+        </svg>
+            <span>Syntax Highlight</span>
+        </a>
+        
+    <div class="navmenu toggle">
+        
+    <div class="navitem " id="coding-horror">
+        <a   onclick="document.body.syntaxHighlight('coding-horror')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Coding Horror</span>
+        </a>
+        
+    </div>
+    <div class="navitem active" id="monokai">
+        <a   onclick="document.body.syntaxHighlight('monokai')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Monokai</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="solarized-light">
+        <a   onclick="document.body.syntaxHighlight('solarized-light')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Solarized Light</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="son-of-obsidian">
+        <a   onclick="document.body.syntaxHighlight('son-of-obsidian')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Son of Obsidian</span>
+        </a>
+        
+    </div>
+    </div>
+    </div>
+    <div class="navitem " >
+        <a   >
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 10l6 6l6 -6h-12" />
+        </svg>
+            <span>Theme</span>
+        </a>
+        
+    <div class="navmenu toggle">
+        
+    <div class="navitem " id="blueberry">
+        <a   onclick="document.body.theme('blueberry')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Blueberry</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="book-cover">
+        <a   onclick="document.body.theme('book-cover')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Book Cover</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="brownie">
+        <a   onclick="document.body.theme('brownie')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Brownie</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="camouflage">
+        <a   onclick="document.body.theme('camouflage')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Camouflage</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="chocolate">
+        <a   onclick="document.body.theme('chocolate')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Chocolate</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="greyhound">
+        <a   onclick="document.body.theme('greyhound')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Greyhound</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="ice-age">
+        <a   onclick="document.body.theme('ice-age')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Ice Age</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="mustard">
+        <a   onclick="document.body.theme('mustard')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Mustard</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="peachy">
+        <a   onclick="document.body.theme('peachy')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Peachy</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="red-alert">
+        <a   onclick="document.body.theme('red-alert')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Red Alert</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="ultra-violet">
+        <a   onclick="document.body.theme('ultra-violet')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Ultra Violet</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="vintage">
+        <a   onclick="document.body.theme('vintage')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Vintage</span>
+        </a>
+        
+    </div>
+    </div>
+    </div>
+    </div>
+            
+    <a class="hamburger">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </a>
+        </div>
+        
+        <div class="layout">
+            <div class="sidepane narrow-scrollbars">
+                
+        <div class="tocmenu">
+            <h3>Table of Contents</h3>
+            
+    <ul>
+        
+    </ul>
+        </div>
+                <div class="toc-button"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M7 7l5 5l-5 5" />
+            <path d="M13 7l5 5l-5 5" />
+        </svg></div>
+            </div>
+            
+        <div class="contentarea closepopups">
+            <pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">import</span> <span class="punctuation">*</span> <span class="keyword">as</span> <span id="6" data-toggle="tooltip" data-title="typeof vscode">vscode</span> <span class="keyword">from</span> <span class="string">&#039;vscode&#039;</span><span class="punctuation">;</span>
+</code></pre>
+<p>Theme kind supported by VS Code
+VS Code provides 4 distinct theme kinds:</p>
+<ul>
+<li>dark: Regular dark theme</li>
+<li>light: Regular light theme</li>
+<li>highContrastDark: High contrast dark theme (ColorThemeKind.HighContrast)</li>
+<li>highContrastLight: High contrast light theme (ColorThemeKind.HighContrastLight)</li>
+</ul>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">export</span> <span class="keyword">type</span> <span id="33" class="typename" data-toggle="tooltip" data-title="ThemeKind">ThemeKind</span> <span class="punctuation">=</span> <span class="string">&#039;dark&#039;</span> <span class="punctuation">|</span> <span class="string">&#039;light&#039;</span> <span class="punctuation">|</span> <span class="string">&#039;highContrastDark&#039;</span> <span class="punctuation">|</span> <span class="string">&#039;highContrastLight&#039;</span><span class="punctuation">;</span>
+</code></pre>
+<p>Theme-specific override configuration</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">export</span> <span class="keyword">interface</span> <span id="431" class="typename" data-toggle="tooltip" data-title="ThemeOverride">ThemeOverride</span> <span class="punctuation">{</span>
+  <span id="514" data-toggle="tooltip" data-title="string | undefined">background</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">;</span>
+  <span id="537" data-toggle="tooltip" data-title="string | undefined">border</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">;</span>
+  <span id="556" data-toggle="tooltip" data-title="string | undefined">borderStyle</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">;</span>
+  <span id="580" data-toggle="tooltip" data-title="string | undefined">borderWidth</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+</code></pre>
+<p>Mode configuration with optional theme-specific overrides</p>
+<p>STAGE 2: Supports cascading fallback hierarchy</p>
+<ul>
+<li>[dark]: Regular dark theme (also fallback for highContrastDark)</li>
+<li>[light]: Regular light theme (also fallback for highContrastLight)</li>
+<li>[highContrastDark]: High contrast dark theme → falls back to [dark]</li>
+<li>[highContrastLight]: High contrast light theme → falls back to [light]</li>
+</ul>
+<p>Each property (background, border, borderStyle, borderWidth) is resolved
+independently through the fallback chain, enabling selective overrides.</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">export</span> <span class="keyword">interface</span> <span id="606" class="typename" data-toggle="tooltip" data-title="ModeConfig">ModeConfig</span> <span class="punctuation">{</span>
+  <span id="1203" data-toggle="tooltip" data-title="string | undefined">background</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">;</span>
+  <span id="1226" data-toggle="tooltip" data-title="string | undefined">border</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">;</span>
+  <span id="1245" data-toggle="tooltip" data-title="string | undefined">borderStyle</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">;</span>
+  <span id="1269" data-toggle="tooltip" data-title="string | undefined">borderWidth</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">;</span>
+  <span class="string">&#039;[dark]&#039;</span><span class="punctuation">?</span><span class="punctuation">:</span> <a href="configuration.html#431"><span class="typename" data-toggle="tooltip" data-title="ThemeOverride">ThemeOverride</span></a><span class="punctuation">;</span>
+  <span class="string">&#039;[light]&#039;</span><span class="punctuation">?</span><span class="punctuation">:</span> <a href="configuration.html#431"><span class="typename" data-toggle="tooltip" data-title="ThemeOverride">ThemeOverride</span></a><span class="punctuation">;</span>
+  <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">?</span><span class="punctuation">:</span> <a href="configuration.html#431"><span class="typename" data-toggle="tooltip" data-title="ThemeOverride">ThemeOverride</span></a><span class="punctuation">;</span>
+  <span class="string">&#039;[highContrastLight]&#039;</span><span class="punctuation">?</span><span class="punctuation">:</span> <a href="configuration.html#431"><span class="typename" data-toggle="tooltip" data-title="ThemeOverride">ThemeOverride</span></a><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+</code></pre>
+<p>Merged configuration after applying theme overrides</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">export</span> <span class="keyword">interface</span> <span id="1433" class="typename" data-toggle="tooltip" data-title="MergedModeConfig">MergedModeConfig</span> <span class="punctuation">{</span>
+  <span id="1533" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">;</span>
+  <span id="1555" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">;</span>
+  <span id="1573" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">;</span>
+  <span id="1596" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+</code></pre>
+<p>Logger interface for optional logging</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">export</span> <span class="keyword">interface</span> <span id="1621" class="typename" data-toggle="tooltip" data-title="Logger">Logger</span> <span class="punctuation">{</span>
+  <span id="1697" class="member" data-toggle="tooltip" data-title="(message: string, data?: unknown) =&gt; void">debug</span><span class="punctuation">(</span><span id="1706" data-toggle="tooltip" data-title="string">message</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">,</span> <span id="1722" data-toggle="tooltip" data-title="unknown">data</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">unknown</span><span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">void</span><span class="punctuation">;</span>
+  <span id="1745" class="member" data-toggle="tooltip" data-title="(message: string, data?: unknown) =&gt; void">log</span><span class="punctuation">(</span><span id="1752" data-toggle="tooltip" data-title="string">message</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">,</span> <span id="1768" data-toggle="tooltip" data-title="unknown">data</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">unknown</span><span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">void</span><span class="punctuation">;</span>
+<span class="punctuation">}</span>
+</code></pre>
+<p>Default configuration for normal mode
+Matches package.json defaults</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">export</span> <span class="keyword">const</span> <span id="1889" data-toggle="tooltip" data-title="MergedModeConfig">DEFAULT_NORMAL_MODE</span><span class="punctuation">:</span> <a href="configuration.html#1433"><span class="typename" data-toggle="tooltip" data-title="MergedModeConfig">MergedModeConfig</span></a> <span class="punctuation">=</span> <span class="punctuation">{</span>
+  <span id="1931" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(255, 255, 255, 0)&#039;</span><span class="punctuation">,</span>
+  <span id="1971" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#00aa00&#039;</span><span class="punctuation">,</span>
+  <span id="1992" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dotted&#039;</span><span class="punctuation">,</span>
+  <span id="2017" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span>
+<span class="punctuation">}</span><span class="punctuation">;</span>
+</code></pre>
+<p>Default configuration for insert mode
+Matches package.json defaults</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">export</span> <span class="keyword">const</span> <span id="2138" data-toggle="tooltip" data-title="MergedModeConfig">DEFAULT_INSERT_MODE</span><span class="punctuation">:</span> <a href="configuration.html#1433"><span class="typename" data-toggle="tooltip" data-title="MergedModeConfig">MergedModeConfig</span></a> <span class="punctuation">=</span> <span class="punctuation">{</span>
+  <span id="2180" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(255, 255, 255, 0)&#039;</span><span class="punctuation">,</span>
+  <span id="2220" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#aa0000&#039;</span><span class="punctuation">,</span>
+  <span id="2241" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;solid&#039;</span><span class="punctuation">,</span>
+  <span id="2265" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span>
+<span class="punctuation">}</span><span class="punctuation">;</span>
+</code></pre>
+<p>Default configuration for visual mode
+Matches package.json defaults</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">export</span> <span class="keyword">const</span> <span id="2386" data-toggle="tooltip" data-title="MergedModeConfig">DEFAULT_VISUAL_MODE</span><span class="punctuation">:</span> <a href="configuration.html#1433"><span class="typename" data-toggle="tooltip" data-title="MergedModeConfig">MergedModeConfig</span></a> <span class="punctuation">=</span> <span class="punctuation">{</span>
+  <span id="2428" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(255, 255, 255, 0)&#039;</span><span class="punctuation">,</span>
+  <span id="2468" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#0000aa&#039;</span><span class="punctuation">,</span>
+  <span id="2489" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dashed&#039;</span><span class="punctuation">,</span>
+  <span id="2514" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span>
+<span class="punctuation">}</span><span class="punctuation">;</span>
+</code></pre>
+<p>Default configuration for search mode
+Matches package.json defaults</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">export</span> <span class="keyword">const</span> <span id="2635" data-toggle="tooltip" data-title="MergedModeConfig">DEFAULT_SEARCH_MODE</span><span class="punctuation">:</span> <a href="configuration.html#1433"><span class="typename" data-toggle="tooltip" data-title="MergedModeConfig">MergedModeConfig</span></a> <span class="punctuation">=</span> <span class="punctuation">{</span>
+  <span id="2677" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="string">&#039;rgba(255, 255, 255, 0)&#039;</span><span class="punctuation">,</span>
+  <span id="2717" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#aaaa00&#039;</span><span class="punctuation">,</span>
+  <span id="2738" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;solid&#039;</span><span class="punctuation">,</span>
+  <span id="2762" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span>
+<span class="punctuation">}</span><span class="punctuation">;</span>
+</code></pre>
+<p>Configuration Manager - Singleton class for managing mode configurations</p>
+<p>Handles all configuration logic:</p>
+<ul>
+<li>Reading VS Code settings</li>
+<li>Theme detection</li>
+<li>Cascading fallback hierarchy</li>
+<li>Property-level merging</li>
+</ul>
+<p>Usage:
+const config = ConfigurationManager.getInstance(logger);
+const normalConfig = config.getConfig('normal');</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">export</span> <span class="keyword">class</span> <span id="2787" class="typename" data-toggle="tooltip" data-title="ConfigurationManager">ConfigurationManager</span> <span class="punctuation">{</span>
+  <span class="keyword">private</span> <span class="keyword">static</span> <span id="3189" data-toggle="tooltip" data-title="ConfigurationManager | null">instance</span><span class="punctuation">:</span> <a href="configuration.html#2787"><span class="typename" data-toggle="tooltip" data-title="ConfigurationManager">ConfigurationManager</span></a> <span class="punctuation">|</span> <span class="keyword">null</span> <span class="punctuation">=</span> <span class="keyword">null</span><span class="punctuation">;</span>
+  <span class="keyword">private</span> <span id="3252" data-toggle="tooltip" data-title="Logger | undefined">logger</span><span class="punctuation">?</span><span class="punctuation">:</span> <a href="configuration.html#1621"><span class="typename" data-toggle="tooltip" data-title="Logger">Logger</span></a><span class="punctuation">;</span>
+
+  <span class="keyword">private</span> <span class="keyword">constructor</span><span class="punctuation">(</span><span id="3303" data-toggle="tooltip" data-title="Logger | undefined">logger</span><span class="punctuation">?</span><span class="punctuation">:</span> <a href="configuration.html#1621"><span class="typename" data-toggle="tooltip" data-title="Logger">Logger</span></a><span class="punctuation">)</span> <span class="punctuation">{</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#3252"><span data-toggle="tooltip" data-title="Logger | undefined">logger</span></a> <span class="punctuation">=</span> <a href="configuration.html#3303"><span data-toggle="tooltip" data-title="Logger | undefined">logger</span></a><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  /**
+   * Get singleton instance of ConfigurationManager
+   *
+   * @<a href="configuration.html#3560"><span data-toggle="tooltip" data-title="any">param</span></a> <a href="configuration.html#3560"><span data-toggle="tooltip" data-title="any">logger</span></a> - Optional logger for debug messages
+   * @returns
+</code></pre>
+<p>Get singleton instance of ConfigurationManager</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code>  <span class="keyword">public</span> <span class="keyword">static</span> <span id="3351" class="member" data-toggle="tooltip" data-title="(logger?: Logger) =&gt; ConfigurationManager">getInstance</span><span class="punctuation">(</span><span id="3560" data-toggle="tooltip" data-title="Logger | undefined">logger</span><span class="punctuation">?</span><span class="punctuation">:</span> <a href="configuration.html#1621"><span class="typename" data-toggle="tooltip" data-title="Logger">Logger</span></a><span class="punctuation">)</span><span class="punctuation">:</span> <a href="configuration.html#2787"><span class="typename" data-toggle="tooltip" data-title="ConfigurationManager">ConfigurationManager</span></a> <span class="punctuation">{</span>
+    <span class="keyword">if</span> <span class="punctuation">(</span><span class="punctuation">!</span><a href="configuration.html#2787"><span class="typename" data-toggle="tooltip" data-title="typeof ConfigurationManager">ConfigurationManager</span></a><span class="punctuation">.</span><a href="configuration.html#3189"><span data-toggle="tooltip" data-title="ConfigurationManager | null">instance</span></a><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <a href="configuration.html#2787"><span class="typename" data-toggle="tooltip" data-title="typeof ConfigurationManager">ConfigurationManager</span></a><span class="punctuation">.</span><a href="configuration.html#3189"><span data-toggle="tooltip" data-title="ConfigurationManager | null">instance</span></a> <span class="punctuation">=</span> <span class="keyword">new</span> <a href="configuration.html#2787"><span class="typename" data-toggle="tooltip" data-title="typeof ConfigurationManager">ConfigurationManager</span></a><span class="punctuation">(</span><a href="configuration.html#3560"><span data-toggle="tooltip" data-title="Logger | undefined">logger</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+    <span class="comment">// Update logger if provided (allows changing logger after first instantiation)</span>
+    <span class="keyword">if</span> <span class="punctuation">(</span><a href="configuration.html#3560"><span data-toggle="tooltip" data-title="Logger | undefined">logger</span></a><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <a href="configuration.html#2787"><span class="typename" data-toggle="tooltip" data-title="typeof ConfigurationManager">ConfigurationManager</span></a><span class="punctuation">.</span><a href="configuration.html#3189"><span data-toggle="tooltip" data-title="ConfigurationManager">instance</span></a><span class="punctuation">.</span><a href="configuration.html#3252"><span data-toggle="tooltip" data-title="Logger | undefined">logger</span></a> <span class="punctuation">=</span> <a href="configuration.html#3560"><span data-toggle="tooltip" data-title="Logger">logger</span></a><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+    <span class="keyword">return</span> <a href="configuration.html#2787"><span class="typename" data-toggle="tooltip" data-title="typeof ConfigurationManager">ConfigurationManager</span></a><span class="punctuation">.</span><a href="configuration.html#3189"><span data-toggle="tooltip" data-title="ConfigurationManager">instance</span></a><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  /**
+   * Get merged configuration for a specific mode
+   *
+   * This is the ONLY public API method. It handles everything:
+   * 1. Read VS Code configuration
+   * 2. Detect current theme
+   * 3. Apply cascading fallback
+   * 4. Merge with defaults
+   *
+   * @<a href="configuration.html#4335"><span data-toggle="tooltip" data-title="any">param</span></a> <a href="configuration.html#4335"><span data-toggle="tooltip" data-title="any">mode</span></a> - The mode to get configuration for
+   * @returns
+</code></pre>
+<p>Get merged configuration for a specific mode</p>
+<p>This is the ONLY public API method. It handles everything:</p>
+<ol>
+<li>Read VS Code configuration</li>
+<li>Detect current theme</li>
+<li>Apply cascading fallback</li>
+<li>Merge with defaults</li>
+</ol>
+<pre class="syntaxhighlight narrow-scrollbars"><code>  <span class="keyword">public</span> <span id="3927" class="member" data-toggle="tooltip" data-title="(mode: &quot;normal&quot; | &quot;insert&quot; | &quot;visual&quot; | &quot;search&quot;) =&gt; MergedModeConfig">getConfig</span><span class="punctuation">(</span><span id="4335" data-toggle="tooltip" data-title="&quot;normal&quot; | &quot;insert&quot; | &quot;visual&quot; | &quot;search&quot;">mode</span><span class="punctuation">:</span> <span class="string">&#039;normal&#039;</span> <span class="punctuation">|</span> <span class="string">&#039;insert&#039;</span> <span class="punctuation">|</span> <span class="string">&#039;visual&#039;</span> <span class="punctuation">|</span> <span class="string">&#039;search&#039;</span><span class="punctuation">)</span><span class="punctuation">:</span> <a href="configuration.html#1433"><span class="typename" data-toggle="tooltip" data-title="MergedModeConfig">MergedModeConfig</span></a> <span class="punctuation">{</span>
+    <span class="comment">// Get VS Code configuration</span>
+    <span class="keyword">const</span> <span id="4446" data-toggle="tooltip" data-title="vscode.WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="configuration.html#6"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.workspace">workspace</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(section?: string, scope?: vscode.ConfigurationScope | null) =&gt; vscode.WorkspaceConfiguration">getConfiguration</span><span class="punctuation">(</span><span class="string">&#039;modaledit-line-indicator&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="4528" data-toggle="tooltip" data-title="string">modeConfigKey</span> <span class="punctuation">=</span> <span class="string">`${</span><a href="configuration.html#4335"><span data-toggle="tooltip" data-title="&quot;normal&quot; | &quot;insert&quot; | &quot;visual&quot; | &quot;search&quot;">mode</span></a><span class="string">}Mode`</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="4569" data-toggle="tooltip" data-title="ModeConfig | undefined">userModeConfig</span> <span class="punctuation">=</span> <a href="configuration.html#4446"><span data-toggle="tooltip" data-title="vscode.WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">&lt;</span><a href="configuration.html#606"><span class="typename" data-toggle="tooltip" data-title="ModeConfig">ModeConfig</span></a><span class="punctuation">&gt;</span><span class="punctuation">(</span><a href="configuration.html#4528"><span data-toggle="tooltip" data-title="string">modeConfigKey</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="4635" data-toggle="tooltip" data-title="ModeConfig">modeConfig</span> <span class="punctuation">=</span>
+      <a href="configuration.html#4569"><span data-toggle="tooltip" data-title="ModeConfig | undefined">userModeConfig</span></a> <span class="punctuation">??</span>
+      <span class="punctuation">(</span><a href="configuration.html#4446"><span data-toggle="tooltip" data-title="vscode.WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(section: string) =&gt; { key: string; defaultValue?: T; globalValue?: T; workspaceValue?: T; workspaceFolderValue?: T; defaultLanguageValue?: T; globalLanguageValue?: T; workspaceLanguageValue?: T; workspaceFolderLanguageValue?: T; languageIds?: string[]; } | undefined">inspect</span><span class="punctuation">&lt;</span><a href="configuration.html#606"><span class="typename" data-toggle="tooltip" data-title="ModeConfig">ModeConfig</span></a><span class="punctuation">&gt;</span><span class="punctuation">(</span><a href="configuration.html#4528"><span data-toggle="tooltip" data-title="string">modeConfigKey</span></a><span class="punctuation">)</span><span class="punctuation">?.</span><span data-toggle="tooltip" data-title="ModeConfig | undefined">defaultValue</span> <span class="keyword">as</span> <a href="configuration.html#606"><span class="typename" data-toggle="tooltip" data-title="ModeConfig">ModeConfig</span></a> <span class="punctuation">|</span> <span class="keyword">undefined</span><span class="punctuation">)</span> <span class="punctuation">??</span>
+      <span class="punctuation">{</span><span class="punctuation">}</span><span class="punctuation">;</span>
+
+    <span class="keyword">if</span> <span class="punctuation">(</span><span class="punctuation">!</span><a href="configuration.html#4569"><span data-toggle="tooltip" data-title="ModeConfig | undefined">userModeConfig</span></a><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#3252"><span data-toggle="tooltip" data-title="Logger | undefined">logger</span></a><span class="punctuation">?.</span><a href="configuration.html#1697"><span class="member" data-toggle="tooltip" data-title="((message: string, data?: unknown) =&gt; void) | undefined">debug</span></a><span class="punctuation">(</span>
+        <span class="string">`Using ${</span><a href="configuration.html#4335"><span data-toggle="tooltip" data-title="&quot;normal&quot; | &quot;insert&quot; | &quot;visual&quot; | &quot;search&quot;">mode</span></a><span class="string">} mode defaults from schema because no user configuration was found.`</span>
+      <span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+
+    <span class="comment">// Get defaults and merge</span>
+    <span class="keyword">const</span> <span id="4976" data-toggle="tooltip" data-title="MergedModeConfig">defaults</span> <span class="punctuation">=</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#5081"><span class="member" data-toggle="tooltip" data-title="(mode: &quot;normal&quot; | &quot;insert&quot; | &quot;visual&quot; | &quot;search&quot;) =&gt; MergedModeConfig">getDefaultsForMode</span></a><span class="punctuation">(</span><a href="configuration.html#4335"><span data-toggle="tooltip" data-title="&quot;normal&quot; | &quot;insert&quot; | &quot;visual&quot; | &quot;search&quot;">mode</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">return</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#9308"><span class="member" data-toggle="tooltip" data-title="(modeConfig: ModeConfig, defaults: MergedModeConfig) =&gt; MergedModeConfig">getMergedModeConfig</span></a><span class="punctuation">(</span><a href="configuration.html#4635"><span data-toggle="tooltip" data-title="ModeConfig">modeConfig</span></a><span class="punctuation">,</span> <a href="configuration.html#4976"><span data-toggle="tooltip" data-title="MergedModeConfig">defaults</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  /**
+   * Get default configuration for a specific mode
+   *
+   * @<a href="configuration.html#5287"><span data-toggle="tooltip" data-title="any">param</span></a> <a href="configuration.html#5287"><span data-toggle="tooltip" data-title="any">mode</span></a> - The mode to get defaults for
+   * @returns
+</code></pre>
+<p>Get default configuration for a specific mode</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code>  <span class="keyword">private</span> <span id="5081" class="member" data-toggle="tooltip" data-title="(mode: &quot;normal&quot; | &quot;insert&quot; | &quot;visual&quot; | &quot;search&quot;) =&gt; MergedModeConfig">getDefaultsForMode</span><span class="punctuation">(</span><span id="5287" data-toggle="tooltip" data-title="&quot;normal&quot; | &quot;insert&quot; | &quot;visual&quot; | &quot;search&quot;">mode</span><span class="punctuation">:</span> <span class="string">&#039;normal&#039;</span> <span class="punctuation">|</span> <span class="string">&#039;insert&#039;</span> <span class="punctuation">|</span> <span class="string">&#039;visual&#039;</span> <span class="punctuation">|</span> <span class="string">&#039;search&#039;</span><span class="punctuation">)</span><span class="punctuation">:</span> <a href="configuration.html#1433"><span class="typename" data-toggle="tooltip" data-title="MergedModeConfig">MergedModeConfig</span></a> <span class="punctuation">{</span>
+    <span class="keyword">switch</span> <span class="punctuation">(</span><a href="configuration.html#5287"><span data-toggle="tooltip" data-title="&quot;normal&quot; | &quot;insert&quot; | &quot;visual&quot; | &quot;search&quot;">mode</span></a><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="keyword">case</span> <span class="string">&#039;normal&#039;</span><span class="punctuation">:</span>
+        <span class="keyword">return</span> <a href="configuration.html#1889"><span data-toggle="tooltip" data-title="MergedModeConfig">DEFAULT_NORMAL_MODE</span></a><span class="punctuation">;</span>
+      <span class="keyword">case</span> <span class="string">&#039;insert&#039;</span><span class="punctuation">:</span>
+        <span class="keyword">return</span> <a href="configuration.html#2138"><span data-toggle="tooltip" data-title="MergedModeConfig">DEFAULT_INSERT_MODE</span></a><span class="punctuation">;</span>
+      <span class="keyword">case</span> <span class="string">&#039;visual&#039;</span><span class="punctuation">:</span>
+        <span class="keyword">return</span> <a href="configuration.html#2386"><span data-toggle="tooltip" data-title="MergedModeConfig">DEFAULT_VISUAL_MODE</span></a><span class="punctuation">;</span>
+      <span class="keyword">case</span> <span class="string">&#039;search&#039;</span><span class="punctuation">:</span>
+        <span class="keyword">return</span> <a href="configuration.html#2635"><span data-toggle="tooltip" data-title="MergedModeConfig">DEFAULT_SEARCH_MODE</span></a><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+
+  /**
+   * Get the current active color theme kind from VS Code
+   *
+   * VS Code provides 4 distinct theme kinds, and we now distinguish between
+   * high contrast dark and high contrast light themes (Stage 1 of Issue #4).
+   *
+   * @returns
+</code></pre>
+<p>Get the current active color theme kind from VS Code</p>
+<p>VS Code provides 4 distinct theme kinds, and we now distinguish between
+high contrast dark and high contrast light themes (Stage 1 of Issue #4).</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code>  <span class="keyword">private</span> <span id="5613" class="member" data-toggle="tooltip" data-title="() =&gt; ThemeKind">getCurrentThemeKind</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">:</span> <a href="configuration.html#33"><span class="typename" data-toggle="tooltip" data-title="ThemeKind">ThemeKind</span></a> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="5978" data-toggle="tooltip" data-title="vscode.ColorThemeKind">themeKind</span> <span class="punctuation">=</span> <a href="configuration.html#6"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorTheme">activeColorTheme</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span><span class="punctuation">;</span>
+
+    <span class="keyword">switch</span> <span class="punctuation">(</span><a href="configuration.html#5978"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">themeKind</span></a><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="keyword">case</span> <a href="configuration.html#6"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Dark">Dark</span><span class="punctuation">:</span>
+        <span class="keyword">return</span> <span class="string">&#039;dark&#039;</span><span class="punctuation">;</span>
+      <span class="keyword">case</span> <a href="configuration.html#6"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Light">Light</span><span class="punctuation">:</span>
+        <span class="keyword">return</span> <span class="string">&#039;light&#039;</span><span class="punctuation">;</span>
+      <span class="keyword">case</span> <a href="configuration.html#6"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span><span class="punctuation">:</span>
+        <span class="comment">// HighContrast is the DARK variant of high contrast themes</span>
+        <span class="keyword">return</span> <span class="string">&#039;highContrastDark&#039;</span><span class="punctuation">;</span>
+      <span class="keyword">case</span> <a href="configuration.html#6"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span><span class="punctuation">:</span>
+        <span class="keyword">return</span> <span class="string">&#039;highContrastLight&#039;</span><span class="punctuation">;</span>
+      <span class="keyword">default</span><span class="punctuation">:</span>
+        <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#3252"><span data-toggle="tooltip" data-title="Logger | undefined">logger</span></a><span class="punctuation">?.</span><a href="configuration.html#1697"><span class="member" data-toggle="tooltip" data-title="((message: string, data?: unknown) =&gt; void) | undefined">debug</span></a><span class="punctuation">(</span><span class="string">`Unknown theme kind: ${</span><a href="configuration.html#5978"><span data-toggle="tooltip" data-title="never">themeKind</span></a><span class="string">}, defaulting to dark`</span><span class="punctuation">)</span><span class="punctuation">;</span>
+        <span class="keyword">return</span> <span class="string">&#039;dark&#039;</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+
+  /**
+   * Returns the fallback chain for a given theme kind.
+   * Each property is resolved by checking these keys in order until a value is found.
+   *
+   * STAGE 2: Implements cascading fallback hierarchy per Issue #4
+   * - HC Dark falls back to regular dark theme
+   * - HC Light falls back to regular light theme
+   * - Regular themes have no fallback (check theme override only)
+   *
+   * @<a href="configuration.html#7088"><span data-toggle="tooltip" data-title="any">param</span></a> <a href="configuration.html#7088"><span data-toggle="tooltip" data-title="any">themeKind</span></a> - Current theme kind
+   * @returns
+</code></pre>
+<p>Returns the fallback chain for a given theme kind.
+Each property is resolved by checking these keys in order until a value is found.</p>
+<p>STAGE 2: Implements cascading fallback hierarchy per Issue #4</p>
+<ul>
+<li>HC Dark falls back to regular dark theme</li>
+<li>HC Light falls back to regular light theme</li>
+<li>Regular themes have no fallback (check theme override only)</li>
+</ul>
+<pre class="syntaxhighlight narrow-scrollbars"><code>  <span class="keyword">private</span> <span id="6549" class="member" data-toggle="tooltip" data-title="(themeKind: ThemeKind) =&gt; string[]">getFallbackChain</span><span class="punctuation">(</span><span id="7088" data-toggle="tooltip" data-title="ThemeKind">themeKind</span><span class="punctuation">:</span> <a href="configuration.html#33"><span class="typename" data-toggle="tooltip" data-title="ThemeKind">ThemeKind</span></a><span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">[</span><span class="punctuation">]</span> <span class="punctuation">{</span>
+    <span class="keyword">switch</span> <span class="punctuation">(</span><a href="configuration.html#7088"><span data-toggle="tooltip" data-title="ThemeKind">themeKind</span></a><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="keyword">case</span> <span class="string">&#039;highContrastDark&#039;</span><span class="punctuation">:</span>
+        <span class="comment">// HC Dark: [highContrastDark] → [dark] → common → defaults</span>
+        <span class="keyword">return</span> <span class="punctuation">[</span><span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">,</span> <span class="string">&#039;[dark]&#039;</span><span class="punctuation">]</span><span class="punctuation">;</span>
+      <span class="keyword">case</span> <span class="string">&#039;highContrastLight&#039;</span><span class="punctuation">:</span>
+        <span class="comment">// HC Light: [highContrastLight] → [light] → common → defaults</span>
+        <span class="keyword">return</span> <span class="punctuation">[</span><span class="string">&#039;[highContrastLight]&#039;</span><span class="punctuation">,</span> <span class="string">&#039;[light]&#039;</span><span class="punctuation">]</span><span class="punctuation">;</span>
+      <span class="keyword">case</span> <span class="string">&#039;dark&#039;</span><span class="punctuation">:</span>
+        <span class="comment">// Regular dark: [dark] → common → defaults</span>
+        <span class="keyword">return</span> <span class="punctuation">[</span><span class="string">&#039;[dark]&#039;</span><span class="punctuation">]</span><span class="punctuation">;</span>
+      <span class="keyword">case</span> <span class="string">&#039;light&#039;</span><span class="punctuation">:</span>
+        <span class="comment">// Regular light: [light] → common → defaults</span>
+        <span class="keyword">return</span> <span class="punctuation">[</span><span class="string">&#039;[light]&#039;</span><span class="punctuation">]</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+
+  /**
+   * Resolves a single property through the fallback chain.
+   * Checks theme overrides first, then common property, then default value.
+   *
+   * STAGE 2: Property-level cascading resolution (not object-level)
+   * This allows selective overrides without duplicating entire config.
+   *
+   * @<a href="configuration.html#8321"><span data-toggle="tooltip" data-title="any">param</span></a> <a href="configuration.html#8321"><span data-toggle="tooltip" data-title="any">propertyName</span></a> - Property to resolve (background, border, borderStyle, borderWidth)
+   * @<a href="configuration.html#8360"><span data-toggle="tooltip" data-title="any">param</span></a> <a href="configuration.html#8360"><span data-toggle="tooltip" data-title="any">modeConfig</span></a> - Mode configuration object from settings
+   * @<a href="configuration.html#8388"><span data-toggle="tooltip" data-title="any">param</span></a> <a href="configuration.html#8388"><span data-toggle="tooltip" data-title="any">fallbackChain</span></a> - Array of theme keys to check in priority order
+   * @<a href="configuration.html#8417"><span data-toggle="tooltip" data-title="any">param</span></a> <a href="configuration.html#8417"><span data-toggle="tooltip" data-title="any">defaultValue</span></a> - Default value if not found anywhere
+   * @returns
+</code></pre>
+<p>Resolves a single property through the fallback chain.
+Checks theme overrides first, then common property, then default value.</p>
+<p>STAGE 2: Property-level cascading resolution (not object-level)
+This allows selective overrides without duplicating entire config.</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code>  <span class="keyword">private</span> <span id="7658" class="member" data-toggle="tooltip" data-title="(propertyName: keyof ThemeOverride, modeConfig: ModeConfig, fallbackChain: string[], defaultValue: string) =&gt; string">resolveProperty</span><span class="punctuation">(</span>
+    <span id="8321" data-toggle="tooltip" data-title="keyof ThemeOverride">propertyName</span><span class="punctuation">:</span> <span class="keyword">keyof</span> <a href="configuration.html#431"><span class="typename" data-toggle="tooltip" data-title="ThemeOverride">ThemeOverride</span></a><span class="punctuation">,</span>
+    <span id="8360" data-toggle="tooltip" data-title="ModeConfig">modeConfig</span><span class="punctuation">:</span> <a href="configuration.html#606"><span class="typename" data-toggle="tooltip" data-title="ModeConfig">ModeConfig</span></a><span class="punctuation">,</span>
+    <span id="8388" data-toggle="tooltip" data-title="string[]">fallbackChain</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span>
+    <span id="8417" data-toggle="tooltip" data-title="string">defaultValue</span><span class="punctuation">:</span> <span class="keyword">string</span>
+  <span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">string</span> <span class="punctuation">{</span>
+    <span class="comment">// 1. Check theme-specific overrides in priority order</span>
+    <span class="keyword">for</span> <span class="punctuation">(</span><span class="keyword">const</span> <span id="8530" data-toggle="tooltip" data-title="string">themeKey</span> <span class="keyword">of</span> <a href="configuration.html#8388"><span data-toggle="tooltip" data-title="string[]">fallbackChain</span></a><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="keyword">const</span> <span id="8571" data-toggle="tooltip" data-title="ThemeOverride | undefined">themeOverride</span> <span class="punctuation">=</span> <a href="configuration.html#8360"><span data-toggle="tooltip" data-title="ModeConfig">modeConfig</span></a><span class="punctuation">[</span><a href="configuration.html#8530"><span data-toggle="tooltip" data-title="string">themeKey</span></a> <span class="keyword">as</span> <span class="keyword">keyof</span> <a href="configuration.html#606"><span class="typename" data-toggle="tooltip" data-title="ModeConfig">ModeConfig</span></a><span class="punctuation">]</span> <span class="keyword">as</span> <a href="configuration.html#431"><span class="typename" data-toggle="tooltip" data-title="ThemeOverride">ThemeOverride</span></a> <span class="punctuation">|</span> <span class="keyword">undefined</span><span class="punctuation">;</span>
+      <span class="keyword">if</span> <span class="punctuation">(</span><a href="configuration.html#8571"><span data-toggle="tooltip" data-title="ThemeOverride | undefined">themeOverride</span></a><span class="punctuation">?.</span><span class="punctuation">[</span><a href="configuration.html#8321"><span data-toggle="tooltip" data-title="keyof ThemeOverride">propertyName</span></a><span class="punctuation">]</span> <span class="punctuation">!==</span> <span data-toggle="tooltip" data-title="undefined">undefined</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+        <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#3252"><span data-toggle="tooltip" data-title="Logger | undefined">logger</span></a><span class="punctuation">?.</span><a href="configuration.html#1697"><span class="member" data-toggle="tooltip" data-title="((message: string, data?: unknown) =&gt; void) | undefined">debug</span></a><span class="punctuation">(</span>
+          <span class="string">`Resolved ${</span><a href="configuration.html#8321"><span data-toggle="tooltip" data-title="keyof ThemeOverride">propertyName</span></a><span class="string">} from ${</span><a href="configuration.html#8530"><span data-toggle="tooltip" data-title="string">themeKey</span></a><span class="string">}: ${</span><a href="configuration.html#8571"><span data-toggle="tooltip" data-title="ThemeOverride">themeOverride</span></a><span class="punctuation">[</span><a href="configuration.html#8321"><span data-toggle="tooltip" data-title="keyof ThemeOverride">propertyName</span></a><span class="punctuation">]</span><span class="string">}`</span>
+        <span class="punctuation">)</span><span class="punctuation">;</span>
+        <span class="keyword">return</span> <a href="configuration.html#8571"><span data-toggle="tooltip" data-title="ThemeOverride">themeOverride</span></a><span class="punctuation">[</span><a href="configuration.html#8321"><span data-toggle="tooltip" data-title="keyof ThemeOverride">propertyName</span></a><span class="punctuation">]</span><span class="punctuation">!</span><span class="punctuation">;</span>
+      <span class="punctuation">}</span>
+    <span class="punctuation">}</span>
+
+    <span class="comment">// 2. Check common property (base configuration)</span>
+    <span class="keyword">if</span> <span class="punctuation">(</span><a href="configuration.html#8360"><span data-toggle="tooltip" data-title="ModeConfig">modeConfig</span></a><span class="punctuation">[</span><a href="configuration.html#8321"><span data-toggle="tooltip" data-title="keyof ThemeOverride">propertyName</span></a><span class="punctuation">]</span> <span class="punctuation">!==</span> <span data-toggle="tooltip" data-title="undefined">undefined</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#3252"><span data-toggle="tooltip" data-title="Logger | undefined">logger</span></a><span class="punctuation">?.</span><a href="configuration.html#1697"><span class="member" data-toggle="tooltip" data-title="((message: string, data?: unknown) =&gt; void) | undefined">debug</span></a><span class="punctuation">(</span>
+        <span class="string">`Resolved ${</span><a href="configuration.html#8321"><span data-toggle="tooltip" data-title="keyof ThemeOverride">propertyName</span></a><span class="string">} from common config: ${</span><a href="configuration.html#8360"><span data-toggle="tooltip" data-title="ModeConfig">modeConfig</span></a><span class="punctuation">[</span><a href="configuration.html#8321"><span data-toggle="tooltip" data-title="keyof ThemeOverride">propertyName</span></a><span class="punctuation">]</span><span class="string">}`</span>
+      <span class="punctuation">)</span><span class="punctuation">;</span>
+      <span class="keyword">return</span> <a href="configuration.html#8360"><span data-toggle="tooltip" data-title="ModeConfig">modeConfig</span></a><span class="punctuation">[</span><a href="configuration.html#8321"><span data-toggle="tooltip" data-title="keyof ThemeOverride">propertyName</span></a><span class="punctuation">]</span><span class="punctuation">!</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+
+    <span class="comment">// 3. Use default value</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#3252"><span data-toggle="tooltip" data-title="Logger | undefined">logger</span></a><span class="punctuation">?.</span><a href="configuration.html#1697"><span class="member" data-toggle="tooltip" data-title="((message: string, data?: unknown) =&gt; void) | undefined">debug</span></a><span class="punctuation">(</span><span class="string">`Resolved ${</span><a href="configuration.html#8321"><span data-toggle="tooltip" data-title="keyof ThemeOverride">propertyName</span></a><span class="string">} from defaults: ${</span><a href="configuration.html#8417"><span data-toggle="tooltip" data-title="string">defaultValue</span></a><span class="string">}`</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">return</span> <a href="configuration.html#8417"><span data-toggle="tooltip" data-title="string">defaultValue</span></a><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  /**
+   * Merges common mode configuration with theme-specific overrides.
+   *
+   * STAGE 2: Implements property-level cascading fallback hierarchy.
+   * Each property (background, border, borderStyle, borderWidth) is resolved
+   * independently through the fallback chain.
+   *
+   * Fallback hierarchy:
+   * - HC Dark: [highContrastDark] → [dark] → common → defaults
+   * - HC Light: [highContrastLight] → [light] → common → defaults
+   * - Regular Dark/Light: [dark/light] → common → defaults
+   *
+   * Example:
+   * {
+   *   borderStyle: "dotted",              <span class="comment">// common</span>
+   *   "[dark]": { borderWidth: "2px" },   <span class="comment">// dark theme</span>
+   *   "[highContrastDark]": { border: "#ff0000" }  <span class="comment">// HC dark</span>
+   * }
+   * When theme = High Contrast Dark:
+   * - border: "#ff0000"             ← from [highContrastDark]
+   * - borderWidth: "2px"            ← from [dark] (fallback)
+   * - borderStyle: "dotted"         ← from common
+   * - background: "rgba(...)"       ← from defaults
+   *
+   * @<a href="configuration.html#10522"><span data-toggle="tooltip" data-title="any">param</span></a> <a href="configuration.html#10522"><span data-toggle="tooltip" data-title="any">modeConfig</span></a> - Nested configuration object from settings
+   * @<a href="configuration.html#10550"><span data-toggle="tooltip" data-title="any">param</span></a> <a href="configuration.html#10550"><span data-toggle="tooltip" data-title="any">defaults</span></a> - Default configuration values to use as fallback
+   * @returns
+</code></pre>
+<p>Merges common mode configuration with theme-specific overrides.</p>
+<p>STAGE 2: Implements property-level cascading fallback hierarchy.
+Each property (background, border, borderStyle, borderWidth) is resolved
+independently through the fallback chain.</p>
+<p>Fallback hierarchy:</p>
+<ul>
+<li>HC Dark: [highContrastDark] → [dark] → common → defaults</li>
+<li>HC Light: [highContrastLight] → [light] → common → defaults</li>
+<li>Regular Dark/Light: [dark/light] → common → defaults</li>
+</ul>
+<p>Example:
+{
+borderStyle: &quot;dotted&quot;,              // common
+&quot;[dark]&quot;: { borderWidth: &quot;2px&quot; },   // dark theme
+&quot;[highContrastDark]&quot;: { border: &quot;#ff0000&quot; }  // HC dark
+}
+When theme = High Contrast Dark:</p>
+<ul>
+<li>border: &quot;#ff0000&quot;             ← from [highContrastDark]</li>
+<li>borderWidth: &quot;2px&quot;            ← from [dark] (fallback)</li>
+<li>borderStyle: &quot;dotted&quot;         ← from common</li>
+<li>background: &quot;rgba(...)&quot;       ← from defaults</li>
+</ul>
+<pre class="syntaxhighlight narrow-scrollbars"><code>  <span class="keyword">private</span> <span id="9308" class="member" data-toggle="tooltip" data-title="(modeConfig: ModeConfig, defaults: MergedModeConfig) =&gt; MergedModeConfig">getMergedModeConfig</span><span class="punctuation">(</span>
+    <span id="10522" data-toggle="tooltip" data-title="ModeConfig">modeConfig</span><span class="punctuation">:</span> <a href="configuration.html#606"><span class="typename" data-toggle="tooltip" data-title="ModeConfig">ModeConfig</span></a><span class="punctuation">,</span>
+    <span id="10550" data-toggle="tooltip" data-title="MergedModeConfig">defaults</span><span class="punctuation">:</span> <a href="configuration.html#1433"><span class="typename" data-toggle="tooltip" data-title="MergedModeConfig">MergedModeConfig</span></a>
+  <span class="punctuation">)</span><span class="punctuation">:</span> <a href="configuration.html#1433"><span class="typename" data-toggle="tooltip" data-title="MergedModeConfig">MergedModeConfig</span></a> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="10615" data-toggle="tooltip" data-title="ThemeKind">themeKind</span> <span class="punctuation">=</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#5613"><span class="member" data-toggle="tooltip" data-title="() =&gt; ThemeKind">getCurrentThemeKind</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="10665" data-toggle="tooltip" data-title="string[]">fallbackChain</span> <span class="punctuation">=</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#6549"><span class="member" data-toggle="tooltip" data-title="(themeKind: ThemeKind) =&gt; string[]">getFallbackChain</span></a><span class="punctuation">(</span><a href="configuration.html#10615"><span data-toggle="tooltip" data-title="ThemeKind">themeKind</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#3252"><span data-toggle="tooltip" data-title="Logger | undefined">logger</span></a><span class="punctuation">?.</span><a href="configuration.html#1697"><span class="member" data-toggle="tooltip" data-title="((message: string, data?: unknown) =&gt; void) | undefined">debug</span></a><span class="punctuation">(</span>
+      <span class="string">`Resolving mode config for theme: ${</span><a href="configuration.html#10615"><span data-toggle="tooltip" data-title="ThemeKind">themeKind</span></a><span class="string">}, fallback chain: ${</span><a href="configuration.html#10665"><span data-toggle="tooltip" data-title="string[]">fallbackChain</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(separator?: string) =&gt; string">join</span><span class="punctuation">(</span><span class="string">&#039; → &#039;</span><span class="punctuation">)</span><span class="string">}`</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// STAGE 2: Resolve each property independently through the fallback chain</span>
+    <span class="comment">// This enables selective overrides (e.g., only override borderWidth for HC, inherit rest from base theme)</span>
+    <span class="keyword">const</span> <span id="11048" data-toggle="tooltip" data-title="MergedModeConfig">merged</span><span class="punctuation">:</span> <a href="configuration.html#1433"><span class="typename" data-toggle="tooltip" data-title="MergedModeConfig">MergedModeConfig</span></a> <span class="punctuation">=</span> <span class="punctuation">{</span>
+      <span id="11077" data-toggle="tooltip" data-title="string">background</span><span class="punctuation">:</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#7658"><span class="member" data-toggle="tooltip" data-title="(propertyName: keyof ThemeOverride, modeConfig: ModeConfig, fallbackChain: string[], defaultValue: string) =&gt; string">resolveProperty</span></a><span class="punctuation">(</span>
+        <span class="string">&#039;background&#039;</span><span class="punctuation">,</span>
+        <a href="configuration.html#10522"><span data-toggle="tooltip" data-title="ModeConfig">modeConfig</span></a><span class="punctuation">,</span>
+        <a href="configuration.html#10665"><span data-toggle="tooltip" data-title="string[]">fallbackChain</span></a><span class="punctuation">,</span>
+        <a href="configuration.html#10550"><span data-toggle="tooltip" data-title="MergedModeConfig">defaults</span></a><span class="punctuation">.</span><a href="configuration.html#1533"><span data-toggle="tooltip" data-title="string">background</span></a>
+      <span class="punctuation">)</span><span class="punctuation">,</span>
+      <span id="11219" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#7658"><span class="member" data-toggle="tooltip" data-title="(propertyName: keyof ThemeOverride, modeConfig: ModeConfig, fallbackChain: string[], defaultValue: string) =&gt; string">resolveProperty</span></a><span class="punctuation">(</span><span class="string">&#039;border&#039;</span><span class="punctuation">,</span> <a href="configuration.html#10522"><span data-toggle="tooltip" data-title="ModeConfig">modeConfig</span></a><span class="punctuation">,</span> <a href="configuration.html#10665"><span data-toggle="tooltip" data-title="string[]">fallbackChain</span></a><span class="punctuation">,</span> <a href="configuration.html#10550"><span data-toggle="tooltip" data-title="MergedModeConfig">defaults</span></a><span class="punctuation">.</span><a href="configuration.html#1555"><span data-toggle="tooltip" data-title="string">border</span></a><span class="punctuation">)</span><span class="punctuation">,</span>
+      <span id="11309" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#7658"><span class="member" data-toggle="tooltip" data-title="(propertyName: keyof ThemeOverride, modeConfig: ModeConfig, fallbackChain: string[], defaultValue: string) =&gt; string">resolveProperty</span></a><span class="punctuation">(</span>
+        <span class="string">&#039;borderStyle&#039;</span><span class="punctuation">,</span>
+        <a href="configuration.html#10522"><span data-toggle="tooltip" data-title="ModeConfig">modeConfig</span></a><span class="punctuation">,</span>
+        <a href="configuration.html#10665"><span data-toggle="tooltip" data-title="string[]">fallbackChain</span></a><span class="punctuation">,</span>
+        <a href="configuration.html#10550"><span data-toggle="tooltip" data-title="MergedModeConfig">defaults</span></a><span class="punctuation">.</span><a href="configuration.html#1573"><span data-toggle="tooltip" data-title="string">borderStyle</span></a>
+      <span class="punctuation">)</span><span class="punctuation">,</span>
+      <span id="11454" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="configuration.html#7658"><span class="member" data-toggle="tooltip" data-title="(propertyName: keyof ThemeOverride, modeConfig: ModeConfig, fallbackChain: string[], defaultValue: string) =&gt; string">resolveProperty</span></a><span class="punctuation">(</span>
+        <span class="string">&#039;borderWidth&#039;</span><span class="punctuation">,</span>
+        <a href="configuration.html#10522"><span data-toggle="tooltip" data-title="ModeConfig">modeConfig</span></a><span class="punctuation">,</span>
+        <a href="configuration.html#10665"><span data-toggle="tooltip" data-title="string[]">fallbackChain</span></a><span class="punctuation">,</span>
+        <a href="configuration.html#10550"><span data-toggle="tooltip" data-title="MergedModeConfig">defaults</span></a><span class="punctuation">.</span><a href="configuration.html#1596"><span data-toggle="tooltip" data-title="string">borderWidth</span></a>
+      <span class="punctuation">)</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">;</span>
+
+    <span class="keyword">return</span> <a href="configuration.html#11048"><span data-toggle="tooltip" data-title="MergedModeConfig">merged</span></a><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span>
+</code></pre>
+
+        </div>
+            <div class="sidepane narrow-scrollbars">
+                
+        <div class="pagemenu">
+            <h3>On This Page</h3>
+                <ul class="pagetree">
+                </ul>
+        </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <a class="footer-button disabled">
+            Previous
+        </a>
+            <div class="footer-text">
+                <p>Copyright © 2023</p>
+                <p>Generated by 
+                    <a href="https://johtela.github.io/litscript">LiTScript</a>
+                </p>
+            </div>
+            <a class="footer-button disabled">
+            Next
+        </a>
+        </div>
+    
+        <script src="../dist/normal.js"></script>
+    </body>
+    </html>

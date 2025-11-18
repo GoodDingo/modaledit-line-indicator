@@ -1,0 +1,441 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>
+            Project
+        </title>
+        <link rel="icon" type="image/icon" href="../images/favicon.svg" />
+        <link rel="stylesheet" href="../dist/normal.css" />
+        
+    </head>
+    <body data-syntax-highlight="monokai"
+        data-theme="purple-rain">
+        
+        <div id="navbar">
+            
+    <div class="navmenu ">
+        
+    <div class="navitem " >
+        <a class="title enabled" href="../index.html" >
+            
+            <span>Project</span>
+        </a>
+        
+    </div>
+    <div class="navitem " >
+        <a   >
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 10l6 6l6 -6h-12" />
+        </svg>
+            <span>Syntax Highlight</span>
+        </a>
+        
+    <div class="navmenu toggle">
+        
+    <div class="navitem " id="coding-horror">
+        <a   onclick="document.body.syntaxHighlight('coding-horror')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Coding Horror</span>
+        </a>
+        
+    </div>
+    <div class="navitem active" id="monokai">
+        <a   onclick="document.body.syntaxHighlight('monokai')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Monokai</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="solarized-light">
+        <a   onclick="document.body.syntaxHighlight('solarized-light')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Solarized Light</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="son-of-obsidian">
+        <a   onclick="document.body.syntaxHighlight('son-of-obsidian')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Son of Obsidian</span>
+        </a>
+        
+    </div>
+    </div>
+    </div>
+    <div class="navitem " >
+        <a   >
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 10l6 6l6 -6h-12" />
+        </svg>
+            <span>Theme</span>
+        </a>
+        
+    <div class="navmenu toggle">
+        
+    <div class="navitem " id="blueberry">
+        <a   onclick="document.body.theme('blueberry')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Blueberry</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="book-cover">
+        <a   onclick="document.body.theme('book-cover')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Book Cover</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="brownie">
+        <a   onclick="document.body.theme('brownie')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Brownie</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="camouflage">
+        <a   onclick="document.body.theme('camouflage')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Camouflage</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="chocolate">
+        <a   onclick="document.body.theme('chocolate')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Chocolate</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="greyhound">
+        <a   onclick="document.body.theme('greyhound')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Greyhound</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="ice-age">
+        <a   onclick="document.body.theme('ice-age')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Ice Age</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="mustard">
+        <a   onclick="document.body.theme('mustard')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Mustard</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="peachy">
+        <a   onclick="document.body.theme('peachy')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Peachy</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="red-alert">
+        <a   onclick="document.body.theme('red-alert')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Red Alert</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="ultra-violet">
+        <a   onclick="document.body.theme('ultra-violet')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Ultra Violet</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="vintage">
+        <a   onclick="document.body.theme('vintage')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Vintage</span>
+        </a>
+        
+    </div>
+    </div>
+    </div>
+    </div>
+            
+    <a class="hamburger">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </a>
+        </div>
+        
+        <div class="layout">
+            <div class="sidepane narrow-scrollbars">
+                
+        <div class="tocmenu">
+            <h3>Table of Contents</h3>
+            
+    <ul>
+        
+    </ul>
+        </div>
+                <div class="toc-button"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M7 7l5 5l-5 5" />
+            <path d="M13 7l5 5l-5 5" />
+        </svg></div>
+            </div>
+            
+        <div class="contentarea closepopups">
+            <pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">import</span> <span class="punctuation">*</span> <span class="keyword">as</span> <span id="6" data-toggle="tooltip" data-title="typeof vscode">vscode</span> <span class="keyword">from</span> <span class="string">&#039;vscode&#039;</span><span class="punctuation">;</span>
+<span class="keyword">import</span> <span class="punctuation">*</span> <span class="keyword">as</span> <span id="40" data-toggle="tooltip" data-title="typeof fs">fs</span> <span class="keyword">from</span> <span class="string">&#039;fs&#039;</span><span class="punctuation">;</span>
+<span class="keyword">import</span> <span class="punctuation">*</span> <span class="keyword">as</span> <span id="66" data-toggle="tooltip" data-title="path.PlatformPath">path</span> <span class="keyword">from</span> <span class="string">&#039;path&#039;</span><span class="punctuation">;</span>
+<span class="keyword">import</span> <span class="punctuation">*</span> <span class="keyword">as</span> <span id="96" data-toggle="tooltip" data-title="typeof os">os</span> <span class="keyword">from</span> <span class="string">&#039;os&#039;</span><span class="punctuation">;</span>
+</code></pre>
+<p>Log level for filtering log messages
+Hierarchy: error &lt; warn &lt; info &lt; debug</p>
+<ul>
+<li>error: Only errors (most restrictive)</li>
+<li>warn: Errors and warnings</li>
+<li>info: Errors, warnings, and general lifecycle events</li>
+<li>debug: Everything including detailed diagnostics (most verbose)</li>
+</ul>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">export</span> <span class="keyword">type</span> <span id="115" class="typename" data-toggle="tooltip" data-title="LogLevel">LogLevel</span> <span class="punctuation">=</span> <span class="string">&#039;error&#039;</span> <span class="punctuation">|</span> <span class="string">&#039;warn&#039;</span> <span class="punctuation">|</span> <span class="string">&#039;info&#039;</span> <span class="punctuation">|</span> <span class="string">&#039;debug&#039;</span><span class="punctuation">;</span>
+</code></pre>
+<p>Numeric values for log level comparison
+Higher value = more verbose</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">export</span> <span class="keyword">const</span> <span id="563" data-toggle="tooltip" data-title="Record&lt;LogLevel, number&gt;">LOG_LEVEL_VALUES</span><span class="punctuation">:</span> <span class="typename" data-toggle="tooltip" data-title="Record&lt;K, T&gt;">Record</span><span class="punctuation">&lt;</span><a href="logging.html#115"><span class="typename" data-toggle="tooltip" data-title="LogLevel">LogLevel</span></a><span class="punctuation">,</span> <span class="keyword">number</span><span class="punctuation">&gt;</span> <span class="punctuation">=</span> <span class="punctuation">{</span>
+  <span id="610" data-toggle="tooltip" data-title="number">error</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span>
+  <span id="622" data-toggle="tooltip" data-title="number">warn</span><span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span>
+  <span id="633" data-toggle="tooltip" data-title="number">info</span><span class="punctuation">:</span> <span class="number">2</span><span class="punctuation">,</span>
+  <span id="644" data-toggle="tooltip" data-title="number">debug</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span>
+<span class="punctuation">}</span><span class="punctuation">;</span>
+</code></pre>
+<p>Logger that writes to both VS Code output channel and file
+Dual output ensures we can review logs even after VS Code closes</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">export</span> <span class="keyword">class</span> <span id="659" class="typename" data-toggle="tooltip" data-title="ExtensionLogger">ExtensionLogger</span> <span class="punctuation">{</span>
+  <span class="keyword">private</span> <span id="829" data-toggle="tooltip" data-title="vscode.OutputChannel">outputChannel</span><span class="punctuation">:</span> <a href="logging.html#6"><span data-toggle="tooltip" data-title="any">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="vscode.OutputChannel">OutputChannel</span><span class="punctuation">;</span>
+  <span class="keyword">private</span> <span id="876" data-toggle="tooltip" data-title="string">logFilePath</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">;</span>
+
+  <span class="keyword">constructor</span><span class="punctuation">(</span><span id="923" data-toggle="tooltip" data-title="string">channelName</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#829"><span data-toggle="tooltip" data-title="vscode.OutputChannel">outputChannel</span></a> <span class="punctuation">=</span> <a href="logging.html#6"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ (name: string, languageId?: string): vscode.OutputChannel; (name: string, options: { log: true; }): vscode.LogOutputChannel; }">createOutputChannel</span><span class="punctuation">(</span><a href="logging.html#923"><span data-toggle="tooltip" data-title="string">channelName</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Log to temp directory - accessible across sessions</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#876"><span data-toggle="tooltip" data-title="string">logFilePath</span></a> <span class="punctuation">=</span> <a href="logging.html#66"><span data-toggle="tooltip" data-title="path.PlatformPath">path</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(...paths: string[]) =&gt; string">join</span><span class="punctuation">(</span><a href="logging.html#96"><span data-toggle="tooltip" data-title="typeof os">os</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="() =&gt; string">tmpdir</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">,</span> <span class="string">&#039;modaledit-line-indicator.log&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Clear old log on startup</span>
+    <span class="keyword">try</span> <span class="punctuation">{</span>
+      <a href="logging.html#40"><span data-toggle="tooltip" data-title="typeof fs">fs</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(file: fs.PathOrFileDescriptor, data: string | NodeJS.ArrayBufferView, options?: fs.WriteFileOptions) =&gt; void">writeFileSync</span><span class="punctuation">(</span><span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#876"><span data-toggle="tooltip" data-title="string">logFilePath</span></a><span class="punctuation">,</span> <span class="string">&#039;&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span> <span class="keyword">catch</span> <span class="punctuation">(</span><span id="1259" data-toggle="tooltip" data-title="unknown">err</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="comment">// Non-critical - log to console for diagnostics</span>
+      <span data-toggle="tooltip" data-title="Console">console</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(message?: any, ...optionalParams: any[]) =&gt; void">error</span><span class="punctuation">(</span><span class="string">`ModalEdit Line Indicator: Cannot write to log file ${</span><span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#876"><span data-toggle="tooltip" data-title="string">logFilePath</span></a><span class="string">}:`</span><span class="punctuation">,</span> <a href="logging.html#1259"><span data-toggle="tooltip" data-title="unknown">err</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#2517"><span class="member" data-toggle="tooltip" data-title="(message: string, data?: unknown) =&gt; void">log</span></a><span class="punctuation">(</span><span class="string">&#039;=== NEW SESSION STARTED ===&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#2517"><span class="member" data-toggle="tooltip" data-title="(message: string, data?: unknown) =&gt; void">log</span></a><span class="punctuation">(</span><span class="string">`Log file: ${</span><span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#876"><span data-toggle="tooltip" data-title="string">logFilePath</span></a><span class="string">}`</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  /**
+   * Get current log level from configuration
+   * @returns
+</code></pre>
+<p>Get current log level from configuration</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code>  <span class="keyword">private</span> <span id="1524" class="member" data-toggle="tooltip" data-title="() =&gt; LogLevel">getCurrentLogLevel</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">:</span> <a href="logging.html#115"><span class="typename" data-toggle="tooltip" data-title="LogLevel">LogLevel</span></a> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="1707" data-toggle="tooltip" data-title="vscode.WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="logging.html#6"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.workspace">workspace</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(section?: string, scope?: vscode.ConfigurationScope | null) =&gt; vscode.WorkspaceConfiguration">getConfiguration</span><span class="punctuation">(</span><span class="string">&#039;modaledit-line-indicator&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">return</span> <span class="punctuation">(</span><a href="logging.html#1707"><span data-toggle="tooltip" data-title="vscode.WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">&lt;</span><a href="logging.html#115"><span class="typename" data-toggle="tooltip" data-title="LogLevel">LogLevel</span></a><span class="punctuation">&gt;</span><span class="punctuation">(</span><span class="string">&#039;logLevel&#039;</span><span class="punctuation">)</span> <span class="punctuation">||</span> <span class="string">&#039;error&#039;</span><span class="punctuation">)</span> <span class="keyword">as</span> <a href="logging.html#115"><span class="typename" data-toggle="tooltip" data-title="LogLevel">LogLevel</span></a><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  /**
+   * Check if a message at the given level should be logged
+   * @<a href="logging.html#2078"><span data-toggle="tooltip" data-title="any">param</span></a> <a href="logging.html#2078"><span data-toggle="tooltip" data-title="any">messageLevel</span></a> Level of the message to log
+   * @returns
+</code></pre>
+<p>Check if a message at the given level should be logged</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code>  <span class="keyword">private</span> <span id="1853" class="member" data-toggle="tooltip" data-title="(messageLevel: LogLevel) =&gt; boolean">shouldLog</span><span class="punctuation">(</span><span id="2078" data-toggle="tooltip" data-title="LogLevel">messageLevel</span><span class="punctuation">:</span> <a href="logging.html#115"><span class="typename" data-toggle="tooltip" data-title="LogLevel">LogLevel</span></a><span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">boolean</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="2122" data-toggle="tooltip" data-title="LogLevel">currentLevel</span> <span class="punctuation">=</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#1524"><span class="member" data-toggle="tooltip" data-title="() =&gt; LogLevel">getCurrentLogLevel</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">return</span> <a href="logging.html#563"><span data-toggle="tooltip" data-title="Record&lt;LogLevel, number&gt;">LOG_LEVEL_VALUES</span></a><span class="punctuation">[</span><a href="logging.html#2122"><span data-toggle="tooltip" data-title="LogLevel">currentLevel</span></a><span class="punctuation">]</span> <span class="punctuation">&gt;=</span> <a href="logging.html#563"><span data-toggle="tooltip" data-title="Record&lt;LogLevel, number&gt;">LOG_LEVEL_VALUES</span></a><span class="punctuation">[</span><a href="logging.html#2078"><span data-toggle="tooltip" data-title="LogLevel">messageLevel</span></a><span class="punctuation">]</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  <span class="keyword">private</span> <span id="2245" class="member" data-toggle="tooltip" data-title="(level: string, message: string, data?: unknown) =&gt; string">formatMessage</span><span class="punctuation">(</span><span id="2271" data-toggle="tooltip" data-title="string">level</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">,</span> <span id="2285" data-toggle="tooltip" data-title="string">message</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">,</span> <span id="2302" data-toggle="tooltip" data-title="unknown">data</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">unknown</span><span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">string</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="2338" data-toggle="tooltip" data-title="string">timestamp</span> <span class="punctuation">=</span> <span class="keyword">new</span> <span class="typename" data-toggle="tooltip" data-title="DateConstructor">Date</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="() =&gt; string">toISOString</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="2386" data-toggle="tooltip" data-title="string">dataStr</span> <span class="punctuation">=</span> <a href="logging.html#2302"><span data-toggle="tooltip" data-title="unknown">data</span></a> <span class="punctuation">!==</span> <span data-toggle="tooltip" data-title="undefined">undefined</span> <span class="punctuation">?</span> <span class="string">` | ${</span><span class="typename" data-toggle="tooltip" data-title="JSON">JSON</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ (value: any, replacer?: (this: any, key: string, value: any) =&gt; any, space?: string | number): string; (value: any, replacer?: (number | string)[] | null, space?: string | number): string; }">stringify</span><span class="punctuation">(</span><a href="logging.html#2302"><span data-toggle="tooltip" data-title="{} | null">data</span></a><span class="punctuation">)</span><span class="string">}`</span> <span class="punctuation">:</span> <span class="string">&#039;&#039;</span><span class="punctuation">;</span>
+    <span class="keyword">return</span> <span class="string">`[${</span><a href="logging.html#2338"><span data-toggle="tooltip" data-title="string">timestamp</span></a><span class="string">}] [${</span><a href="logging.html#2271"><span data-toggle="tooltip" data-title="string">level</span></a><span class="string">}] ${</span><a href="logging.html#2285"><span data-toggle="tooltip" data-title="string">message</span></a><span class="string">}${</span><a href="logging.html#2386"><span data-toggle="tooltip" data-title="string">dataStr</span></a><span class="string">}`</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  <span id="2517" class="member" data-toggle="tooltip" data-title="(message: string, data?: unknown) =&gt; void">log</span><span class="punctuation">(</span><span id="2525" data-toggle="tooltip" data-title="string">message</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">,</span> <span id="2541" data-toggle="tooltip" data-title="unknown">data</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">unknown</span><span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">void</span> <span class="punctuation">{</span>
+    <span class="keyword">if</span> <span class="punctuation">(</span><span class="punctuation">!</span><span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#1853"><span class="member" data-toggle="tooltip" data-title="(messageLevel: LogLevel) =&gt; boolean">shouldLog</span></a><span class="punctuation">(</span><span class="string">&#039;info&#039;</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="keyword">return</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+    <span class="keyword">const</span> <span id="2630" data-toggle="tooltip" data-title="string">formatted</span> <span class="punctuation">=</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#2245"><span class="member" data-toggle="tooltip" data-title="(level: string, message: string, data?: unknown) =&gt; string">formatMessage</span></a><span class="punctuation">(</span><span class="string">&#039;INFO&#039;</span><span class="punctuation">,</span> <a href="logging.html#2525"><span data-toggle="tooltip" data-title="string">message</span></a><span class="punctuation">,</span> <a href="logging.html#2541"><span data-toggle="tooltip" data-title="unknown">data</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#829"><span data-toggle="tooltip" data-title="vscode.OutputChannel">outputChannel</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: string) =&gt; void">appendLine</span><span class="punctuation">(</span><a href="logging.html#2630"><span data-toggle="tooltip" data-title="string">formatted</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#3756"><span class="member" data-toggle="tooltip" data-title="(message: string) =&gt; void">writeToFile</span></a><span class="punctuation">(</span><a href="logging.html#2630"><span data-toggle="tooltip" data-title="string">formatted</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  <span id="2768" class="member" data-toggle="tooltip" data-title="(message: string, data?: unknown) =&gt; void">debug</span><span class="punctuation">(</span><span id="2778" data-toggle="tooltip" data-title="string">message</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">,</span> <span id="2794" data-toggle="tooltip" data-title="unknown">data</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">unknown</span><span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">void</span> <span class="punctuation">{</span>
+    <span class="keyword">if</span> <span class="punctuation">(</span><span class="punctuation">!</span><span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#1853"><span class="member" data-toggle="tooltip" data-title="(messageLevel: LogLevel) =&gt; boolean">shouldLog</span></a><span class="punctuation">(</span><span class="string">&#039;debug&#039;</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="keyword">return</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+    <span class="keyword">const</span> <span id="2884" data-toggle="tooltip" data-title="string">formatted</span> <span class="punctuation">=</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#2245"><span class="member" data-toggle="tooltip" data-title="(level: string, message: string, data?: unknown) =&gt; string">formatMessage</span></a><span class="punctuation">(</span><span class="string">&#039;DEBUG&#039;</span><span class="punctuation">,</span> <a href="logging.html#2778"><span data-toggle="tooltip" data-title="string">message</span></a><span class="punctuation">,</span> <a href="logging.html#2794"><span data-toggle="tooltip" data-title="unknown">data</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#829"><span data-toggle="tooltip" data-title="vscode.OutputChannel">outputChannel</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: string) =&gt; void">appendLine</span><span class="punctuation">(</span><a href="logging.html#2884"><span data-toggle="tooltip" data-title="string">formatted</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#3756"><span class="member" data-toggle="tooltip" data-title="(message: string) =&gt; void">writeToFile</span></a><span class="punctuation">(</span><a href="logging.html#2884"><span data-toggle="tooltip" data-title="string">formatted</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  <span id="3023" class="member" data-toggle="tooltip" data-title="(message: string, data?: unknown) =&gt; void">warn</span><span class="punctuation">(</span><span id="3032" data-toggle="tooltip" data-title="string">message</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">,</span> <span id="3048" data-toggle="tooltip" data-title="unknown">data</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">unknown</span><span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">void</span> <span class="punctuation">{</span>
+    <span class="keyword">if</span> <span class="punctuation">(</span><span class="punctuation">!</span><span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#1853"><span class="member" data-toggle="tooltip" data-title="(messageLevel: LogLevel) =&gt; boolean">shouldLog</span></a><span class="punctuation">(</span><span class="string">&#039;warn&#039;</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="keyword">return</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+    <span class="keyword">const</span> <span id="3137" data-toggle="tooltip" data-title="string">formatted</span> <span class="punctuation">=</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#2245"><span class="member" data-toggle="tooltip" data-title="(level: string, message: string, data?: unknown) =&gt; string">formatMessage</span></a><span class="punctuation">(</span><span class="string">&#039;WARN&#039;</span><span class="punctuation">,</span> <a href="logging.html#3032"><span data-toggle="tooltip" data-title="string">message</span></a><span class="punctuation">,</span> <a href="logging.html#3048"><span data-toggle="tooltip" data-title="unknown">data</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#829"><span data-toggle="tooltip" data-title="vscode.OutputChannel">outputChannel</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: string) =&gt; void">appendLine</span><span class="punctuation">(</span><a href="logging.html#3137"><span data-toggle="tooltip" data-title="string">formatted</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#3756"><span class="member" data-toggle="tooltip" data-title="(message: string) =&gt; void">writeToFile</span></a><span class="punctuation">(</span><a href="logging.html#3137"><span data-toggle="tooltip" data-title="string">formatted</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  <span id="3275" class="member" data-toggle="tooltip" data-title="(message: string, error?: unknown) =&gt; void">error</span><span class="punctuation">(</span><span id="3285" data-toggle="tooltip" data-title="string">message</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">,</span> <span id="3301" data-toggle="tooltip" data-title="unknown">error</span><span class="punctuation">?</span><span class="punctuation">:</span> <span class="keyword">unknown</span><span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">void</span> <span class="punctuation">{</span>
+    <span class="keyword">if</span> <span class="punctuation">(</span><span class="punctuation">!</span><span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#1853"><span class="member" data-toggle="tooltip" data-title="(messageLevel: LogLevel) =&gt; boolean">shouldLog</span></a><span class="punctuation">(</span><span class="string">&#039;error&#039;</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="keyword">return</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+    <span class="keyword">const</span> <span id="3392" data-toggle="tooltip" data-title="string">errorStr</span> <span class="punctuation">=</span> <a href="logging.html#3301"><span data-toggle="tooltip" data-title="unknown">error</span></a> <span class="keyword">instanceof</span> <span class="typename" data-toggle="tooltip" data-title="ErrorConstructor">Error</span> <span class="punctuation">?</span> <a href="logging.html#3301"><span data-toggle="tooltip" data-title="Error">error</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="string | undefined">stack</span> <span class="punctuation">||</span> <a href="logging.html#3301"><span data-toggle="tooltip" data-title="Error">error</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="string">message</span> <span class="punctuation">:</span> <span class="typename" data-toggle="tooltip" data-title="StringConstructor">String</span><span class="punctuation">(</span><a href="logging.html#3301"><span data-toggle="tooltip" data-title="unknown">error</span></a> <span class="punctuation">||</span> <span class="string">&#039;&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="3490" data-toggle="tooltip" data-title="string">formatted</span> <span class="punctuation">=</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#2245"><span class="member" data-toggle="tooltip" data-title="(level: string, message: string, data?: unknown) =&gt; string">formatMessage</span></a><span class="punctuation">(</span><span class="string">&#039;ERROR&#039;</span><span class="punctuation">,</span> <a href="logging.html#3285"><span data-toggle="tooltip" data-title="string">message</span></a><span class="punctuation">,</span> <span class="punctuation">{</span> <span id="3541" data-toggle="tooltip" data-title="string">error</span><span class="punctuation">:</span> <a href="logging.html#3392"><span data-toggle="tooltip" data-title="string">errorStr</span></a> <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#829"><span data-toggle="tooltip" data-title="vscode.OutputChannel">outputChannel</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: string) =&gt; void">appendLine</span><span class="punctuation">(</span><a href="logging.html#3490"><span data-toggle="tooltip" data-title="string">formatted</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#3756"><span class="member" data-toggle="tooltip" data-title="(message: string) =&gt; void">writeToFile</span></a><span class="punctuation">(</span><a href="logging.html#3490"><span data-toggle="tooltip" data-title="string">formatted</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  <span id="3644" class="member" data-toggle="tooltip" data-title="() =&gt; void">show</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">void</span> <span class="punctuation">{</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#829"><span data-toggle="tooltip" data-title="vscode.OutputChannel">outputChannel</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ (preserveFocus?: boolean): void; (column?: vscode.ViewColumn, preserveFocus?: boolean): void; }">show</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  <span id="3697" class="member" data-toggle="tooltip" data-title="() =&gt; void">dispose</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">void</span> <span class="punctuation">{</span>
+    <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#829"><span data-toggle="tooltip" data-title="vscode.OutputChannel">outputChannel</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="() =&gt; void">dispose</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  <span class="keyword">private</span> <span id="3756" class="member" data-toggle="tooltip" data-title="(message: string) =&gt; void">writeToFile</span><span class="punctuation">(</span><span id="3780" data-toggle="tooltip" data-title="string">message</span><span class="punctuation">:</span> <span class="keyword">string</span><span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">void</span> <span class="punctuation">{</span>
+    <span class="keyword">try</span> <span class="punctuation">{</span>
+      <a href="logging.html#40"><span data-toggle="tooltip" data-title="typeof fs">fs</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(path: fs.PathOrFileDescriptor, data: string | Uint8Array, options?: fs.WriteFileOptions) =&gt; void">appendFileSync</span><span class="punctuation">(</span><span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#876"><span data-toggle="tooltip" data-title="string">logFilePath</span></a><span class="punctuation">,</span> <a href="logging.html#3780"><span data-toggle="tooltip" data-title="string">message</span></a> <span class="punctuation">+</span> <span class="string">&#039;\n&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span> <span class="keyword">catch</span> <span class="punctuation">(</span><span id="3887" data-toggle="tooltip" data-title="unknown">err</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="comment">// Don&#039;t crash if file write fails, but log to console for diagnostics</span>
+      <span data-toggle="tooltip" data-title="Console">console</span><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(message?: any, ...optionalParams: any[]) =&gt; void">error</span><span class="punctuation">(</span><span class="string">`ModalEdit Line Indicator: Log file write failed (${</span><span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#876"><span data-toggle="tooltip" data-title="string">logFilePath</span></a><span class="string">}):`</span><span class="punctuation">,</span> <a href="logging.html#3887"><span data-toggle="tooltip" data-title="unknown">err</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+
+  <span id="4080" class="member" data-toggle="tooltip" data-title="() =&gt; string">getLogFilePath</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">:</span> <span class="keyword">string</span> <span class="punctuation">{</span>
+    <span class="keyword">return</span> <span class="keyword">this</span><span class="punctuation">.</span><a href="logging.html#876"><span data-toggle="tooltip" data-title="string">logFilePath</span></a><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span>
+</code></pre>
+
+        </div>
+            <div class="sidepane narrow-scrollbars">
+                
+        <div class="pagemenu">
+            <h3>On This Page</h3>
+                <ul class="pagetree">
+                </ul>
+        </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <a class="footer-button disabled">
+            Previous
+        </a>
+            <div class="footer-text">
+                <p>Copyright © 2023</p>
+                <p>Generated by 
+                    <a href="https://johtela.github.io/litscript">LiTScript</a>
+                </p>
+            </div>
+            <a class="footer-button disabled">
+            Next
+        </a>
+        </div>
+    
+        <script src="../dist/normal.js"></script>
+    </body>
+    </html>

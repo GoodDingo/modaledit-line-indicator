@@ -5,15 +5,17 @@
 
 # Build config
 tsconfig.json
-.eslintrc.json
+eslint.config.js
 .prettierrc.json
 .editorconfig
+esbuild.config.js
 
-# Source files (only compiled output needed)
+# Source files (only bundled output needed)
 src/
 
-# Source maps
-out/**/*.map
+# Build artifacts (keep only dist/extension.js)
+out/
+dist/**/*.map
 
 # Dependencies
 node_modules/
@@ -50,3 +52,11 @@ desktop.ini
 
 # Claude Code
 .claude/
+
+# Others
+pre-release-improvement-plan
+docs/
+commitlint.config.js
+gh-actions-failure-analysis.md
+improvement-points.md
+Makefile

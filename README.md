@@ -95,7 +95,7 @@ Or install manually:
 # From the extension directory
 npm install
 npm run compile
-code --install-extension modaledit-line-indicator-0.1.4.vsix
+code --install-extension modaledit-line-indicator-1.0.5.vsix
 ```
 
 ## Usage
@@ -360,6 +360,116 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow and contribution g
      }
    }
    ```
+
+#### "Always shows red border / stuck in insert mode"
+
+**Symptoms:** Border never changes from red, regardless of mode switching attempts.
+
+**Root Cause:** ModalEdit extension not installed, not active, or not properly configured.
+
+**Diagnosis (4-step):**
+
+1. **Check ModalEdit installation:**
+   - Extensions panel → Search "ModalEdit"
+   - Verify "ModalEdit" by johtela is installed
+   - If not installed → See [Prerequisites](#prerequisites)
+
+2. **Check ModalEdit configuration:**
+   - Open Settings → Search "modaledit"
+   - Verify cursor style settings exist:
+     ```json
+     {
+       "modaledit.normal.cursorStyle": "block",
+       "modaledit.insert.cursorStyle": "line"
+     }
+     ```
+   - If missing → Add cursor style configuration
+
+3. **Test ModalEdit independently:**
+   - Open any file
+   - Press `Esc` (should enter Normal mode)
+   - **Expected:** Cursor changes to block
+   - **If cursor doesn't change:** ModalEdit not working - see [ModalEdit docs](https://github.com/johtela/vscode-modaledit#troubleshooting)
+
+4. **Run diagnostic command:**
+   - Command Palette → "ModalEdit Line Indicator: Query Current Mode (Debug)"
+   - Check if ModalEdit is detected
+   - Review output for configuration issues
+
+**Resolution:**
+- Install and configure ModalEdit properly (see [Prerequisites](#prerequisites))
+- Ensure ModalEdit cursor styles are configured
+- Restart VS Code after configuration changes
+
+#### "Conflicts with other vim/modal extensions"
+
+**Symptoms:** Extension stops working after installing VSCodeVim, Vim, NeoVim, or similar extensions.
+
+**Root Cause:** Multiple extensions competing for cursor style control.
+
+**Incompatible Extensions:**
+- ❌ **VSCodeVim** - Conflicts with ModalEdit cursor styles
+- ❌ **Vim** - Conflicts with ModalEdit cursor styles
+- ❌ **NeoVim** - Conflicts with ModalEdit cursor styles
+- ❌ **Dance** - May conflict depending on configuration
+- ✅ **ModalEdit** - Required and fully compatible
+
+**Resolution:**
+
+1. **Choose ONE modal editing extension:**
+   - If you want to use this extension → Use ModalEdit exclusively
+   - If you prefer VSCodeVim/Vim/NeoVim → Uninstall this extension
+
+2. **Remove conflicting extensions:**
+   - Extensions panel → Search for conflicting extensions
+   - Uninstall all vim/modal extensions except ModalEdit
+   - Restart VS Code
+
+3. **Verify ModalEdit works alone:**
+   - Test mode switching (`Esc`, `i`, `v`)
+   - Confirm cursor styles change
+   - Confirm line borders appear and change colors
+
+**Why this happens:** Multiple extensions trying to control cursor styles interfere with each other. This extension relies on ModalEdit's cursor style changes for mode detection. Other vim extensions override these styles, breaking detection.
+
+#### "How do I configure ModalEdit cursor styles?"
+
+**Required for:** Proper mode detection and visual feedback.
+
+**Quick Configuration:**
+
+Add to your `settings.json`:
+
+```json
+{
+  "modaledit.normal.cursorStyle": "block",
+  "modaledit.insert.cursorStyle": "line",
+  "modaledit.visual.cursorStyle": "underline"
+}
+```
+
+**Full ModalEdit Documentation:**
+- [ModalEdit Configuration Guide](https://github.com/johtela/vscode-modaledit#configuration)
+- [ModalEdit Cursor Style Options](https://github.com/johtela/vscode-modaledit#cursor-customization)
+
+**Diagnostic - Verify Configuration:**
+
+1. **Run diagnostic command:**
+   - Command Palette → "ModalEdit Line Indicator: Query Current Mode (Debug)"
+   - Shows current mode and ModalEdit status
+
+2. **Test cursor changes:**
+   - Press `Esc` → Cursor should become a block
+   - Press `i` → Cursor should become a line
+   - Press `v` → Cursor should become an underline
+
+3. **If cursor doesn't change:**
+   - Check Settings → "modaledit" → Verify cursor style settings
+   - Check for conflicting extensions (see "Conflicts with other vim/modal extensions" above)
+   - Restart VS Code
+   - See [ModalEdit troubleshooting](https://github.com/johtela/vscode-modaledit#troubleshooting)
+
+**Tip:** This extension uses cursor style changes to detect modes. If ModalEdit cursor styles aren't configured, mode detection won't work properly.
 
 ### Diagnostic Commands
 

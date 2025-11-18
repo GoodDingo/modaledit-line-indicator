@@ -1,0 +1,156 @@
+{
+    "src/configuration": {
+        "url": "src/configuration.html",
+        "dependencies": [
+            "vscode"
+        ]
+    },
+    "vscode": {
+        "dependencies": []
+    },
+    "src/logging": {
+        "url": "src/logging.html",
+        "dependencies": [
+            "vscode",
+            "fs",
+            "path",
+            "os"
+        ]
+    },
+    "fs": {
+        "dependencies": []
+    },
+    "path": {
+        "dependencies": []
+    },
+    "os": {
+        "dependencies": []
+    },
+    "src/extension": {
+        "url": "src/extension.html",
+        "dependencies": [
+            "vscode",
+            "fs",
+            "path",
+            "src/logging",
+            "src/configuration"
+        ]
+    },
+    "src/test/runTest": {
+        "url": "src/test/runTest.html",
+        "dependencies": [
+            "path",
+            "@vscode/test-electron"
+        ]
+    },
+    "@vscode/test-electron": {
+        "dependencies": []
+    },
+    "src/test/helpers/testHelpers": {
+        "url": "src/test/helpers/testHelpers.html",
+        "dependencies": [
+            "vscode"
+        ]
+    },
+    "src/test/suite/cascadingFallback.test": {
+        "url": "src/test/suite/cascadingFallback.test.html",
+        "dependencies": [
+            "assert",
+            "src/test/helpers/testHelpers"
+        ]
+    },
+    "assert": {
+        "dependencies": []
+    },
+    "src/test/suite/configMerging.test": {
+        "url": "src/test/suite/configMerging.test.html",
+        "dependencies": [
+            "assert",
+            "src/test/helpers/testHelpers"
+        ]
+    },
+    "src/test/suite/configuration.test": {
+        "url": "src/test/suite/configuration.test.html",
+        "dependencies": [
+            "assert",
+            "src/test/helpers/testHelpers"
+        ]
+    },
+    "src/test/suite/decorationLifecycle.test": {
+        "url": "src/test/suite/decorationLifecycle.test.html",
+        "dependencies": [
+            "assert",
+            "vscode",
+            "src/test/helpers/testHelpers"
+        ]
+    },
+    "src/test/suite/eventHandling.test": {
+        "url": "src/test/suite/eventHandling.test.html",
+        "dependencies": [
+            "assert",
+            "vscode",
+            "src/test/helpers/testHelpers"
+        ]
+    },
+    "src/test/suite/example.test": {
+        "url": "src/test/suite/example.test.html",
+        "dependencies": [
+            "assert",
+            "src/test/helpers/testHelpers"
+        ]
+    },
+    "src/test/suite/extension.test": {
+        "url": "src/test/suite/extension.test.html",
+        "dependencies": [
+            "assert",
+            "vscode",
+            "src/test/helpers/testHelpers"
+        ]
+    },
+    "src/test/suite/index": {
+        "url": "src/test/suite/index.html",
+        "dependencies": [
+            "path",
+            "mocha",
+            "glob"
+        ]
+    },
+    "mocha": {
+        "dependencies": []
+    },
+    "glob": {
+        "dependencies": []
+    },
+    "src/test/suite/modalEditIntegration.test": {
+        "url": "src/test/suite/modalEditIntegration.test.html",
+        "dependencies": [
+            "assert",
+            "vscode",
+            "src/test/helpers/testHelpers"
+        ]
+    },
+    "src/test/suite/modeDetection.test": {
+        "url": "src/test/suite/modeDetection.test.html",
+        "dependencies": [
+            "assert",
+            "vscode",
+            "src/test/helpers/testHelpers"
+        ]
+    },
+    "src/test/suite/themeChangeEvent.test": {
+        "url": "src/test/suite/themeChangeEvent.test.html",
+        "dependencies": [
+            "assert",
+            "vscode",
+            "src/test/helpers/testHelpers"
+        ]
+    },
+    "src/test/suite/themeDetection.test": {
+        "url": "src/test/suite/themeDetection.test.html",
+        "dependencies": [
+            "assert",
+            "vscode",
+            "src/test/helpers/testHelpers"
+        ]
+    }
+}

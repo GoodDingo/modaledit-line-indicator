@@ -1,0 +1,598 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>
+            Project
+        </title>
+        <link rel="icon" type="image/icon" href="../../../images/favicon.svg" />
+        <link rel="stylesheet" href="../../../dist/normal.css" />
+        
+    </head>
+    <body data-syntax-highlight="monokai"
+        data-theme="purple-rain">
+        
+        <div id="navbar">
+            
+    <div class="navmenu ">
+        
+    <div class="navitem " >
+        <a class="title enabled" href="../../../index.html" >
+            
+            <span>Project</span>
+        </a>
+        
+    </div>
+    <div class="navitem " >
+        <a   >
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 10l6 6l6 -6h-12" />
+        </svg>
+            <span>Syntax Highlight</span>
+        </a>
+        
+    <div class="navmenu toggle">
+        
+    <div class="navitem " id="coding-horror">
+        <a   onclick="document.body.syntaxHighlight('coding-horror')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Coding Horror</span>
+        </a>
+        
+    </div>
+    <div class="navitem active" id="monokai">
+        <a   onclick="document.body.syntaxHighlight('monokai')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Monokai</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="solarized-light">
+        <a   onclick="document.body.syntaxHighlight('solarized-light')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Solarized Light</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="son-of-obsidian">
+        <a   onclick="document.body.syntaxHighlight('son-of-obsidian')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        </svg>
+            <span>Son of Obsidian</span>
+        </a>
+        
+    </div>
+    </div>
+    </div>
+    <div class="navitem " >
+        <a   >
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-caret-down" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M6 10l6 6l6 -6h-12" />
+        </svg>
+            <span>Theme</span>
+        </a>
+        
+    <div class="navmenu toggle">
+        
+    <div class="navitem " id="blueberry">
+        <a   onclick="document.body.theme('blueberry')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Blueberry</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="book-cover">
+        <a   onclick="document.body.theme('book-cover')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Book Cover</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="brownie">
+        <a   onclick="document.body.theme('brownie')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Brownie</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="camouflage">
+        <a   onclick="document.body.theme('camouflage')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Camouflage</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="chocolate">
+        <a   onclick="document.body.theme('chocolate')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Chocolate</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="greyhound">
+        <a   onclick="document.body.theme('greyhound')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Greyhound</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="ice-age">
+        <a   onclick="document.body.theme('ice-age')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Ice Age</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="mustard">
+        <a   onclick="document.body.theme('mustard')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Mustard</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="peachy">
+        <a   onclick="document.body.theme('peachy')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Peachy</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="red-alert">
+        <a   onclick="document.body.theme('red-alert')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Red Alert</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="ultra-violet">
+        <a   onclick="document.body.theme('ultra-violet')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Ultra Violet</span>
+        </a>
+        
+    </div>
+    <div class="navitem " id="vintage">
+        <a   onclick="document.body.theme('vintage')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paint" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+            <path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2" />
+            <path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+        </svg>
+            <span>Vintage</span>
+        </a>
+        
+    </div>
+    </div>
+    </div>
+    </div>
+            
+    <a class="hamburger">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </a>
+        </div>
+        
+        <div class="layout">
+            <div class="sidepane narrow-scrollbars">
+                
+        <div class="tocmenu">
+            <h3>Table of Contents</h3>
+            
+    <ul>
+        
+    </ul>
+        </div>
+                <div class="toc-button"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M7 7l5 5l-5 5" />
+            <path d="M13 7l5 5l-5 5" />
+        </svg></div>
+            </div>
+            
+        <div class="contentarea closepopups">
+            <pre class="syntaxhighlight narrow-scrollbars"><code><span class="keyword">import</span> <span class="punctuation">*</span> <span class="keyword">as</span> <span id="6" data-toggle="tooltip" data-title="typeof assert">assert</span> <span class="keyword">from</span> <span class="string">&#039;assert&#039;</span><span class="punctuation">;</span>
+<span class="keyword">import</span> <span class="punctuation">*</span> <span class="keyword">as</span> <span id="40" data-toggle="tooltip" data-title="typeof vscode">vscode</span> <span class="keyword">from</span> <span class="string">&#039;vscode&#039;</span><span class="punctuation">;</span>
+<span class="keyword">import</span> <span class="punctuation">{</span> <span id="76" data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span> <span class="punctuation">}</span> <span class="keyword">from</span> <span class="string">&#039;../helpers/testHelpers&#039;</span><span class="punctuation">;</span>
+</code></pre>
+<p>Theme Detection Tests</p>
+<p>Tests the getCurrentThemeKind() method and theme detection logic.
+Verifies correct mapping from VS Code ColorThemeKind to our ThemeKind type.</p>
+<pre class="syntaxhighlight narrow-scrollbars"><code><span data-toggle="tooltip" data-title="Mocha.SuiteFunction">suite</span><span class="punctuation">(</span><span class="string">&#039;Theme Detection Tests&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Extension can detect current theme kind&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="themeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Get current theme from VS Code</span>
+    <span class="keyword">const</span> <span id="505" data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span> <span class="punctuation">=</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorTheme">activeColorTheme</span><span class="punctuation">;</span>
+
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="themeDetection.test.html#505"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">,</span> <span class="string">&#039;VS Code should have an active color theme&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="themeDetection.test.html#505"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span> <span class="punctuation">!==</span> <span data-toggle="tooltip" data-title="undefined">undefined</span><span class="punctuation">,</span> <span class="string">&#039;Color theme should have a kind property&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Theme kind is one of the valid VS Code values&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="799" data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span> <span class="punctuation">=</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorTheme">activeColorTheme</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="856" data-toggle="tooltip" data-title="vscode.ColorThemeKind[]">validKinds</span> <span class="punctuation">=</span> <span class="punctuation">[</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Dark">Dark</span><span class="punctuation">,</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Light">Light</span><span class="punctuation">,</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span><span class="punctuation">,</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span><span class="punctuation">,</span>
+    <span class="punctuation">]</span><span class="punctuation">;</span>
+
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span>
+      <a href="themeDetection.test.html#856"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind[]">validKinds</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(searchElement: vscode.ColorThemeKind, fromIndex?: number) =&gt; boolean">includes</span><span class="punctuation">(</span><a href="themeDetection.test.html#799"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span><span class="punctuation">)</span><span class="punctuation">,</span>
+      <span class="string">`Theme kind ${</span><a href="themeDetection.test.html#799"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span><span class="string">} should be one of: ${</span><a href="themeDetection.test.html#856"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind[]">validKinds</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(separator?: string) =&gt; string">join</span><span class="punctuation">(</span><span class="string">&#039;, &#039;</span><span class="punctuation">)</span><span class="string">}`</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Dark theme maps to dark theme kind&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="1258" data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span> <span class="punctuation">=</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorTheme">activeColorTheme</span><span class="punctuation">;</span>
+
+    <span class="comment">// If currently dark theme, verify it&#039;s detected correctly</span>
+    <span class="keyword">if</span> <span class="punctuation">(</span><a href="themeDetection.test.html#1258"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span> <span class="punctuation">===</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Dark">Dark</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span class="comment">// Extension should detect this as &#039;dark&#039;</span>
+      <span class="comment">// We can verify this by checking that decorations use dark theme config</span>
+      <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span>
+        <a href="themeDetection.test.html#1258"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Dark">kind</span><span class="punctuation">,</span>
+        <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Dark">Dark</span><span class="punctuation">,</span>
+        <span class="string">&#039;Dark theme should have Dark kind&#039;</span>
+      <span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Light theme maps to light theme kind&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="1775" data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span> <span class="punctuation">=</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorTheme">activeColorTheme</span><span class="punctuation">;</span>
+
+    <span class="comment">// If currently light theme, verify it&#039;s detected correctly</span>
+    <span class="keyword">if</span> <span class="punctuation">(</span><a href="themeDetection.test.html#1775"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span> <span class="punctuation">===</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Light">Light</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span>
+        <a href="themeDetection.test.html#1775"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Light">kind</span><span class="punctuation">,</span>
+        <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Light">Light</span><span class="punctuation">,</span>
+        <span class="string">&#039;Light theme should have Light kind&#039;</span>
+      <span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;HighContrast theme maps to highContrast theme kind&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">const</span> <span id="2184" data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span> <span class="punctuation">=</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorTheme">activeColorTheme</span><span class="punctuation">;</span>
+
+    <span class="comment">// If currently high contrast theme, verify it&#039;s detected correctly</span>
+    <span class="keyword">if</span> <span class="punctuation">(</span>
+      <a href="themeDetection.test.html#2184"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span> <span class="punctuation">===</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span> <span class="punctuation">||</span>
+      <a href="themeDetection.test.html#2184"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Light | vscode.ColorThemeKind.Dark | vscode.ColorThemeKind.HighContrastLight">kind</span> <span class="punctuation">===</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span>
+    <span class="punctuation">)</span> <span class="punctuation">{</span>
+      <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span>
+        <a href="themeDetection.test.html#2184"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast | vscode.ColorThemeKind.HighContrastLight">kind</span> <span class="punctuation">===</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span> <span class="punctuation">||</span>
+          <a href="themeDetection.test.html#2184"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">kind</span> <span class="punctuation">===</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span><span class="punctuation">,</span>
+        <span class="string">&#039;HighContrast theme should have HighContrast or HighContrastLight kind&#039;</span>
+      <span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Extension logs theme kind during decoration creation&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="themeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Trigger decoration reload which logs theme kind</span>
+    <span class="keyword">const</span> <span id="2905" data-toggle="tooltip" data-title="vscode.WorkspaceConfiguration">config</span> <span class="punctuation">=</span> <a href="themeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4263"><span class="member" data-toggle="tooltip" data-title="() =&gt; vscode.WorkspaceConfiguration">getConfig</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="2949" data-toggle="tooltip" data-title="unknown">currentNormalMode</span> <span class="punctuation">=</span> <a href="themeDetection.test.html#2905"><span data-toggle="tooltip" data-title="vscode.WorkspaceConfiguration">config</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="{ &lt;T&gt;(section: string): T | undefined; &lt;T&gt;(section: string, defaultValue: T): T; }">get</span><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Make a small change to trigger reload</span>
+    <span class="keyword">const</span> <span id="3051" data-toggle="tooltip" data-title="{ borderWidth: string; }">modifiedConfig</span> <span class="punctuation">=</span> <span class="punctuation">{</span>
+      <span class="punctuation">...</span><span class="punctuation">(</span><a href="themeDetection.test.html#2949"><span data-toggle="tooltip" data-title="unknown">currentNormalMode</span></a> <span class="keyword">as</span> <span class="typename" data-toggle="tooltip" data-title="Record&lt;K, T&gt;">Record</span><span class="punctuation">&lt;</span><span class="keyword">string</span><span class="punctuation">,</span> <span class="keyword">unknown</span><span class="punctuation">&gt;</span><span class="punctuation">)</span><span class="punctuation">,</span>
+      <span id="3127" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;3px&#039;</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="themeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <a href="themeDetection.test.html#3051"><span data-toggle="tooltip" data-title="{ borderWidth: string; }">modifiedConfig</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="keyword">await</span> <a href="themeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Extension should have logged the theme kind</span>
+    <span class="comment">// We can&#039;t directly verify log contents in tests, but we can verify no errors occurred</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;Decoration reload with theme detection should not error&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Restore config</span>
+    <span class="keyword">await</span> <a href="themeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Theme detection works immediately on extension activation&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="comment">// Extension should detect theme kind during constructor/activation</span>
+    <span class="comment">// This is implicitly tested by successful activation</span>
+    <span class="keyword">await</span> <a href="themeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">const</span> <span id="3830" data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span> <span class="punctuation">=</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorTheme">activeColorTheme</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="themeDetection.test.html#3830"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">,</span> <span class="string">&#039;Theme should be detectable on activation&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Theme API is available and stable&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="comment">// Verify VS Code theme API is available</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorTheme">activeColorTheme</span><span class="punctuation">,</span> <span class="string">&#039;activeColorTheme should be available&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span>
+      <span class="keyword">typeof</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorTheme">activeColorTheme</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span> <span class="punctuation">===</span> <span class="string">&#039;number&#039;</span><span class="punctuation">,</span>
+      <span class="string">&#039;Theme kind should be a number (enum value)&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Verify ColorThemeKind enum exists</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">,</span> <span class="string">&#039;ColorThemeKind enum should exist&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Dark">Dark</span><span class="punctuation">,</span> <span class="string">&#039;number&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Light">Light</span><span class="punctuation">,</span> <span class="string">&#039;number&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span><span class="punctuation">,</span> <span class="string">&#039;number&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Theme detection handles all ColorThemeKind enum values&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="comment">// Verify our extension can handle all possible theme kinds</span>
+    <span class="keyword">const</span> <span id="4763" data-toggle="tooltip" data-title="vscode.ColorThemeKind[]">allThemeKinds</span> <span class="punctuation">=</span> <span class="punctuation">[</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Dark">Dark</span><span class="punctuation">,</span> <span class="comment">// 1</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Light">Light</span><span class="punctuation">,</span> <span class="comment">// 2</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span><span class="punctuation">,</span> <span class="comment">// 3</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span><span class="punctuation">,</span> <span class="comment">// 4 (added in newer VS Code)</span>
+    <span class="punctuation">]</span><span class="punctuation">;</span>
+
+    <span class="comment">// All theme kinds should be valid numbers</span>
+    <a href="themeDetection.test.html#4763"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind[]">allThemeKinds</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(callbackfn: (value: vscode.ColorThemeKind, index: number, array: vscode.ColorThemeKind[]) =&gt; void, thisArg?: any) =&gt; void">forEach</span><span class="punctuation">(</span><span id="5066" data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+      <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="themeDetection.test.html#5066"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span></a><span class="punctuation">,</span> <span class="string">&#039;number&#039;</span><span class="punctuation">,</span> <span class="string">`Theme kind ${</span><a href="themeDetection.test.html#5066"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span></a><span class="string">} should be a number`</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Current theme should be one of these</span>
+    <span class="keyword">const</span> <span id="5228" data-toggle="tooltip" data-title="vscode.ColorThemeKind">current</span> <span class="punctuation">=</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorTheme">activeColorTheme</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span>
+      <a href="themeDetection.test.html#4763"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind[]">allThemeKinds</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(searchElement: vscode.ColorThemeKind, fromIndex?: number) =&gt; boolean">includes</span><span class="punctuation">(</span><a href="themeDetection.test.html#5228"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">current</span></a><span class="punctuation">)</span><span class="punctuation">,</span>
+      <span class="string">`Current theme kind ${</span><a href="themeDetection.test.html#5228"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">current</span></a><span class="string">} should be in known values`</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Theme kind enum values are stable and known&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="comment">// VS Code ColorThemeKind values should be stable numbers</span>
+    <span class="comment">// Actual values: Dark=2, Light=1, HighContrast=3 (or Light=2, Dark=1 depending on version)</span>
+    <span class="comment">// What matters is they&#039;re consistent and numeric</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Dark">Dark</span><span class="punctuation">,</span> <span class="string">&#039;number&#039;</span><span class="punctuation">,</span> <span class="string">&#039;Dark should be a number&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Light">Light</span><span class="punctuation">,</span> <span class="string">&#039;number&#039;</span><span class="punctuation">,</span> <span class="string">&#039;Light should be a number&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span>
+      <span class="keyword">typeof</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span><span class="punctuation">,</span>
+      <span class="string">&#039;number&#039;</span><span class="punctuation">,</span>
+      <span class="string">&#039;HighContrast should be a number&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// HighContrastLight exists in newer VS Code versions</span>
+    <span class="keyword">if</span> <span class="punctuation">(</span><a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span> <span class="punctuation">!==</span> <span data-toggle="tooltip" data-title="undefined">undefined</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span>
+        <span class="keyword">typeof</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span><span class="punctuation">,</span>
+        <span class="string">&#039;number&#039;</span><span class="punctuation">,</span>
+        <span class="string">&#039;HighContrastLight should be a number&#039;</span>
+      <span class="punctuation">)</span><span class="punctuation">;</span>
+    <span class="punctuation">}</span>
+
+    <span class="comment">// All values should be distinct</span>
+    <span class="keyword">const</span> <span id="6345" data-toggle="tooltip" data-title="vscode.ColorThemeKind[]">values</span> <span class="punctuation">=</span> <span class="punctuation">[</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Dark">Dark</span><span class="punctuation">,</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Light">Light</span><span class="punctuation">,</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span><span class="punctuation">,</span>
+    <span class="punctuation">]</span><span class="punctuation">;</span>
+    <span class="keyword">const</span> <span id="6484" data-toggle="tooltip" data-title="Set&lt;vscode.ColorThemeKind&gt;">uniqueValues</span> <span class="punctuation">=</span> <span class="keyword">new</span> <span class="typename" data-toggle="tooltip" data-title="SetConstructor">Set</span><span class="punctuation">(</span><a href="themeDetection.test.html#6345"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind[]">values</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span>
+      <a href="themeDetection.test.html#6484"><span data-toggle="tooltip" data-title="Set&lt;vscode.ColorThemeKind&gt;">uniqueValues</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="number">size</span><span class="punctuation">,</span>
+      <a href="themeDetection.test.html#6345"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind[]">values</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="number">length</span><span class="punctuation">,</span>
+      <span class="string">&#039;All theme kind values should be distinct&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span class="comment">// STAGE 1 TESTS: High Contrast Dark/Light Distinction</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 1: HighContrast and HighContrastLight are distinct enum values&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="comment">// VS Code provides two distinct high contrast theme kinds</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(actual: unknown, expected: unknown, message?: string | Error) =&gt; void">notStrictEqual</span><span class="punctuation">(</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span><span class="punctuation">,</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span><span class="punctuation">,</span>
+      <span class="string">&#039;HighContrast and HighContrastLight should be different enum values&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Both should be numbers</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span><span class="punctuation">,</span> <span class="string">&#039;number&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span><span class="keyword">typeof</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span><span class="punctuation">,</span> <span class="string">&#039;number&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// HighContrast = 3, HighContrastLight = 4 (in newer VS Code versions)</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span> <span class="punctuation">&gt;=</span> <span class="number">1</span> <span class="punctuation">&amp;&amp;</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span> <span class="punctuation">&lt;=</span> <span class="number">4</span><span class="punctuation">,</span>
+      <span class="string">&#039;HighContrast should be valid enum value (1-4)&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span> <span class="punctuation">&gt;=</span> <span class="number">1</span> <span class="punctuation">&amp;&amp;</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span> <span class="punctuation">&lt;=</span> <span class="number">4</span><span class="punctuation">,</span>
+      <span class="string">&#039;HighContrastLight should be valid enum value (1-4)&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 1: All 4 theme kinds are accounted for&#039;</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="comment">// After Stage 1, we support all 4 VS Code theme kinds</span>
+    <span class="keyword">const</span> <span id="7807" data-toggle="tooltip" data-title="vscode.ColorThemeKind[]">allThemeKinds</span> <span class="punctuation">=</span> <span class="punctuation">[</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Dark">Dark</span><span class="punctuation">,</span> <span class="comment">// 2</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Light">Light</span><span class="punctuation">,</span> <span class="comment">// 1</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span><span class="punctuation">,</span> <span class="comment">// 3 (dark variant)</span>
+      <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span><span class="punctuation">,</span> <span class="comment">// 4 (light variant)</span>
+    <span class="punctuation">]</span><span class="punctuation">;</span>
+
+    <span class="comment">// All should be distinct</span>
+    <span class="keyword">const</span> <span id="8082" data-toggle="tooltip" data-title="Set&lt;vscode.ColorThemeKind&gt;">uniqueKinds</span> <span class="punctuation">=</span> <span class="keyword">new</span> <span class="typename" data-toggle="tooltip" data-title="SetConstructor">Set</span><span class="punctuation">(</span><a href="themeDetection.test.html#7807"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind[]">allThemeKinds</span></a><span class="punctuation">)</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span>
+      <a href="themeDetection.test.html#8082"><span data-toggle="tooltip" data-title="Set&lt;vscode.ColorThemeKind&gt;">uniqueKinds</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="number">size</span><span class="punctuation">,</span>
+      <span class="number">4</span><span class="punctuation">,</span>
+      <span class="string">&#039;Should have exactly 4 distinct theme kinds: Dark, Light, HighContrast (dark), HighContrastLight&#039;</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Current theme should be one of these 4</span>
+    <span class="keyword">const</span> <span id="8345" data-toggle="tooltip" data-title="vscode.ColorThemeKind">currentKind</span> <span class="punctuation">=</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorTheme">activeColorTheme</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span><span class="punctuation">;</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span>
+      <a href="themeDetection.test.html#7807"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind[]">allThemeKinds</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(searchElement: vscode.ColorThemeKind, fromIndex?: number) =&gt; boolean">includes</span><span class="punctuation">(</span><a href="themeDetection.test.html#8345"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">currentKind</span></a><span class="punctuation">)</span><span class="punctuation">,</span>
+      <span class="string">`Current theme kind ${</span><a href="themeDetection.test.html#8345"><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">currentKind</span></a><span class="string">} should be one of the 4 valid kinds`</span>
+    <span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 1: Extension can distinguish HC dark from HC light&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="themeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">const</span> <span id="8684" data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span> <span class="punctuation">=</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="typeof vscode.window">window</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorTheme">activeColorTheme</span><span class="punctuation">;</span>
+
+    <span class="comment">// If we&#039;re in a high contrast theme, verify we can detect which variant</span>
+    <span class="keyword">if</span> <span class="punctuation">(</span><a href="themeDetection.test.html#8684"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind">kind</span> <span class="punctuation">===</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span>
+        <a href="themeDetection.test.html#8684"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">kind</span><span class="punctuation">,</span>
+        <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrast">HighContrast</span><span class="punctuation">,</span>
+        <span class="string">&#039;High contrast DARK should have HighContrast enum value (3)&#039;</span>
+      <span class="punctuation">)</span><span class="punctuation">;</span>
+      <span class="comment">// Extension&#039;s getCurrentThemeKind() should return &#039;highContrastDark&#039;</span>
+    <span class="punctuation">}</span> <span class="keyword">else</span> <span class="keyword">if</span> <span class="punctuation">(</span><a href="themeDetection.test.html#8684"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.Light | vscode.ColorThemeKind.Dark | vscode.ColorThemeKind.HighContrastLight">kind</span> <span class="punctuation">===</span> <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+      <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="&lt;T&gt;(actual: unknown, expected: T, message?: string | Error) =&gt; asserts actual is T">strictEqual</span><span class="punctuation">(</span>
+        <a href="themeDetection.test.html#8684"><span data-toggle="tooltip" data-title="vscode.ColorTheme">currentTheme</span></a><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">kind</span><span class="punctuation">,</span>
+        <a href="themeDetection.test.html#40"><span data-toggle="tooltip" data-title="typeof vscode">vscode</span></a><span class="punctuation">.</span><span class="typename" data-toggle="tooltip" data-title="typeof vscode.ColorThemeKind">ColorThemeKind</span><span class="punctuation">.</span><span data-toggle="tooltip" data-title="vscode.ColorThemeKind.HighContrastLight">HighContrastLight</span><span class="punctuation">,</span>
+        <span class="string">&#039;High contrast LIGHT should have HighContrastLight enum value (4)&#039;</span>
+      <span class="punctuation">)</span><span class="punctuation">;</span>
+      <span class="comment">// Extension&#039;s getCurrentThemeKind() should return &#039;highContrastLight&#039;</span>
+    <span class="punctuation">}</span>
+
+    <span class="comment">// Test passes regardless of current theme - validates detection logic exists</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;Extension should handle both HC variants&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+  <span data-toggle="tooltip" data-title="Mocha.TestFunction">test</span><span class="punctuation">(</span><span class="string">&#039;Stage 1: New [highContrastDark] and [highContrastLight] configs supported&#039;</span><span class="punctuation">,</span> <span class="keyword">async</span> <span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">=&gt;</span> <span class="punctuation">{</span>
+    <span class="keyword">await</span> <a href="themeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#6141"><span class="member" data-toggle="tooltip" data-title="() =&gt; Promise&lt;boolean&gt;">ensureExtensionActive</span></a><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Stage 1 adds support for new config keys</span>
+    <span class="keyword">await</span> <a href="themeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#4626"><span class="member" data-toggle="tooltip" data-title="(key: string, value: unknown) =&gt; Promise&lt;void&gt;">setConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">,</span> <span class="punctuation">{</span>
+      <span id="9874" data-toggle="tooltip" data-title="string">borderStyle</span><span class="punctuation">:</span> <span class="string">&#039;dotted&#039;</span><span class="punctuation">,</span>
+      <span id="9903" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;2px&#039;</span><span class="punctuation">,</span>
+      <span class="string">&#039;[dark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="9947" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#00aa00&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[light]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="10002" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#0000ff&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastDark]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="10068" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#00ffff&#039;</span><span class="punctuation">,</span>
+        <span id="10095" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;4px&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="string">&#039;[highContrastLight]&#039;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+        <span id="10163" data-toggle="tooltip" data-title="string">border</span><span class="punctuation">:</span> <span class="string">&#039;#ffffff&#039;</span><span class="punctuation">,</span>
+        <span id="10190" data-toggle="tooltip" data-title="string">borderWidth</span><span class="punctuation">:</span> <span class="string">&#039;4px&#039;</span><span class="punctuation">,</span>
+      <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="keyword">await</span> <a href="themeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#1836"><span class="member" data-toggle="tooltip" data-title="(ms: number) =&gt; Promise&lt;void&gt;">wait</span></a><span class="punctuation">(</span><span class="number">100</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Extension should accept the new config keys without error</span>
+    <a href="themeDetection.test.html#6"><span data-toggle="tooltip" data-title="typeof assert">assert</span></a><span class="punctuation">.</span><span class="member" data-toggle="tooltip" data-title="(value: unknown, message?: string | Error) =&gt; asserts value">ok</span><span class="punctuation">(</span><span class="keyword">true</span><span class="punctuation">,</span> <span class="string">&#039;Extension should handle new HC dark/light config keys&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+
+    <span class="comment">// Cleanup</span>
+    <span class="keyword">await</span> <a href="themeDetection.test.html#76"><span data-toggle="tooltip" data-title="typeof TestHelpers">TestHelpers</span></a><span class="punctuation">.</span><a href="../helpers/testHelpers.html#5018"><span class="member" data-toggle="tooltip" data-title="(key: string) =&gt; Promise&lt;void&gt;">resetConfig</span></a><span class="punctuation">(</span><span class="string">&#039;normalMode&#039;</span><span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+<span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span>
+</code></pre>
+
+        </div>
+            <div class="sidepane narrow-scrollbars">
+                
+        <div class="pagemenu">
+            <h3>On This Page</h3>
+                <ul class="pagetree">
+                </ul>
+        </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <a class="footer-button disabled">
+            Previous
+        </a>
+            <div class="footer-text">
+                <p>Copyright © 2023</p>
+                <p>Generated by 
+                    <a href="https://johtela.github.io/litscript">LiTScript</a>
+                </p>
+            </div>
+            <a class="footer-button disabled">
+            Next
+        </a>
+        </div>
+    
+        <script src="../../../dist/normal.js"></script>
+    </body>
+    </html>
