@@ -5,53 +5,97 @@ import * as vscode from 'vscode';
  * VS Code provides 4 distinct theme kinds:
  * - dark: Regular dark theme
  * - light: Regular light theme
- * - highContrastDark: High contrast dark theme (ColorThemeKind.HighContrast)
- * - highContrastLight: High contrast light theme (ColorThemeKind.HighContrastLight)
+ * - darkHC: High contrast dark theme (ColorThemeKind.HighContrast)
+ * - lightHC: High contrast light theme (ColorThemeKind.HighContrastLight)
  */
-export type ThemeKind = 'dark' | 'light' | 'highContrastDark' | 'highContrastLight';
+export type ThemeKind = 'dark' | 'light' | 'darkHC' | 'lightHC';
+
+/**
+ * Complete DecorationRenderOptions interface
+ * Maps 1:1 to vscode.DecorationRenderOptions
+ * All properties optional - only backgroundColor and border have defaults
+ *
+ * This interface represents the complete set of styling properties available
+ * for decorations in VS Code. By providing direct passthrough to the VS Code API,
+ * we eliminate transformation logic and support all current and future properties.
+ */
+export interface DecorationConfig {
+  // ===== Text Styling =====
+  backgroundColor?: string; // Background color (CSS color, rgba(), or ThemeColor)
+  color?: string; // Text color (CSS color or ThemeColor)
+  opacity?: string; // Opacity (0.0 to 1.0)
+
+  // ===== Border (CSS shorthand OR individual properties) =====
+  border?: string; // CSS border shorthand: "2px dotted #00aa00"
+  borderColor?: string; // Border color (used if border not specified)
+  borderRadius?: string; // Border radius
+  borderSpacing?: string; // Border spacing
+  borderStyle?: string; // Border style (solid, dotted, dashed, etc.)
+  borderWidth?: string; // Border width (used if border not specified)
+
+  // ===== Outline (CSS shorthand OR individual properties) =====
+  outline?: string; // CSS outline shorthand: "1px solid #ff0000"
+  outlineColor?: string; // Outline color
+  outlineStyle?: string; // Outline style
+  outlineWidth?: string; // Outline width
+
+  // ===== Font Styling =====
+  fontStyle?: string; // Font style (normal, italic, oblique)
+  fontWeight?: string; // Font weight (normal, bold, 100-900)
+  letterSpacing?: string; // Letter spacing
+  textDecoration?: string; // Text decoration (underline, line-through, etc.)
+
+  // ===== Cursor =====
+  cursor?: string; // CSS cursor (pointer, default, etc.)
+
+  // ===== Overview Ruler =====
+  overviewRulerColor?: string; // Color in overview ruler
+  overviewRulerLane?: string; // Position: 'Left' | 'Center' | 'Right' | 'Full'
+
+  // ===== Gutter Icon =====
+  gutterIconPath?: string; // Absolute path or URI to gutter icon
+  gutterIconSize?: string; // Icon size: 'auto' | 'contain' | 'cover' | percentage
+
+  // ===== Advanced =====
+  rangeBehavior?: string; // 'OpenOpen' | 'ClosedClosed' | 'OpenClosed' | 'ClosedOpen'
+
+  // ===== Attachments (deferred - complex) =====
+  // before?: ThemableDecorationAttachmentRenderOptions;
+  // after?: ThemableDecorationAttachmentRenderOptions;
+}
 
 /**
  * Theme-specific override configuration
+ * Now supports all DecorationConfig properties instead of just 4
  */
-export interface ThemeOverride {
-  background?: string;
-  border?: string;
-  borderStyle?: string;
-  borderWidth?: string;
-}
+export type ThemeOverride = DecorationConfig;
 
 /**
  * Mode configuration with optional theme-specific overrides
  *
- * STAGE 2: Supports cascading fallback hierarchy
- * - [dark]: Regular dark theme (also fallback for highContrastDark)
- * - [light]: Regular light theme (also fallback for highContrastLight)
- * - [highContrastDark]: High contrast dark theme → falls back to [dark]
- * - [highContrastLight]: High contrast light theme → falls back to [light]
+ * Extends DecorationConfig to support ALL decoration properties.
+ * Supports cascading fallback hierarchy:
+ * - dark: Regular dark theme (also fallback for darkHC)
+ * - light: Regular light theme (also fallback for lightHC)
+ * - darkHC: High contrast dark theme → falls back to dark
+ * - lightHC: High contrast light theme → falls back to light
  *
- * Each property (background, border, borderStyle, borderWidth) is resolved
- * independently through the fallback chain, enabling selective overrides.
+ * Each property is resolved independently through the fallback chain,
+ * enabling selective overrides.
  */
-export interface ModeConfig {
-  background?: string;
-  border?: string;
-  borderStyle?: string;
-  borderWidth?: string;
-  '[dark]'?: ThemeOverride;
-  '[light]'?: ThemeOverride;
-  '[highContrastDark]'?: ThemeOverride;
-  '[highContrastLight]'?: ThemeOverride;
+export interface ModeConfig extends DecorationConfig {
+  // Theme-specific overrides (no brackets, shorter HC names)
+  dark?: ThemeOverride;
+  light?: ThemeOverride;
+  darkHC?: ThemeOverride;
+  lightHC?: ThemeOverride;
 }
 
 /**
  * Merged configuration after applying theme overrides
+ * Now supports ALL DecorationConfig properties instead of just 4 required ones
  */
-export interface MergedModeConfig {
-  background: string;
-  border: string;
-  borderStyle: string;
-  borderWidth: string;
-}
+export type MergedModeConfig = DecorationConfig;
 
 /**
  * Logger interface for optional logging
@@ -62,47 +106,39 @@ export interface Logger {
 }
 
 /**
- * Default configuration for normal mode
- * Matches package.json defaults
+ * Default configuration for normal mode (v0.3.0 format)
+ * Uses backgroundColor and CSS border shorthand
  */
 export const DEFAULT_NORMAL_MODE: MergedModeConfig = {
-  background: 'rgba(255, 255, 255, 0)',
-  border: '#00aa00',
-  borderStyle: 'dotted',
-  borderWidth: '2px',
+  backgroundColor: 'rgba(255, 255, 255, 0)',
+  border: '2px dotted #00aa00',
 };
 
 /**
- * Default configuration for insert mode
- * Matches package.json defaults
+ * Default configuration for insert mode (v0.3.0 format)
+ * Uses backgroundColor and CSS border shorthand
  */
 export const DEFAULT_INSERT_MODE: MergedModeConfig = {
-  background: 'rgba(255, 255, 255, 0)',
-  border: '#aa0000',
-  borderStyle: 'solid',
-  borderWidth: '2px',
+  backgroundColor: 'rgba(255, 255, 255, 0)',
+  border: '2px solid #aa0000',
 };
 
 /**
- * Default configuration for visual mode
- * Matches package.json defaults
+ * Default configuration for visual mode (v0.3.0 format)
+ * Uses backgroundColor and CSS border shorthand
  */
 export const DEFAULT_VISUAL_MODE: MergedModeConfig = {
-  background: 'rgba(255, 255, 255, 0)',
-  border: '#0000aa',
-  borderStyle: 'dashed',
-  borderWidth: '2px',
+  backgroundColor: 'rgba(255, 255, 255, 0)',
+  border: '2px dashed #0000aa',
 };
 
 /**
- * Default configuration for search mode
- * Matches package.json defaults
+ * Default configuration for search mode (v0.3.0 format)
+ * Uses backgroundColor and CSS border shorthand
  */
 export const DEFAULT_SEARCH_MODE: MergedModeConfig = {
-  background: 'rgba(255, 255, 255, 0)',
-  border: '#aaaa00',
-  borderStyle: 'solid',
-  borderWidth: '2px',
+  backgroundColor: 'rgba(255, 255, 255, 0)',
+  border: '2px solid #aaaa00',
 };
 
 /**
@@ -201,9 +237,9 @@ export class ConfigurationManager {
    * VS Code provides 4 distinct theme kinds, and we now distinguish between
    * high contrast dark and high contrast light themes (Stage 1 of Issue #4).
    *
-   * @returns 'dark', 'light', 'highContrastDark', or 'highContrastLight'
+   * @returns 'dark', 'light', 'darkHC', or 'lightHC'
    */
-  private getCurrentThemeKind(): ThemeKind {
+  public getCurrentThemeKind(): ThemeKind {
     const themeKind = vscode.window.activeColorTheme.kind;
 
     switch (themeKind) {
@@ -213,9 +249,9 @@ export class ConfigurationManager {
         return 'light';
       case vscode.ColorThemeKind.HighContrast:
         // HighContrast is the DARK variant of high contrast themes
-        return 'highContrastDark';
+        return 'darkHC';
       case vscode.ColorThemeKind.HighContrastLight:
-        return 'highContrastLight';
+        return 'lightHC';
       default:
         this.logger?.debug(`Unknown theme kind: ${themeKind}, defaulting to dark`);
         return 'dark';
@@ -236,18 +272,18 @@ export class ConfigurationManager {
    */
   private getFallbackChain(themeKind: ThemeKind): string[] {
     switch (themeKind) {
-      case 'highContrastDark':
-        // HC Dark: [highContrastDark] → [dark] → common → defaults
-        return ['[highContrastDark]', '[dark]'];
-      case 'highContrastLight':
-        // HC Light: [highContrastLight] → [light] → common → defaults
-        return ['[highContrastLight]', '[light]'];
+      case 'darkHC':
+        // HC Dark: darkHC → dark → common → defaults
+        return ['darkHC', 'dark'];
+      case 'lightHC':
+        // HC Light: lightHC → light → common → defaults
+        return ['lightHC', 'light'];
       case 'dark':
-        // Regular dark: [dark] → common → defaults
-        return ['[dark]'];
+        // Regular dark: dark → common → defaults
+        return ['dark'];
       case 'light':
-        // Regular light: [light] → common → defaults
-        return ['[light]'];
+        // Regular light: light → common → defaults
+        return ['light'];
     }
   }
 
@@ -255,21 +291,21 @@ export class ConfigurationManager {
    * Resolves a single property through the fallback chain.
    * Checks theme overrides first, then common property, then default value.
    *
-   * STAGE 2: Property-level cascading resolution (not object-level)
+   * STAGE 2: Generic property resolution for ANY DecorationConfig property
    * This allows selective overrides without duplicating entire config.
    *
-   * @param propertyName - Property to resolve (background, border, borderStyle, borderWidth)
+   * @param propertyName - Property to resolve (any key from DecorationConfig)
    * @param modeConfig - Mode configuration object from settings
    * @param fallbackChain - Array of theme keys to check in priority order
-   * @param defaultValue - Default value if not found anywhere
-   * @returns Resolved property value
+   * @param defaultValue - Default value if not found anywhere (may be undefined for optional properties)
+   * @returns Resolved property value or undefined
    */
   private resolveProperty(
-    propertyName: keyof ThemeOverride,
+    propertyName: keyof DecorationConfig,
     modeConfig: ModeConfig,
     fallbackChain: string[],
-    defaultValue: string
-  ): string {
+    defaultValue?: string
+  ): string | undefined {
     // 1. Check theme-specific overrides in priority order
     for (const themeKey of fallbackChain) {
       const themeOverride = modeConfig[themeKey as keyof ModeConfig] as ThemeOverride | undefined;
@@ -277,7 +313,7 @@ export class ConfigurationManager {
         this.logger?.debug(
           `Resolved ${propertyName} from ${themeKey}: ${themeOverride[propertyName]}`
         );
-        return themeOverride[propertyName]!;
+        return themeOverride[propertyName];
       }
     }
 
@@ -286,41 +322,41 @@ export class ConfigurationManager {
       this.logger?.debug(
         `Resolved ${propertyName} from common config: ${modeConfig[propertyName]}`
       );
-      return modeConfig[propertyName]!;
+      return modeConfig[propertyName];
     }
 
-    // 3. Use default value
-    this.logger?.debug(`Resolved ${propertyName} from defaults: ${defaultValue}`);
+    // 3. Use default value (may be undefined for optional properties)
+    if (defaultValue !== undefined) {
+      this.logger?.debug(`Resolved ${propertyName} from defaults: ${defaultValue}`);
+    }
     return defaultValue;
   }
 
   /**
    * Merges common mode configuration with theme-specific overrides.
    *
-   * STAGE 2: Implements property-level cascading fallback hierarchy.
-   * Each property (background, border, borderStyle, borderWidth) is resolved
-   * independently through the fallback chain.
+   * STAGE 2: Generic property-level cascading fallback hierarchy.
+   * Each property is resolved independently through the fallback chain.
    *
    * Fallback hierarchy:
-   * - HC Dark: [highContrastDark] → [dark] → common → defaults
-   * - HC Light: [highContrastLight] → [light] → common → defaults
-   * - Regular Dark/Light: [dark/light] → common → defaults
+   * - HC Dark: darkHC → dark → common → defaults
+   * - HC Light: lightHC → light → common → defaults
+   * - Regular Dark/Light: dark/light → common → defaults
    *
    * Example:
    * {
-   *   borderStyle: "dotted",              // common
-   *   "[dark]": { borderWidth: "2px" },   // dark theme
-   *   "[highContrastDark]": { border: "#ff0000" }  // HC dark
+   *   borderStyle: "dotted",                    // common
+   *   dark: { border: "2px solid #00ff00" },    // dark theme
+   *   darkHC: { border: "4px solid #ff0000" }   // HC dark
    * }
    * When theme = High Contrast Dark:
-   * - border: "#ff0000"             ← from [highContrastDark]
-   * - borderWidth: "2px"            ← from [dark] (fallback)
+   * - border: "4px solid #ff0000"   ← from darkHC
    * - borderStyle: "dotted"         ← from common
-   * - background: "rgba(...)"       ← from defaults
+   * - backgroundColor: "rgba(...)"  ← from defaults
    *
    * @param modeConfig - Nested configuration object from settings
    * @param defaults - Default configuration values to use as fallback
-   * @returns Merged configuration with all required properties
+   * @returns Merged configuration with all properties resolved
    */
   private getMergedModeConfig(
     modeConfig: ModeConfig,
@@ -333,29 +369,57 @@ export class ConfigurationManager {
       `Resolving mode config for theme: ${themeKind}, fallback chain: ${fallbackChain.join(' → ')}`
     );
 
-    // STAGE 2: Resolve each property independently through the fallback chain
-    // This enables selective overrides (e.g., only override borderWidth for HC, inherit rest from base theme)
-    const merged: MergedModeConfig = {
-      background: this.resolveProperty(
-        'background',
+    // Define all properties we want to resolve
+    // Single source of truth for all supported properties
+    // NOTE: borderStyle and borderWidth are valid VS Code API fallback properties
+    const propertiesToResolve: (keyof DecorationConfig)[] = [
+      // Text styling
+      'backgroundColor',
+      'color',
+      'opacity',
+      // Border (CSS shorthand only)
+      'border',
+      'borderColor',
+      'borderRadius',
+      'borderSpacing',
+      // Outline
+      'outline',
+      'outlineColor',
+      'outlineStyle',
+      'outlineWidth',
+      // Font
+      'fontStyle',
+      'fontWeight',
+      'letterSpacing',
+      'textDecoration',
+      // Cursor
+      'cursor',
+      // Overview ruler
+      'overviewRulerColor',
+      'overviewRulerLane',
+      // Gutter
+      'gutterIconPath',
+      'gutterIconSize',
+      // Advanced
+      'rangeBehavior',
+    ];
+
+    // GENERIC RESOLUTION: Loop through all properties
+    const merged: MergedModeConfig = {};
+
+    for (const prop of propertiesToResolve) {
+      const value = this.resolveProperty(
+        prop,
         modeConfig,
         fallbackChain,
-        defaults.background
-      ),
-      border: this.resolveProperty('border', modeConfig, fallbackChain, defaults.border),
-      borderStyle: this.resolveProperty(
-        'borderStyle',
-        modeConfig,
-        fallbackChain,
-        defaults.borderStyle
-      ),
-      borderWidth: this.resolveProperty(
-        'borderWidth',
-        modeConfig,
-        fallbackChain,
-        defaults.borderWidth
-      ),
-    };
+        defaults[prop] // May be undefined for optional properties
+      );
+
+      // Only add to merged config if value exists
+      if (value !== undefined) {
+        merged[prop] = value;
+      }
+    }
 
     return merged;
   }

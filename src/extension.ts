@@ -48,16 +48,15 @@ class ModalEditLineIndicator implements vscode.Disposable {
 
     // Helper function to create decoration for a specific mode
     const createModeDecoration = (mode: Mode): vscode.TextEditorDecorationType => {
-      const merged = this.configManager.getConfig(mode);
+      const config = this.configManager.getConfig(mode);
 
-      this.logger.log(
-        `  ${mode.toUpperCase()}: bg=${merged.background}, border=${merged.borderWidth} ${merged.borderStyle} ${merged.border}`
-      );
+      this.logger.log(`  ${mode.toUpperCase()}: ${JSON.stringify(config)}`);
 
+      // PASSTHROUGH: Spread config directly into VS Code API
+      // HARDCODED: isWholeLine always true (this is a LINE highlighter)
       return vscode.window.createTextEditorDecorationType({
-        backgroundColor: merged.background,
-        border: `${merged.borderWidth} ${merged.borderStyle} ${merged.border}`,
-        isWholeLine: true,
+        ...(config as vscode.DecorationRenderOptions), // ALL properties from config
+        isWholeLine: true, // ALWAYS true, NOT configurable
       });
     };
 
@@ -385,11 +384,12 @@ class ModalEditLineIndicator implements vscode.Disposable {
       })
     );
 
-    // Command: Manual mode query
+    // Command: Manual mode query (enhanced diagnostics)
     this.disposables.push(
       vscode.commands.registerCommand('modaledit-line-indicator.queryMode', () => {
         this.logger.log('=== MANUAL MODE QUERY TRIGGERED ===');
 
+        const editor = vscode.window.activeTextEditor;
         const currentMode = this.detectCurrentMode();
         const modeColorMap = {
           normal: 'green dotted',
@@ -399,20 +399,60 @@ class ModalEditLineIndicator implements vscode.Disposable {
         };
         const modeDescription = modeColorMap[currentMode];
 
+        // ModalEdit detection
         const modalEditExt = vscode.extensions.getExtension('johtela.vscode-modaledit');
         const modalEditInfo = modalEditExt
           ? `ModalEdit v${modalEditExt.packageJSON.version} (active: ${modalEditExt.isActive})`
           : 'ModalEdit NOT installed';
 
-        const message = `Current Mode: ${currentMode.toUpperCase()} (${modeDescription})\n${modalEditInfo}`;
+        // Theme detection
+        const themeKind = this.configManager.getCurrentThemeKind();
+        const themeKindMap = {
+          dark: 'Dark',
+          light: 'Light',
+          darkHC: 'High Contrast Dark',
+          lightHC: 'High Contrast Light',
+        };
+        const themeDescription = themeKindMap[themeKind];
+
+        // Cursor and selection state
+        const cursorStyle = editor?.options.cursorStyle as number | undefined;
+        const cursorStyleMap: Record<number, string> = {
+          1: 'Line',
+          2: 'Block',
+          3: 'Underline',
+          4: 'LineThin',
+          5: 'BlockOutline',
+          6: 'UnderlineThin',
+        };
+        const cursorStyleName = cursorStyle
+          ? cursorStyleMap[cursorStyle] || `Unknown (${cursorStyle})`
+          : 'Unknown';
+        const hasSelection = editor ? !editor.selection.isEmpty : false;
+
+        // Build detailed message
+        const parts = [
+          `MODE: ${currentMode.toUpperCase()} (${modeDescription})`,
+          `Cursor: ${cursorStyleName}`,
+          `Selection: ${hasSelection ? 'Yes' : 'No'}`,
+          `Theme: ${themeDescription}`,
+          `Extension: ${this.enabled ? 'Enabled' : 'Disabled'}`,
+          modalEditInfo,
+        ];
+
+        const message = parts.join('\n');
 
         this.logger.log('Manual query result', {
           mode: currentMode,
+          cursorStyle: cursorStyleName,
+          hasSelection,
+          theme: themeKind,
+          enabled: this.enabled,
           modalEditPresent: !!modalEditExt,
           modalEditActive: modalEditExt?.isActive,
         });
 
-        vscode.window.showInformationMessage(message);
+        vscode.window.showInformationMessage(message, { modal: true });
       })
     );
 

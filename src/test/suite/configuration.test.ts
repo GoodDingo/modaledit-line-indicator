@@ -23,10 +23,8 @@ suite('Configuration Tests', () => {
     assert.deepStrictEqual(
       normalMode,
       {
-        background: 'rgba(255, 255, 255, 0)',
-        border: '#00aa00',
-        borderStyle: 'dotted',
-        borderWidth: '2px',
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        border: '2px dotted #00aa00',
       },
       'normalMode should have correct defaults'
     );
@@ -35,10 +33,8 @@ suite('Configuration Tests', () => {
     assert.deepStrictEqual(
       insertMode,
       {
-        background: 'rgba(255, 255, 255, 0)',
-        border: '#aa0000',
-        borderStyle: 'solid',
-        borderWidth: '2px',
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        border: '2px solid #aa0000',
       },
       'insertMode should have correct defaults'
     );
@@ -47,10 +43,8 @@ suite('Configuration Tests', () => {
     assert.deepStrictEqual(
       visualMode,
       {
-        background: 'rgba(255, 255, 255, 0)',
-        border: '#0000aa',
-        borderStyle: 'dashed',
-        borderWidth: '2px',
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        border: '2px dashed #0000aa',
       },
       'visualMode should have correct defaults'
     );
@@ -59,10 +53,8 @@ suite('Configuration Tests', () => {
     assert.deepStrictEqual(
       searchMode,
       {
-        background: 'rgba(255, 255, 255, 0)',
-        border: '#aaaa00',
-        borderStyle: 'solid',
-        borderWidth: '2px',
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        border: '2px solid #aaaa00',
       },
       'searchMode should have correct defaults'
     );
@@ -98,10 +90,8 @@ suite('Configuration Tests', () => {
 
   test('Can update nested mode configuration', async () => {
     const newNormalMode = {
-      background: '#123456',
-      border: '#654321',
-      borderStyle: 'solid',
-      borderWidth: '3px',
+      backgroundColor: '#123456',
+      border: '3px solid #654321',
     };
 
     await TestHelpers.setConfig('normalMode', newNormalMode);
@@ -112,14 +102,13 @@ suite('Configuration Tests', () => {
 
   test('Can update mode configuration with theme overrides', async () => {
     const newNormalMode = {
-      background: 'rgba(255, 255, 255, 0)',
-      borderStyle: 'dotted',
-      borderWidth: '2px',
-      '[dark]': {
-        border: '#00ffff',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px dotted #808080',
+      dark: {
+        border: '2px solid #00ffff',
       },
-      '[light]': {
-        border: '#0000ff',
+      light: {
+        border: '2px solid #0000ff',
       },
     };
 
@@ -131,17 +120,15 @@ suite('Configuration Tests', () => {
     assert.ok(normalMode, 'normalMode should exist');
 
     // Compare nested objects using deepStrictEqual
-    assert.deepStrictEqual(normalMode['[dark]'], newNormalMode['[dark]']);
-    assert.deepStrictEqual(normalMode['[light]'], newNormalMode['[light]']);
+    assert.deepStrictEqual(normalMode.dark, newNormalMode.dark);
+    assert.deepStrictEqual(normalMode.light, newNormalMode.light);
   });
 
   test('Can reset nested configuration to default', async () => {
     // Change configuration
     const customConfig = {
-      background: '#ff0000',
-      border: '#00ff00',
-      borderStyle: 'dashed',
-      borderWidth: '5px',
+      backgroundColor: '#ff0000',
+      border: '5px dashed #00ff00',
     };
 
     await TestHelpers.setConfig('normalMode', customConfig);
@@ -152,10 +139,8 @@ suite('Configuration Tests', () => {
 
     // Should be back to default
     const defaultNormalMode = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#00aa00',
-      borderStyle: 'dotted',
-      borderWidth: '2px',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px dotted #00aa00',
     };
 
     assert.deepStrictEqual(TestHelpers.getConfig().get('normalMode'), defaultNormalMode);
@@ -164,10 +149,8 @@ suite('Configuration Tests', () => {
   test('Configuration changes are persisted', async () => {
     // Change config
     const newInsertMode = {
-      background: 'rgba(0, 0, 0, 0.1)',
-      border: '#ff00ff',
-      borderStyle: 'double',
-      borderWidth: '4px',
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      border: '4px double #ff00ff',
     };
 
     await TestHelpers.setConfig('insertMode', newInsertMode);
@@ -214,15 +197,8 @@ suite('Configuration Tests', () => {
     assert.ok(normalMode, 'normalMode should be an object');
 
     // Check object properties
-    assert.strictEqual(typeof normalMode.background, 'string');
+    assert.strictEqual(typeof normalMode.backgroundColor, 'string');
     assert.strictEqual(typeof normalMode.border, 'string');
-    assert.ok(
-      ['solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 'inset', 'outset'].includes(
-        normalMode.borderStyle as string
-      ),
-      'borderStyle should be valid CSS border style'
-    );
-    assert.strictEqual(typeof normalMode.borderWidth, 'string');
   });
 
   test('Can read and update logLevel configuration', async () => {

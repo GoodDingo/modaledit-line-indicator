@@ -37,6 +37,11 @@ grumpy-review.md
 honest-judgement-mk1.md
 pre-release-audit.md
 pre-release-improvement-plan.md
+pre-release-improvements-list.md
+pre-release-audit-v*.md.bak
+*.OBSOLETE
+config-overhaul/
+plan-*.md
 DEVELOPMENT.md
 CONTRIBUTING.md
 CLAUDE.md

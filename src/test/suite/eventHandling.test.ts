@@ -122,10 +122,8 @@ suite('Event Handling Tests', () => {
     try {
       // Change our configuration (use nested structure)
       const newNormalMode = {
-        background: '#ff0000',
-        border: '#00aa00',
-        borderStyle: 'solid',
-        borderWidth: '2px',
+        backgroundColor: '#ff0000',
+        border: '2px solid #00aa00',
       };
       await TestHelpers.setConfig('normalMode', newNormalMode);
       await TestHelpers.waitForDebounce();

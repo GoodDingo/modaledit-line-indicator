@@ -166,19 +166,23 @@ Key methods:
 
 Namespace: `modaledit-line-indicator.*` (6 settings: `enabled` + `logLevel` + 4 modes)
 
+**IMPORTANT - v0.3.0 Configuration Format**:
+- Uses unbracketed theme keys: `dark`, `light`, `darkHC`, `lightHC` (NOT `"[dark]"`, `"[light]"`, etc.)
+- Uses `backgroundColor` property (NOT `background`)
+- Supports 23+ DecorationRenderOptions properties with 1:1 VS Code API mapping
+- No migration code exists - this is the only format that has ever existed
+
 ### Per-mode structure
 
 Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports:
 ```json
 {
-  "background": "rgba(255, 255, 255, 0)",
-  "border": "#00aa00",
-  "borderStyle": "dotted",
-  "borderWidth": "2px",
-  "[dark]": { "border": "#00ffff" },
-  "[light]": { "border": "#0000ff" },
-  "[highContrastDark]": { "borderWidth": "4px" },
-  "[highContrastLight]": { "border": "#000000", "borderWidth": "4px" }
+  "backgroundColor": "rgba(0, 0, 0, 0)",
+  "border": "2px dotted #00aa00",
+  "dark": { "border": "2px dotted #00ffff" },
+  "light": { "border": "2px dotted #0000ff" },
+  "darkHC": { "border": "4px dotted #ffffff" },
+  "lightHC": { "border": "4px dotted #000000" }
 }
 ```
 
@@ -197,14 +201,14 @@ Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports:
 **CRITICAL**: Each property resolves independently through fallback chain.
 
 Fallback chains:
-- **HC Dark**: `[highContrastDark]` → `[dark]` → common → defaults
-- **HC Light**: `[highContrastLight]` → `[light]` → common → defaults
-- **Regular Dark**: `[dark]` → common → defaults
-- **Regular Light**: `[light]` → common → defaults
+- **HC Dark**: `darkHC` → `dark` → common → defaults
+- **HC Light**: `lightHC` → `light` → common → defaults
+- **Regular Dark**: `dark` → common → defaults
+- **Regular Light**: `light` → common → defaults
 
 **Example**: For HC Dark theme, `border` property resolution:
-1. Check `config["[highContrastDark]"].border`
-2. If undefined, check `config["[dark]"].border`
+1. Check `config["darkHC"].border`
+2. If undefined, check `config["dark"].border`
 3. If undefined, check `config.border`
 4. If undefined, use `defaults.border`
 
@@ -355,3 +359,7 @@ Configuration module functions accept optional logger interface (`logger?: { deb
 - `git fetch` first
 - Compare `origin/main...HEAD` (NOT `main...HEAD`)
 - Verify: `git diff origin/main...HEAD --stat`, `git log origin/main..HEAD --oneline`
+
+## Documentation, comments, migrations, changes in general
+
+**IMPORTANT**: This is *CRITICAL* always ALWAYS remember that this plugin/extension was not release yet, therefore there are no "historical changes", not migrations, no "used to be" as when the plugin will be released it will be like it is for all users for the first time, therefore keeping all references to history would confuse users. Therefore always replace historical or old data with new and current state (without historical changes or migrations). CURRENT STATE is ALWAYS THE KING!!

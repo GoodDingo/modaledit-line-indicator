@@ -15,10 +15,8 @@ suite('Configuration Merging Tests', () => {
 
   test('Common properties only - no theme overrides', async () => {
     const configWithoutThemes = {
-      background: 'rgba(100, 100, 100, 0.5)',
-      border: '#123456',
-      borderStyle: 'solid',
-      borderWidth: '3px',
+      backgroundColor: 'rgba(100, 100, 100, 0.5)',
+      border: '3px solid #123456',
     };
 
     await TestHelpers.setConfig('normalMode', configWithoutThemes);
@@ -28,23 +26,17 @@ suite('Configuration Merging Tests', () => {
     const normalMode = config.get('normalMode') as Record<string, unknown>;
 
     // Should use common properties directly
-    assert.strictEqual(normalMode.background, 'rgba(100, 100, 100, 0.5)');
-    assert.strictEqual(normalMode.border, '#123456');
-    assert.strictEqual(normalMode.borderStyle, 'solid');
-    assert.strictEqual(normalMode.borderWidth, '3px');
+    assert.strictEqual(normalMode.backgroundColor, 'rgba(100, 100, 100, 0.5)');
+    assert.strictEqual(normalMode.border, '3px solid #123456');
   });
 
-  test('Full theme override - all properties in [dark]', async () => {
+  test('Full theme override - all properties in dark', async () => {
     const configWithFullDarkOverride = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#ffffff',
-      borderStyle: 'dotted',
-      borderWidth: '2px',
-      '[dark]': {
-        background: 'rgba(0, 0, 0, 0.5)',
-        border: '#000000',
-        borderStyle: 'solid',
-        borderWidth: '4px',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px dotted #ffffff',
+      dark: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        border: '4px solid #000000',
       },
     };
 
@@ -56,18 +48,16 @@ suite('Configuration Merging Tests', () => {
     const config = TestHelpers.getConfig();
     const normalMode = config.get('normalMode') as Record<string, unknown>;
 
-    assert.ok(normalMode['[dark]'], 'Dark theme override should exist');
-    assert.deepStrictEqual(normalMode['[dark]'], configWithFullDarkOverride['[dark]']);
+    assert.ok(normalMode.dark, 'Dark theme override should exist');
+    assert.deepStrictEqual(normalMode.dark, configWithFullDarkOverride.dark);
   });
 
-  test('Partial theme override - only border color in [dark]', async () => {
+  test('Partial theme override - only border in dark', async () => {
     const configWithPartialOverride = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#aaaaaa',
-      borderStyle: 'dotted',
-      borderWidth: '2px',
-      '[dark]': {
-        border: '#00ffff', // Only override border color
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px dotted #aaaaaa',
+      dark: {
+        border: '2px solid #00ffff', // Only override border
       },
     };
 
@@ -76,33 +66,31 @@ suite('Configuration Merging Tests', () => {
 
     const config = TestHelpers.getConfig();
     const normalMode = config.get('normalMode') as Record<string, unknown>;
-    const darkOverride = normalMode['[dark]'] as Record<string, string>;
+    const darkOverride = normalMode.dark as Record<string, string>;
 
     // Dark override should only have border
-    assert.strictEqual(darkOverride.border, '#00ffff');
-    assert.strictEqual(darkOverride.background, undefined, 'Should not override background');
-    assert.strictEqual(darkOverride.borderStyle, undefined, 'Should not override borderStyle');
-    assert.strictEqual(darkOverride.borderWidth, undefined, 'Should not override borderWidth');
+    assert.strictEqual(darkOverride.border, '2px solid #00ffff');
+    assert.strictEqual(
+      darkOverride.backgroundColor,
+      undefined,
+      'Should not override backgroundColor'
+    );
 
     // Common properties should still exist
-    assert.strictEqual(normalMode.background, 'rgba(255, 255, 255, 0)');
-    assert.strictEqual(normalMode.borderStyle, 'dotted');
-    assert.strictEqual(normalMode.borderWidth, '2px');
+    assert.strictEqual(normalMode.backgroundColor, 'rgba(255, 255, 255, 0)');
   });
 
-  test('Multiple theme overrides - [dark] and [light] both present', async () => {
+  test('Multiple theme overrides - dark and light both present', async () => {
     const configWithMultipleThemes = {
-      background: 'rgba(128, 128, 128, 0.2)',
-      border: '#808080',
-      borderStyle: 'solid',
-      borderWidth: '2px',
-      '[dark]': {
-        border: '#00ffff',
-        background: 'rgba(0, 255, 255, 0.1)',
+      backgroundColor: 'rgba(128, 128, 128, 0.2)',
+      border: '2px solid #808080',
+      dark: {
+        border: '2px solid #00ffff',
+        backgroundColor: 'rgba(0, 255, 255, 0.1)',
       },
-      '[light]': {
-        border: '#0000ff',
-        background: 'rgba(0, 0, 255, 0.1)',
+      light: {
+        border: '2px solid #0000ff',
+        backgroundColor: 'rgba(0, 0, 255, 0.1)',
       },
     };
 
@@ -113,23 +101,21 @@ suite('Configuration Merging Tests', () => {
     const normalMode = config.get('normalMode') as Record<string, unknown>;
 
     // Both theme overrides should exist
-    assert.ok(normalMode['[dark]'], 'Dark theme override should exist');
-    assert.ok(normalMode['[light]'], 'Light theme override should exist');
+    assert.ok(normalMode.dark, 'Dark theme override should exist');
+    assert.ok(normalMode.light, 'Light theme override should exist');
 
-    assert.deepStrictEqual(normalMode['[dark]'], configWithMultipleThemes['[dark]']);
-    assert.deepStrictEqual(normalMode['[light]'], configWithMultipleThemes['[light]']);
+    assert.deepStrictEqual(normalMode.dark, configWithMultipleThemes.dark);
+    assert.deepStrictEqual(normalMode.light, configWithMultipleThemes.light);
   });
 
-  test('Missing theme key - no [light] defined', async () => {
+  test('Missing theme key - no light defined', async () => {
     const configWithOnlyDark = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#808080',
-      borderStyle: 'dotted',
-      borderWidth: '2px',
-      '[dark]': {
-        border: '#00ffff',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px dotted #808080',
+      dark: {
+        border: '2px solid #00ffff',
       },
-      // No [light] key
+      // No light key
     };
 
     await TestHelpers.setConfig('normalMode', configWithOnlyDark);
@@ -138,11 +124,11 @@ suite('Configuration Merging Tests', () => {
     const config = TestHelpers.getConfig();
     const normalMode = config.get('normalMode') as Record<string, unknown>;
 
-    assert.ok(normalMode['[dark]'], 'Dark override should exist');
-    assert.strictEqual(normalMode['[light]'], undefined, 'Light override should not exist');
+    assert.ok(normalMode.dark, 'Dark override should exist');
+    assert.strictEqual(normalMode.light, undefined, 'Light override should not exist');
 
     // Common properties should still work
-    assert.strictEqual(normalMode.border, '#808080');
+    assert.strictEqual(normalMode.border, '2px dotted #808080');
   });
 
   test('Empty config object - VS Code returns defaults from schema', async () => {
@@ -158,14 +144,14 @@ suite('Configuration Merging Tests', () => {
 
     // VS Code fills in defaults from package.json schema
     assert.ok(normalMode, 'VS Code should return config object');
-    assert.ok(normalMode.background !== undefined, 'Should have default background');
+    assert.ok(normalMode.backgroundColor !== undefined, 'Should have default backgroundColor');
     assert.ok(normalMode.border !== undefined, 'Should have default border');
   });
 
   test('Partial config uses VS Code defaults for missing properties', async () => {
     const partialConfig = {
-      border: '#ff0000',
-      // Missing: background, borderStyle, borderWidth
+      border: '2px solid #ff0000',
+      // Missing: backgroundColor
     };
 
     await TestHelpers.setConfig('normalMode', partialConfig);
@@ -175,22 +161,18 @@ suite('Configuration Merging Tests', () => {
     const normalMode = config.get('normalMode') as Record<string, unknown>;
 
     // Our custom value
-    assert.strictEqual(normalMode.border, '#ff0000');
+    assert.strictEqual(normalMode.border, '2px solid #ff0000');
 
     // VS Code fills in missing properties with defaults from package.json
-    assert.ok(normalMode.background !== undefined, 'VS Code provides default background');
-    assert.ok(normalMode.borderStyle !== undefined, 'VS Code provides default borderStyle');
-    assert.ok(normalMode.borderWidth !== undefined, 'VS Code provides default borderWidth');
+    assert.ok(normalMode.backgroundColor !== undefined, 'VS Code provides default backgroundColor');
   });
 
   test('Theme override with only one property', async () => {
     const configWithMinimalOverride = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#808080',
-      borderStyle: 'solid',
-      borderWidth: '2px',
-      '[dark]': {
-        borderWidth: '5px', // Only override borderWidth
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #808080',
+      dark: {
+        border: '5px solid #808080', // Only override border
       },
     };
 
@@ -199,28 +181,28 @@ suite('Configuration Merging Tests', () => {
 
     const config = TestHelpers.getConfig();
     const normalMode = config.get('normalMode') as Record<string, unknown>;
-    const darkOverride = normalMode['[dark]'] as Record<string, string>;
+    const darkOverride = normalMode.dark as Record<string, string>;
 
-    assert.strictEqual(darkOverride.borderWidth, '5px');
+    assert.strictEqual(darkOverride.border, '5px solid #808080');
     assert.strictEqual(Object.keys(darkOverride).length, 1, 'Should only have one property');
   });
 
   test('All four modes can have different theme configurations', async () => {
     const normalConfig = {
-      border: '#00aa00',
-      '[dark]': { border: '#00ff00' },
+      border: '2px dotted #00aa00',
+      dark: { border: '2px solid #00ff00' },
     };
     const insertConfig = {
-      border: '#aa0000',
-      '[dark]': { border: '#ff0000' },
+      border: '2px solid #aa0000',
+      dark: { border: '2px solid #ff0000' },
     };
     const visualConfig = {
-      border: '#0000aa',
-      '[dark]': { border: '#0000ff' },
+      border: '2px dashed #0000aa',
+      dark: { border: '2px solid #0000ff' },
     };
     const searchConfig = {
-      border: '#aaaa00',
-      '[dark]': { border: '#ffff00' },
+      border: '2px solid #aaaa00',
+      dark: { border: '2px solid #ffff00' },
     };
 
     await TestHelpers.setConfig('normalMode', normalConfig);
@@ -236,25 +218,23 @@ suite('Configuration Merging Tests', () => {
     const visual = config.get('visualMode') as Record<string, unknown>;
     const search = config.get('searchMode') as Record<string, unknown>;
 
-    assert.strictEqual(normal.border, '#00aa00');
-    assert.strictEqual(insert.border, '#aa0000');
-    assert.strictEqual(visual.border, '#0000aa');
-    assert.strictEqual(search.border, '#aaaa00');
+    assert.strictEqual(normal.border, '2px dotted #00aa00');
+    assert.strictEqual(insert.border, '2px solid #aa0000');
+    assert.strictEqual(visual.border, '2px dashed #0000aa');
+    assert.strictEqual(search.border, '2px solid #aaaa00');
 
-    assert.strictEqual((normal['[dark]'] as Record<string, string>).border, '#00ff00');
-    assert.strictEqual((insert['[dark]'] as Record<string, string>).border, '#ff0000');
-    assert.strictEqual((visual['[dark]'] as Record<string, string>).border, '#0000ff');
-    assert.strictEqual((search['[dark]'] as Record<string, string>).border, '#ffff00');
+    assert.strictEqual((normal.dark as Record<string, string>).border, '2px solid #00ff00');
+    assert.strictEqual((insert.dark as Record<string, string>).border, '2px solid #ff0000');
+    assert.strictEqual((visual.dark as Record<string, string>).border, '2px solid #0000ff');
+    assert.strictEqual((search.dark as Record<string, string>).border, '2px solid #ffff00');
   });
 
-  test('Theme override can override background with transparency', async () => {
+  test('Theme override can override backgroundColor with transparency', async () => {
     const configWithTransparency = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#808080',
-      borderStyle: 'solid',
-      borderWidth: '2px',
-      '[dark]': {
-        background: 'rgba(0, 255, 255, 0.2)', // Semi-transparent cyan
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #808080',
+      dark: {
+        backgroundColor: 'rgba(0, 255, 255, 0.2)', // Semi-transparent cyan
       },
     };
 
@@ -263,22 +243,20 @@ suite('Configuration Merging Tests', () => {
 
     const config = TestHelpers.getConfig();
     const normalMode = config.get('normalMode') as Record<string, unknown>;
-    const darkOverride = normalMode['[dark]'] as Record<string, string>;
+    const darkOverride = normalMode.dark as Record<string, string>;
 
-    assert.strictEqual(darkOverride.background, 'rgba(0, 255, 255, 0.2)');
+    assert.strictEqual(darkOverride.backgroundColor, 'rgba(0, 255, 255, 0.2)');
   });
 
-  test('Theme override can change borderStyle', async () => {
+  test('Theme override can change border style', async () => {
     const configWithStyleOverride = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#808080',
-      borderStyle: 'solid',
-      borderWidth: '2px',
-      '[dark]': {
-        borderStyle: 'dashed',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #808080',
+      dark: {
+        border: '2px dashed #808080',
       },
-      '[light]': {
-        borderStyle: 'dotted',
+      light: {
+        border: '2px dotted #808080',
       },
     };
 
@@ -288,29 +266,24 @@ suite('Configuration Merging Tests', () => {
     const config = TestHelpers.getConfig();
     const normalMode = config.get('normalMode') as Record<string, unknown>;
 
-    assert.strictEqual((normalMode['[dark]'] as Record<string, string>).borderStyle, 'dashed');
-    assert.strictEqual((normalMode['[light]'] as Record<string, string>).borderStyle, 'dotted');
+    assert.strictEqual((normalMode.dark as Record<string, string>).border, '2px dashed #808080');
+    assert.strictEqual((normalMode.light as Record<string, string>).border, '2px dotted #808080');
   });
 
   test('Complex configuration with all features combined', async () => {
     const complexConfig = {
       // Common defaults
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#808080',
-      borderStyle: 'solid',
-      borderWidth: '2px',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #808080',
 
       // Dark theme: cyan border, dashed style, thicker
-      '[dark]': {
-        border: '#00ffff',
-        borderStyle: 'dashed',
-        borderWidth: '3px',
+      dark: {
+        border: '3px dashed #00ffff',
       },
 
       // Light theme: blue border, dotted style
-      '[light]': {
-        border: '#0000ff',
-        borderStyle: 'dotted',
+      light: {
+        border: '2px dotted #0000ff',
       },
     };
 
@@ -321,29 +294,23 @@ suite('Configuration Merging Tests', () => {
     const normalMode = config.get('normalMode') as Record<string, unknown>;
 
     // Verify all theme overrides are stored correctly
-    const dark = normalMode['[dark]'] as Record<string, string>;
-    const light = normalMode['[light]'] as Record<string, string>;
+    const dark = normalMode.dark as Record<string, string>;
+    const light = normalMode.light as Record<string, string>;
 
     // Dark theme verification
-    assert.strictEqual(dark.border, '#00ffff');
-    assert.strictEqual(dark.borderStyle, 'dashed');
-    assert.strictEqual(dark.borderWidth, '3px');
+    assert.strictEqual(dark.border, '3px dashed #00ffff');
 
     // Light theme verification
-    assert.strictEqual(light.border, '#0000ff');
-    assert.strictEqual(light.borderStyle, 'dotted');
-    assert.strictEqual(light.borderWidth, undefined, 'Should use common borderWidth');
+    assert.strictEqual(light.border, '2px dotted #0000ff');
   });
 
   test('Updating theme override preserves common properties', async () => {
     // Initial config
     const initialConfig = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#808080',
-      borderStyle: 'solid',
-      borderWidth: '2px',
-      '[dark]': {
-        border: '#00ffff',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #808080',
+      dark: {
+        border: '2px solid #00ffff',
       },
     };
 
@@ -352,13 +319,10 @@ suite('Configuration Merging Tests', () => {
 
     // Update with new dark override
     const updatedConfig = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#808080',
-      borderStyle: 'solid',
-      borderWidth: '2px',
-      '[dark]': {
-        border: '#ff00ff', // Changed color
-        borderWidth: '4px', // Added width override
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #808080',
+      dark: {
+        border: '4px solid #ff00ff', // Changed color and width
       },
     };
 
@@ -367,22 +331,19 @@ suite('Configuration Merging Tests', () => {
 
     const config = TestHelpers.getConfig();
     const normalMode = config.get('normalMode') as Record<string, unknown>;
-    const dark = normalMode['[dark]'] as Record<string, string>;
+    const dark = normalMode.dark as Record<string, string>;
 
-    assert.strictEqual(dark.border, '#ff00ff');
-    assert.strictEqual(dark.borderWidth, '4px');
-    assert.strictEqual(normalMode.borderStyle, 'solid', 'Common property should persist');
+    assert.strictEqual(dark.border, '4px solid #ff00ff');
+    assert.strictEqual(normalMode.border, '2px solid #808080', 'Common property should persist');
   });
 
   test('Removing theme override works correctly', async () => {
     // Config with override
     const withOverride = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#808080',
-      borderStyle: 'solid',
-      borderWidth: '2px',
-      '[dark]': {
-        border: '#00ffff',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #808080',
+      dark: {
+        border: '2px solid #00ffff',
       },
     };
 
@@ -391,15 +352,13 @@ suite('Configuration Merging Tests', () => {
 
     let config = TestHelpers.getConfig();
     let normalMode = config.get('normalMode') as Record<string, unknown>;
-    assert.ok(normalMode['[dark]'], 'Dark override should exist');
+    assert.ok(normalMode.dark, 'Dark override should exist');
 
     // Config without override
     const withoutOverride = {
-      background: 'rgba(255, 255, 255, 0)',
-      border: '#808080',
-      borderStyle: 'solid',
-      borderWidth: '2px',
-      // No [dark] key
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      border: '2px solid #808080',
+      // No dark key
     };
 
     await TestHelpers.setConfig('normalMode', withoutOverride);
@@ -407,6 +366,6 @@ suite('Configuration Merging Tests', () => {
 
     config = TestHelpers.getConfig();
     normalMode = config.get('normalMode') as Record<string, unknown>;
-    assert.strictEqual(normalMode['[dark]'], undefined, 'Dark override should be removed');
+    assert.strictEqual(normalMode.dark, undefined, 'Dark override should be removed');
   });
 });

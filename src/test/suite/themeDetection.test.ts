@@ -88,7 +88,7 @@ suite('Theme Detection Tests', () => {
     // Make a small change to trigger reload
     const modifiedConfig = {
       ...(currentNormalMode as Record<string, unknown>),
-      borderWidth: '3px',
+      border: '3px solid #00aa00',
     };
 
     await TestHelpers.setConfig('normalMode', modifiedConfig);
@@ -259,26 +259,23 @@ suite('Theme Detection Tests', () => {
     assert.ok(true, 'Extension should handle both HC variants');
   });
 
-  test('Stage 1: New [highContrastDark] and [highContrastLight] configs supported', async () => {
+  test('Stage 1: New darkHC and lightHC configs supported', async () => {
     await TestHelpers.ensureExtensionActive();
 
     // Stage 1 adds support for new config keys
     await TestHelpers.setConfig('normalMode', {
-      borderStyle: 'dotted',
-      borderWidth: '2px',
-      '[dark]': {
-        border: '#00aa00',
+      border: '2px dotted #808080',
+      dark: {
+        border: '2px solid #00aa00',
       },
-      '[light]': {
-        border: '#0000ff',
+      light: {
+        border: '2px solid #0000ff',
       },
-      '[highContrastDark]': {
-        border: '#00ffff',
-        borderWidth: '4px',
+      darkHC: {
+        border: '4px solid #00ffff',
       },
-      '[highContrastLight]': {
-        border: '#ffffff',
-        borderWidth: '4px',
+      lightHC: {
+        border: '4px solid #ffffff',
       },
     });
 

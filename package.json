@@ -72,6 +72,49 @@
     "configuration": {
       "type": "object",
       "title": "ModalEdit Line Indicator",
+      "definitions": {
+        "themeOverride": {
+          "type": "object",
+          "description": "Theme-specific decoration overrides. Can override any DecorationRenderOptions property.",
+          "properties": {
+            "backgroundColor": { "type": "string" },
+            "color": { "type": "string" },
+            "opacity": { "type": "string" },
+            "border": { "type": "string" },
+            "borderColor": { "type": "string" },
+            "borderRadius": { "type": "string" },
+            "borderSpacing": { "type": "string" },
+            "borderStyle": {
+              "type": "string",
+              "enum": ["solid", "dotted", "dashed", "double", "groove", "ridge", "inset", "outset"]
+            },
+            "borderWidth": { "type": "string" },
+            "outline": { "type": "string" },
+            "outlineColor": { "type": "string" },
+            "outlineStyle": { "type": "string" },
+            "outlineWidth": { "type": "string" },
+            "fontStyle": {
+              "type": "string",
+              "enum": ["normal", "italic", "oblique"]
+            },
+            "fontWeight": { "type": "string" },
+            "letterSpacing": { "type": "string" },
+            "textDecoration": { "type": "string" },
+            "cursor": { "type": "string" },
+            "overviewRulerColor": { "type": "string" },
+            "overviewRulerLane": {
+              "type": "string",
+              "enum": ["Left", "Center", "Right", "Full"]
+            },
+            "gutterIconPath": { "type": "string" },
+            "gutterIconSize": { "type": "string" },
+            "rangeBehavior": {
+              "type": "string",
+              "enum": ["OpenOpen", "ClosedClosed", "OpenClosed", "ClosedOpen"]
+            }
+          }
+        }
+      },
       "properties": {
         "modaledit-line-indicator.enabled": {
           "type": "boolean",
@@ -94,45 +137,509 @@
         "modaledit-line-indicator.normalMode": {
           "type": "object",
           "scope": "resource",
-          "description": "Normal mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
+          "description": "Normal mode decoration configuration. Supports ALL DecorationRenderOptions properties. Theme-specific overrides: 'dark', 'light', 'darkHC', 'lightHC'. Cascading fallback: darkHC → dark → common → defaults; lightHC → light → common → defaults.",
           "default": {
-            "background": "rgba(255, 255, 255, 0)",
-            "border": "#00aa00",
-            "borderStyle": "dotted",
-            "borderWidth": "2px"
+            "backgroundColor": "rgba(255, 255, 255, 0)",
+            "border": "2px dotted #00aa00"
+          },
+          "properties": {
+            "backgroundColor": {
+              "type": "string",
+              "description": "Background color (CSS color, rgba(), or VS Code theme color reference)"
+            },
+            "color": {
+              "type": "string",
+              "description": "Text color (CSS color or VS Code theme color reference)"
+            },
+            "opacity": {
+              "type": "string",
+              "description": "Opacity (0.0 to 1.0)"
+            },
+            "border": {
+              "type": "string",
+              "description": "CSS border shorthand (e.g., '2px solid #ff0000'). Recommended over individual border properties."
+            },
+            "borderColor": {
+              "type": "string",
+              "description": "Border color (fallback if 'border' not specified)"
+            },
+            "borderRadius": {
+              "type": "string",
+              "description": "Border radius (e.g., '4px', '0.5em')"
+            },
+            "borderSpacing": {
+              "type": "string",
+              "description": "Border spacing"
+            },
+            "borderStyle": {
+              "type": "string",
+              "enum": ["solid", "dotted", "dashed", "double", "groove", "ridge", "inset", "outset"],
+              "description": "Border style (fallback if 'border' not specified)"
+            },
+            "borderWidth": {
+              "type": "string",
+              "description": "Border width (fallback if 'border' not specified)"
+            },
+            "outline": {
+              "type": "string",
+              "description": "CSS outline shorthand (e.g., '1px solid #00ff00')"
+            },
+            "outlineColor": {
+              "type": "string",
+              "description": "Outline color"
+            },
+            "outlineStyle": {
+              "type": "string",
+              "description": "Outline style"
+            },
+            "outlineWidth": {
+              "type": "string",
+              "description": "Outline width"
+            },
+            "fontStyle": {
+              "type": "string",
+              "enum": ["normal", "italic", "oblique"],
+              "description": "Font style"
+            },
+            "fontWeight": {
+              "type": "string",
+              "description": "Font weight (normal, bold, 100-900)"
+            },
+            "letterSpacing": {
+              "type": "string",
+              "description": "Letter spacing (e.g., '1px', '0.1em')"
+            },
+            "textDecoration": {
+              "type": "string",
+              "description": "Text decoration (e.g., 'underline', 'line-through')"
+            },
+            "cursor": {
+              "type": "string",
+              "description": "CSS cursor (e.g., 'pointer', 'default', 'text')"
+            },
+            "overviewRulerColor": {
+              "type": "string",
+              "description": "Color of the decoration in the overview ruler"
+            },
+            "overviewRulerLane": {
+              "type": "string",
+              "enum": ["Left", "Center", "Right", "Full"],
+              "description": "Position in the overview ruler"
+            },
+            "gutterIconPath": {
+              "type": "string",
+              "description": "Absolute path or URI to an image to render in the gutter"
+            },
+            "gutterIconSize": {
+              "type": "string",
+              "description": "Gutter icon size (auto, contain, cover, or percentage)"
+            },
+            "rangeBehavior": {
+              "type": "string",
+              "enum": ["OpenOpen", "ClosedClosed", "OpenClosed", "ClosedOpen"],
+              "description": "Growing behavior when edits occur at decoration edges"
+            },
+            "dark": {
+              "type": "object",
+              "description": "Dark theme overrides",
+              "$ref": "#/definitions/themeOverride"
+            },
+            "light": {
+              "type": "object",
+              "description": "Light theme overrides",
+              "$ref": "#/definitions/themeOverride"
+            },
+            "darkHC": {
+              "type": "object",
+              "description": "High contrast dark theme overrides (fallback: dark → common)",
+              "$ref": "#/definitions/themeOverride"
+            },
+            "lightHC": {
+              "type": "object",
+              "description": "High contrast light theme overrides (fallback: light → common)",
+              "$ref": "#/definitions/themeOverride"
+            }
           }
         },
         "modaledit-line-indicator.insertMode": {
           "type": "object",
           "scope": "resource",
-          "description": "Insert mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
+          "description": "Insert mode decoration configuration. Supports ALL DecorationRenderOptions properties. Theme-specific overrides: 'dark', 'light', 'darkHC', 'lightHC'. Cascading fallback: darkHC → dark → common → defaults; lightHC → light → common → defaults.",
           "default": {
-            "background": "rgba(255, 255, 255, 0)",
-            "border": "#aa0000",
-            "borderStyle": "solid",
-            "borderWidth": "2px"
+            "backgroundColor": "rgba(255, 255, 255, 0)",
+            "border": "2px solid #aa0000"
+          },
+          "properties": {
+            "backgroundColor": {
+              "type": "string",
+              "description": "Background color (CSS color, rgba(), or VS Code theme color reference)"
+            },
+            "color": {
+              "type": "string",
+              "description": "Text color (CSS color or VS Code theme color reference)"
+            },
+            "opacity": {
+              "type": "string",
+              "description": "Opacity (0.0 to 1.0)"
+            },
+            "border": {
+              "type": "string",
+              "description": "CSS border shorthand (e.g., '2px solid #ff0000'). Recommended over individual border properties."
+            },
+            "borderColor": {
+              "type": "string",
+              "description": "Border color (fallback if 'border' not specified)"
+            },
+            "borderRadius": {
+              "type": "string",
+              "description": "Border radius (e.g., '4px', '0.5em')"
+            },
+            "borderSpacing": {
+              "type": "string",
+              "description": "Border spacing"
+            },
+            "borderStyle": {
+              "type": "string",
+              "enum": ["solid", "dotted", "dashed", "double", "groove", "ridge", "inset", "outset"],
+              "description": "Border style (fallback if 'border' not specified)"
+            },
+            "borderWidth": {
+              "type": "string",
+              "description": "Border width (fallback if 'border' not specified)"
+            },
+            "outline": {
+              "type": "string",
+              "description": "CSS outline shorthand (e.g., '1px solid #00ff00')"
+            },
+            "outlineColor": {
+              "type": "string",
+              "description": "Outline color"
+            },
+            "outlineStyle": {
+              "type": "string",
+              "description": "Outline style"
+            },
+            "outlineWidth": {
+              "type": "string",
+              "description": "Outline width"
+            },
+            "fontStyle": {
+              "type": "string",
+              "enum": ["normal", "italic", "oblique"],
+              "description": "Font style"
+            },
+            "fontWeight": {
+              "type": "string",
+              "description": "Font weight (normal, bold, 100-900)"
+            },
+            "letterSpacing": {
+              "type": "string",
+              "description": "Letter spacing (e.g., '1px', '0.1em')"
+            },
+            "textDecoration": {
+              "type": "string",
+              "description": "Text decoration (e.g., 'underline', 'line-through')"
+            },
+            "cursor": {
+              "type": "string",
+              "description": "CSS cursor (e.g., 'pointer', 'default', 'text')"
+            },
+            "overviewRulerColor": {
+              "type": "string",
+              "description": "Color of the decoration in the overview ruler"
+            },
+            "overviewRulerLane": {
+              "type": "string",
+              "enum": ["Left", "Center", "Right", "Full"],
+              "description": "Position in the overview ruler"
+            },
+            "gutterIconPath": {
+              "type": "string",
+              "description": "Absolute path or URI to an image to render in the gutter"
+            },
+            "gutterIconSize": {
+              "type": "string",
+              "description": "Gutter icon size (auto, contain, cover, or percentage)"
+            },
+            "rangeBehavior": {
+              "type": "string",
+              "enum": ["OpenOpen", "ClosedClosed", "OpenClosed", "ClosedOpen"],
+              "description": "Growing behavior when edits occur at decoration edges"
+            },
+            "dark": {
+              "type": "object",
+              "description": "Dark theme overrides",
+              "$ref": "#/definitions/themeOverride"
+            },
+            "light": {
+              "type": "object",
+              "description": "Light theme overrides",
+              "$ref": "#/definitions/themeOverride"
+            },
+            "darkHC": {
+              "type": "object",
+              "description": "High contrast dark theme overrides (fallback: dark → common)",
+              "$ref": "#/definitions/themeOverride"
+            },
+            "lightHC": {
+              "type": "object",
+              "description": "High contrast light theme overrides (fallback: light → common)",
+              "$ref": "#/definitions/themeOverride"
+            }
           }
         },
         "modaledit-line-indicator.visualMode": {
           "type": "object",
           "scope": "resource",
-          "description": "Visual mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
+          "description": "Visual mode decoration configuration. Supports ALL DecorationRenderOptions properties. Theme-specific overrides: 'dark', 'light', 'darkHC', 'lightHC'. Cascading fallback: darkHC → dark → common → defaults; lightHC → light → common → defaults.",
           "default": {
-            "background": "rgba(255, 255, 255, 0)",
-            "border": "#0000aa",
-            "borderStyle": "dashed",
-            "borderWidth": "2px"
+            "backgroundColor": "rgba(255, 255, 255, 0)",
+            "border": "2px dashed #0000aa"
+          },
+          "properties": {
+            "backgroundColor": {
+              "type": "string",
+              "description": "Background color (CSS color, rgba(), or VS Code theme color reference)"
+            },
+            "color": {
+              "type": "string",
+              "description": "Text color (CSS color or VS Code theme color reference)"
+            },
+            "opacity": {
+              "type": "string",
+              "description": "Opacity (0.0 to 1.0)"
+            },
+            "border": {
+              "type": "string",
+              "description": "CSS border shorthand (e.g., '2px solid #ff0000'). Recommended over individual border properties."
+            },
+            "borderColor": {
+              "type": "string",
+              "description": "Border color (fallback if 'border' not specified)"
+            },
+            "borderRadius": {
+              "type": "string",
+              "description": "Border radius (e.g., '4px', '0.5em')"
+            },
+            "borderSpacing": {
+              "type": "string",
+              "description": "Border spacing"
+            },
+            "borderStyle": {
+              "type": "string",
+              "enum": ["solid", "dotted", "dashed", "double", "groove", "ridge", "inset", "outset"],
+              "description": "Border style (fallback if 'border' not specified)"
+            },
+            "borderWidth": {
+              "type": "string",
+              "description": "Border width (fallback if 'border' not specified)"
+            },
+            "outline": {
+              "type": "string",
+              "description": "CSS outline shorthand (e.g., '1px solid #00ff00')"
+            },
+            "outlineColor": {
+              "type": "string",
+              "description": "Outline color"
+            },
+            "outlineStyle": {
+              "type": "string",
+              "description": "Outline style"
+            },
+            "outlineWidth": {
+              "type": "string",
+              "description": "Outline width"
+            },
+            "fontStyle": {
+              "type": "string",
+              "enum": ["normal", "italic", "oblique"],
+              "description": "Font style"
+            },
+            "fontWeight": {
+              "type": "string",
+              "description": "Font weight (normal, bold, 100-900)"
+            },
+            "letterSpacing": {
+              "type": "string",
+              "description": "Letter spacing (e.g., '1px', '0.1em')"
+            },
+            "textDecoration": {
+              "type": "string",
+              "description": "Text decoration (e.g., 'underline', 'line-through')"
+            },
+            "cursor": {
+              "type": "string",
+              "description": "CSS cursor (e.g., 'pointer', 'default', 'text')"
+            },
+            "overviewRulerColor": {
+              "type": "string",
+              "description": "Color of the decoration in the overview ruler"
+            },
+            "overviewRulerLane": {
+              "type": "string",
+              "enum": ["Left", "Center", "Right", "Full"],
+              "description": "Position in the overview ruler"
+            },
+            "gutterIconPath": {
+              "type": "string",
+              "description": "Absolute path or URI to an image to render in the gutter"
+            },
+            "gutterIconSize": {
+              "type": "string",
+              "description": "Gutter icon size (auto, contain, cover, or percentage)"
+            },
+            "rangeBehavior": {
+              "type": "string",
+              "enum": ["OpenOpen", "ClosedClosed", "OpenClosed", "ClosedOpen"],
+              "description": "Growing behavior when edits occur at decoration edges"
+            },
+            "dark": {
+              "type": "object",
+              "description": "Dark theme overrides",
+              "$ref": "#/definitions/themeOverride"
+            },
+            "light": {
+              "type": "object",
+              "description": "Light theme overrides",
+              "$ref": "#/definitions/themeOverride"
+            },
+            "darkHC": {
+              "type": "object",
+              "description": "High contrast dark theme overrides (fallback: dark → common)",
+              "$ref": "#/definitions/themeOverride"
+            },
+            "lightHC": {
+              "type": "object",
+              "description": "High contrast light theme overrides (fallback: light → common)",
+              "$ref": "#/definitions/themeOverride"
+            }
           }
         },
         "modaledit-line-indicator.searchMode": {
           "type": "object",
           "scope": "resource",
-          "description": "Search mode line highlight configuration. Supports theme-specific overrides with [dark], [light], [highContrastDark], and [highContrastLight] keys. Common properties (background, border, borderStyle, borderWidth) apply to all themes unless overridden. Theme fallback: HC Dark → [dark] → common → defaults; HC Light → [light] → common → defaults.",
+          "description": "Search mode decoration configuration. Supports ALL DecorationRenderOptions properties. Theme-specific overrides: 'dark', 'light', 'darkHC', 'lightHC'. Cascading fallback: darkHC → dark → common → defaults; lightHC → light → common → defaults.",
           "default": {
-            "background": "rgba(255, 255, 255, 0)",
-            "border": "#aaaa00",
-            "borderStyle": "solid",
-            "borderWidth": "2px"
+            "backgroundColor": "rgba(255, 255, 255, 0)",
+            "border": "2px solid #aaaa00"
+          },
+          "properties": {
+            "backgroundColor": {
+              "type": "string",
+              "description": "Background color (CSS color, rgba(), or VS Code theme color reference)"
+            },
+            "color": {
+              "type": "string",
+              "description": "Text color (CSS color or VS Code theme color reference)"
+            },
+            "opacity": {
+              "type": "string",
+              "description": "Opacity (0.0 to 1.0)"
+            },
+            "border": {
+              "type": "string",
+              "description": "CSS border shorthand (e.g., '2px solid #ff0000'). Recommended over individual border properties."
+            },
+            "borderColor": {
+              "type": "string",
+              "description": "Border color (fallback if 'border' not specified)"
+            },
+            "borderRadius": {
+              "type": "string",
+              "description": "Border radius (e.g., '4px', '0.5em')"
+            },
+            "borderSpacing": {
+              "type": "string",
+              "description": "Border spacing"
+            },
+            "borderStyle": {
+              "type": "string",
+              "enum": ["solid", "dotted", "dashed", "double", "groove", "ridge", "inset", "outset"],
+              "description": "Border style (fallback if 'border' not specified)"
+            },
+            "borderWidth": {
+              "type": "string",
+              "description": "Border width (fallback if 'border' not specified)"
+            },
+            "outline": {
+              "type": "string",
+              "description": "CSS outline shorthand (e.g., '1px solid #00ff00')"
+            },
+            "outlineColor": {
+              "type": "string",
+              "description": "Outline color"
+            },
+            "outlineStyle": {
+              "type": "string",
+              "description": "Outline style"
+            },
+            "outlineWidth": {
+              "type": "string",
+              "description": "Outline width"
+            },
+            "fontStyle": {
+              "type": "string",
+              "enum": ["normal", "italic", "oblique"],
+              "description": "Font style"
+            },
+            "fontWeight": {
+              "type": "string",
+              "description": "Font weight (normal, bold, 100-900)"
+            },
+            "letterSpacing": {
+              "type": "string",
+              "description": "Letter spacing (e.g., '1px', '0.1em')"
+            },
+            "textDecoration": {
+              "type": "string",
+              "description": "Text decoration (e.g., 'underline', 'line-through')"
+            },
+            "cursor": {
+              "type": "string",
+              "description": "CSS cursor (e.g., 'pointer', 'default', 'text')"
+            },
+            "overviewRulerColor": {
+              "type": "string",
+              "description": "Color of the decoration in the overview ruler"
+            },
+            "overviewRulerLane": {
+              "type": "string",
+              "enum": ["Left", "Center", "Right", "Full"],
+              "description": "Position in the overview ruler"
+            },
+            "gutterIconPath": {
+              "type": "string",
+              "description": "Absolute path or URI to an image to render in the gutter"
+            },
+            "gutterIconSize": {
+              "type": "string",
+              "description": "Gutter icon size (auto, contain, cover, or percentage)"
+            },
+            "rangeBehavior": {
+              "type": "string",
+              "enum": ["OpenOpen", "ClosedClosed", "OpenClosed", "ClosedOpen"],
+              "description": "Growing behavior when edits occur at decoration edges"
+            },
+            "dark": {
+              "type": "object",
+              "description": "Dark theme overrides",
+              "$ref": "#/definitions/themeOverride"
+            },
+            "light": {
+              "type": "object",
+              "description": "Light theme overrides",
+              "$ref": "#/definitions/themeOverride"
+            },
+            "darkHC": {
+              "type": "object",
+              "description": "High contrast dark theme overrides (fallback: dark → common)",
+              "$ref": "#/definitions/themeOverride"
+            },
+            "lightHC": {
+              "type": "object",
+              "description": "High contrast light theme overrides (fallback: light → common)",
+              "$ref": "#/definitions/themeOverride"
+            }
           }
         }
       }

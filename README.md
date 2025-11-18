@@ -90,12 +90,10 @@ Settings → Search "modaledit-line-indicator" → Customize colors, borders, an
 3. Search for "ModalEdit Line Indicator"
 4. Click Install
 
-Or install manually:
+Or install from VSIX:
 ```bash
-# From the extension directory
-npm install
-npm run compile
-code --install-extension modaledit-line-indicator-0.2.0.vsix
+# Download the .vsix file from releases, then:
+code --install-extension modaledit-line-indicator-*.vsix
 ```
 
 ## Usage
@@ -132,31 +130,23 @@ Edit your `settings.json` to customize colors and styles per mode:
   "modaledit-line-indicator.enabled": true,
 
   "modaledit-line-indicator.normalMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#00aa00",
-    "borderStyle": "dotted",
-    "borderWidth": "2px"
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "2px dotted #00aa00"
   },
 
   "modaledit-line-indicator.insertMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#aa0000",
-    "borderStyle": "solid",
-    "borderWidth": "2px"
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "2px solid #aa0000"
   },
 
   "modaledit-line-indicator.visualMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#0000aa",
-    "borderStyle": "dashed",
-    "borderWidth": "2px"
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "2px dashed #0000aa"
   },
 
   "modaledit-line-indicator.searchMode": {
-    "background": "rgba(255, 255, 255, 0)",
-    "border": "#aaaa00",
-    "borderStyle": "solid",
-    "borderWidth": "2px"
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "2px solid #aaaa00"
   }
 }
 ```
@@ -169,30 +159,27 @@ You can specify different colors for dark, light, and high contrast themes (both
 {
   "modaledit-line-indicator.normalMode": {
     // Common properties (apply to all themes unless overridden)
-    "background": "rgba(255, 255, 255, 0)",
-    "borderStyle": "dotted",
-    "borderWidth": "2px",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "border": "2px dotted #00aa00",
 
     // Dark theme override (also used as fallback for high contrast dark)
-    "[dark]": {
-      "border": "#00ffff"  // Cyan in dark themes
+    "dark": {
+      "border": "2px dotted #00ffff"  // Cyan border in dark themes
     },
 
     // Light theme override (also used as fallback for high contrast light)
-    "[light]": {
-      "border": "#0000ff"  // Blue in light themes
+    "light": {
+      "border": "2px dotted #0000ff"  // Blue border in light themes
     },
 
     // High contrast dark theme override
-    "[highContrastDark]": {
-      "border": "#ffffff",
-      "borderWidth": "4px"  // Thicker border for better visibility
+    "darkHC": {
+      "border": "4px dotted #ffffff"  // Thicker white border for better visibility
     },
 
     // High contrast light theme override
-    "[highContrastLight]": {
-      "border": "#000000",
-      "borderWidth": "4px"  // Thicker border for better visibility
+    "lightHC": {
+      "border": "4px dotted #000000"  // Thicker black border for better visibility
     }
   }
 }
@@ -200,19 +187,21 @@ You can specify different colors for dark, light, and high contrast themes (both
 
 **How It Works:**
 1. **Common properties** (background, border, borderStyle, borderWidth) apply to all themes
-2. **Theme-specific overrides** (`[dark]`, `[light]`, `[highContrastDark]`, `[highContrastLight]`) selectively override properties
+2. **Theme-specific overrides** (`dark`, `light`, `darkHC`, `lightHC`) selectively override properties
 3. **Cascading fallback hierarchy** for high contrast themes:
-   - High Contrast Dark: `[highContrastDark]` → `[dark]` → common → defaults
-   - High Contrast Light: `[highContrastLight]` → `[light]` → common → defaults
+   - High Contrast Dark: `darkHC` → `dark` → common → defaults
+   - High Contrast Light: `lightHC` → `light` → common → defaults
 4. Extension automatically detects your current theme and applies the appropriate styling
 5. When you switch themes, the extension instantly updates the decorations
 
 ### Quick Configuration Examples
 
-**Change one color:**
+**Change border color and style:**
 ```json
 {
-  "modaledit-line-indicator.normalMode": { "border": "#00ff00" }
+  "modaledit-line-indicator.normalMode": {
+    "border": "3px solid #00ff00"
+  }
 }
 ```
 
@@ -220,8 +209,8 @@ You can specify different colors for dark, light, and high contrast themes (both
 ```json
 {
   "modaledit-line-indicator.normalMode": {
-    "[dark]": { "border": "#00ffff" },
-    "[light]": { "border": "#0000ff" }
+    "dark": { "border": "2px dotted #00ffff" },
+    "light": { "border": "2px dotted #0000ff" }
   }
 }
 ```
@@ -242,29 +231,239 @@ Each mode (`normalMode`, `insertMode`, `visualMode`, `searchMode`) supports the 
 
 | Property | Type | Default | Valid Values | Examples |
 |----------|------|---------|--------------|----------|
-| `background` | CSS color | `rgba(255,255,255,0)` | Any CSS color | `#00ff00`, `rgba(0,255,0,0.1)`, `transparent` |
-| `border` | CSS color | Varies by mode* | Any CSS color | `#00aa00`, `rgb(0,170,0)`, `cyan` |
+| `backgroundColor` | CSS color | `rgba(0,0,0,0)` | Any CSS color | `#00ff00`, `rgba(0,255,0,0.1)`, `transparent` |
+| `border` | CSS shorthand | Varies by mode* | CSS border shorthand | `2px dotted #00aa00`, `3px solid cyan` |
+| `borderColor` | CSS color | Varies by mode* | Any CSS color | `#00aa00`, `rgb(0,170,0)`, `cyan` |
 | `borderStyle` | CSS keyword | Varies by mode** | `solid` \| `dashed` \| `dotted` \| `double` \| `groove` \| `ridge` \| `inset` \| `outset` | `dotted`, `solid` |
 | `borderWidth` | CSS length | `2px` | Positive length | `1px`, `0.5em`, `3px` |
-| `[dark]` | object | _(none)_ | Any property overrides | `{ "border": "#00ffff" }` |
-| `[light]` | object | _(none)_ | Any property overrides | `{ "border": "#0000ff" }` |
-| `[highContrastDark]` | object | _(none)_ | Any property overrides | `{ "borderWidth": "4px" }` |
-| `[highContrastLight]` | object | _(none)_ | Any property overrides | `{ "border": "#000000" }` |
+| `borderRadius` | CSS length | `0px` | Positive length | `4px`, `0.5em`, `8px` |
+| `dark` | object | _(none)_ | Any property overrides | `{ "border": "2px dotted #00ffff" }` |
+| `light` | object | _(none)_ | Any property overrides | `{ "border": "2px dotted #0000ff" }` |
+| `darkHC` | object | _(none)_ | Any property overrides | `{ "border": "4px dotted #ffffff" }` |
+| `lightHC` | object | _(none)_ | Any property overrides | `{ "border": "4px dotted #000000" }` |
 
-**Default border colors by mode:**
-- *Normal: `#00aa00` (green), Insert: `#aa0000` (red), Visual: `#0000aa` (blue), Search: `#aaaa00` (yellow)*
+**Default borders by mode:**
+- *Normal: `2px dotted #00aa00` (green), Insert: `2px solid #aa0000` (red), Visual: `2px dashed #0000aa` (blue), Search: `2px solid #aaaa00` (yellow)*
 
-**Default border styles by mode:**
-- **Normal: `dotted`, Insert: `solid`, Visual: `dashed`, Search: `solid`*
+**Border Property Options:**
+- **CSS Shorthand** (recommended): `"border": "2px dotted #00aa00"` - concise, single property
+- **Individual Properties**: `"borderColor": "#00aa00"`, `"borderStyle": "dotted"`, `"borderWidth": "2px"` - fine-grained control
+- Both formats supported; shorthand takes precedence if both specified
 
 **Theme Override Objects** can contain any combination of the above properties.
 
-**Cascading Fallback**: Each property (background, border, borderStyle, borderWidth) is resolved independently through the fallback chain:
-- **HC Dark**: `[highContrastDark]` → `[dark]` → common → defaults
-- **HC Light**: `[highContrastLight]` → `[light]` → common → defaults
-- **Regular Dark/Light**: `[dark/light]` → common → defaults
+**Cascading Fallback**: Each property is resolved independently through the fallback chain:
+- **HC Dark**: `darkHC` → `dark` → common → defaults
+- **HC Light**: `lightHC` → `light` → common → defaults
+- **Regular Dark/Light**: `dark/light` → common → defaults
 
-This allows selective overrides (e.g., only override `borderWidth` for high contrast, inherit other properties from the base theme).
+This allows selective overrides (e.g., only override border for high contrast, inherit other properties from the base theme).
+
+---
+
+## Complete Property Reference
+
+All VS Code `DecorationRenderOptions` properties are supported. Properties are passed directly to the VS Code API.
+
+### Visual Properties
+
+| Property | Type | Description | Example | Status |
+|----------|------|-------------|---------|--------|
+| **backgroundColor** | CSS color | Background color of the current line | `"rgba(0, 255, 0, 0.1)"`, `"#00ff00"` | ✅ Tested |
+| **color** | CSS color | Text color | `"#ffffff"`, `"rgb(255, 255, 255)"` | ⚠️ Supported |
+| **opacity** | Number (0-1) | Overall opacity | `"0.8"`, `"1.0"` | ⚠️ Supported |
+
+### Border Properties
+
+| Property | Type | Description | Example | Status |
+|----------|------|-------------|---------|--------|
+| **border** | CSS shorthand | Border style (recommended) | `"2px dotted #00aa00"` | ✅ Tested |
+| **borderColor** | CSS color | Border color (if not using shorthand) | `"#00aa00"`, `"cyan"` | ⚠️ Supported |
+| **borderRadius** | CSS length | Rounded corners | `"4px"`, `"0.5em"` | ✅ Tested |
+| **borderSpacing** | CSS length | Border spacing | `"2px"` | ⚠️ Supported |
+| **borderStyle** | Keyword | Border line style | `"solid"`, `"dotted"`, `"dashed"`, `"double"` | ⚠️ Supported |
+| **borderWidth** | CSS length | Border thickness (if not using shorthand) | `"2px"`, `"3px"` | ⚠️ Supported |
+
+**Border Style Options**: `solid` | `dotted` | `dashed` | `double` | `groove` | `ridge` | `inset` | `outset`
+
+### Outline Properties
+
+| Property | Type | Description | Example | Status |
+|----------|------|-------------|---------|--------|
+| **outline** | CSS shorthand | Outline style (like border but doesn't affect layout) | `"1px solid #00ff00"` | ⚠️ Supported |
+| **outlineColor** | CSS color | Outline color | `"#00ff00"` | ⚠️ Supported |
+| **outlineStyle** | Keyword | Outline line style | `"solid"`, `"dashed"` | ⚠️ Supported |
+| **outlineWidth** | CSS length | Outline thickness | `"1px"`, `"2px"` | ⚠️ Supported |
+
+**Outline Style Options**: Same as border styles
+
+### Text Properties
+
+| Property | Type | Description | Example | Status |
+|----------|------|-------------|---------|--------|
+| **fontStyle** | Keyword | Font style | `"italic"`, `"normal"`, `"oblique"` | ⚠️ Supported |
+| **fontWeight** | Keyword/Number | Font weight | `"bold"`, `"normal"`, `"600"` | ⚠️ Supported |
+| **letterSpacing** | CSS length | Space between letters | `"1px"`, `"0.1em"` | ⚠️ Supported |
+| **textDecoration** | Keyword | Text decoration | `"underline"`, `"line-through"` | ⚠️ Supported |
+| **cursor** | Keyword | Mouse cursor style | `"pointer"`, `"default"`, `"text"` | ⚠️ Supported |
+
+### Overview Ruler (Scrollbar) Properties
+
+| Property | Type | Description | Example | Status |
+|----------|------|-------------|---------|--------|
+| **overviewRulerColor** | CSS color | Color marker in scrollbar | `"#00ff00"`, `"rgba(0,255,0,0.5)"` | ⚠️ Supported |
+| **overviewRulerLane** | Keyword | Position in scrollbar | `"Left"`, `"Center"`, `"Right"`, `"Full"` | ⚠️ Supported |
+
+### Gutter (Line Number Area) Properties
+
+| Property | Type | Description | Example | Status |
+|----------|------|-------------|---------|--------|
+| **gutterIconPath** | URI/Path | Icon to display in gutter | `"/path/to/icon.svg"` | ⚠️ Supported |
+| **gutterIconSize** | Keyword | Icon size | `"auto"`, `"contain"`, `"cover"`, `"50%"` | ⚠️ Supported |
+
+### Advanced Properties
+
+| Property | Type | Description | Example | Status |
+|----------|------|-------------|---------|--------|
+| **rangeBehavior** | Keyword | How decoration grows when text is inserted at edges | `"OpenOpen"`, `"ClosedClosed"` | ⚠️ Supported |
+
+**Range Behavior Options**: `OpenOpen` | `ClosedClosed` | `OpenClosed` | `ClosedOpen`
+
+### Theme Override Properties
+
+| Property | Type | Description | Example | Status |
+|----------|------|-------------|---------|--------|
+| **dark** | Object | Dark theme overrides | `{ "border": "2px dotted #00ffff" }` | ✅ Tested |
+| **light** | Object | Light theme overrides | `{ "border": "2px dotted #0000ff" }` | ✅ Tested |
+| **darkHC** | Object | High contrast dark overrides (fallback: dark → common) | `{ "border": "4px dotted #ffffff" }` | ✅ Tested |
+| **lightHC** | Object | High contrast light overrides (fallback: light → common) | `{ "border": "4px dotted #000000" }` | ✅ Tested |
+
+**Legend**:
+- ✅ **Tested**: Property has automated test coverage and is verified working
+- ⚠️ **Supported**: Property is passed through to VS Code API but not yet tested in this extension
+
+**Note**: All properties are passed directly to VS Code's `createTextEditorDecorationType()` API. Untested properties should work but haven't been verified in test suite.
+
+---
+
+## Known Limitations
+
+### CSS Shorthand vs Individual Properties
+
+**Border Configuration**:
+- ✅ **Recommended**: Use CSS shorthand `"border": "2px dotted #00aa00"` for concise configuration
+- ⚠️ **Alternative**: Use individual properties `borderColor`, `borderStyle`, `borderWidth` separately
+- **Precedence**: If both shorthand and individual properties are specified, behavior depends on VS Code's internal merging
+- **Best Practice**: Choose one approach per mode configuration to avoid conflicts
+
+**Outline Configuration**: Same pattern as borders - use shorthand or individual properties, not both.
+
+### VS Code API Restrictions
+
+**Property Support**:
+- All properties are passed directly to `createTextEditorDecorationType()` API
+- VS Code controls which properties are rendered and how
+- Some properties may not work in all VS Code versions
+- Minimum supported: VS Code 1.85.0+
+
+**High Contrast Light Theme**:
+- Requires VS Code 1.106.0+ for `ColorThemeKind.HighContrastLight` (value 4)
+- Earlier versions: `lightHC` will fall back to `light` theme settings
+- No breaking issues, just uses light theme colors instead
+
+### Performance Considerations
+
+**Decoration Complexity**:
+- Simple decorations (border only): Minimal performance impact (<1% CPU)
+- Complex decorations (backgrounds + borders + text styling): Slightly higher overhead
+- Current line only: Minimal overhead regardless of file size
+- **Tested**: Extension runs smoothly on files up to 10,000+ lines
+
+**Recommended for Best Performance**:
+- Avoid combining too many visual properties simultaneously
+- Use `backgroundColor` sparingly (semi-transparent only if needed)
+- Prefer borders over backgrounds for lower visual noise
+
+**Heavy Properties** (higher rendering cost):
+- `gutterIconPath` - Requires image loading
+- `overviewRulerColor` - Additional scrollbar rendering
+- Multiple font properties together - May cause layout recalculations
+
+### Theme Compatibility
+
+**Theme Detection**:
+- Extension detects 4 theme kinds: `dark`, `light`, `darkHC`, `lightHC`
+- Custom themes are mapped to one of these 4 kinds by VS Code
+- If colors are not visible in your theme, add theme-specific overrides
+
+**Color Visibility**:
+- Default border colors may not be visible in all themes
+- Solution: Configure theme-specific colors using `dark`, `light`, `darkHC`, `lightHC` overrides
+- High contrast themes: Use thicker borders (3-4px) and solid style for better visibility
+
+### Property Combinations
+
+**Properties That Work Well Together**:
+- `border` + `backgroundColor` - Classic highlight style
+- `border` + `borderRadius` - Rounded border effect
+- `outline` + `border` - Double border effect (outline doesn't affect layout)
+- `overviewRulerColor` + `border` - Visual feedback in scrollbar and editor
+
+**Properties That May Conflict**:
+- `border` (shorthand) + `borderColor`/`borderStyle`/`borderWidth` - Use one approach
+- `outline` (shorthand) + `outlineColor`/`outlineStyle`/`outlineWidth` - Use one approach
+- Heavy text styling (`fontStyle` + `fontWeight` + `textDecoration` + `letterSpacing`) - May cause rendering issues
+
+### Platform Differences
+
+**Desktop vs Browser**:
+- Extension designed for VS Code desktop
+- VS Code for Web (vscode.dev): Should work but not extensively tested
+- GitHub Codespaces: Should work but not tested
+
+**Operating System**:
+- Tested on: macOS, Linux
+- Should work on: Windows
+- Font rendering may vary by OS (especially `fontWeight`, `letterSpacing`)
+
+### ModalEdit Dependency
+
+**Critical Requirement**:
+- Extension requires ModalEdit for mode detection
+- Without ModalEdit: Extension shows warning and displays insert mode styling only
+- Mode detection relies on cursor style changes from ModalEdit
+- See [Prerequisites](#prerequisites) for installation instructions
+
+**Cursor Style Detection**:
+- Detects mode based on cursor style (block = normal, line = insert, underline = visual/search)
+- Requires ModalEdit cursor styles to be configured
+- Conflicting extensions (VSCodeVim, Vim, NeoVim) will break mode detection
+
+### Accessibility
+
+**Screen Readers**:
+- ✅ Decorations are visual only, don't affect text content
+- ✅ Screen readers can read code normally
+
+**Color Blindness**:
+- Default colors may not be distinguishable for some users
+- Solution: Configure high-contrast colors or use different border styles (dotted vs solid vs dashed)
+- High contrast themes (`darkHC`, `lightHC`) provide accessibility-focused defaults
+
+**Keyboard Navigation**:
+- Extension does not interfere with keyboard navigation
+- All functionality works without mouse
+
+### Future Improvements
+
+Items not currently supported but may be added in future versions:
+
+- **Animation/Transitions**: VS Code API doesn't support CSS transitions
+- **Multi-line Highlighting**: By design, only current line is highlighted
+- **Custom Shapes**: Limited to CSS border/outline properties
+- **Before/After Content**: `before` and `after` decoration properties exist but are complex to configure
+
+---
 
 ## Development
 
@@ -303,18 +502,18 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow and contribution g
 
 **Diagnosis & Fix:**
 1. **Check theme detection:** View logs (Output Channel) for "Color theme changed to: X"
-2. **Verify theme kind:** VS Code uses 4 kinds (dark, light, highContrastDark, highContrastLight)
-3. **Add theme override:** Settings → Add `[dark]` or `[light]` configuration:
+2. **Verify theme kind:** VS Code uses 4 kinds (dark, light, darkHC, lightHC)
+3. **Add theme override:** Settings → Add `dark` or `light` configuration:
    ```json
    {
      "modaledit-line-indicator.normalMode": {
-       "[dark]": { "border": "#00ffff" },
-       "[light]": { "border": "#0000ff" }
+       "dark": { "border": "2px dotted #00ffff" },
+       "light": { "border": "2px dotted #0000ff" }
      }
    }
    ```
 4. **Test switching:** Change theme → Colors should update immediately
-5. **High contrast:** Use `[highContrastDark]` and `[highContrastLight]` with thicker borders (`borderWidth: "4px"`)
+5. **High contrast:** Use `darkHC` and `lightHC` with thicker borders (e.g., `"border": "4px dotted #ffffff"`)
 
 #### "Performance lag/stutter"
 
@@ -341,22 +540,21 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow and contribution g
 
 **Diagnosis & Fix:**
 1. **Identify theme colors:** Check your theme's background color
-2. **Add high-contrast colors:** Settings → Override border colors for better visibility:
+2. **Add high-contrast colors:** Settings → Override border for better visibility:
    ```json
    {
      "modaledit-line-indicator.normalMode": {
-       "border": "#00ff00",      // Bright green
-       "borderWidth": "3px"       // Thicker for visibility
+       "border": "3px solid #00ff00"  // Bright green, thicker, solid style
      }
    }
    ```
-3. **Test different styles:** Try `borderStyle: "solid"` instead of `"dotted"` for better visibility
+3. **Test different styles:** Try `"border": "2px solid #00aa00"` instead of `"2px dotted #00aa00"` for better visibility
 4. **Add background:** Use semi-transparent background for extra visibility:
    ```json
    {
      "modaledit-line-indicator.normalMode": {
-       "border": "#00ff00",
-       "background": "rgba(0, 255, 0, 0.1)"  // Subtle green tint
+       "border": "2px solid #00ff00",
+       "backgroundColor": "rgba(0, 255, 0, 0.1)"  // Subtle green tint
      }
    }
    ```

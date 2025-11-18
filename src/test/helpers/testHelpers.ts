@@ -434,10 +434,10 @@ export class TestHelpers {
 
     if (themeOverrides) {
       if (themeOverrides.dark) {
-        config['[dark]'] = themeOverrides.dark;
+        config['dark'] = themeOverrides.dark;
       }
       if (themeOverrides.light) {
-        config['[light]'] = themeOverrides.light;
+        config['light'] = themeOverrides.light;
       }
     }
 
